@@ -1,0 +1,63 @@
+[project]
+name = "openagora"
+version = "0.1.0"
+description = "OpenAGORA core runtime: negotiation-driven adaptive multi-agent orchestration"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "OpenAGORA Contributors" }]
+license = { text = "Apache-2.0" }
+dependencies = [
+  "pydantic>=2.8,<3",
+  "pyyaml>=6.0.1,<7",
+  "typer>=0.12,<1",
+  "typing-extensions>=4.12,<5"
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.51.0,<2"]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-cov>=5,<7",
+  "mypy>=1.11,<2",
+  "ruff>=0.6,<1",
+  "pre-commit>=3.8,<4"
+]
+
+[project.scripts]
+openagora = "openagora.cli.app:app"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"openagora.templates" = ["*.yaml"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "W"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+plugins = []
+exclude = ["tests/e2e"]
+
+[[tool.mypy.overrides]]
+module = ["yaml", "yaml.*", "openai", "openai.*"]
+ignore_missing_imports = true

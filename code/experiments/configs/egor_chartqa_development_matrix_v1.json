@@ -1,0 +1,86 @@
+{
+  "baseline": "./results/chartqa_development_v1/baseline_qwen3.jsonl",
+  "candidates": [
+    {
+      "candidate_id": "baseline_resynthesis",
+      "specialists": [],
+      "synthesis": "./results/chartqa_development_v1/baseline_resynthesis.jsonl"
+    },
+    {
+      "candidate_id": "exact_repair",
+      "specialists": [
+        {
+          "action_id": "qwen25_ocr_span",
+          "evidence_type": "exact_span",
+          "path": "./results/chartqa_development_v1/specialist_exact_qwen25.jsonl"
+        }
+      ],
+      "synthesis": "./results/chartqa_development_v1/exact_repair.jsonl"
+    },
+    {
+      "candidate_id": "visual_repair",
+      "specialists": [
+        {
+          "action_id": "internvl3_visual_relation",
+          "evidence_type": "visual_relation",
+          "path": "./results/chartqa_development_v1/specialist_visual_internvl3.jsonl"
+        }
+      ],
+      "synthesis": "./results/chartqa_development_v1/visual_repair.jsonl"
+    },
+    {
+      "candidate_id": "numerical_repair",
+      "specialists": [
+        {
+          "action_id": "qwen25_numerical_derivation",
+          "evidence_type": "numerical_derivation",
+          "path": "./results/chartqa_development_v1/specialist_numerical_qwen25.jsonl"
+        }
+      ],
+      "synthesis": "./results/chartqa_development_v1/numerical_repair.jsonl"
+    },
+    {
+      "candidate_id": "verifier_repair",
+      "specialists": [
+        {
+          "action_id": "qwen3_independent_verifier",
+          "evidence_type": "independent_verification",
+          "path": "./results/chartqa_development_v1/specialist_verify_qwen3.jsonl"
+        }
+      ],
+      "synthesis": "./results/chartqa_development_v1/verifier_repair.jsonl"
+    }
+  ],
+  "policies": [
+    {
+      "candidate_id": "baseline_resynthesis",
+      "policy_id": "baseline_resynthesis_gap_strict",
+      "require_evidence_for_change": true,
+      "threshold": 0.05
+    },
+    {
+      "candidate_id": "exact_repair",
+      "policy_id": "exact_gap_strict",
+      "require_evidence_for_change": true,
+      "threshold": 0.05
+    },
+    {
+      "candidate_id": "visual_repair",
+      "policy_id": "visual_gap_strict",
+      "require_evidence_for_change": true,
+      "threshold": 0.05
+    },
+    {
+      "candidate_id": "numerical_repair",
+      "policy_id": "numerical_gap_strict",
+      "require_evidence_for_change": true,
+      "threshold": 0.05
+    },
+    {
+      "candidate_id": "verifier_repair",
+      "policy_id": "verifier_gap_strict",
+      "require_evidence_for_change": true,
+      "threshold": 0.05
+    }
+  ]
+}

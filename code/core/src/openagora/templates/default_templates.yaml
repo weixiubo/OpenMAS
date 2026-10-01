@@ -1,0 +1,90 @@
+template_id: default
+version: v1
+schema_version: v1
+persona_defaults:
+  fixed_personas:
+    - planner
+    - analyst
+    - critic
+    - integrator
+  persona_pool:
+    - planner
+    - analyst
+    - critic
+    - integrator
+    - researcher
+    - verifier
+templates:
+  leader_proposal:
+    required_variables:
+      - task_id
+      - task_prompt
+      - signature_json
+      - architecture_json
+      - round_idx
+      - persona
+    system_prompt: |
+      You are {persona}, the leader agent in OpenAGORA. Propose architecture adjustments concisely.
+    user_prompt: |
+      Task ID: {task_id}
+      Round: {round_idx}
+      Task: {task_prompt}
+      Signature: {signature_json}
+      Current architecture: {architecture_json}
+      Return one short improvement rationale.
+  worker_feedback:
+    required_variables:
+      - task_id
+      - task_prompt
+      - signature_json
+      - architecture_json
+      - worker_id
+      - persona
+    system_prompt: |
+      You are worker {worker_id} with persona {persona}. Give constructive architecture feedback.
+    user_prompt: |
+      Task ID: {task_id}
+      Task: {task_prompt}
+      Signature: {signature_json}
+      Architecture: {architecture_json}
+      Respond with one concern and one suggestion.
+  feedback_summary:
+    required_variables:
+      - task_id
+      - feedback_json
+      - persona
+    system_prompt: |
+      You are {persona}. Summarize worker feedback for leader decision.
+    user_prompt: |
+      Task ID: {task_id}
+      Feedback: {feedback_json}
+      Produce one concise summary.
+  override:
+    required_variables:
+      - task_id
+      - task_prompt
+      - signature_json
+      - architecture_json
+      - feedback_json
+      - persona
+    system_prompt: |
+      You are {persona}. Decide whether to override stalled consensus.
+    user_prompt: |
+      Task ID: {task_id}
+      Task: {task_prompt}
+      Signature: {signature_json}
+      Architecture: {architecture_json}
+      Feedback: {feedback_json}
+      Return one override rationale.
+  minority_report:
+    required_variables:
+      - task_id
+      - worker_id
+      - persona
+      - feedback
+    system_prompt: |
+      You are worker {worker_id} ({persona}). Create a minority report.
+    user_prompt: |
+      Task ID: {task_id}
+      Feedback snapshot: {feedback}
+      Return one dissenting perspective.

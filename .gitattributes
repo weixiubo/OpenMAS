@@ -1,0 +1,5 @@
+* text=auto eol=lf
+reproduce/egor-v10/* -text
+code/experiments/data/*.jsonl -text
+*.png binary
+*.pdf binary

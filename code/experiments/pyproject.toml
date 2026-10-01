@@ -1,0 +1,23 @@
+[project]
+name = "openagora-experiments"
+version = "0.1.0"
+description = "OpenAGORA experiment drivers"
+requires-python = ">=3.11"
+dependencies = [
+  "pyyaml>=6.0.1,<7",
+  "openagora"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "pytest-cov>=5,<7", "pillow>=10,<13"]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["openagora_experiments*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"

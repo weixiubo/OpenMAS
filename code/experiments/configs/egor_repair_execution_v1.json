@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "actions": {
+    "exact": {
+      "evidence_type": "exact_span",
+      "model_name": "qwen2_5_vl_7b_instruct",
+      "model_path": "Qwen/Qwen2.5-VL-7B-Instruct",
+      "model_profile": "medium",
+      "specialist_id": "qwen25_ocr_span"
+    },
+    "numerical": {
+      "evidence_type": "numerical_derivation",
+      "model_name": "qwen2_5_vl_7b_instruct",
+      "model_path": "Qwen/Qwen2.5-VL-7B-Instruct",
+      "model_profile": "medium",
+      "specialist_id": "qwen25_numerical_derivation"
+    },
+    "verifier": {
+      "evidence_type": "independent_verification",
+      "model_name": "qwen3-vl-8b-instruct",
+      "model_path": "Qwen/Qwen3-VL-8B-Instruct",
+      "model_profile": "medium",
+      "specialist_id": "qwen3_independent_verifier"
+    },
+    "visual": {
+      "evidence_type": "visual_relation",
+      "model_name": "internvl3-8b-hf",
+      "model_path": "OpenGVLab/InternVL3-8B-hf",
+      "model_profile": "medium",
+      "specialist_id": "internvl3_visual_relation"
+    }
+  },
+  "templates": {
+    "exact": {
+      "action_ids": [
+        "exact"
+      ]
+    },
+    "exact_visual": {
+      "action_ids": [
+        "exact",
+        "visual"
+      ]
+    },
+    "numerical": {
+      "action_ids": [
+        "numerical"
+      ]
+    },
+    "verifier": {
+      "action_ids": [
+        "verifier"
+      ]
+    },
+    "visual": {
+      "action_ids": [
+        "visual"
+      ]
+    }
+  },
+  "synthesizer": {
+    "model_name": "qwen3-vl-8b-instruct",
+    "model_path": "Qwen/Qwen3-VL-8B-Instruct",
+    "model_profile": "medium"
+  }
+}

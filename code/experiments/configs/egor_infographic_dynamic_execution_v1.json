@@ -1,0 +1,14 @@
+{
+  "actions": {
+    "internvl3_visual_relation": "./results/development_v1/specialist_visual_internvl3.jsonl",
+    "qwen25_ocr_span": "./results/development_v1/specialist_exact_qwen25.jsonl",
+    "qwen3_independent_verifier": "./results/development_v1/specialist_verify_qwen3.jsonl"
+  },
+  "combinations": {
+    "internvl3_visual_relation": "./results/development_v1/visual_repair.jsonl",
+    "internvl3_visual_relation__qwen3_independent_verifier": "./results/development_v1/dynamic_v1/visual_verifier_synthesis.jsonl",
+    "qwen25_ocr_span": "./results/development_v1/exact_repair.jsonl",
+    "qwen25_ocr_span__qwen3_independent_verifier": "./results/development_v1/dynamic_v1/exact_verifier_synthesis.jsonl",
+    "qwen3_independent_verifier": "./results/development_v1/verifier_repair.jsonl"
+  }
+}

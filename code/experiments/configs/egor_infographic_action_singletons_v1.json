@@ -1,0 +1,20 @@
+{
+  "internvl3_visual_relation": {
+    "candidate_id": "visual_repair",
+    "gap_types": [
+      "visual_relation"
+    ]
+  },
+  "qwen25_ocr_span": {
+    "candidate_id": "exact_repair",
+    "gap_types": [
+      "exact_span"
+    ]
+  },
+  "qwen3_independent_verifier": {
+    "candidate_id": "verifier_repair",
+    "gap_types": [
+      "independent_verification"
+    ]
+  }
+}

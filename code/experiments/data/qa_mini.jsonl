@@ -1,0 +1,5 @@
+{"task_id":"qa-001","prompt":"Use tools to answer: what is 2 + 3?","metadata":{"reference_answer":"5","primary_type":"multi_step_qa","uncertainty":"medium","complexity":"medium","interdependence":"reciprocal"}}
+{"task_id":"qa-002","prompt":"Use tools to answer: what is 9 - 4?","metadata":{"reference_answer":"5","primary_type":"multi_step_qa","uncertainty":"low","complexity":"medium","interdependence":"sequential"}}
+{"task_id":"qa-003","prompt":"Use tools to answer: what is 7 * 6?","metadata":{"reference_answer":"42","primary_type":"multi_step_qa","uncertainty":"low","complexity":"high","interdependence":"sequential"}}
+{"task_id":"qa-004","prompt":"Use tools to answer: what is 8 / 2?","metadata":{"reference_answer":"4","primary_type":"multi_step_qa","uncertainty":"medium","complexity":"medium","interdependence":"pooled"}}
+{"task_id":"qa-005","prompt":"Use tools to answer: what is 11 + 13?","metadata":{"reference_answer":"24","primary_type":"multi_step_qa","uncertainty":"high","complexity":"high","interdependence":"reciprocal"}}

@@ -1,0 +1,35 @@
+﻿name: openagora-release
+
+on:
+  push:
+    tags:
+      - "openmas-v*"
+      - "openagora-v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build source artifacts
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build "code/core"
+          python -m build "code/experiments"
+      - name: Package public source snapshot
+        run: |
+          python scripts/export_public.py --target dist/public-source
+          tar -czf openmas-public-source.tar.gz -C dist/public-source .
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            code/core/dist/*
+            code/experiments/dist/*
+            openmas-public-source.tar.gz

@@ -1,0 +1,395 @@
+{
+  "bootstrap": {
+    "samples": 100000,
+    "seed": 20260793,
+    "unit": "paired task with equal task weight"
+  },
+  "claim_boundary": "fresh_independent_sealed_v10_confirmation",
+  "criteria": [
+    {
+      "actual": {
+        "ci95_low": 0.0,
+        "delta": 0.005
+      },
+      "name": "pooled_positive_with_strict_ci",
+      "passed": false,
+      "required": "pooled delta > 0 and paired-bootstrap 95% lower bound > 0"
+    },
+    {
+      "actual": {
+        "chartqa": 0.004347826086956522,
+        "ocrbench": 0.005263157894736842
+      },
+      "name": "nonnegative_each_source",
+      "passed": true,
+      "required": "each source point delta >= 0"
+    },
+    {
+      "actual": {
+        "pooled": 0.00125,
+        "sources": {
+          "chartqa": 0.0,
+          "ocrbench": 0.0017543859649122807
+        }
+      },
+      "name": "bounded_strict_harm",
+      "passed": true,
+      "required": "pooled <= 0.005 and every source <= 0.01"
+    },
+    {
+      "actual": {
+        "chartqa": 1.0,
+        "ocrbench": 0.983739837398374
+      },
+      "name": "resolver_native_transport_completion",
+      "passed": true,
+      "required": "every source >= 0.95 native one-line or explicit-abstention transport"
+    },
+    {
+      "actual": {
+        "sources": {
+          "chartqa": 1,
+          "ocrbench": 6
+        },
+        "total": 7
+      },
+      "name": "accepted_overwrite_breadth",
+      "passed": false,
+      "required": "at least eight total and at least two on each source"
+    },
+    {
+      "actual": {
+        "cross_source": true,
+        "sources": true
+      },
+      "name": "integrity_manifests",
+      "passed": true,
+      "required": "all task, source, model, prompt, seed, code, stage, and checksum checks pass"
+    }
+  ],
+  "method": "egor_v10_two_support_blind_resolver",
+  "passed": false,
+  "pooled": {
+    "accepted_one_support": 20,
+    "accepted_overwrites": 7,
+    "baseline": {
+      "ci95_high": null,
+      "ci95_low": null,
+      "exact_sign_p_two_sided": 1.0,
+      "losses": 0,
+      "mean_calls": 1.0,
+      "mean_latency_seconds": 15.646792375,
+      "mean_total_tokens": 1157.64,
+      "quality": 0.7299633808702076,
+      "quality_delta": 0.0,
+      "strict_harm_rate": 0.0,
+      "ties": 800,
+      "useful_repair_rate": 0.0,
+      "wins": 0
+    },
+    "decision_reasons": {
+      "blind_resolver_abstained": 26,
+      "blind_resolver_incomplete": 636,
+      "no_baseline_overwrite": 74,
+      "no_heterogeneous_corroborator": 57,
+      "supported_blind_resolver_overwrite": 7
+    },
+    "direct_resolver": {
+      "ci95_high": null,
+      "ci95_low": null,
+      "exact_sign_p_two_sided": 0.2295229434967041,
+      "losses": 9,
+      "mean_calls": 1.205,
+      "mean_latency_seconds": 16.3688011375,
+      "mean_total_tokens": 1325.315,
+      "quality": 0.7374673532295202,
+      "quality_delta": 0.007503972359312558,
+      "strict_harm_rate": 0.01125,
+      "ties": 775,
+      "useful_repair_rate": 0.01875,
+      "wins": 16
+    },
+    "failure_counts": {},
+    "native_explicit_abstentions": 24,
+    "one_support": {
+      "ci95_high": null,
+      "ci95_low": null,
+      "exact_sign_p_two_sided": 0.2265625,
+      "losses": 3,
+      "mean_calls": 1.365,
+      "mean_latency_seconds": 18.490705525,
+      "mean_total_tokens": 1627.7525,
+      "quality": 0.7367568591310771,
+      "quality_delta": 0.006793478260869565,
+      "strict_harm_rate": 0.00375,
+      "ties": 789,
+      "useful_repair_rate": 0.01,
+      "wins": 8
+    },
+    "repairability_triggered": 164,
+    "resolver_changed": 64,
+    "resolver_native_transport_completion": 0.9878048780487805,
+    "resolver_operational_completion": 1.0,
+    "sanitized_abstentions": 26,
+    "tasks": 800,
+    "transport_modes": {
+      "explicit_abstention": 24,
+      "plain_single_line": 138,
+      "sanitized_transport_abstention": 2
+    },
+    "transport_sanitized_abstentions": 2,
+    "v10": {
+      "ci95_high": 0.01125,
+      "ci95_low": 0.0,
+      "exact_sign_p_two_sided": 0.21875,
+      "losses": 1,
+      "mean_calls": 1.365,
+      "mean_latency_seconds": 18.490705525,
+      "mean_total_tokens": 1627.7525,
+      "quality": 0.7349633808702076,
+      "quality_delta": 0.005,
+      "strict_harm_rate": 0.00125,
+      "ties": 794,
+      "useful_repair_rate": 0.00625,
+      "wins": 5
+    }
+  },
+  "preflight": {
+    "checks": {
+      "cross_source": true,
+      "sources": true
+    },
+    "cross_source_checks": {
+      "disjoint_task_ids": true,
+      "expected_tasks": {
+        "chartqa": true,
+        "ocrbench": true
+      },
+      "two_sources": true,
+      "unique_images": true,
+      "unique_source_task_keys": true
+    },
+    "outcome_blind_before_scoring": true,
+    "passed": true,
+    "sources": {
+      "chartqa": {
+        "audit_sha256": "c0f896c2284f725b4a5f3c3b446627623ac57eb53d3a7eb789702f25d72ff73b",
+        "checks": {
+          "audit_commit": true,
+          "audit_integrity": true,
+          "audit_mode": true,
+          "audit_outcome_blind": true,
+          "audit_passed": true,
+          "checksums": true,
+          "completion_marker": true,
+          "resolver_contract": true,
+          "source_commit": true,
+          "specialist_contract": true,
+          "task_hash_marker": true
+        },
+        "generation_sha256sums_sha256": "568156ef6f11bd30552016a63464200c30fdde2baf5c520c63c7eaf4c98152e0",
+        "passed": true,
+        "tasks_sha256": "9ba9fc70fe4d513569918d3c9fd0f5f4f7e7f5bd29ef6450c2545c6304b31fb0"
+      },
+      "ocrbench": {
+        "audit_sha256": "55ea8763ada351976c4676d7e1f40bd8e5a4aba258f9c440d6a5a47fb2a22c7c",
+        "checks": {
+          "audit_commit": true,
+          "audit_integrity": true,
+          "audit_mode": true,
+          "audit_outcome_blind": true,
+          "audit_passed": true,
+          "checksums": true,
+          "completion_marker": true,
+          "resolver_contract": true,
+          "source_commit": true,
+          "specialist_contract": true,
+          "task_hash_marker": true
+        },
+        "generation_sha256sums_sha256": "efb2f697b59a01f2dad65aff4e6c565a9038c59a8ff840ef67e6aa46feb32f57",
+        "passed": true,
+        "tasks_sha256": "d0f454e1330682dce20c1a82e384ba3a0dedf16ebe8614aea78b6760ddfd2b33"
+      }
+    }
+  },
+  "schema_version": 1,
+  "secondary_harm_suppression": {
+    "descriptive_not_a_pass_gate": true,
+    "direct_harms_blocked_by_v10": 8,
+    "direct_resolver_harms": 9,
+    "v10_harms": 1
+  },
+  "source_commit": "389cdfaeb7ac4474da36f9b0b0972a7688b400a4",
+  "sources": {
+    "chartqa": {
+      "accepted_one_support": 3,
+      "accepted_overwrites": 1,
+      "baseline": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 1.0,
+        "losses": 0,
+        "mean_calls": 1.0,
+        "mean_latency_seconds": 17.19156086956522,
+        "mean_total_tokens": 981.3565217391305,
+        "quality": 0.7869565217391304,
+        "quality_delta": 0.0,
+        "strict_harm_rate": 0.0,
+        "ties": 230,
+        "useful_repair_rate": 0.0,
+        "wins": 0
+      },
+      "decision_reasons": {
+        "blind_resolver_abstained": 10,
+        "blind_resolver_incomplete": 189,
+        "no_baseline_overwrite": 19,
+        "no_heterogeneous_corroborator": 11,
+        "supported_blind_resolver_overwrite": 1
+      },
+      "direct_resolver": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 0.0625,
+        "losses": 0,
+        "mean_calls": 1.1782608695652175,
+        "mean_latency_seconds": 18.207996956521736,
+        "mean_total_tokens": 1094.9782608695652,
+        "quality": 0.808695652173913,
+        "quality_delta": 0.021739130434782608,
+        "strict_harm_rate": 0.0,
+        "ties": 225,
+        "useful_repair_rate": 0.021739130434782608,
+        "wins": 5
+      },
+      "failure_counts": {},
+      "native_explicit_abstentions": 10,
+      "one_support": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 0.5,
+        "losses": 0,
+        "mean_calls": 1.2826086956521738,
+        "mean_latency_seconds": 20.08438791304348,
+        "mean_total_tokens": 1265.713043478261,
+        "quality": 0.7956521739130434,
+        "quality_delta": 0.008695652173913044,
+        "strict_harm_rate": 0.0,
+        "ties": 228,
+        "useful_repair_rate": 0.008695652173913044,
+        "wins": 2
+      },
+      "repairability_triggered": 41,
+      "resolver_changed": 12,
+      "resolver_native_transport_completion": 1.0,
+      "resolver_operational_completion": 1.0,
+      "sanitized_abstentions": 10,
+      "tasks": 230,
+      "transport_modes": {
+        "explicit_abstention": 10,
+        "plain_single_line": 31
+      },
+      "transport_sanitized_abstentions": 0,
+      "v10": {
+        "ci95_high": 0.013043478260869565,
+        "ci95_low": 0.0,
+        "exact_sign_p_two_sided": 1.0,
+        "losses": 0,
+        "mean_calls": 1.2826086956521738,
+        "mean_latency_seconds": 20.08438791304348,
+        "mean_total_tokens": 1265.713043478261,
+        "quality": 0.7913043478260869,
+        "quality_delta": 0.004347826086956522,
+        "strict_harm_rate": 0.0,
+        "ties": 229,
+        "useful_repair_rate": 0.004347826086956522,
+        "wins": 1
+      }
+    },
+    "ocrbench": {
+      "accepted_one_support": 17,
+      "accepted_overwrites": 6,
+      "baseline": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 1.0,
+        "losses": 0,
+        "mean_calls": 1.0,
+        "mean_latency_seconds": 15.023464736842106,
+        "mean_total_tokens": 1228.7719298245613,
+        "quality": 0.706966148589765,
+        "quality_delta": 0.0,
+        "strict_harm_rate": 0.0,
+        "ties": 570,
+        "useful_repair_rate": 0.0,
+        "wins": 0
+      },
+      "decision_reasons": {
+        "blind_resolver_abstained": 16,
+        "blind_resolver_incomplete": 447,
+        "no_baseline_overwrite": 55,
+        "no_heterogeneous_corroborator": 46,
+        "supported_blind_resolver_overwrite": 6
+      },
+      "direct_resolver": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 0.8238029479980469,
+        "losses": 9,
+        "mean_calls": 1.2157894736842105,
+        "mean_latency_seconds": 15.62666949122807,
+        "mean_total_tokens": 1418.2578947368422,
+        "quality": 0.7087261097958178,
+        "quality_delta": 0.0017599612060527137,
+        "strict_harm_rate": 0.015789473684210527,
+        "ties": 550,
+        "useful_repair_rate": 0.017543859649122806,
+        "wins": 11
+      },
+      "failure_counts": {},
+      "native_explicit_abstentions": 14,
+      "one_support": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "exact_sign_p_two_sided": 0.5078125,
+        "losses": 3,
+        "mean_calls": 1.3982456140350876,
+        "mean_latency_seconds": 17.847640701754386,
+        "mean_total_tokens": 1773.8385964912281,
+        "quality": 0.7129920829909856,
+        "quality_delta": 0.0060259344012204424,
+        "strict_harm_rate": 0.005263157894736842,
+        "ties": 561,
+        "useful_repair_rate": 0.010526315789473684,
+        "wins": 6
+      },
+      "repairability_triggered": 123,
+      "resolver_changed": 52,
+      "resolver_native_transport_completion": 0.983739837398374,
+      "resolver_operational_completion": 1.0,
+      "sanitized_abstentions": 16,
+      "tasks": 570,
+      "transport_modes": {
+        "explicit_abstention": 14,
+        "plain_single_line": 107,
+        "sanitized_transport_abstention": 2
+      },
+      "transport_sanitized_abstentions": 2,
+      "v10": {
+        "ci95_high": 0.014035087719298246,
+        "ci95_low": -0.0017543859649122807,
+        "exact_sign_p_two_sided": 0.375,
+        "losses": 1,
+        "mean_calls": 1.3982456140350876,
+        "mean_latency_seconds": 17.847640701754386,
+        "mean_total_tokens": 1773.8385964912281,
+        "quality": 0.7122293064845019,
+        "quality_delta": 0.005263157894736842,
+        "strict_harm_rate": 0.0017543859649122807,
+        "ties": 565,
+        "useful_repair_rate": 0.007017543859649123,
+        "wins": 4
+      }
+    }
+  },
+  "task_denominator": 800
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "name": "EGOR pending-claim CPU preflight",
+  "scope": "CPU-only contract tests for prospective analysis, downstream release, paper binding, and claim promotion. This preflight does not read a prospective result root, launch a model, or promote a claim.",
+  "covered_claim_ids": [
+    "CTRL-PROSPECTIVE-CERTIFICATE",
+    "HOLDOUT-PROSPECTIVE-EFFECT",
+    "CTRL-PAID-SCHEDULER",
+    "TRANSFER-OCRBENCH",
+    "TRANSFER-STRONGER-BACKBONE",
+    "AUDIT-EVIDENCE-ALIGNMENT"
+  ],
+  "expected_module_count": 22,
+  "minimum_test_count": 74,
+  "modules": [
+    "code/experiments/tests/test_build_egor_prospective_gate_report.py",
+    "code/experiments/tests/test_apply_egor_chartqa_analysis_amendment.py",
+    "code/experiments/tests/test_finalize_egor_chartqa_analysis_amendment.py",
+    "code/experiments/tests/test_analyze_egor_prospective_certificate_control.py",
+    "code/experiments/tests/test_apply_egor_chartqa_certificate_control.py",
+    "code/experiments/tests/test_audit_egor_selected_execution.py",
+    "code/experiments/tests/test_build_egor_stronger_backbone_report.py",
+    "code/experiments/tests/test_run_egor_qwen35_transfer_contract.py",
+    "code/experiments/tests/test_egor_ocrbench_splits.py",
+    "code/experiments/tests/test_finalize_egor_prospective_release.py",
+    "code/experiments/tests/test_validate_egor_downstream_release.py",
+    "code/experiments/tests/test_egor_downstream_queue_contract.py",
+    "code/experiments/tests/test_build_egor_evidence_alignment_audit.py",
+    "code/experiments/tests/test_package_egor_blinded_rater_packet.py",
+    "code/experiments/tests/test_analyze_egor_evidence_alignment_audit.py",
+    "paper_aaai27/tests/test_build_egor_chartqa_table.py",
+    "paper_aaai27/tests/test_build_egor_certificate_results.py",
+    "paper_aaai27/tests/test_build_egor_transfer_results.py",
+    "paper_aaai27/tests/test_build_egor_audit_results.py",
+    "paper_aaai27/tests/test_build_egor_trace_results.py",
+    "paper_aaai27/tests/test_build_egor_final_summary.py",
+    "paper_aaai27/tests/test_bind_egor_claim_registry.py"
+  ]
+}
