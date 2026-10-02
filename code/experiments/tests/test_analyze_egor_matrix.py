@@ -6,6 +6,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
+
 
 def test_analysis_script_writes_scored_matrix_and_capability_cards(
     tmp_path: Path,
@@ -94,7 +96,7 @@ def test_analysis_script_writes_scored_matrix_and_capability_cards(
         encoding="utf-8",
     )
     output = tmp_path / "analysis"
-    script = Path(__file__).resolve().parents[1] / "scripts" / "analyze_egor_matrix.py"
+    script = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_matrix.py"
 
     subprocess.run(
         [
@@ -110,12 +112,8 @@ def test_analysis_script_writes_scored_matrix_and_capability_cards(
         check=True,
     )
 
-    summary = json.loads(
-        (output / "candidate_summary.json").read_text(encoding="utf-8")
-    )
-    capabilities = json.loads(
-        (output / "capability_cards.json").read_text(encoding="utf-8")
-    )
+    summary = json.loads((output / "candidate_summary.json").read_text(encoding="utf-8"))
+    capabilities = json.loads((output / "capability_cards.json").read_text(encoding="utf-8"))
     policies = json.loads((output / "policy_summary.json").read_text(encoding="utf-8"))
     with (output / "matrix_rows.csv").open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
@@ -126,9 +124,7 @@ def test_analysis_script_writes_scored_matrix_and_capability_cards(
     assert policies["egor-gap"]["policy_quality"] == 1.0
     assert policies["egor-gap"]["provenance_rejection_rate"] == 0.0
     assert (output / "policy_rows.csv").is_file()
-    assert (
-        json.loads((output / "manifest.json").read_text(encoding="utf-8"))["tasks"] == 1
-    )
+    assert json.loads((output / "manifest.json").read_text(encoding="utf-8"))["tasks"] == 1
 
 
 def test_frozen_run_all_sentinel_is_narrowly_translated(tmp_path: Path) -> None:
@@ -187,7 +183,7 @@ def test_frozen_run_all_sentinel_is_narrowly_translated(tmp_path: Path) -> None:
         ],
     }
     config.write_text(json.dumps(payload), encoding="utf-8")
-    script = Path(__file__).resolve().parents[1] / "scripts" / "analyze_egor_matrix.py"
+    script = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_matrix.py"
     output = tmp_path / "analysis"
 
     subprocess.run(
@@ -206,9 +202,7 @@ def test_frozen_run_all_sentinel_is_narrowly_translated(tmp_path: Path) -> None:
 
     with (output / "policy_rows.csv").open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    selection = json.loads(
-        (output / "manifest.json").read_text(encoding="utf-8")
-    )["policy_selection"]
+    selection = json.loads((output / "manifest.json").read_text(encoding="utf-8"))["policy_selection"]
     assert rows[0]["triggered"] == "1"
     assert selection == [
         {
@@ -240,9 +234,7 @@ def test_frozen_run_all_sentinel_is_narrowly_translated(tmp_path: Path) -> None:
         ],
         check=True,
     )
-    explicit_selection = json.loads(
-        (explicit / "manifest.json").read_text(encoding="utf-8")
-    )["policy_selection"]
+    explicit_selection = json.loads((explicit / "manifest.json").read_text(encoding="utf-8"))["policy_selection"]
     assert explicit_selection[0]["trigger_mode"] == "all"
     assert explicit_selection[0]["translated_legacy_run_all_sentinel"] is False
 

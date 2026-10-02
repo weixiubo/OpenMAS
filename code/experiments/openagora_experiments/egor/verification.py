@@ -58,9 +58,7 @@ def decide_verified_overwrite(
         raise ValueError("at least one specialist corroborator is required")
     if not canonical_answer(core_answer):
         return _decision(False, "empty_core_answer")
-    if answers_agree(
-        baseline_answer, core_answer, metric=metric, options=options
-    ):
+    if answers_agree(baseline_answer, core_answer, metric=metric, options=options):
         return _decision(False, "no_baseline_overwrite")
 
     verifier_answer = _candidate_answer(verifier)
@@ -72,9 +70,7 @@ def decide_verified_overwrite(
             corroborating_specialists=(),
             verifier_evidence_count=len(verifier_cards),
         )
-    if not answers_agree(
-        verifier_answer, core_answer, metric=metric, options=options
-    ):
+    if not answers_agree(verifier_answer, core_answer, metric=metric, options=options):
         return VerifiedOverwriteDecision(
             accept_overwrite=False,
             reason="verifier_disagrees",
@@ -127,23 +123,17 @@ def decide_answer_only_verified_overwrite(
         raise ValueError("at least one specialist corroborator is required")
     if not canonical_answer(core_answer):
         return _decision(False, "empty_core_answer")
-    if answers_agree(
-        baseline_answer, core_answer, metric=metric, options=options
-    ):
+    if answers_agree(baseline_answer, core_answer, metric=metric, options=options):
         return _decision(False, "no_baseline_overwrite")
 
     transport = verifier.get("transport", {})
-    operational = isinstance(transport, Mapping) and bool(
-        transport.get("operational_complete")
-    )
+    operational = isinstance(transport, Mapping) and bool(transport.get("operational_complete"))
     verifier_answer = _candidate_answer(verifier)
     if not operational:
         return _decision(False, "answer_only_verifier_incomplete")
     if not verifier_answer:
         return _decision(False, "answer_only_verifier_abstained")
-    if not answers_agree(
-        verifier_answer, core_answer, metric=metric, options=options
-    ):
+    if not answers_agree(verifier_answer, core_answer, metric=metric, options=options):
         return _decision(False, "answer_only_verifier_disagrees")
 
     corroborators = _corroborating_specialists(
@@ -165,16 +155,6 @@ def decide_answer_only_verified_overwrite(
         corroborating_specialists=corroborators,
         verifier_evidence_count=0,
     )
-
-
-
-
-
-
-
-
-
-
 
 
 def _decision(accept: bool, reason: str) -> VerifiedOverwriteDecision:

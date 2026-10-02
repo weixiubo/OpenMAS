@@ -6,9 +6,11 @@ import json
 from pathlib import Path
 from types import ModuleType
 
+from openmas_test_history import historical_root
+
 
 def _load_module() -> ModuleType:
-    script = Path(__file__).resolve().parents[1] / "scripts" / "run_egor_stage.py"
+    script = (historical_root() / "code/experiments") / "scripts" / "run_egor_stage.py"
     spec = importlib.util.spec_from_file_location("run_egor_stage", script)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -28,7 +30,7 @@ def test_manifest_uses_explicit_source_commit_outside_git(
         json.dumps({"source_id": "s", "task_id": "1", "status": "ok"}) + "\n",
         encoding="utf-8",
     )
-    setattr(module, "ROOT", tmp_path)
+    module.ROOT = tmp_path
     monkeypatch.setenv("EGOR_SOURCE_COMMIT", "abc123")  # type: ignore[attr-defined]
     args = argparse.Namespace(
         stage="baseline",
@@ -64,11 +66,7 @@ def test_manifest_uses_explicit_source_commit_outside_git(
 
 def test_scheduler_catalog_is_derived_from_frozen_action_spec() -> None:
     module = _load_module()
-    config = (
-        Path(__file__).resolve().parents[1]
-        / "configs"
-        / "egor_repair_execution_v1.json"
-    )
+    config = (historical_root() / "code/experiments") / "configs" / "egor_repair_execution_v1.json"
 
     catalog = module._scheduler_catalog(config)
 

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from openagora.mechanisms.evidence_gap_repair import EvidenceType
 from openagora_experiments.egor.evaluation import (
     audit_synthesis,
@@ -13,7 +12,7 @@ from openagora_experiments.egor.evaluation import (
     summarize_candidate,
     summarize_policy,
 )
-from openagora_experiments.egor.protocol import PilotTask
+from openagora_experiments.egor.task_model import PilotTask
 
 
 def test_residual_gaps_use_validated_card_confidence_and_baseline_confidence() -> None:
@@ -47,9 +46,7 @@ def test_residual_gaps_accumulate_same_type_demands_and_honor_open_gap() -> None
             {"type": "visual_relation", "weight": 0.4},
             {"type": "visual_relation", "weight": 0.6},
         ],
-        "evidence": [
-            _card("b1", "visual_relation", confidence=0.5, producer="baseline")
-        ],
+        "evidence": [_card("b1", "visual_relation", confidence=0.5, producer="baseline")],
         "open_gap_types": [],
     }
 
@@ -68,9 +65,7 @@ def test_synthesis_audit_rejects_unknown_citations() -> None:
             "answer": "wrong",
             "evidence": [_card("b1", "exact_span", producer="baseline")],
         },
-        specialists=[
-            {"evidence": [_card("s1", "visual_relation", producer="visual-worker")]}
-        ],
+        specialists=[{"evidence": [_card("s1", "visual_relation", producer="visual-worker")]}],
         synthesis={
             "answer": "right",
             "used_evidence_ids": ["s1", "invented"],
@@ -118,9 +113,7 @@ def test_candidate_matrix_scores_all_rows_and_estimates_capability() -> None:
     specialist = _record(
         parsed={
             "candidate_answer": "right",
-            "evidence": [
-                _card("s1", "visual_relation", confidence=0.9, producer="visual-worker")
-            ],
+            "evidence": [_card("s1", "visual_relation", confidence=0.9, producer="visual-worker")],
         },
         tokens=50,
     )

@@ -3,12 +3,10 @@ from __future__ import annotations
 import inspect
 from typing import Any
 
-from openagora_experiments.egor.protocol import (
-    PilotTask,
-    parse_answer_only_verifier_output,
-)
+from openagora_experiments.egor.parsing import parse_answer_only_verifier_output
 from openagora_experiments.egor.runner import run_verifier_v8_stage
 from openagora_experiments.egor.runtime_types import ArtifactSpec
+from openagora_experiments.egor.task_model import PilotTask
 from openagora_experiments.egor.verification import (
     decide_answer_only_verified_overwrite,
 )
@@ -102,15 +100,11 @@ def test_v8_parser_safely_abstains_on_nonconforming_transport() -> None:
 
 def test_v8_runner_binds_blind_prompt_parser_and_token_contract() -> None:
     provider = Provider()
-    record = list(
-        run_verifier_v8_stage(provider=provider, tasks=[task()], seed=3)
-    )[0]
+    record = list(run_verifier_v8_stage(provider=provider, tasks=[task()], seed=3))[0]
     assert record["status"] == "ok"
     assert record["stage"] == "verifier_v8"
     assert record["information_boundary"] == "question_options_image_only"
-    assert record["parser_contract"] == (
-        "v10_answer_only_with_fail_closed_abstention"
-    )
+    assert record["parser_contract"] == ("v10_answer_only_with_fail_closed_abstention")
     assert record["max_new_tokens_contract"] == 64
     assert record["parsed"]["answer"] == "B"
     assert "answer_only_verifier_v8" in provider.request_id
@@ -141,6 +135,4 @@ def test_v8_authorization_separates_verifier_answer_from_specialist_evidence() -
     assert no_evidence.reason == "no_heterogeneous_corroborator"
 
     forbidden = {"source_id", "reference", "score", "realized_outcome"}
-    assert forbidden.isdisjoint(
-        inspect.signature(decide_answer_only_verified_overwrite).parameters
-    )
+    assert forbidden.isdisjoint(inspect.signature(decide_answer_only_verified_overwrite).parameters)

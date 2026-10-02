@@ -39,4 +39,3 @@ def test_invalidation_and_rollback(tmp_path) -> None:
     current2 = store.get_current(signature.primary_type)
     assert current2 is not None
     assert current2.needs_revalidation
-

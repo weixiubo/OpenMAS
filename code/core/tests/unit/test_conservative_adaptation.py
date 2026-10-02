@@ -36,9 +36,7 @@ def test_fit_uses_worst_candidate_residual_per_task() -> None:
     )
 
     assert calibrator.correction == pytest.approx(0.2)
-    assert calibrator.lower_bounds({"a": 0.6, "b": 0.25}) == pytest.approx(
-        {"a": 0.4, "b": 0.05}
-    )
+    assert calibrator.lower_bounds({"a": 0.6, "b": 0.25}) == pytest.approx({"a": 0.4, "b": 0.05})
 
 
 def test_fit_returns_infinite_correction_when_coverage_exceeds_sample_resolution() -> None:

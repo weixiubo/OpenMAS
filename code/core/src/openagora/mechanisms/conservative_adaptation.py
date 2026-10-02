@@ -63,8 +63,7 @@ class SimultaneousLowerBoundCalibrator:
                 raise CalibrationError("all calibration examples must use the same candidate ids")
             residuals.append(
                 max(
-                    float(example.predicted_advantages[candidate_id])
-                    - float(example.observed_advantages[candidate_id])
+                    float(example.predicted_advantages[candidate_id]) - float(example.observed_advantages[candidate_id])
                     for candidate_id in candidate_ids
                 )
             )
@@ -193,10 +192,7 @@ class ConservativeOrganizationSelector:
                 estimated_cost=option.estimated_cost,
                 edit_distance=option.edit_distance,
                 admissible=option.admissible
-                and (
-                    self._max_edit_distance is None
-                    or option.edit_distance <= self._max_edit_distance
-                ),
+                and (self._max_edit_distance is None or option.edit_distance <= self._max_edit_distance),
             )
             for option in sorted(options, key=lambda item: item.candidate_id)
         )

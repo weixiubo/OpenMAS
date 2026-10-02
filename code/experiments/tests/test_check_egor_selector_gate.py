@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
+
 
 def test_selector_gate_writes_pass_and_fail_reports(tmp_path: Path) -> None:
     config = tmp_path / "gate.json"
@@ -27,9 +29,7 @@ def test_selector_gate_writes_pass_and_fail_reports(tmp_path: Path) -> None:
     summary = tmp_path / "summary.json"
     payload = _passing_summary()
     summary.write_text(json.dumps(payload), encoding="utf-8")
-    script = (
-        Path(__file__).resolve().parents[1] / "scripts" / "check_egor_selector_gate.py"
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "check_egor_selector_gate.py"
     passed_report = tmp_path / "passed.json"
 
     passed = subprocess.run(

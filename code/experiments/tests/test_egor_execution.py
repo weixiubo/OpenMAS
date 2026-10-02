@@ -17,6 +17,7 @@ from openagora_experiments.egor.selection import (
     CounterfactualRepairSelector,
     RepairSelectionConfig,
 )
+from openmas_test_history import historical_root
 
 
 def test_plans_are_source_blind_and_emit_only_selected_stages() -> None:
@@ -36,9 +37,7 @@ def test_plans_are_source_blind_and_emit_only_selected_stages() -> None:
     )
 
     assert plans[0]["feature_vector"] == plans[1]["feature_vector"]
-    assert (
-        plans[0]["selected_template_id"] == plans[1]["selected_template_id"] == "exact"
-    )
+    assert plans[0]["selected_template_id"] == plans[1]["selected_template_id"] == "exact"
     assert plans[2]["selected_template_id"] == "baseline"
     actions, combinations = task_lists_from_plans(
         plans,
@@ -72,10 +71,7 @@ def test_policy_planner_script_writes_auditable_task_lists(tmp_path: Path) -> No
         encoding="utf-8",
     )
     baseline_path.write_text(
-        json.dumps(
-            {"source_id": "fixture", "task_id": "t1", **_baseline(open_gap=True)}
-        )
-        + "\n",
+        json.dumps({"source_id": "fixture", "task_id": "t1", **_baseline(open_gap=True)}) + "\n",
         encoding="utf-8",
     )
     selector_path.write_text(json.dumps(_selector().to_dict()), encoding="utf-8")
@@ -91,9 +87,7 @@ def test_policy_planner_script_writes_auditable_task_lists(tmp_path: Path) -> No
         ),
         encoding="utf-8",
     )
-    script = (
-        Path(__file__).resolve().parents[1] / "scripts" / "plan_egor_selector_policy.py"
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "plan_egor_selector_policy.py"
 
     subprocess.run(
         [
@@ -121,10 +115,7 @@ def test_policy_planner_script_writes_auditable_task_lists(tmp_path: Path) -> No
     assert (output_dir / "actions_task_ids" / "visual.txt").read_text() == ""
     manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["selection_counts"] == {"exact": 1}
-    assert (
-        "absent from the serialized feature schema"
-        in manifest["source_id_feature_policy"]
-    )
+    assert "absent from the serialized feature schema" in manifest["source_id_feature_policy"]
 
     scheduler_path = tmp_path / "scheduler.jsonl"
     scheduler_path.write_text(
@@ -162,9 +153,7 @@ def test_policy_planner_script_writes_auditable_task_lists(tmp_path: Path) -> No
         ],
         check=True,
     )
-    scheduler_plan = json.loads(
-        (scheduler_output / "plans.jsonl").read_text(encoding="utf-8")
-    )
+    scheduler_plan = json.loads((scheduler_output / "plans.jsonl").read_text(encoding="utf-8"))
     assert scheduler_plan["selected_template_id"] == "visual"
     assert scheduler_plan["selected_action_ids"] == ["visual"]
 

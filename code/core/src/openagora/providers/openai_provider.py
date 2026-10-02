@@ -1,4 +1,4 @@
-﻿"""OpenAI provider adapter with retries, timeout and error normalization."""
+"""OpenAI provider adapter with retries, timeout and error normalization."""
 
 from __future__ import annotations
 
@@ -164,5 +164,3 @@ class OpenAIModelProvider:
         events = list(self._audit_buffer)
         self._audit_buffer.clear()
         return events
-
-

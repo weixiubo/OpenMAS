@@ -8,13 +8,11 @@ import sys
 from pathlib import Path
 from types import ModuleType
 
+from openmas_test_history import historical_root
+
 
 def _load_builder() -> ModuleType:
-    path = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "build_egor_prospective_configs.py"
-    )
+    path = (historical_root() / "code/experiments") / "scripts" / "build_egor_prospective_configs.py"
     spec = importlib.util.spec_from_file_location("prospective_configs", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -27,9 +25,7 @@ def test_configs_share_paths_and_freeze_visual_as_best_fixed(tmp_path: Path) -> 
     execution = module.build_execution_config(tmp_path)
     matrix = module.build_matrix_config(tmp_path)
 
-    assert execution["combinations"]["exact__visual"].endswith(
-        "exact_visual_repair.jsonl"
-    )
+    assert execution["combinations"]["exact__visual"].endswith("exact_visual_repair.jsonl")
     candidates = {item["candidate_id"]: item for item in matrix["candidates"]}
     assert len(candidates["full_team"]["specialists"]) == 4
     policies = {item["policy_id"]: item for item in matrix["policies"]}
@@ -58,9 +54,7 @@ def test_policy_combiner_rejects_task_mismatch_and_writes_manifest(
     _policy_csv(first, "one", ("t1", "t2"))
     _policy_csv(second, "two", ("t1", "t2"))
     output = tmp_path / "bundle.csv"
-    script = (
-        Path(__file__).resolve().parents[1] / "scripts" / "combine_egor_policy_rows.py"
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "combine_egor_policy_rows.py"
     subprocess.run(
         [
             sys.executable,
@@ -75,9 +69,7 @@ def test_policy_combiner_rejects_task_mismatch_and_writes_manifest(
         check=True,
     )
     rows = list(csv.DictReader(output.open(encoding="utf-8")))
-    manifest = json.loads(
-        output.with_suffix(".csv.manifest.json").read_text(encoding="utf-8")
-    )
+    manifest = json.loads(output.with_suffix(".csv.manifest.json").read_text(encoding="utf-8"))
     assert len(rows) == 4
     assert rows[0]["provenance_rejected"] == "0"
     assert rows[0]["failed_stages"] == ""

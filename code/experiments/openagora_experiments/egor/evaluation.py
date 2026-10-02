@@ -9,9 +9,9 @@ from statistics import fmean
 from typing import Any
 
 from openagora.mechanisms.evidence_gap_repair import EvidenceType
-from openagora_experiments.cago.scoring import score_prediction
-from openagora_experiments.egor.protocol import PilotTask
 
+from openagora_experiments.cago.scoring import score_prediction
+from openagora_experiments.egor.task_model import PilotTask
 
 RecordKey = tuple[str, str]
 
@@ -143,44 +143,26 @@ def evaluate_candidate_rows(
         key = (task.source_id, task.task_id)
         baseline_record = baseline_records.get(key)
         if baseline_record is None:
-            raise ValueError(
-                f"missing baseline record for {task.source_id}::{task.task_id}"
-            )
+            raise ValueError(f"missing baseline record for {task.source_id}::{task.task_id}")
         specialist_records = [records.get(key) for records in specialist_record_sets]
         synthesis_record = synthesis_records.get(key)
         baseline_parsed = _parsed(baseline_record)
         synthesis_parsed = _parsed(synthesis_record or {})
         baseline_answer = str(baseline_parsed.get("answer", "")).strip()
         candidate_answer = str(synthesis_parsed.get("answer", "")).strip()
-        baseline_quality = (
-            _score(task, baseline_answer) if _ok(baseline_record) else 0.0
-        )
+        baseline_quality = _score(task, baseline_answer) if _ok(baseline_record) else 0.0
         candidate_quality = (
-            _score(task, candidate_answer)
-            if synthesis_record is not None and _ok(synthesis_record)
-            else 0.0
+            _score(task, candidate_answer) if synthesis_record is not None and _ok(synthesis_record) else 0.0
         )
         specialist_parsed = [_parsed(item or {}) for item in specialist_records]
-        cards = tuple(
-            card
-            for parsed in specialist_parsed
-            for card in _valid_evidence(parsed.get("evidence", []))
-        )
+        cards = tuple(card for parsed in specialist_parsed for card in _valid_evidence(parsed.get("evidence", [])))
         audit = audit_synthesis(
             baseline=baseline_parsed,
             specialists=specialist_parsed,
             synthesis=synthesis_parsed,
         )
         stage_records = [baseline_record, *specialist_records, synthesis_record]
-        failed_stages: list[str] = []
-        for index, record in enumerate(stage_records):
-            if record is None or not _ok(record):
-                if index == 0:
-                    failed_stages.append("baseline")
-                elif index == len(stage_records) - 1:
-                    failed_stages.append("synthesis")
-                else:
-                    failed_stages.append(f"specialist_{index}")
+        failed_stages = _failed_stages(stage_records)
         rows.append(
             CandidateRow(
                 source_id=task.source_id,
@@ -198,12 +180,8 @@ def evaluate_candidate_rows(
                 baseline_total_tokens=_usage(baseline_record, "total_tokens"),
                 baseline_latency_seconds=_usage(baseline_record, "latency_seconds"),
                 calls=sum(_usage(record, "attempts") for record in stage_records),
-                total_tokens=sum(
-                    _usage(record, "total_tokens") for record in stage_records
-                ),
-                latency_seconds=sum(
-                    _usage(record, "latency_seconds") for record in stage_records
-                ),
+                total_tokens=sum(_usage(record, "total_tokens") for record in stage_records),
+                latency_seconds=sum(_usage(record, "latency_seconds") for record in stage_records),
                 failed_stages=tuple(failed_stages),
             )
         )
@@ -224,9 +202,7 @@ def derive_gap_policy(
     return _derive_policy(
         rows,
         policy_id=policy_id,
-        should_trigger=lambda row: any(
-            value > threshold for value in row.residual_gaps.values()
-        ),
+        should_trigger=lambda row: any(value > threshold for value in row.residual_gaps.values()),
         useful_margin=useful_margin,
         harm_tolerance=harm_tolerance,
         require_evidence_for_change=require_evidence_for_change,
@@ -273,11 +249,7 @@ def _derive_policy(
             and row.synthesis_audit.actual_changed
             and not row.synthesis_audit.evidence_supported_change
         )
-        policy_quality = (
-            row.candidate_quality
-            if triggered and not provenance_rejected
-            else row.baseline_quality
-        )
+        policy_quality = row.candidate_quality if triggered and not provenance_rejected else row.baseline_quality
         delta = policy_quality - row.baseline_quality
         if triggered:
             calls = row.calls
@@ -288,9 +260,7 @@ def _derive_policy(
             calls = row.baseline_calls
             tokens = row.baseline_total_tokens
             latency = row.baseline_latency_seconds
-            failures = tuple(
-                stage for stage in row.failed_stages if stage == "baseline"
-            )
+            failures = tuple(stage for stage in row.failed_stages if stage == "baseline")
         policy_rows.append(
             PolicyRow(
                 source_id=row.source_id,
@@ -344,19 +314,13 @@ def audit_synthesis(
     This is a provenance check only; it never reads a reference answer or
     predicts correctness.
     """
-    baseline_ids = {
-        card.evidence_id for card in _valid_evidence(baseline.get("evidence", []))
-    }
+    baseline_ids = {card.evidence_id for card in _valid_evidence(baseline.get("evidence", []))}
     specialist_ids = {
-        card.evidence_id
-        for specialist in specialists
-        for card in _valid_evidence(specialist.get("evidence", []))
+        card.evidence_id for specialist in specialists for card in _valid_evidence(specialist.get("evidence", []))
     }
     used = set(_strings(synthesis.get("used_evidence_ids", [])))
     known = baseline_ids | specialist_ids
-    actual_changed = _canonical_text(synthesis.get("answer", "")) != _canonical_text(
-        baseline.get("answer", "")
-    )
+    actual_changed = _canonical_text(synthesis.get("answer", "")) != _canonical_text(baseline.get("answer", ""))
     reported_changed = bool(synthesis.get("changed_baseline", False))
     used_specialist = used & specialist_ids
     return SynthesisAudit(
@@ -367,9 +331,7 @@ def audit_synthesis(
         actual_changed=actual_changed,
         reported_changed=reported_changed,
         change_flag_agrees=actual_changed == reported_changed,
-        evidence_supported_change=actual_changed
-        and bool(used_specialist)
-        and not (used - known),
+        evidence_supported_change=actual_changed and bool(used_specialist) and not (used - known),
     )
 
 
@@ -384,28 +346,21 @@ def estimate_capability(
     correct_threshold: float = 0.95,
     noninferiority_tolerance: float = 0.05,
 ) -> CapabilityEstimate:
-    eligible = [
-        row for row in rows if row.residual_gaps.get(evidence_type, 0.0) > minimum_gap
-    ]
+    eligible = [row for row in rows if row.residual_gaps.get(evidence_type, 0.0) > minimum_gap]
     successes = 0
     for row in eligible:
         qualifying_ids = {
             card.evidence_id
             for card in row.specialist_cards
-            if card.evidence_type is evidence_type
-            and card.confidence >= minimum_card_confidence
+            if card.evidence_type is evidence_type and card.confidence >= minimum_card_confidence
         }
-        cited = qualifying_ids.intersection(
-            row.synthesis_audit.used_valid_specialist_ids
-        )
+        cited = qualifying_ids.intersection(row.synthesis_audit.used_valid_specialist_ids)
         useful = row.quality_delta > useful_margin
         preserves_correct = (
             row.baseline_quality >= correct_threshold
             and row.candidate_quality >= row.baseline_quality - noninferiority_tolerance
         )
-        successes += int(
-            bool(cited) and (useful or preserves_correct) and not row.failed_stages
-        )
+        successes += int(bool(cited) and (useful or preserves_correct) and not row.failed_stages)
     count = len(eligible)
     posterior_mean = (successes + 1.0) / (count + 2.0)
     low, high = _wilson_interval(successes, count)
@@ -436,9 +391,7 @@ def summarize_candidate(
         "useful_rate": fmean(row.quality_delta > useful_margin for row in rows),
         "strict_harm_rate": fmean(row.quality_delta < -harm_tolerance for row in rows),
         "complete_rate": fmean(not row.failed_stages for row in rows),
-        "evidence_supported_change_rate": fmean(
-            row.synthesis_audit.evidence_supported_change for row in rows
-        ),
+        "evidence_supported_change_rate": fmean(row.synthesis_audit.evidence_supported_change for row in rows),
         "calls": fmean(row.calls for row in rows),
         "total_tokens": fmean(row.total_tokens for row in rows),
         "latency_seconds": fmean(row.latency_seconds for row in rows),
@@ -456,12 +409,7 @@ def _valid_evidence(value: Any) -> list[EvidenceObservation]:
             str(item.get("support", "")).strip(),
             str(item.get("provenance", "")).strip(),
         )
-        if (
-            evidence_type is None
-            or not evidence_id
-            or not producer_id
-            or any(not item for item in required)
-        ):
+        if evidence_type is None or not evidence_id or not producer_id or any(not item for item in required):
             continue
         cards.append(
             EvidenceObservation(
@@ -513,19 +461,11 @@ def _evidence_type(value: Any) -> EvidenceType | None:
 
 
 def _objects(value: Any) -> list[Mapping[str, Any]]:
-    return (
-        [item for item in value if isinstance(item, Mapping)]
-        if isinstance(value, list)
-        else []
-    )
+    return [item for item in value if isinstance(item, Mapping)] if isinstance(value, list) else []
 
 
 def _strings(value: Any) -> list[str]:
-    return (
-        [str(item).strip() for item in value if str(item).strip()]
-        if isinstance(value, list)
-        else []
-    )
+    return [str(item).strip() for item in value if str(item).strip()] if isinstance(value, list) else []
 
 
 def _clip_probability(value: Any) -> float:
@@ -540,19 +480,24 @@ def _canonical_text(value: Any) -> str:
     return " ".join(str(value).strip().lower().split())
 
 
-def _wilson_interval(
-    successes: int, count: int, *, z: float = 1.959963984540054
-) -> tuple[float, float]:
+def _wilson_interval(successes: int, count: int, *, z: float = 1.959963984540054) -> tuple[float, float]:
     if count <= 0:
         return 0.0, 1.0
     probability = successes / count
     denominator = 1.0 + z * z / count
     center = (probability + z * z / (2.0 * count)) / denominator
-    radius = (
-        z
-        * math.sqrt(
-            probability * (1.0 - probability) / count + z * z / (4.0 * count * count)
-        )
-        / denominator
-    )
+    radius = z * math.sqrt(probability * (1.0 - probability) / count + z * z / (4.0 * count * count)) / denominator
     return max(0.0, center - radius), min(1.0, center + radius)
+
+
+def _failed_stages(stage_records: Sequence[Mapping[str, Any] | None]) -> list[str]:
+    failed_stages: list[str] = []
+    for index, record in enumerate(stage_records):
+        if record is None or not _ok(record):
+            if index == 0:
+                failed_stages.append("baseline")
+            elif index == len(stage_records) - 1:
+                failed_stages.append("synthesis")
+            else:
+                failed_stages.append(f"specialist_{index}")
+    return failed_stages

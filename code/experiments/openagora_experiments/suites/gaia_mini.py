@@ -1,4 +1,4 @@
-﻿"""gaia_mini suite and evidence-chain runner."""
+"""gaia_mini suite and evidence-chain runner."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from openagora.core.engine import OpenAGORAEngine
 from openagora.plugins.registry import build_default_registry
 from openagora.storage.sqlite_store import SQLiteStore
 from openagora.utils.artifacts import build_file_hashes, write_hash_manifest
+
 from openagora_experiments.adapters.gaia_mini import load_gaia_manifest, load_gaia_mini_tasks
 from openagora_experiments.evaluation.judge import build_hybrid_judge
 from openagora_experiments.evaluation.protocol import evaluate_rule
@@ -118,29 +119,8 @@ def run_gaia_mini_ablation(
                 }
             )
 
-    _write_csv(output_csv, rows)
-    _write_csv(summary_csv, build_summary(rows))
-    _write_csv(
-        pairwise_csv,
-        build_pairwise_stats(
-            rows,
-            reference_variant="OpenAGORA_Full",
-            bootstrap_n=cfg.eval.stats_bootstrap_n,
-            seed=cfg.eval.stats_seed,
-        ),
-    )
-    _write_csv(failure_csv, build_failure_buckets(rows))
-    if cfg.eval.judge_mode == "hybrid":
-        _write_jsonl(judge_audit_path, judge_audits)
-
-    _write_run_artifacts(
-        cfg=cfg,
-        manifest=manifest,
-        rows_path=Path(output_csv),
-        summary_path=Path(summary_csv),
-        pairwise_path=Path(pairwise_csv),
-        failure_path=Path(failure_csv),
-        judge_audit_path=Path(judge_audit_path),
+    _write_ablation_outputs(
+        cfg, rows, judge_audits, manifest, output_csv, summary_csv, pairwise_csv, failure_csv, judge_audit_path
     )
     return rows
 
@@ -283,3 +263,41 @@ def _write_run_artifacts(
         files.append(judge_audit_path)
     hashes = build_file_hashes(files)
     write_hash_manifest(Path(cfg.eval.output_hashes_json), hashes)
+
+
+def _write_ablation_outputs(
+    cfg: RunConfig,
+    rows: list[dict[str, Any]],
+    judge_audits: list[dict[str, Any]],
+    manifest: dict[str, Any],
+    output_csv: str,
+    summary_csv: str,
+    pairwise_csv: str,
+    failure_csv: str,
+    judge_audit_path: str,
+) -> None:
+    _write_csv(output_csv, rows)
+    _write_csv(summary_csv, build_summary(rows))
+    _write_csv(
+        pairwise_csv,
+        build_pairwise_stats(
+            rows,
+            reference_variant="OpenAGORA_Full",
+            bootstrap_n=cfg.eval.stats_bootstrap_n,
+            seed=cfg.eval.stats_seed,
+        ),
+    )
+    _write_csv(failure_csv, build_failure_buckets(rows))
+    if cfg.eval.judge_mode == "hybrid":
+        _write_jsonl(judge_audit_path, judge_audits)
+
+    _write_run_artifacts(
+        cfg=cfg,
+        manifest=manifest,
+        rows_path=Path(output_csv),
+        summary_path=Path(summary_csv),
+        pairwise_path=Path(pairwise_csv),
+        failure_path=Path(failure_csv),
+        judge_audit_path=Path(judge_audit_path),
+    )
+    return None

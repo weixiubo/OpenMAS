@@ -13,6 +13,7 @@ from openagora.mechanisms.conservative_adaptation import (
     OrganizationOption,
     SimultaneousLowerBoundCalibrator,
 )
+
 from openagora_experiments.cago.data import (
     CounterfactualMatrix,
     MatrixValidationError,
@@ -148,15 +149,7 @@ def run_cago_evaluation(
 ) -> EvaluationResult:
     """Run the frozen library-only CAGO algorithm and required diagnostic policies."""
 
-    if baseline_id not in matrix.organization_ids:
-        raise MatrixValidationError(f"unknown baseline organization: {baseline_id}")
-    candidate_ids = tuple(item for item in matrix.organization_ids if item != baseline_id)
-    if not candidate_ids:
-        raise MatrixValidationError("CAGO requires at least one alternative organization")
-    all_split_keys = set((*split.train, *split.calibration, *split.test))
-    unknown_keys = all_split_keys.difference(matrix.tasks)
-    if unknown_keys:
-        raise MatrixValidationError(f"split contains {len(unknown_keys)} tasks absent from matrix")
+    candidate_ids = _validate_cago_inputs(matrix, split, baseline_id)
 
     predictor = _fit_predictor(
         matrix=matrix,
@@ -204,67 +197,20 @@ def run_cago_evaluation(
         utility=utility,
     )
 
-    selected_by_policy: dict[str, dict[TaskKey, str]] = {
-        "baseline": {},
-        "best_static": {},
-        "best_static_by_source": {},
-        "uncalibrated_advantage": {},
-        "cago": {},
-        "oracle": {},
-    }
-    decisions: list[DecisionRecord] = []
-    for key in split.test:
-        features = visible_feature_vector(matrix.tasks[key])
-        predicted = predictor.predict(features)
-        lower_bounds = calibrator.lower_bounds(predicted)
-        true_advantages = _true_advantages(
-            matrix=matrix,
-            key=key,
-            baseline_id=baseline_id,
-            candidate_ids=candidate_ids,
-            utility=utility,
-        )
-        decision = selector.select(
-            baseline_id=baseline_id,
-            options=options,
-            predicted_advantages=predicted,
-            calibrator=calibrator,
-        )
-        uncalibrated_id = _select_predicted(
-            predicted=predicted,
-            baseline_id=baseline_id,
-            margin=margin,
-        )
-        oracle_id = _select_oracle(matrix=matrix, key=key, utility=utility)
-        selected_by_policy["baseline"][key] = baseline_id
-        selected_by_policy["best_static"][key] = best_static_id
-        selected_by_policy["best_static_by_source"][key] = best_static_by_source[key.source_id]
-        selected_by_policy["uncalibrated_advantage"][key] = uncalibrated_id
-        selected_by_policy["cago"][key] = decision.selected_id
-        selected_by_policy["oracle"][key] = oracle_id
-        covered = all(
-            true_advantages[candidate_id] >= lower_bounds[candidate_id]
-            for candidate_id in candidate_ids
-        )
-        realized_advantage = (
-            true_advantages[decision.selected_id] if decision.switched else 0.0
-        )
-        decisions.append(
-            DecisionRecord(
-                source_id=key.source_id,
-                task_id=key.task_id,
-                baseline_id=baseline_id,
-                selected_id=decision.selected_id,
-                switched=decision.switched,
-                predicted_advantages=dict(predicted),
-                lower_bounds=dict(lower_bounds),
-                true_advantages=dict(true_advantages),
-                selected_lower_bound=decision.selected_lower_bound,
-                realized_advantage=realized_advantage,
-                simultaneous_covered=covered,
-                reason=decision.reason,
-            )
-        )
+    selected_by_policy, decisions = _evaluate_policies(
+        matrix=matrix,
+        split=split,
+        predictor=predictor,
+        calibrator=calibrator,
+        selector=selector,
+        options=options,
+        baseline_id=baseline_id,
+        candidate_ids=candidate_ids,
+        utility=utility,
+        margin=margin,
+        best_static_id=best_static_id,
+        best_static_by_source=best_static_by_source,
+    )
 
     summaries = tuple(
         _summarize_policy(
@@ -286,10 +232,7 @@ def run_cago_evaluation(
     model_artifact = {
         "feature_names": list(FEATURE_NAMES),
         "ridge_l2": ridge_l2,
-        "models": {
-            candidate_id: predictor.models[candidate_id].to_dict()
-            for candidate_id in predictor.candidate_ids
-        },
+        "models": {candidate_id: predictor.models[candidate_id].to_dict() for candidate_id in predictor.candidate_ids},
     }
     return EvaluationResult(
         baseline_id=baseline_id,
@@ -322,8 +265,7 @@ def _fit_predictor(
     models: dict[str, RidgeModel] = {}
     for candidate_id in candidate_ids:
         targets = [
-            utility.score(matrix.outcome(key, candidate_id))
-            - utility.score(matrix.outcome(key, baseline_id))
+            utility.score(matrix.outcome(key, candidate_id)) - utility.score(matrix.outcome(key, baseline_id))
             for key in keys
         ]
         models[candidate_id] = RidgeModel.fit(features, targets, l2=ridge_l2)
@@ -420,22 +362,17 @@ def _summarize_policy(
         utility.score(matrix.outcome(key, selections[key])) - utility.score(matrix.outcome(key, baseline_id))
         for key in keys
     ]
-    harmful = [switched and advantage <= margin for switched, advantage in zip(switches, realized_advantages, strict=True)]
-    strict_negative = [
-        switched and advantage < 0.0
-        for switched, advantage in zip(switches, realized_advantages, strict=True)
-    ]
+    harmful, strict_negative = _switch_effects(switches, realized_advantages, margin)
     switch_count = sum(switches)
     return PolicySummary(
         policy=policy,
         count=len(keys),
-        mean_quality=mean(outcome.quality for outcome in selected),
+        mean_quality=_mean_quality(selected),
         mean_utility=mean(utility.score(outcome) for outcome in selected),
         mean_cost_usd=mean(outcome.cost_usd for outcome in selected),
         mean_tokens=mean(outcome.tokens for outcome in selected),
         mean_latency_seconds=mean(outcome.latency_seconds for outcome in selected),
-        quality_gain_from_baseline=mean(outcome.quality for outcome in selected)
-        - mean(outcome.quality for outcome in baselines),
+        quality_gain_from_baseline=_mean_quality(selected) - _mean_quality(baselines),
         utility_gain_from_baseline=mean(realized_advantages),
         switch_rate=switch_count / len(keys),
         harmful_switch_rate_all_tasks=sum(harmful) / len(keys),
@@ -453,7 +390,110 @@ def _wilson_interval(*, successes: int, count: int, z: float = 1.959963984540054
     proportion = successes / count
     denominator = 1.0 + z * z / count
     center = (proportion + z * z / (2.0 * count)) / denominator
-    radius = z * (
-        proportion * (1.0 - proportion) / count + z * z / (4.0 * count * count)
-    ) ** 0.5 / denominator
+    radius = z * (proportion * (1.0 - proportion) / count + z * z / (4.0 * count * count)) ** 0.5 / denominator
     return max(0.0, center - radius), min(1.0, center + radius)
+
+
+def _evaluate_policies(
+    *,
+    matrix: CounterfactualMatrix,
+    split: SplitAssignment,
+    predictor: AdvantagePredictor,
+    calibrator: SimultaneousLowerBoundCalibrator,
+    selector: ConservativeOrganizationSelector,
+    options: Sequence[OrganizationOption],
+    baseline_id: str,
+    candidate_ids: Sequence[str],
+    utility: UtilitySpec,
+    margin: float,
+    best_static_id: str,
+    best_static_by_source: Mapping[str, str],
+) -> tuple[dict[str, dict[TaskKey, str]], list[DecisionRecord]]:
+    selected_by_policy: dict[str, dict[TaskKey, str]] = {
+        "baseline": {},
+        "best_static": {},
+        "best_static_by_source": {},
+        "uncalibrated_advantage": {},
+        "cago": {},
+        "oracle": {},
+    }
+    decisions: list[DecisionRecord] = []
+    for key in split.test:
+        features = visible_feature_vector(matrix.tasks[key])
+        predicted = predictor.predict(features)
+        lower_bounds = calibrator.lower_bounds(predicted)
+        true_advantages = _true_advantages(
+            matrix=matrix,
+            key=key,
+            baseline_id=baseline_id,
+            candidate_ids=candidate_ids,
+            utility=utility,
+        )
+        decision = selector.select(
+            baseline_id=baseline_id,
+            options=options,
+            predicted_advantages=predicted,
+            calibrator=calibrator,
+        )
+        uncalibrated_id = _select_predicted(
+            predicted=predicted,
+            baseline_id=baseline_id,
+            margin=margin,
+        )
+        oracle_id = _select_oracle(matrix=matrix, key=key, utility=utility)
+        selected_by_policy["baseline"][key] = baseline_id
+        selected_by_policy["best_static"][key] = best_static_id
+        selected_by_policy["best_static_by_source"][key] = best_static_by_source[key.source_id]
+        selected_by_policy["uncalibrated_advantage"][key] = uncalibrated_id
+        selected_by_policy["cago"][key] = decision.selected_id
+        selected_by_policy["oracle"][key] = oracle_id
+        covered = all(true_advantages[candidate_id] >= lower_bounds[candidate_id] for candidate_id in candidate_ids)
+        realized_advantage = true_advantages[decision.selected_id] if decision.switched else 0.0
+        decisions.append(
+            DecisionRecord(
+                source_id=key.source_id,
+                task_id=key.task_id,
+                baseline_id=baseline_id,
+                selected_id=decision.selected_id,
+                switched=decision.switched,
+                predicted_advantages=dict(predicted),
+                lower_bounds=dict(lower_bounds),
+                true_advantages=dict(true_advantages),
+                selected_lower_bound=decision.selected_lower_bound,
+                realized_advantage=realized_advantage,
+                simultaneous_covered=covered,
+                reason=decision.reason,
+            )
+        )
+
+    return selected_by_policy, decisions
+
+
+def _switch_effects(
+    switches: Sequence[bool], realized_advantages: Sequence[float], margin: float
+) -> tuple[list[bool], list[bool]]:
+    harmful = [
+        switched and advantage <= margin for switched, advantage in zip(switches, realized_advantages, strict=True)
+    ]
+    strict_negative = [
+        switched and advantage < 0.0 for switched, advantage in zip(switches, realized_advantages, strict=True)
+    ]
+    return harmful, strict_negative
+
+
+def _validate_cago_inputs(matrix: CounterfactualMatrix, split: SplitAssignment, baseline_id: str) -> tuple[str, ...]:
+    if baseline_id not in matrix.organization_ids:
+        raise MatrixValidationError(f"unknown baseline organization: {baseline_id}")
+    candidate_ids = tuple(item for item in matrix.organization_ids if item != baseline_id)
+    if not candidate_ids:
+        raise MatrixValidationError("CAGO requires at least one alternative organization")
+    all_split_keys = set((*split.train, *split.calibration, *split.test))
+    unknown_keys = all_split_keys.difference(matrix.tasks)
+    if unknown_keys:
+        raise MatrixValidationError(f"split contains {len(unknown_keys)} tasks absent from matrix")
+
+    return candidate_ids
+
+
+def _mean_quality(outcomes: Sequence[OutcomeRecord]) -> float:
+    return mean(outcome.quality for outcome in outcomes)

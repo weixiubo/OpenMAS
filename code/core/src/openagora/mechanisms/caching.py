@@ -85,4 +85,3 @@ class CacheLifecycleManager:
                 )
             )
         self._store.rollback_if_needed(signature.primary_type)
-

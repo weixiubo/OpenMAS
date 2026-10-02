@@ -1,4 +1,5 @@
 """Typed evidence and capability contracts shared by EGOR planners."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,6 +10,7 @@ from typing import Mapping
 class EvidenceRepairError(ValueError):
     """Raised when an evidence-repair object violates the frozen grammar."""
 
+
 class EvidenceType(StrEnum):
     """Finite evidence grammar used by the first EGOR implementation."""
 
@@ -18,6 +20,7 @@ class EvidenceType(StrEnum):
     EXTERNAL_FACT = "external_fact"
     CONSTRAINT_CHECK = "constraint_check"
     INDEPENDENT_VERIFICATION = "independent_verification"
+
 
 @dataclass(frozen=True)
 class EvidenceDemand:
@@ -33,6 +36,7 @@ class EvidenceDemand:
             raise EvidenceRepairError("demand id and requirement must be non-empty")
         if not 0.0 <= self.weight <= 1.0:
             raise EvidenceRepairError("demand weight must lie in [0, 1]")
+
 
 @dataclass(frozen=True)
 class EvidenceCard:
@@ -59,6 +63,7 @@ class EvidenceCard:
         if not 0.0 <= self.confidence <= 1.0:
             raise EvidenceRepairError("evidence confidence must lie in [0, 1]")
 
+
 @dataclass(frozen=True)
 class CapabilityCard:
     """Empirical probability that a repair action closes each typed gap."""
@@ -82,6 +87,7 @@ class CapabilityCard:
     def supply(self, evidence_type: EvidenceType) -> float:
         return float(self.supply_by_type.get(evidence_type, 0.0))
 
+
 @dataclass(frozen=True)
 class GapAssessment:
     demand_id: str
@@ -89,12 +95,14 @@ class GapAssessment:
     validated_coverage: float
     residual_gap: float
 
+
 @dataclass(frozen=True)
 class RepairStep:
     action_id: str
     marginal_coverage_gain: float
     cumulative_coverage: float
     estimated_cost: float
+
 
 @dataclass(frozen=True)
 class EvidenceRepairPlan:

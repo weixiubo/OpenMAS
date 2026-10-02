@@ -7,13 +7,9 @@ from pathlib import Path
 from typing import Any
 
 from openagora_experiments.egor.protocol import PilotTask
+from openmas_test_history import historical_root
 
-
-SCRIPT = (
-    Path(__file__).resolve().parents[1]
-    / "scripts"
-    / "analyze_egor_v7_confirmation.py"
-)
+SCRIPT = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_v7_confirmation.py"
 SPEC = importlib.util.spec_from_file_location("analyze_egor_v7_confirmation", SCRIPT)
 assert SPEC and SPEC.loader
 module = importlib.util.module_from_spec(SPEC)
@@ -28,12 +24,14 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 def evidence(answer: str, prefix: str) -> dict[str, Any]:
     return {
         "candidate_answer": answer,
-        "evidence": [{
-            "evidence_id": f"{prefix}1",
-            "claim": "visible value",
-            "support": answer,
-            "provenance": "image center",
-        }],
+        "evidence": [
+            {
+                "evidence_id": f"{prefix}1",
+                "claim": "visible value",
+                "support": answer,
+                "provenance": "image center",
+            }
+        ],
     }
 
 
@@ -57,17 +55,11 @@ def test_confirmation_analysis_accepts_only_independently_verified_change(
     ]
     write_jsonl(
         tmp_path / "repairability.jsonl",
-        [
-            {"source_id": source, "task_id": task.task_id, "repairability_triggered": True}
-            for task in tasks
-        ],
+        [{"source_id": source, "task_id": task.task_id, "repairability_triggered": True} for task in tasks],
     )
     write_jsonl(
         tmp_path / "overwrite_plans.jsonl",
-        [
-            {"source_id": source, "task_id": task.task_id, "verifier_triggered": True}
-            for task in tasks
-        ],
+        [{"source_id": source, "task_id": task.task_id, "verifier_triggered": True} for task in tasks],
     )
     write_jsonl(
         tmp_path / "baseline_qwen3.jsonl",

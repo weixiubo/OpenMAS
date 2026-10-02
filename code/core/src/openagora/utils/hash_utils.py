@@ -30,4 +30,3 @@ def sha256_file(path: str) -> str:
                 break
             digest.update(chunk)
     return digest.hexdigest()
-

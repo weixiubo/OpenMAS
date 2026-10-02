@@ -1,4 +1,4 @@
-﻿"""Hybrid LLM judge wrapper with deterministic fallback."""
+"""Hybrid LLM judge wrapper with deterministic fallback."""
 
 from __future__ import annotations
 
@@ -12,7 +12,12 @@ from typing import Any
 from openagora.config.models import RunConfig
 from openagora.providers.openai_provider import OpenAIModelProvider, ProviderInvocationError
 
-from openagora_experiments.evaluation.protocol import FinalEvaluation, RuleEvaluation, should_trigger_judge, verdict_from_score
+from openagora_experiments.evaluation.protocol import (
+    FinalEvaluation,
+    RuleEvaluation,
+    should_trigger_judge,
+    verdict_from_score,
+)
 
 
 @dataclass(frozen=True)

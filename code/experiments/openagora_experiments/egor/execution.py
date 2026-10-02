@@ -9,12 +9,12 @@ from typing import Any
 
 from openagora_experiments.egor.evaluation import residual_gap_vector
 from openagora_experiments.egor.planning import combination_id
-from openagora_experiments.egor.protocol import PilotTask
 from openagora_experiments.egor.selection import (
     REPAIR_FEATURE_NAMES,
     CounterfactualRepairSelector,
     visible_repair_feature_vector,
 )
+from openagora_experiments.egor.task_model import PilotTask
 
 
 def build_selector_repair_plans(
@@ -33,9 +33,7 @@ def build_selector_repair_plans(
     """
 
     _validate_template_actions(selector, template_actions)
-    feature_schema_sha256 = hashlib.sha256(
-        json.dumps(REPAIR_FEATURE_NAMES, separators=(",", ":")).encode()
-    ).hexdigest()
+    feature_schema_sha256 = hashlib.sha256(json.dumps(REPAIR_FEATURE_NAMES, separators=(",", ":")).encode()).hexdigest()
     plans: list[dict[str, Any]] = []
     for task in tasks:
         key = (task.source_id, task.task_id)
@@ -46,9 +44,7 @@ def build_selector_repair_plans(
                     "schema_version": 2,
                     "source_id": task.source_id,
                     "task_id": task.task_id,
-                    "baseline_status": (
-                        "missing" if record is None else str(record.get("status", ""))
-                    ),
+                    "baseline_status": ("missing" if record is None else str(record.get("status", ""))),
                     "selected_template_id": "baseline",
                     "selected_action_ids": [],
                     "combination_id": "baseline",
@@ -70,9 +66,7 @@ def build_selector_repair_plans(
         # task.source_id is used for record lookup and audit only; it is never
         # an argument to the feature map or selector.
         decision = selector.select(features, gap_max=gap_max)
-        actions = (
-            tuple(template_actions[decision.selected_id]) if decision.repaired else ()
-        )
+        actions = tuple(template_actions[decision.selected_id]) if decision.repaired else ()
         plans.append(
             {
                 "schema_version": 2,
@@ -82,9 +76,7 @@ def build_selector_repair_plans(
                 "selected_template_id": decision.selected_id,
                 "selected_action_ids": list(actions),
                 "combination_id": combination_id(actions),
-                "residual_gaps": {
-                    key.value: value for key, value in sorted(gaps.items())
-                },
+                "residual_gaps": {key.value: value for key, value in sorted(gaps.items())},
                 "gap_max": gap_max,
                 "predicted_advantages": dict(decision.predicted_advantages),
                 "net_advantage_scores": dict(decision.net_advantage_scores),
@@ -143,15 +135,11 @@ def build_scheduler_repair_plans(
         baseline = baseline_records.get(key)
         scheduler = scheduler_records.get(key)
         baseline_ok = baseline is not None and str(baseline.get("status", "")) == "ok"
-        scheduler_ok = (
-            scheduler is not None and str(scheduler.get("status", "")) == "ok"
-        )
+        scheduler_ok = scheduler is not None and str(scheduler.get("status", "")) == "ok"
         if not baseline_ok or not scheduler_ok:
             selected_template = "baseline"
             actions: tuple[str, ...] = ()
-            reason = (
-                "baseline_stage_failed" if not baseline_ok else "scheduler_stage_failed"
-            )
+            reason = "baseline_stage_failed" if not baseline_ok else "scheduler_stage_failed"
             parsed: Mapping[str, Any] = {}
         else:
             raw_parsed = scheduler.get("parsed", {}) if scheduler is not None else {}
@@ -170,12 +158,8 @@ def build_scheduler_repair_plans(
                 "schema_version": 2,
                 "source_id": task.source_id,
                 "task_id": task.task_id,
-                "baseline_status": (
-                    "missing" if baseline is None else str(baseline.get("status", ""))
-                ),
-                "scheduler_status": (
-                    "missing" if scheduler is None else str(scheduler.get("status", ""))
-                ),
+                "baseline_status": ("missing" if baseline is None else str(baseline.get("status", ""))),
+                "scheduler_status": ("missing" if scheduler is None else str(scheduler.get("status", ""))),
                 "selected_template_id": selected_template,
                 "selected_action_ids": list(actions),
                 "combination_id": combination_id(actions),

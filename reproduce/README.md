@@ -16,3 +16,14 @@ and compute and have not been run during this code cleanup.
 Original source snapshots, complete research records and reproduction-only
 internal checks are preserved in the local private archive. This public
 verification path does not depend on those private files.
+
+## Refactored installation
+
+`uv run --no-sync openagora reproduce` verifies the same sealed files from an
+installed experiments package. Original evidence bytes and sidecar hashes remain
+unchanged. Version-labelled workflow scripts/configurations mentioned in older
+research notes now live at their original paths inside
+`frozen/openmas-812f3e2.tar.gz`; `frozen/SOURCE.json` indexes their checksums.
+`python scripts/check_historical.py` verifies and runs the archived workflow tests
+with their original library source. It does not call models or download data.
+New model runs use `openagora run --config`; see `docs/MIGRATION.md`.

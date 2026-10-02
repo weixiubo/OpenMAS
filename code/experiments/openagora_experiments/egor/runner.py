@@ -9,14 +9,8 @@ from pathlib import Path
 from typing import Any, Protocol
 
 from openagora.mechanisms.evidence_gap_repair import EvidenceType
-from openagora_experiments.egor.protocol import (
-    PilotTask,
-    build_answer_only_verifier_prompt,
-    build_baseline_prompt,
-    build_scheduler_prompt,
-    build_specialist_prompt,
-    build_synthesis_prompt,
-    build_verifier_prompt,
+
+from openagora_experiments.egor.parsing import (
     parse_answer_only_verifier_output,
     parse_baseline_output,
     parse_scheduler_output,
@@ -26,7 +20,16 @@ from openagora_experiments.egor.protocol import (
     parse_verifier_output_v6,
     parse_verifier_output_v7,
 )
+from openagora_experiments.egor.prompts import (
+    build_answer_only_verifier_prompt,
+    build_baseline_prompt,
+    build_scheduler_prompt,
+    build_specialist_prompt,
+    build_synthesis_prompt,
+    build_verifier_prompt,
+)
 from openagora_experiments.egor.runtime_types import ArtifactSpec
+from openagora_experiments.egor.task_model import PilotTask
 
 
 class MultimodalProvider(Protocol):
@@ -46,21 +49,22 @@ class MultimodalProvider(Protocol):
     def pop_audit_events(self) -> list[dict[str, Any]]: ...
 
 
-def load_tasks(
-    path: Path, *, limit: int = 0, allowed_task_ids: set[str] | None = None
-) -> list[PilotTask]:
+def load_tasks(path: Path, *, limit: int = 0, allowed_task_ids: set[str] | None = None) -> list[PilotTask]:
     tasks: list[PilotTask] = []
     seen: set[tuple[str, str]] = set()
     with Path(path).resolve().open(encoding="utf-8") as handle:
         for line_number, line in enumerate(handle, start=1):
             if not line.strip():
                 continue
-            task = PilotTask.from_json(json.loads(line))
+            payload = json.loads(line)
+            if payload.get("image_path"):
+                payload["image_path"] = str(
+                    (Path(path).resolve().parent / Path(payload["image_path"]).expanduser()).resolve()
+                )
+            task = PilotTask.from_json(payload)
             key = (task.source_id, task.task_id)
             if key in seen:
-                raise ValueError(
-                    f"duplicate task at line {line_number}: {task.source_id}::{task.task_id}"
-                )
+                raise ValueError(f"duplicate task at line {line_number}: {task.source_id}::{task.task_id}")
             seen.add(key)
             if allowed_task_ids is not None and task.task_id not in allowed_task_ids:
                 continue
@@ -117,9 +121,7 @@ def run_baseline_stage(
             stage="baseline",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
             # "proposal" selects the runtime's frozen 384-token structured-output budget.
             request_id=f"egor::proposal::baseline::{task.source_id}::{task.task_id}",
             parser=parse_baseline_output,
@@ -144,12 +146,8 @@ def run_verifier_stage(
             stage="verifier",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
-            request_id=(
-                f"egor::proposal::independent_verifier::{task.source_id}::{task.task_id}"
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
+            request_id=(f"egor::proposal::independent_verifier::{task.source_id}::{task.task_id}"),
             parser=parse_verifier_output,
             extra={"information_boundary": "question_options_image_only"},
         )
@@ -172,12 +170,8 @@ def run_verifier_v6_stage(
             stage="verifier_v6",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
-            request_id=(
-                f"egor::proposal::independent_verifier_v6::{task.source_id}::{task.task_id}"
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
+            request_id=(f"egor::proposal::independent_verifier_v6::{task.source_id}::{task.task_id}"),
             parser=parse_verifier_output_v6,
             extra={
                 "information_boundary": "question_options_image_only",
@@ -203,12 +197,8 @@ def run_verifier_v7_stage(
             stage="verifier_v7",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
-            request_id=(
-                f"egor::proposal::independent_verifier_v7::{task.source_id}::{task.task_id}"
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
+            request_id=(f"egor::proposal::independent_verifier_v7::{task.source_id}::{task.task_id}"),
             parser=parse_verifier_output_v7,
             extra={
                 "information_boundary": "question_options_image_only",
@@ -234,12 +224,8 @@ def run_verifier_v8_stage(
             stage="verifier_v8",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
-            request_id=(
-                f"egor::answer_only_verifier_v8::{task.source_id}::{task.task_id}"
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
+            request_id=(f"egor::answer_only_verifier_v8::{task.source_id}::{task.task_id}"),
             parser=parse_answer_only_verifier_output,
             extra={
                 "information_boundary": "question_options_image_only",
@@ -263,9 +249,7 @@ def run_specialist_stage(
         key = (task.source_id, task.task_id)
         baseline = baseline_records.get(key)
         if baseline is None:
-            yield _missing_dependency_record(
-                task, stage="specialist", dependency="baseline"
-            )
+            yield _missing_dependency_record(task, stage="specialist", dependency="baseline")
             continue
         baseline_parsed = _parsed(baseline)
         system_prompt, user_prompt = build_specialist_prompt(
@@ -279,9 +263,7 @@ def run_specialist_stage(
             stage="specialist",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
             request_id=f"egor::proposal::{specialist_id}::{task.source_id}::{task.task_id}",
             parser=lambda raw: parse_specialist_output(
                 raw,
@@ -312,9 +294,7 @@ def run_synthesis_stage(
         baseline = baseline_records.get(key)
         specialists = [records.get(key) for records in specialist_record_sets]
         if baseline is None or any(item is None for item in specialists):
-            yield _missing_dependency_record(
-                task, stage="synthesis", dependency="baseline_or_specialist"
-            )
+            yield _missing_dependency_record(task, stage="synthesis", dependency="baseline_or_specialist")
             continue
         specialist_parsed = [_parsed(item) for item in specialists if item is not None]
         system_prompt, user_prompt = build_synthesis_prompt(
@@ -328,9 +308,7 @@ def run_synthesis_stage(
             stage="synthesis",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
             request_id=f"egor::finalize::{candidate_id}::{task.source_id}::{task.task_id}",
             parser=parse_synthesis_output,
             extra={"candidate_id": candidate_id},
@@ -348,14 +326,8 @@ def run_scheduler_stage(
 ) -> Iterable[dict[str, Any]]:
     """Run a strong-LLM routing baseline on the frozen repair catalog."""
 
-    allowed = tuple(
-        str(item.get("template_id", "")).strip() for item in template_catalog
-    )
-    if (
-        not allowed
-        or any(not value for value in allowed)
-        or len(set(allowed)) != len(allowed)
-    ):
+    allowed = tuple(str(item.get("template_id", "")).strip() for item in template_catalog)
+    if not allowed or any(not value for value in allowed) or len(set(allowed)) != len(allowed):
         raise ValueError("scheduler template catalog requires unique non-empty IDs")
     catalog_sha256 = hashlib.sha256(
         json.dumps(list(template_catalog), ensure_ascii=False, sort_keys=True).encode()
@@ -364,9 +336,7 @@ def run_scheduler_stage(
         key = (task.source_id, task.task_id)
         baseline = baseline_records.get(key)
         if baseline is None:
-            yield _missing_dependency_record(
-                task, stage="scheduler", dependency="baseline"
-            )
+            yield _missing_dependency_record(task, stage="scheduler", dependency="baseline")
             continue
         system_prompt, user_prompt = build_scheduler_prompt(
             task,
@@ -379,9 +349,7 @@ def run_scheduler_stage(
             stage="scheduler",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            seed=_stable_task_seed(
-                seed, task=task, fallback_index=index, task_indices=task_indices
-            ),
+            seed=_stable_task_seed(seed, task=task, fallback_index=index, task_indices=task_indices),
             request_id=f"egor::route::llm_scheduler::{task.source_id}::{task.task_id}",
             parser=lambda raw: parse_scheduler_output(
                 raw,
@@ -485,15 +453,10 @@ def _invoke(
 
 def _summarize_usage(events: Sequence[Mapping[str, Any]]) -> dict[str, float]:
     return {
-        "prompt_tokens": sum(
-            _float(event.get("prompt_tokens", 0.0)) for event in events
-        ),
-        "completion_tokens": sum(
-            _float(event.get("completion_tokens", 0.0)) for event in events
-        ),
+        "prompt_tokens": sum(_float(event.get("prompt_tokens", 0.0)) for event in events),
+        "completion_tokens": sum(_float(event.get("completion_tokens", 0.0)) for event in events),
         "total_tokens": sum(_float(event.get("total_tokens", 0.0)) for event in events),
-        "latency_seconds": sum(_float(event.get("latency_ms", 0.0)) for event in events)
-        / 1000.0,
+        "latency_seconds": sum(_float(event.get("latency_ms", 0.0)) for event in events) / 1000.0,
         "attempts": sum(_float(event.get("attempts", 0.0)) for event in events),
     }
 
@@ -510,9 +473,7 @@ def _parsed(record: Mapping[str, Any]) -> Mapping[str, Any]:
     return parsed if isinstance(parsed, Mapping) else {}
 
 
-def _missing_dependency_record(
-    task: PilotTask, *, stage: str, dependency: str
-) -> dict[str, Any]:
+def _missing_dependency_record(task: PilotTask, *, stage: str, dependency: str) -> dict[str, Any]:
     return {
         "schema_version": 1,
         "stage": stage,

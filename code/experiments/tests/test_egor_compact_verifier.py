@@ -3,13 +3,11 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from openagora_experiments.egor.protocol import (
-    PilotTask,
-    build_verifier_prompt,
-    parse_verifier_output,
-)
+from openagora_experiments.egor.parsing import parse_verifier_output
+from openagora_experiments.egor.prompts import build_verifier_prompt
 from openagora_experiments.egor.runner import run_verifier_stage
 from openagora_experiments.egor.runtime_types import ArtifactSpec
+from openagora_experiments.egor.task_model import PilotTask
 
 
 class FakeProvider:

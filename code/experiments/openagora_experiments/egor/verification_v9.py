@@ -35,18 +35,14 @@ def decide_supported_blind_resolver_overwrite(
     if minimum_specialist_corroborators < 1:
         raise ValueError("at least one specialist corroborator is required")
     transport = resolver.get("transport", {})
-    operational = isinstance(transport, Mapping) and bool(
-        transport.get("operational_complete")
-    )
+    operational = isinstance(transport, Mapping) and bool(transport.get("operational_complete"))
     if not operational:
         return _decision(False, "blind_resolver_incomplete")
 
     resolver_answer = _candidate_answer(resolver)
     if not canonical_answer(resolver_answer):
         return _decision(False, "blind_resolver_abstained")
-    if answers_agree(
-        baseline_answer, resolver_answer, metric=metric, options=options
-    ):
+    if answers_agree(baseline_answer, resolver_answer, metric=metric, options=options):
         return _decision(False, "no_baseline_overwrite")
 
     corroborators = tuple(
@@ -75,8 +71,6 @@ def decide_supported_blind_resolver_overwrite(
         corroborating_specialists=corroborators,
         verifier_evidence_count=0,
     )
-
-
 
 
 def _decision(accept: bool, reason: str) -> VerifiedOverwriteDecision:

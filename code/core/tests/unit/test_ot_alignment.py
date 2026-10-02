@@ -16,4 +16,3 @@ def test_ot_alignment_score_range() -> None:
     out = scorer.compute(signature, arch)
     assert 0.0 <= out.score <= 1.0
     assert out.predicted_config == "Adh"
-

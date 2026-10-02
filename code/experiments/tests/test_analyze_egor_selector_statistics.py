@@ -6,6 +6,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
+
 
 def test_selector_statistics_binds_inputs_and_computes_paired_contrasts(
     tmp_path: Path,
@@ -35,11 +37,7 @@ def test_selector_statistics_binds_inputs_and_computes_paired_contrasts(
         ],
     )
     output = tmp_path / "statistics.json"
-    script = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "analyze_egor_selector_statistics.py"
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_selector_statistics.py"
 
     subprocess.run(
         [
@@ -66,9 +64,7 @@ def test_selector_statistics_binds_inputs_and_computes_paired_contrasts(
         "exact": 1,
     }
     assert payload["contrasts"]["selector_minus_baseline_quality"]["mean_delta"] == 0.5
-    assert (
-        payload["contrasts"]["selector_minus_best_fixed_quality"]["mean_delta"] == 0.5
-    )
+    assert payload["contrasts"]["selector_minus_best_fixed_quality"]["mean_delta"] == 0.5
     assert payload["contrasts"]["calls_saved_vs_best_fixed"]["mean_delta"] == 1.5
     assert payload["inputs"]["selector"]["sha256"]
 

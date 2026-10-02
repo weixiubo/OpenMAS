@@ -1,4 +1,4 @@
-﻿"""qa_mini suite and ablation runner."""
+"""qa_mini suite and ablation runner."""
 
 from __future__ import annotations
 

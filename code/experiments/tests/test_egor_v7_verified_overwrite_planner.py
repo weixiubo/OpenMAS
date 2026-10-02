@@ -2,15 +2,11 @@ from __future__ import annotations
 
 import importlib.util
 import sys
-from pathlib import Path
 from typing import Any
 
+from openmas_test_history import historical_root
 
-SCRIPT = (
-    Path(__file__).resolve().parents[1]
-    / "scripts"
-    / "plan_egor_v7_verified_overwrite.py"
-)
+SCRIPT = (historical_root() / "code/experiments") / "scripts" / "plan_egor_v7_verified_overwrite.py"
 SPEC = importlib.util.spec_from_file_location("plan_egor_v7_verified_overwrite", SCRIPT)
 assert SPEC and SPEC.loader
 module = importlib.util.module_from_spec(SPEC)

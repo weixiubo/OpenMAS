@@ -76,29 +76,7 @@ class NegotiationLoop:
                     deadlock_breaker=False,
                 )
         personas = self._assign_personas(cfg)
-        if not cfg.toggles.enable_negotiation:
-            prototype = self._scorer.prototype_architecture(
-                self._scorer.predict_config(signature), cfg.runtime.worker_count
-            )
-            prototype = self._decorate_proposal(
-                proposal=prototype,
-                task=task,
-                signature=signature,
-                round_idx=0,
-                personas=personas,
-                use_override_template=False,
-            )
-            return NegotiationOutcome(
-                architecture=prototype,
-                used_cache=False,
-                rounds=0,
-                override_used=False,
-                deadlock_breaker=False,
-            )
-
-        proposal = self._scorer.prototype_architecture(
-            self._scorer.predict_config(signature), cfg.runtime.worker_count
-        )
+        proposal = self._scorer.prototype_architecture(self._scorer.predict_config(signature), cfg.runtime.worker_count)
         proposal = self._decorate_proposal(
             proposal=proposal,
             task=task,
@@ -107,6 +85,10 @@ class NegotiationLoop:
             personas=personas,
             use_override_template=False,
         )
+        if not cfg.toggles.enable_negotiation:
+            return NegotiationOutcome(
+                architecture=proposal, used_cache=False, rounds=0, override_used=False, deadlock_breaker=False
+            )
         previous_feedback: list[WorkerFeedback] = []
         for round_idx in range(1, cfg.thresholds.max_negotiation_rounds + 1):
             self._active_context = _NegotiationContext(
@@ -168,9 +150,7 @@ class NegotiationLoop:
 
         self._active_context = None
         fallback = self._scorer.prototype_architecture("SS", cfg.runtime.worker_count)
-        self._observer.on_event(
-            RunEvent(event_type="deadlock_breaker", payload={"task_id": task.task_id})
-        )
+        self._observer.on_event(RunEvent(event_type="deadlock_breaker", payload={"task_id": task.task_id}))
         return NegotiationOutcome(
             architecture=fallback,
             used_cache=False,
@@ -200,9 +180,7 @@ class NegotiationLoop:
         similarity = self._feedback_similarity(current_feedback, previous_feedback)
         return similarity >= stable_threshold
 
-    def _collect_feedback(
-        self, proposal: ArchitectureSpec, signature: TaskSignature
-    ) -> list[WorkerFeedback]:
+    def _collect_feedback(self, proposal: ArchitectureSpec, signature: TaskSignature) -> list[WorkerFeedback]:
         predicted = self._scorer.predict_config(signature)
         actual = self._scorer.classify_architecture(proposal)
         aligned = predicted == actual

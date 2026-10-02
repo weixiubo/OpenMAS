@@ -6,17 +6,15 @@ import types
 from typing import Any
 
 import pytest
-
-from openagora_experiments.egor.local_provider import (
-    EgorLocalModelProvider,
-    EgorLocalProviderError,
+from openagora_experiments.egor.local_provider import EgorLocalModelProvider, _max_new_tokens_for_request
+from openagora_experiments.egor.model_inputs import (
     _first_image_artifact,
     _first_image_path,
-    _max_new_tokens_for_request,
     _prepare_internvl_hf_inputs,
     _prepare_qwen_vl_inputs,
     _uses_qwen35_native_path,
 )
+from openagora_experiments.egor.provider_errors import EgorLocalProviderError
 from openagora_experiments.egor.runtime_types import ArtifactSpec
 
 
@@ -72,9 +70,7 @@ def test_qwen_uses_native_multimodal_chat_template(
     monkeypatch.setitem(
         sys.modules,
         "qwen_vl_utils",
-        types.SimpleNamespace(
-            process_vision_info=lambda messages: (["processed-image"], [])
-        ),
+        types.SimpleNamespace(process_vision_info=lambda messages: (["processed-image"], [])),
     )
     artifact = ArtifactSpec(
         artifact_id="image",
@@ -309,9 +305,7 @@ def test_egor_single_gpu_cpu_offload_uses_a_bounded_device_map(
 
 
 @pytest.mark.parametrize("gpu_devices,max_memory", [("0,1", 18), ("0", 0)])
-def test_egor_cpu_offload_rejects_an_ambiguous_placement(
-    gpu_devices: str, max_memory: float
-) -> None:
+def test_egor_cpu_offload_rejects_an_ambiguous_placement(gpu_devices: str, max_memory: float) -> None:
     with pytest.raises(ValueError, match="CPU offload requires one GPU"):
         EgorLocalModelProvider(
             "qwen3.5-9b",

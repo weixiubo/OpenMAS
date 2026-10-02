@@ -7,16 +7,10 @@ from pathlib import Path
 from typing import Any
 
 from openagora_experiments.egor.protocol import PilotTask
+from openmas_test_history import historical_root
 
-
-SCRIPT = (
-    Path(__file__).resolve().parents[1]
-    / "scripts"
-    / "analyze_egor_v7_confirmation.py"
-)
-SPEC = importlib.util.spec_from_file_location(
-    "analyze_egor_confirmation_shared_v8", SCRIPT
-)
+SCRIPT = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_v7_confirmation.py"
+SPEC = importlib.util.spec_from_file_location("analyze_egor_confirmation_shared_v8", SCRIPT)
 assert SPEC and SPEC.loader
 module = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = module

@@ -1,4 +1,4 @@
-﻿"""Evaluation utilities for experiment evidence chain."""
+"""Evaluation utilities for experiment evidence chain."""
 
 from openagora_experiments.evaluation.judge import HybridJudge, build_hybrid_judge
 from openagora_experiments.evaluation.protocol import FinalEvaluation, RuleEvaluation, evaluate_rule

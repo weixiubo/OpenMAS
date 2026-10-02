@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
+
 
 def test_builder_is_deterministic_excludes_old_images_and_separates_splits(tmp_path: Path) -> None:
     images = tmp_path / "images"
@@ -38,7 +40,7 @@ def test_builder_is_deterministic_excludes_old_images_and_separates_splits(tmp_p
         + "\n",
         encoding="utf-8",
     )
-    script = Path(__file__).resolve().parents[1] / "scripts" / "build_egor_infographic_splits.py"
+    script = (historical_root() / "code/experiments") / "scripts" / "build_egor_infographic_splits.py"
 
     first = _run_builder(
         script=script,
@@ -57,9 +59,7 @@ def test_builder_is_deterministic_excludes_old_images_and_separates_splits(tmp_p
 
     first_calibration = _rows(first[0])
     first_heldout = _rows(first[1])
-    assert [row["task_id"] for row in first_calibration] == [
-        row["task_id"] for row in _rows(second[0])
-    ]
+    assert [row["task_id"] for row in first_calibration] == [row["task_id"] for row in _rows(second[0])]
     assert [row["task_id"] for row in first_heldout] == [row["task_id"] for row in _rows(second[1])]
     assert len(first_calibration) == 2
     assert len(first_heldout) == 3

@@ -5,16 +5,12 @@ import json
 from pathlib import Path
 from types import ModuleType
 
+from openmas_test_history import historical_root
+
 
 def _load_module() -> ModuleType:
-    script = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "audit_egor_stage_completeness.py"
-    )
-    spec = importlib.util.spec_from_file_location(
-        "audit_egor_stage_completeness", script
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "audit_egor_stage_completeness.py"
+    spec = importlib.util.spec_from_file_location("audit_egor_stage_completeness", script)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -77,9 +73,7 @@ def test_completed_stage_requires_original_order_seed_and_compatible_manifest(
         {"source_id": "fixture", "task_id": "t1", "status": "ok", "seed": 100},
         {"source_id": "fixture", "task_id": "t2", "status": "ok", "seed": 101},
     ]
-    stage.write_text(
-        "\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8"
-    )
+    stage.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
     manifest = {
         "tasks_sha256": module._sha256(tasks),
         "requested": 2,
@@ -88,9 +82,7 @@ def test_completed_stage_requires_original_order_seed_and_compatible_manifest(
         "git_commit": "abc123",
         "seed_schedule": "base_plus_original_requested_index",
     }
-    stage.with_suffix(".jsonl.manifest.json").write_text(
-        json.dumps(manifest), encoding="utf-8"
-    )
+    stage.with_suffix(".jsonl.manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
 
     report = module.audit_stage_matrix(
         tasks_path=tasks,
@@ -102,9 +94,7 @@ def test_completed_stage_requires_original_order_seed_and_compatible_manifest(
     assert report["stages"]["baseline"]["manifest"]["compatible"] is True
 
     rows[1]["seed"] = 100
-    stage.write_text(
-        "\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8"
-    )
+    stage.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
     mismatched = module.audit_stage_matrix(
         tasks_path=tasks,
         stages={"baseline": stage},
@@ -112,9 +102,7 @@ def test_completed_stage_requires_original_order_seed_and_compatible_manifest(
         require_manifest=True,
     )
     assert mismatched["passed"] is False
-    assert mismatched["stages"]["baseline"]["seed_mismatches"]["examples"] == [
-        "fixture::t2"
-    ]
+    assert mismatched["stages"]["baseline"]["seed_mismatches"]["examples"] == ["fixture::t2"]
 
 
 def test_task_id_subset_uses_original_task_file_seed_index(tmp_path: Path) -> None:

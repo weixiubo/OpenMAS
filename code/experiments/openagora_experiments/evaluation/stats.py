@@ -1,4 +1,4 @@
-﻿"""Statistical analysis for GAIA mini pairwise comparisons."""
+"""Statistical analysis for GAIA mini pairwise comparisons."""
 
 from __future__ import annotations
 
@@ -16,7 +16,14 @@ def build_summary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for row in rows:
         bucket[str(row["variant"])].append(row)
 
-    numeric_cols = ["quality_score", "token_consumption", "latency_seconds", "cost_usd", "perf_cost_ratio", "final_score"]
+    numeric_cols = [
+        "quality_score",
+        "token_consumption",
+        "latency_seconds",
+        "cost_usd",
+        "perf_cost_ratio",
+        "final_score",
+    ]
     out: list[dict[str, Any]] = []
     for variant, grouped in bucket.items():
         line: dict[str, Any] = {
@@ -49,20 +56,13 @@ def build_pairwise_stats(
 
     out: list[dict[str, Any]] = []
     for variant in variants:
-        paired = []
-        for task_id in ref_tasks:
-            ref = by_variant_task.get((reference_variant, task_id))
-            other = by_variant_task.get((variant, task_id))
-            if ref is None or other is None:
-                continue
-            paired.append((ref, other))
+        paired = _aligned_pairs(by_variant_task, ref_tasks, reference_variant, variant)
         if not paired:
             continue
 
         ref_correct = [int(pair[0]["is_correct"]) for pair in paired]
         var_correct = [int(pair[1]["is_correct"]) for pair in paired]
-        b = sum(1 for r, v in zip(ref_correct, var_correct) if r == 1 and v == 0)
-        c = sum(1 for r, v in zip(ref_correct, var_correct) if r == 0 and v == 1)
+        b, c = _discordant_counts(ref_correct, var_correct)
         acc_effect = _mean(ref_correct) - _mean(var_correct)
         acc_p = _mcnemar_exact_p_value(b, c)
 
@@ -163,7 +163,7 @@ def _mcnemar_exact_p_value(b: int, c: int) -> float:
 
 
 def _binomial_prob(n: int, k: int) -> float:
-    return math.comb(n, k) * (0.5 ** n)
+    return math.comb(n, k) * (0.5**n)
 
 
 def _mean(values) -> float:  # type: ignore[no-untyped-def]
@@ -178,3 +178,22 @@ def _variance(values: list[float]) -> float:
         return 0.0
     m = _mean(values)
     return sum((value - m) ** 2 for value in values) / len(values)
+
+
+def _aligned_pairs(
+    by_variant_task: dict[tuple[str, str], dict[str, Any]], ref_tasks: list[str], reference_variant: str, variant: str
+) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+    paired = []
+    for task_id in ref_tasks:
+        ref = by_variant_task.get((reference_variant, task_id))
+        other = by_variant_task.get((variant, task_id))
+        if ref is None or other is None:
+            continue
+        paired.append((ref, other))
+    return paired
+
+
+def _discordant_counts(ref_correct: list[int], var_correct: list[int]) -> tuple[int, int]:
+    b = sum(1 for r, v in zip(ref_correct, var_correct, strict=True) if r == 1 and v == 0)
+    c = sum(1 for r, v in zip(ref_correct, var_correct, strict=True) if r == 0 and v == 1)
+    return b, c

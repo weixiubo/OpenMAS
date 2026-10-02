@@ -6,7 +6,6 @@ import re
 
 from openagora_experiments.cago.data import TaskRecord
 
-
 FEATURE_NAMES = (
     "question_chars",
     "question_words",

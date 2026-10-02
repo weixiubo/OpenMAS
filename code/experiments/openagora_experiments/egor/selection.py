@@ -10,10 +10,10 @@ from statistics import fmean
 from typing import Any, Literal, cast
 
 from openagora.mechanisms.evidence_gap_repair import EvidenceType
+
 from openagora_experiments.cago.linear import RidgeModel
 from openagora_experiments.egor.evaluation import residual_gap_vector
-from openagora_experiments.egor.protocol import PilotTask
-
+from openagora_experiments.egor.task_model import PilotTask
 
 _EVIDENCE_TYPES = tuple(EvidenceType)
 _OCR_TERMS = ("text", "word", "name", "written", "read", "label", "title", "number")
@@ -103,9 +103,7 @@ class RepairTrainingExample:
         if len(self.features) != len(REPAIR_FEATURE_NAMES):
             raise ValueError("repair feature width does not match the frozen schema")
         if set(self.strict_advantages) != set(self.incremental_calls):
-            raise ValueError(
-                "repair advantages and call costs must share candidate IDs"
-            )
+            raise ValueError("repair advantages and call costs must share candidate IDs")
         if not self.strict_advantages:
             raise ValueError("repair examples require at least one candidate")
         if min(self.incremental_calls.values()) < 0.0:
@@ -200,8 +198,7 @@ class CounterfactualRepairSelector:
                     (
                         item.strict_advantages[candidate_id]
                         if target == "paired_advantage"
-                        else item.baseline_quality
-                        + item.strict_advantages[candidate_id]
+                        else item.baseline_quality + item.strict_advantages[candidate_id]
                     )
                     for item in examples
                 ],
@@ -210,9 +207,7 @@ class CounterfactualRepairSelector:
             for candidate_id in candidate_ids
         }
         costs = {
-            candidate_id: fmean(
-                item.incremental_calls[candidate_id] for item in examples
-            )
+            candidate_id: fmean(item.incremental_calls[candidate_id] for item in examples)
             for candidate_id in candidate_ids
         }
         return cls(
@@ -241,10 +236,7 @@ class CounterfactualRepairSelector:
         """
         if len(features) != len(REPAIR_FEATURE_NAMES):
             raise ValueError("selection feature width does not match the frozen schema")
-        predicted = {
-            candidate_id: self.models[candidate_id].predict(features)
-            for candidate_id in self.candidate_ids
-        }
+        predicted = {candidate_id: self.models[candidate_id].predict(features) for candidate_id in self.candidate_ids}
         adjusted = {
             candidate_id: predicted[candidate_id]
             - self.config.cost_weight * self.estimated_incremental_calls[candidate_id]
@@ -293,10 +285,7 @@ class CounterfactualRepairSelector:
             "feature_names": list(REPAIR_FEATURE_NAMES),
             "config": asdict(self.config),
             "estimated_incremental_calls": dict(self.estimated_incremental_calls),
-            "models": {
-                candidate_id: self.models[candidate_id].to_dict()
-                for candidate_id in self.candidate_ids
-            },
+            "models": {candidate_id: self.models[candidate_id].to_dict() for candidate_id in self.candidate_ids},
         }
 
     @classmethod
@@ -317,9 +306,7 @@ class CounterfactualRepairSelector:
         return cls(
             config=RepairSelectionConfig(**dict(raw_config)),
             models=models,
-            estimated_incremental_calls={
-                str(key): float(value) for key, value in dict(raw_costs).items()
-            },
+            estimated_incremental_calls={str(key): float(value) for key, value in dict(raw_costs).items()},
             target=target,
         )
 
@@ -341,22 +328,10 @@ def visible_repair_feature_vector(
     lowered = question.lower()
     words = re.findall(r"[a-z0-9]+", lowered)
     option_text_chars = sum(len(text) for _, text in task.options)
-    raw_demands = baseline.get("demands", [])
-    demands = (
-        [item for item in raw_demands if isinstance(item, Mapping)]
-        if isinstance(raw_demands, list)
-        else []
-    )
-    raw_evidence = baseline.get("evidence", [])
-    evidence_records = (
-        [item for item in raw_evidence if isinstance(item, Mapping)]
-        if isinstance(raw_evidence, list)
-        else []
-    )
+    demands = _mapping_records(baseline.get("demands", []))
+    evidence_records = _mapping_records(baseline.get("evidence", []))
     demand_counts = Counter(str(item.get("type", "")) for item in demands)
-    evidence_counts = Counter(
-        str(item.get("type", "")) for item in evidence_records
-    )
+    evidence_counts = Counter(str(item.get("type", "")) for item in evidence_records)
     gaps = residual_gap_vector(baseline)
     gap_values = [float(gaps.get(item, 0.0)) for item in _EVIDENCE_TYPES]
     answer = str(baseline.get("answer", "")).strip()
@@ -374,9 +349,7 @@ def visible_repair_feature_vector(
         _term_density(words, _CHART_TERMS),
         _term_density(words, _MATH_TERMS),
         _term_density(words, _SPATIAL_TERMS),
-        float(
-            lowered.startswith(("is ", "are ", "does ", "do ", "can ", "was ", "were "))
-        ),
+        float(lowered.startswith(("is ", "are ", "does ", "do ", "can ", "was ", "were "))),
         _probability(baseline.get("confidence", 0.0)),
         min(len(answer), 100) / 50.0,
         float(bool(re.fullmatch(r"[-+]?[$]?\d[\d,.%\s-]*", answer))),
@@ -469,57 +442,14 @@ def select_config_by_source_cv(
                     cost_weight=float(cost_weight),
                     minimum_gap=minimum_gap,
                 )
-                decisions: list[tuple[RepairTrainingExample, RepairDecision]] = []
-                for held_source in sources:
-                    train = [item for item in examples if item.source_id != held_source]
-                    held = [item for item in examples if item.source_id == held_source]
-                    selector = CounterfactualRepairSelector.fit(
-                        train,
-                        config=config,
-                        target=target,
-                    )
-                    decisions.extend(
-                        (
-                            item,
-                            selector.select(
-                                item.features,
-                                gap_max=item.gap_max,
-                                force_repair=force_repair,
-                            ),
-                        )
-                        for item in held
-                    )
-                deltas = [
-                    0.0
-                    if not decision.repaired
-                    else float(item.strict_advantages[decision.selected_id])
-                    for item, decision in decisions
-                ]
-                calls = [
-                    0.0
-                    if not decision.repaired
-                    else float(item.incremental_calls[decision.selected_id])
-                    for item, decision in decisions
-                ]
-                repair_rate = sum(decision.repaired for _, decision in decisions) / len(
-                    decisions
-                )
-                harm_rate = sum(value < -0.05 for value in deltas) / len(deltas)
-                useful_rate = sum(value > 0.05 for value in deltas) / len(deltas)
-                mean_delta = fmean(deltas)
-                mean_calls = fmean(calls)
-                eligible = (
-                    harm_rate <= maximum_harm_rate
-                    and repair_rate >= minimum_repair_rate
+                decisions = _held_source_decisions(examples, sources, config, target, force_repair)
+                mean_delta, mean_calls, repair_rate, harm_rate, useful_rate, eligible = _cv_summary(
+                    decisions, maximum_harm_rate, minimum_repair_rate
                 )
                 choices.append(
                     CrossValidationChoice(
                         config=config,
-                        objective=(
-                            mean_delta - evaluation_call_price * mean_calls
-                            if eligible
-                            else float("-inf")
-                        ),
+                        objective=(mean_delta - evaluation_call_price * mean_calls if eligible else float("-inf")),
                         mean_quality_delta=mean_delta,
                         mean_incremental_calls=mean_calls,
                         repair_rate=repair_rate,
@@ -530,9 +460,7 @@ def select_config_by_source_cv(
                     )
                 )
     if not choices or not any(item.eligible for item in choices):
-        raise ValueError(
-            "no finite-grid selector satisfies the preregistered constraints"
-        )
+        raise ValueError("no finite-grid selector satisfies the preregistered constraints")
     selected = min(
         (item for item in choices if item.eligible),
         key=lambda item: (
@@ -567,9 +495,7 @@ def _validate_target(target: str) -> SelectorTarget:
 def _ridge_from_payload(payload: Mapping[str, Any]) -> RidgeModel:
     return RidgeModel(
         feature_means=tuple(float(value) for value in payload.get("feature_means", [])),
-        feature_scales=tuple(
-            float(value) for value in payload.get("feature_scales", [])
-        ),
+        feature_scales=tuple(float(value) for value in payload.get("feature_scales", [])),
         weights=tuple(float(value) for value in payload.get("weights", [])),
         l2=float(payload.get("l2", 0.0)),
     )
@@ -585,3 +511,61 @@ def _probability(value: Any) -> float:
         return max(0.0, min(1.0, float(value)))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _mapping_records(value: Any) -> list[Mapping[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, Mapping)]
+
+
+def _held_source_decisions(
+    examples: Sequence[RepairTrainingExample],
+    sources: Sequence[str],
+    config: RepairSelectionConfig,
+    target: SelectorTarget,
+    force_repair: bool,
+) -> list[tuple[RepairTrainingExample, RepairDecision]]:
+    decisions: list[tuple[RepairTrainingExample, RepairDecision]] = []
+    for held_source in sources:
+        train = [item for item in examples if item.source_id != held_source]
+        held = [item for item in examples if item.source_id == held_source]
+        selector = CounterfactualRepairSelector.fit(
+            train,
+            config=config,
+            target=target,
+        )
+        decisions.extend(
+            (
+                item,
+                selector.select(
+                    item.features,
+                    gap_max=item.gap_max,
+                    force_repair=force_repair,
+                ),
+            )
+            for item in held
+        )
+    return decisions
+
+
+def _cv_summary(
+    decisions: Sequence[tuple[RepairTrainingExample, RepairDecision]],
+    maximum_harm_rate: float,
+    minimum_repair_rate: float,
+) -> tuple[float, float, float, float, float, bool]:
+    deltas = [
+        0.0 if not decision.repaired else float(item.strict_advantages[decision.selected_id])
+        for item, decision in decisions
+    ]
+    calls = [
+        0.0 if not decision.repaired else float(item.incremental_calls[decision.selected_id])
+        for item, decision in decisions
+    ]
+    repair_rate = sum(decision.repaired for _, decision in decisions) / len(decisions)
+    harm_rate = sum(value < -0.05 for value in deltas) / len(deltas)
+    useful_rate = sum(value > 0.05 for value in deltas) / len(deltas)
+    mean_delta = fmean(deltas)
+    mean_calls = fmean(calls)
+    eligible = harm_rate <= maximum_harm_rate and repair_rate >= minimum_repair_rate
+    return mean_delta, mean_calls, repair_rate, harm_rate, useful_rate, eligible

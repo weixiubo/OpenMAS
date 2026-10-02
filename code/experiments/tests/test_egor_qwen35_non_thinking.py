@@ -4,7 +4,7 @@ import sys
 import types
 from typing import Any
 
-from openagora_experiments.egor.local_provider import _prepare_qwen_vl_inputs
+from openagora_experiments.egor.model_inputs import _prepare_qwen_vl_inputs
 from openagora_experiments.egor.runtime_types import ArtifactSpec
 
 
@@ -26,9 +26,7 @@ def test_qwen35_structured_generation_disables_thinking(monkeypatch) -> None:
     monkeypatch.setitem(
         sys.modules,
         "qwen_vl_utils",
-        types.SimpleNamespace(
-            process_vision_info=lambda messages: (["processed-image"], [])
-        ),
+        types.SimpleNamespace(process_vision_info=lambda messages: (["processed-image"], [])),
     )
     prepared = _prepare_qwen_vl_inputs(
         processor=processor,

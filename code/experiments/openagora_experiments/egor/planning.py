@@ -14,12 +14,14 @@ from openagora.mechanisms.evidence_gap_repair import (
     EvidenceGapRepairPlanner,
     EvidenceType,
 )
+
 from openagora_experiments.egor.evaluation import (
+    CandidateRow,
     PolicyRow,
     evaluate_candidate_rows,
     residual_gap_vector,
 )
-from openagora_experiments.egor.protocol import PilotTask
+from openagora_experiments.egor.task_model import PilotTask
 
 
 @dataclass(frozen=True)
@@ -56,31 +58,22 @@ def fit_capability_cards(
     """Fit cross-type supply probabilities from singleton counterfactual rows."""
 
     if minimum_gap < 0.0 or minimum_eligible <= 0:
-        raise ValueError(
-            "minimum gap must be non-negative and minimum eligible positive"
-        )
+        raise ValueError("minimum gap must be non-negative and minimum eligible positive")
     cards: list[CapabilityCard] = []
     estimates: list[CapabilitySupplyEstimate] = []
     for action_id, candidate_id in sorted(action_candidates.items()):
         if action_id not in admissible_gap_types or not admissible_gap_types[action_id]:
             raise ValueError(f"action {action_id} requires an admissible gap type")
         admitted = set(admissible_gap_types[action_id])
-        candidate_rows = [
-            row for row in rows if row.get("candidate_id") == candidate_id
-        ]
+        candidate_rows = [row for row in rows if row.get("candidate_id") == candidate_id]
         if not candidate_rows:
             raise ValueError(f"no matrix rows for singleton candidate {candidate_id}")
         incremental_calls = [
-            max(0.0, _float(row.get("calls")) - _float(row.get("baseline_calls")))
-            for row in candidate_rows
+            max(0.0, _float(row.get("calls")) - _float(row.get("baseline_calls"))) for row in candidate_rows
         ]
         supply_by_type: dict[EvidenceType, float] = {}
         for gap_type in EvidenceType:
-            eligible = [
-                row
-                for row in candidate_rows
-                if _residual_gaps(row).get(gap_type, 0.0) > minimum_gap
-            ]
+            eligible = _eligible_gap_rows(candidate_rows, gap_type, minimum_gap)
             successes = sum(
                 _successful_closure(
                     row,
@@ -164,9 +157,7 @@ def build_repair_plans(
                 "source_id": source_id,
                 "task_id": task_id,
                 "baseline_status": "ok",
-                "residual_gaps": {
-                    key.value: value for key, value in sorted(gaps.items())
-                },
+                "residual_gaps": {key.value: value for key, value in sorted(gaps.items())},
                 "selected_action_ids": selected,
                 "combination_id": combination_id(selected),
                 "reason": plan.reason,
@@ -200,31 +191,10 @@ def evaluate_planned_policy(
         baseline = baseline_records.get(key)
         plan = plan_records.get(key)
         if baseline is None or plan is None:
-            raise ValueError(
-                f"missing baseline/plan for {task.source_id}::{task.task_id}"
-            )
-        selected = tuple(str(value) for value in plan.get("selected_action_ids", []))
-        selected_combination = combination_id(selected)
-        if str(plan.get("combination_id", "")) != selected_combination:
-            raise ValueError(
-                f"plan combination mismatch for {task.source_id}::{task.task_id}"
-            )
-        if selected:
-            missing_actions = [
-                action_id
-                for action_id in selected
-                if action_id not in action_record_sets
-            ]
-            if missing_actions or selected_combination not in synthesis_record_sets:
-                raise ValueError(
-                    f"plan references unavailable stages for {selected_combination}: "
-                    f"{missing_actions}"
-                )
-            specialist_sets = [action_record_sets[action_id] for action_id in selected]
-            synthesis_records = synthesis_record_sets[selected_combination]
-        else:
-            specialist_sets = []
-            synthesis_records = {key: baseline}
+            raise ValueError(f"missing baseline/plan for {task.source_id}::{task.task_id}")
+        selected, selected_combination, specialist_sets, synthesis_records = _planned_stages(
+            plan, baseline, task, key, action_record_sets, synthesis_record_sets
+        )
         candidate = evaluate_candidate_rows(
             tasks=[task],
             baseline_records={key: baseline},
@@ -239,38 +209,11 @@ def evaluate_planned_policy(
             and not candidate.synthesis_audit.evidence_supported_change
         )
         policy_quality = (
-            candidate.candidate_quality
-            if selected and not provenance_rejected
-            else candidate.baseline_quality
+            candidate.candidate_quality if selected and not provenance_rejected else candidate.baseline_quality
         )
         delta = policy_quality - candidate.baseline_quality
-        failures = (
-            candidate.failed_stages
-            if selected
-            else tuple(
-                stage for stage in candidate.failed_stages if stage == "baseline"
-            )
-        )
-        decision_record = (
-            decision_records.get(key) if decision_records is not None else None
-        )
-        decision_failures = (
-            ("decision",)
-            if decision_records is not None
-            and (
-                decision_record is None
-                or str(decision_record.get("status", "")) != "ok"
-            )
-            else ()
-        )
-        base_calls = candidate.calls if selected else candidate.baseline_calls
-        base_tokens = (
-            candidate.total_tokens if selected else candidate.baseline_total_tokens
-        )
-        base_latency = (
-            candidate.latency_seconds
-            if selected
-            else candidate.baseline_latency_seconds
+        failures, decision_failures, decision_record, base_calls, base_tokens, base_latency = _planned_usage(
+            candidate, selected, key, decision_records
         )
         results.append(
             PlannedPolicyResult(
@@ -284,10 +227,8 @@ def evaluate_planned_policy(
                     policy_quality=policy_quality,
                     quality_delta=delta,
                     calls=base_calls + _record_usage(decision_record, "attempts"),
-                    total_tokens=base_tokens
-                    + _record_usage(decision_record, "total_tokens"),
-                    latency_seconds=base_latency
-                    + _record_usage(decision_record, "latency_seconds"),
+                    total_tokens=base_tokens + _record_usage(decision_record, "total_tokens"),
+                    latency_seconds=base_latency + _record_usage(decision_record, "latency_seconds"),
                     strict_harm=delta < -harm_tolerance,
                     useful_repair=delta > useful_margin,
                     failed_stages=(*failures, *decision_failures),
@@ -312,10 +253,7 @@ def capability_cards_payload(
         "actions": [
             {
                 "action_id": card.action_id,
-                "supply_by_type": {
-                    key.value: value
-                    for key, value in sorted(card.supply_by_type.items())
-                },
+                "supply_by_type": {key.value: value for key, value in sorted(card.supply_by_type.items())},
                 "estimated_cost": card.estimated_cost,
                 "heterogeneous": card.heterogeneous,
                 "admissible": card.admissible,
@@ -346,10 +284,7 @@ def capability_cards_from_payload(payload: Mapping[str, Any]) -> list[Capability
         cards.append(
             CapabilityCard(
                 action_id=str(raw.get("action_id", "")),
-                supply_by_type={
-                    EvidenceType(str(key)): float(value)
-                    for key, value in raw_supply.items()
-                },
+                supply_by_type={EvidenceType(str(key)): float(value) for key, value in raw_supply.items()},
                 estimated_cost=float(raw.get("estimated_cost", 0.0)),
                 heterogeneous=bool(raw.get("heterogeneous", True)),
                 admissible=bool(raw.get("admissible", True)),
@@ -378,10 +313,7 @@ def _successful_closure(
     supported = _bool(row.get("evidence_supported_change"))
     strict_candidate = baseline if changed and not supported else candidate
     useful = strict_candidate - baseline > useful_margin
-    preserves_correct = (
-        baseline >= correct_threshold
-        and strict_candidate >= baseline - noninferiority_tolerance
-    )
+    preserves_correct = baseline >= correct_threshold and strict_candidate >= baseline - noninferiority_tolerance
     return int(cited and (useful or preserves_correct))
 
 
@@ -423,11 +355,60 @@ def _wilson_interval(
     probability = successes / count
     denominator = 1.0 + z * z / count
     center = (probability + z * z / (2.0 * count)) / denominator
-    radius = (
-        z
-        * math.sqrt(
-            probability * (1.0 - probability) / count + z * z / (4.0 * count * count)
-        )
-        / denominator
-    )
+    radius = z * math.sqrt(probability * (1.0 - probability) / count + z * z / (4.0 * count * count)) / denominator
     return max(0.0, center - radius), min(1.0, center + radius)
+
+
+def _eligible_gap_rows(
+    rows: Sequence[Mapping[str, str]], gap_type: EvidenceType, minimum_gap: float
+) -> list[Mapping[str, str]]:
+    return [row for row in rows if _residual_gaps(row).get(gap_type, 0.0) > minimum_gap]
+
+
+def _planned_stages(
+    plan: Mapping[str, Any],
+    baseline: Mapping[str, Any],
+    task: PilotTask,
+    key: tuple[str, str],
+    action_record_sets: Mapping[str, Mapping[tuple[str, str], Mapping[str, Any]]],
+    synthesis_record_sets: Mapping[str, Mapping[tuple[str, str], Mapping[str, Any]]],
+) -> tuple[
+    tuple[str, ...], str, list[Mapping[tuple[str, str], Mapping[str, Any]]], Mapping[tuple[str, str], Mapping[str, Any]]
+]:
+    selected = tuple(str(value) for value in plan.get("selected_action_ids", []))
+    selected_combination = combination_id(selected)
+    if str(plan.get("combination_id", "")) != selected_combination:
+        raise ValueError(f"plan combination mismatch for {task.source_id}::{task.task_id}")
+    if selected:
+        missing_actions = [action_id for action_id in selected if action_id not in action_record_sets]
+        if missing_actions or selected_combination not in synthesis_record_sets:
+            raise ValueError(f"plan references unavailable stages for {selected_combination}: {missing_actions}")
+        specialist_sets = [action_record_sets[action_id] for action_id in selected]
+        synthesis_records = synthesis_record_sets[selected_combination]
+    else:
+        specialist_sets = []
+        synthesis_records = {key: baseline}
+    return selected, selected_combination, specialist_sets, synthesis_records
+
+
+def _planned_usage(
+    candidate: CandidateRow,
+    selected: Sequence[str],
+    key: tuple[str, str],
+    decision_records: Mapping[tuple[str, str], Mapping[str, Any]] | None,
+) -> tuple[tuple[str, ...], tuple[str, ...], Mapping[str, Any] | None, float, float, float]:
+    failures = (
+        candidate.failed_stages
+        if selected
+        else tuple(stage for stage in candidate.failed_stages if stage == "baseline")
+    )
+    decision_record = decision_records.get(key) if decision_records is not None else None
+    decision_failures = (
+        ("decision",)
+        if decision_records is not None and (decision_record is None or str(decision_record.get("status", "")) != "ok")
+        else ()
+    )
+    base_calls = candidate.calls if selected else candidate.baseline_calls
+    base_tokens = candidate.total_tokens if selected else candidate.baseline_total_tokens
+    base_latency = candidate.latency_seconds if selected else candidate.baseline_latency_seconds
+    return failures, decision_failures, decision_record, base_calls, base_tokens, base_latency

@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_BASIC_VQA_TYPES = (
     "APP agent en",
     "ASCII art classification en",
@@ -94,9 +93,7 @@ def select_transfer_rows_by_type(
     answers are carried to the output but never supplied to the rank function.
     """
 
-    quota_items = [
-        (str(key).strip(), int(value)) for key, value in quota_by_type.items()
-    ]
+    quota_items = [(str(key).strip(), int(value)) for key, value in quota_by_type.items()]
     requested_types = tuple(key for key, _ in quota_items)
     if (
         not requested_types
@@ -108,25 +105,9 @@ def select_transfer_rows_by_type(
     if not salt.strip():
         raise ValueError("a non-empty salt is required")
 
-    seen_source_ids: set[int] = set()
-    groups: dict[str, list[OCRBenchCandidate]] = {
-        task_type: [] for task_type in requested_types
-    }
-    excluded_by_source_id = 0
-    excluded_by_image = 0
-    for candidate in candidates:
-        if candidate.source_id in seen_source_ids:
-            raise ValueError(f"duplicate OCRBench-v2 source id: {candidate.source_id}")
-        seen_source_ids.add(candidate.source_id)
-        if candidate.task_type not in groups:
-            continue
-        if candidate.source_id in excluded_source_ids:
-            excluded_by_source_id += 1
-            continue
-        if candidate.image_sha256 in excluded_image_hashes:
-            excluded_by_image += 1
-            continue
-        groups[candidate.task_type].append(candidate)
+    groups, excluded_by_source_id, excluded_by_image = _eligible_transfer_groups(
+        candidates, requested_types, excluded_source_ids, excluded_image_hashes
+    )
 
     for task_type, rows in groups.items():
         rows.sort(
@@ -143,40 +124,14 @@ def select_transfer_rows_by_type(
             )
         )
 
-    selected: list[OCRBenchCandidate] = []
-    used_images: set[str] = set()
-    selected_by_type = {task_type: 0 for task_type in requested_types}
-    cursors = {task_type: 0 for task_type in requested_types}
-    # Interleaving prevents an earlier type from monopolizing images that are
-    # shared by rows belonging to different official task labels.
-    for _ in range(max(quotas.values())):
-        for task_type in requested_types:
-            if selected_by_type[task_type] >= quotas[task_type]:
-                continue
-            rows = groups[task_type]
-            while cursors[task_type] < len(rows):
-                candidate = rows[cursors[task_type]]
-                cursors[task_type] += 1
-                if candidate.image_sha256 in used_images:
-                    continue
-                selected.append(candidate)
-                used_images.add(candidate.image_sha256)
-                selected_by_type[task_type] += 1
-                break
-            else:
-                raise ValueError(
-                    f"task type {task_type!r} has fewer than {quotas[task_type]} "
-                    "eligible image-unique rows"
-                )
+    selected, used_images, selected_by_type = _interleaved_transfer_selection(groups, requested_types, quotas)
 
     return selected, {
         "source_rows": len(candidates),
         "source_unique_images": len({row.image_sha256 for row in candidates}),
         "requested_task_types": list(requested_types),
         "requested_rows_by_type": quotas,
-        "eligible_rows_by_type": {
-            task_type: len(groups[task_type]) for task_type in requested_types
-        },
+        "eligible_rows_by_type": {task_type: len(groups[task_type]) for task_type in requested_types},
         "selected_rows_by_type": selected_by_type,
         "excluded_source_ids_declared": len(excluded_source_ids),
         "excluded_image_hashes_declared": len(excluded_image_hashes),
@@ -278,10 +233,7 @@ def sha256(path: Path) -> str:
 def write_jsonl(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        "".join(
-            json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n"
-            for row in rows
-        ),
+        "".join(json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
         encoding="utf-8",
     )
 
@@ -318,3 +270,63 @@ def _ocrbench_task_source_id(task_id: str) -> int | None:
     prefix = "ocrbench-v2-"
     lowered = task_id.lower()
     return _integer(lowered[len(prefix) :]) if lowered.startswith(prefix) else None
+
+
+def _eligible_transfer_groups(
+    candidates: Sequence[OCRBenchCandidate],
+    requested_types: Sequence[str],
+    excluded_source_ids: set[int],
+    excluded_image_hashes: set[str],
+) -> tuple[dict[str, list[OCRBenchCandidate]], int, int]:
+    seen_source_ids: set[int] = set()
+    groups: dict[str, list[OCRBenchCandidate]] = {task_type: [] for task_type in requested_types}
+    excluded_by_source_id = 0
+    excluded_by_image = 0
+    for candidate in candidates:
+        if candidate.source_id in seen_source_ids:
+            raise ValueError(f"duplicate OCRBench-v2 source id: {candidate.source_id}")
+        seen_source_ids.add(candidate.source_id)
+        if candidate.task_type not in groups:
+            continue
+        if candidate.source_id in excluded_source_ids:
+            excluded_by_source_id += 1
+            continue
+        if candidate.image_sha256 in excluded_image_hashes:
+            excluded_by_image += 1
+            continue
+        groups[candidate.task_type].append(candidate)
+
+    return groups, excluded_by_source_id, excluded_by_image
+
+
+def _interleaved_transfer_selection(
+    groups: Mapping[str, Sequence[OCRBenchCandidate]],
+    requested_types: Sequence[str],
+    quotas: Mapping[str, int],
+) -> tuple[list[OCRBenchCandidate], set[str], dict[str, int]]:
+    selected: list[OCRBenchCandidate] = []
+    used_images: set[str] = set()
+    selected_by_type = {task_type: 0 for task_type in requested_types}
+    cursors = {task_type: 0 for task_type in requested_types}
+    # Interleaving prevents an earlier type from monopolizing images that are
+    # shared by rows belonging to different official task labels.
+    for _ in range(max(quotas.values())):
+        for task_type in requested_types:
+            if selected_by_type[task_type] >= quotas[task_type]:
+                continue
+            rows = groups[task_type]
+            while cursors[task_type] < len(rows):
+                candidate = rows[cursors[task_type]]
+                cursors[task_type] += 1
+                if candidate.image_sha256 in used_images:
+                    continue
+                selected.append(candidate)
+                used_images.add(candidate.image_sha256)
+                selected_by_type[task_type] += 1
+                break
+            else:
+                raise ValueError(
+                    f"task type {task_type!r} has fewer than {quotas[task_type]} eligible image-unique rows"
+                )
+
+    return selected, used_images, selected_by_type

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "project": "OpenMAS",
+  "resources": [
+    {
+      "id": "qwen3-vl-8b", "purpose": "Optional local multimodal EGOR experiments",
+      "root": "models", "path": "Qwen3-VL-8B-Instruct", "kind": "directory",
+      "version": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "source": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+      "license": "Apache-2.0", "sha256": null,
+      "checksums": "docs/model_sources.json (individual files; no aggregate directory hash)",
+      "required_for": ["local multimodal experiments"],
+      "how_to_get": "Restore or explicitly download that revision into the model root. Verify each file using docs/model_sources.json. Set provider.local_model_path. No automatic download is required for tests or demos."
+    },
+    {
+      "id": "gaia", "purpose": "Optional GAIA task execution",
+      "root": "data", "path": "gaia", "kind": "directory", "version": "GAIA 2023",
+      "source": "https://huggingface.co/datasets/gaia-benchmark/GAIA",
+      "license": "Upstream dataset access terms; review before redistribution",
+      "sha256": null, "checksum_status": "No complete local dataset verified",
+      "required_for": ["GAIA experiments"],
+      "how_to_get": "Obtain access from the dataset publisher, restore the selected revision to this directory and set eval.dataset_path. Record the revision and file hashes before a research run."
+    },
+    {
+      "id": "ocrbench", "purpose": "Optional image-backed EGOR transfer experiments",
+      "root": "data", "path": "ocrbench", "kind": "directory", "version": "OCRBench; see experiment manifest for selected rows",
+      "source": "https://huggingface.co/datasets/echo840/OCRBench",
+      "license": "Upstream dataset/image terms; review before redistribution",
+      "sha256": null, "checksum_status": "Original images external to the public repository",
+      "required_for": ["image-backed EGOR experiments"],
+      "how_to_get": "Restore original images and the experiment task manifest here. Match source IDs and hashes from your frozen run manifest; arithmetic reproduction does not require images."
+    }
+  ]
+}

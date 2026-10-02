@@ -7,9 +7,9 @@ from pathlib import Path
 from typing import Any
 
 from openagora_experiments.egor.protocol import PilotTask
+from openmas_test_history import historical_root
 
-
-SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
+SCRIPTS = (historical_root() / "code/experiments") / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 SCRIPT = SCRIPTS / "analyze_egor_v9_confirmation.py"
 SPEC = importlib.util.spec_from_file_location("analyze_egor_v9_test", SCRIPT)

@@ -151,9 +151,7 @@ class CounterfactualMatrix:
         try:
             return self.outcomes[(key, organization_id)]
         except KeyError as exc:
-            raise MatrixValidationError(
-                f"missing counterfactual cell {key.stable_id}::{organization_id}"
-            ) from exc
+            raise MatrixValidationError(f"missing counterfactual cell {key.stable_id}::{organization_id}") from exc
 
 
 def load_counterfactual_matrix(
@@ -169,26 +167,7 @@ def load_counterfactual_matrix(
     if not outcome_paths:
         raise MatrixValidationError("at least one organization is required")
 
-    tasks: dict[TaskKey, TaskRecord] = {}
-    file_hashes: dict[str, str] = {}
-    source_task_counts: dict[str, int] = {}
-    for source_id, path in sorted(task_paths.items()):
-        resolved = Path(path).resolve()
-        file_hashes[str(resolved)] = _sha256(resolved)
-        source_count = 0
-        with resolved.open(encoding="utf-8") as handle:
-            for line_number, line in enumerate(handle, start=1):
-                if not line.strip():
-                    continue
-                payload = json.loads(line)
-                loaded_task = TaskRecord.from_json(source_id=source_id, payload=payload)
-                if loaded_task.key in tasks:
-                    raise MatrixValidationError(
-                        f"duplicate task {loaded_task.key.stable_id} at {resolved}:{line_number}"
-                    )
-                tasks[loaded_task.key] = loaded_task
-                source_count += 1
-        source_task_counts[source_id] = source_count
+    tasks, file_hashes, source_task_counts = _load_task_sources(task_paths)
 
     organizations = tuple(sorted(outcome_paths))
     outcomes: dict[tuple[TaskKey, str], OutcomeRecord] = {}
@@ -199,12 +178,7 @@ def load_counterfactual_matrix(
     organization_row_counts: dict[str, int] = {organization_id: 0 for organization_id in organizations}
 
     for organization_id, source_paths in sorted(outcome_paths.items()):
-        missing_sources = sorted(set(task_paths).difference(source_paths))
-        extra_sources = sorted(set(source_paths).difference(task_paths))
-        if missing_sources or extra_sources:
-            raise MatrixValidationError(
-                f"organization {organization_id} source mismatch: missing={missing_sources}, extra={extra_sources}"
-            )
+        _check_organization_sources(organization_id, task_paths, source_paths)
         for source_id, path in sorted(source_paths.items()):
             resolved = Path(path).resolve()
             file_hashes[str(resolved)] = _sha256(resolved)
@@ -240,14 +214,9 @@ def load_counterfactual_matrix(
                     )
                     organization_row_counts[organization_id] += 1
 
-    expected_cells = {
-        (key, organization_id)
-        for key in tasks
-        for organization_id in organizations
-    }
+    expected_cells = {(key, organization_id) for key in tasks for organization_id in organizations}
     missing_cells = sorted(
-        f"{key.stable_id}::{organization_id}"
-        for key, organization_id in expected_cells.difference(outcomes)
+        f"{key.stable_id}::{organization_id}" for key, organization_id in expected_cells.difference(outcomes)
     )
     audit = MatrixAudit(
         task_count=len(tasks),
@@ -265,9 +234,7 @@ def load_counterfactual_matrix(
     )
     if not audit.complete:
         preview = [*audit.missing_cells[:3], *audit.extra_cells[:3]]
-        raise MatrixValidationError(
-            "counterfactual evidence failed completeness audit: " + ", ".join(preview)
-        )
+        raise MatrixValidationError("counterfactual evidence failed completeness audit: " + ", ".join(preview))
     return CounterfactualMatrix(
         tasks=tasks,
         outcomes=outcomes,
@@ -289,3 +256,42 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _load_task_sources(
+    task_paths: Mapping[str, Path],
+) -> tuple[dict[TaskKey, TaskRecord], dict[str, str], dict[str, int]]:
+    tasks: dict[TaskKey, TaskRecord] = {}
+    file_hashes: dict[str, str] = {}
+    source_task_counts: dict[str, int] = {}
+    for source_id, path in sorted(task_paths.items()):
+        resolved = Path(path).resolve()
+        file_hashes[str(resolved)] = _sha256(resolved)
+        source_count = 0
+        with resolved.open(encoding="utf-8") as handle:
+            for line_number, line in enumerate(handle, start=1):
+                if not line.strip():
+                    continue
+                payload = json.loads(line)
+                loaded_task = TaskRecord.from_json(source_id=source_id, payload=payload)
+                if loaded_task.key in tasks:
+                    raise MatrixValidationError(
+                        f"duplicate task {loaded_task.key.stable_id} at {resolved}:{line_number}"
+                    )
+                tasks[loaded_task.key] = loaded_task
+                source_count += 1
+        source_task_counts[source_id] = source_count
+
+    return tasks, file_hashes, source_task_counts
+
+
+def _check_organization_sources(
+    organization_id: str, task_paths: Mapping[str, Path], source_paths: Mapping[str, Path]
+) -> None:
+    missing_sources = sorted(set(task_paths).difference(source_paths))
+    extra_sources = sorted(set(source_paths).difference(task_paths))
+    if missing_sources or extra_sources:
+        raise MatrixValidationError(
+            f"organization {organization_id} source mismatch: missing={missing_sources}, extra={extra_sources}"
+        )
+    return None

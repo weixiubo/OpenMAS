@@ -77,18 +77,14 @@ def select_chartqa_rows(
         raise ValueError(f"only {len(candidates)} eligible images for {required} tasks")
     development = candidates[:development_size]
     heldout = candidates[development_size:required]
-    if {item.image_name for item in development}.intersection(
-        item.image_name for item in heldout
-    ):
+    if {item.image_name for item in development}.intersection(item.image_name for item in heldout):
         raise AssertionError("development and heldout images overlap")
     return (
         development,
         heldout,
         {
             "source_rows": len(rows),
-            "source_unique_images": len(
-                {Path(str(row.get("imgname", ""))).name for row in rows}
-            ),
+            "source_unique_images": len({Path(str(row.get("imgname", ""))).name for row in rows}),
             "excluded_task_ids_declared": len(excluded_task_ids),
             "excluded_images_declared": len(excluded_images),
             "rows_excluded_by_task_id": excluded_by_task,
@@ -114,9 +110,7 @@ def materialize_chartqa_rows(
         if not answer:
             raise ValueError(f"selected ChartQA task {item.task_id} has no label")
         if not isinstance(image_payload, (bytes, bytearray, memoryview)):
-            raise ValueError(
-                f"selected ChartQA task {item.task_id} has no encoded image"
-            )
+            raise ValueError(f"selected ChartQA task {item.task_id} has no encoded image")
         encoded = bytes(image_payload)
         image_path = images_root / item.image_name
         if image_path.exists() and image_path.read_bytes() != encoded:
@@ -161,11 +155,7 @@ def load_exclusions(paths: Sequence[Path]) -> tuple[set[str], set[str]]:
                 row = json.loads(line)
                 task_id = str(row.get("task_id", "")).strip()
                 metadata = row.get("metadata", {})
-                source_image = (
-                    str(metadata.get("source_image", "")).strip()
-                    if isinstance(metadata, Mapping)
-                    else ""
-                )
+                source_image = str(metadata.get("source_image", "")).strip() if isinstance(metadata, Mapping) else ""
                 image_path = str(row.get("image_path", "")).strip()
                 if task_id:
                     task_ids.add(task_id)
@@ -177,10 +167,7 @@ def load_exclusions(paths: Sequence[Path]) -> tuple[set[str], set[str]]:
 def write_jsonl(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
-        "".join(
-            json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n"
-            for row in rows
-        ),
+        "".join(json.dumps(dict(row), ensure_ascii=False, sort_keys=True) + "\n" for row in rows),
         encoding="utf-8",
     )
 

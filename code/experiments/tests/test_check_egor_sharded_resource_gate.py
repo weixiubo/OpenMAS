@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import importlib.util
-from pathlib import Path
 from types import ModuleType
 
 import pytest
+from openmas_test_history import historical_root
 
 
 def test_two_safe_readings_are_required_and_recorded() -> None:
@@ -56,9 +56,7 @@ def test_unknown_compute_pid_fails_closed_without_waiting() -> None:
     assert report["passed"] is False
     assert report["completed_readings"] == 1
     assert sleeps == []
-    assert report["readings"][0]["violations"] == [
-        {"code": "unknown_compute_pids", "gpu": 0, "pids": [999]}
-    ]
+    assert report["readings"][0]["violations"] == [{"code": "unknown_compute_pids", "gpu": 0, "pids": [999]}]
 
 
 @pytest.mark.parametrize(
@@ -68,9 +66,7 @@ def test_unknown_compute_pid_fails_closed_without_waiting() -> None:
         ({"util1": 6}, "excess_utilization"),
     ],
 )
-def test_memory_and_utilization_thresholds_fail_closed(
-    snapshot_kwargs: dict[str, int], code: str
-) -> None:
+def test_memory_and_utilization_thresholds_fail_closed(snapshot_kwargs: dict[str, int], code: str) -> None:
     module = _load_module()
 
     violations = module.evaluate_snapshot(
@@ -88,10 +84,7 @@ def test_nvidia_csv_parser_maps_processes_by_uuid() -> None:
 
     snapshot = module.parse_nvidia_snapshot(
         gpu_text="0, GPU-A, 16000, 2\n1, GPU-B, 19000, 0\n",
-        process_text=(
-            "GPU-A, 12, 900, /service/a\n"
-            "GPU-B, 34, 5000, /service/b\n"
-        ),
+        process_text=("GPU-A, 12, 900, /service/a\nGPU-B, 34, 5000, /service/b\n"),
         observed_at="2026-07-15T00:00:00+00:00",
     )
 
@@ -121,9 +114,7 @@ def test_nvidia_csv_parser_maps_processes_by_uuid() -> None:
         ),
     ],
 )
-def test_nvidia_csv_parser_rejects_ambiguous_rows(
-    gpu_text: str, process_text: str, message: str
-) -> None:
+def test_nvidia_csv_parser_rejects_ambiguous_rows(gpu_text: str, process_text: str, message: str) -> None:
     module = _load_module()
 
     with pytest.raises(ValueError, match=message):
@@ -163,9 +154,7 @@ def test_allowed_pid_parser_rejects_ambiguous_values(raw: str) -> None:
         module.parse_allowed_pids(raw)
 
 
-def _snapshot(
-    *, free0: int = 16000, free1: int = 19000, util0: int = 2, util1: int = 1
-) -> dict[str, object]:
+def _snapshot(*, free0: int = 16000, free1: int = 19000, util0: int = 2, util1: int = 1) -> dict[str, object]:
     return {
         "observed_at": "2026-07-15T00:00:00+00:00",
         "gpus": [
@@ -203,11 +192,7 @@ def _snapshot(
 
 
 def _load_module() -> ModuleType:
-    path = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "check_egor_sharded_resource_gate.py"
-    )
+    path = (historical_root() / "code/experiments") / "scripts" / "check_egor_sharded_resource_gate.py"
     spec = importlib.util.spec_from_file_location("egor_sharded_resource_gate", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

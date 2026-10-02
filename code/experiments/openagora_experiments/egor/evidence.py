@@ -3,6 +3,7 @@
 These functions accept generated answers and provenance-bearing evidence only;
 neither a reference answer nor an observed experiment outcome is an input.
 """
+
 from __future__ import annotations
 
 import json
@@ -17,6 +18,7 @@ _ANSWER_PREFIX = re.compile(
     r"(?:\s+produced)?\s*(?::|is\b)\s*",
     flags=re.IGNORECASE,
 )
+
 
 def answers_agree(
     left: Any,
@@ -50,6 +52,7 @@ def answers_agree(
     )
     return max(forward, reverse) >= threshold
 
+
 def canonical_answer(value: Any) -> str:
     """Remove common wrappers while preserving answer-bearing content."""
 
@@ -64,6 +67,7 @@ def canonical_answer(value: Any) -> str:
     if len(text) >= 2 and text[0] == text[-1] and text[0] in {"'", '"'}:
         text = text[1:-1].strip()
     return " ".join(text.lower().split()).strip(" .")
+
 
 def valid_evidence_cards(record: Mapping[str, Any]) -> tuple[Mapping[str, Any], ...]:
     """Return structurally valid cards for ``sec:blind-support``.
@@ -83,6 +87,7 @@ def valid_evidence_cards(record: Mapping[str, Any]) -> tuple[Mapping[str, Any], 
         and str(card.get("support", "")).strip()
         and str(card.get("provenance", "")).strip()
     )
+
 
 def _corroborating_specialists(
     *,
@@ -104,6 +109,7 @@ def _corroborating_specialists(
             )
         )
     )
+
 
 def _candidate_answer(record: Mapping[str, Any]) -> str:
     return str(record.get("candidate_answer", record.get("answer", ""))).strip()

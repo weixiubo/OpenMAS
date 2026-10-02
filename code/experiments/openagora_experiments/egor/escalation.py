@@ -9,7 +9,6 @@ from typing import Any, Literal
 
 from openagora_experiments.egor.evaluation import SynthesisAudit, audit_synthesis
 
-
 EscalationTier = Literal["baseline", "core_pair", "full_team"]
 
 
@@ -63,12 +62,8 @@ def decide_evidence_escalation(
         synthesis=core_synthesis,
     )
     exact_boolean = canonical_boolean(exact_specialist.get("candidate_answer", ""))
-    visual_boolean = canonical_boolean(
-        visual_specialist.get("candidate_answer", "")
-    )
-    boolean_disagreement = bool(
-        exact_boolean and visual_boolean and exact_boolean != visual_boolean
-    )
+    visual_boolean = canonical_boolean(visual_specialist.get("candidate_answer", ""))
+    boolean_disagreement = bool(exact_boolean and visual_boolean and exact_boolean != visual_boolean)
 
     if not core_complete:
         reason = "core_stage_incomplete"

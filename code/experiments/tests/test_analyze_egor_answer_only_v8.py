@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import importlib.util
-from pathlib import Path
 from typing import Any
 
+from openmas_test_history import historical_root
 
-SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "analyze_egor_answer_only_v8.py"
+SCRIPT = (historical_root() / "code/experiments") / "scripts" / "analyze_egor_answer_only_v8.py"
 SPEC = importlib.util.spec_from_file_location("analyze_v8", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
@@ -76,8 +76,5 @@ def test_v8_gate_fails_closed_on_one_source_completion_failure() -> None:
     rows["infographic"][0]["verifier_complete"] = False
     report = MODULE.analyze(rows, bootstrap_samples=1000, seed=9)
     assert not report["passed"]
-    completion = next(
-        item for item in report["criteria"]
-        if item["name"] == "sourcewise_operational_completion"
-    )
+    completion = next(item for item in report["criteria"] if item["name"] == "sourcewise_operational_completion")
     assert not completion["passed"]

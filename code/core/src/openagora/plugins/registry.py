@@ -1,4 +1,4 @@
-﻿"""Plugin registry and discovery for providers/adapters."""
+"""Plugin registry and discovery for providers/adapters."""
 
 from __future__ import annotations
 

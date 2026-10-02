@@ -1,9 +1,8 @@
-﻿"""Reproducibility helpers."""
+"""Reproducibility helpers."""
 
 from __future__ import annotations
 
 import json
-import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
@@ -12,20 +11,6 @@ from openagora.config.loader import dump_config
 from openagora.config.models import RunConfig
 from openagora.types import RunManifest
 from openagora.utils.hash_utils import sha256_file, sha256_json
-
-
-def safe_git_commit() -> str:
-    """Return current git commit hash, or 'unknown'."""
-    try:
-        out = subprocess.run(  # noqa: S603
-            ["git", "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        return out.stdout.strip()
-    except Exception:
-        return "unknown"
 
 
 def resolve_dependency_lock_hash(candidates: Iterable[str]) -> str:
@@ -49,7 +34,7 @@ def build_manifest(
     return RunManifest(
         run_id=run_id,
         created_at=datetime.now(timezone.utc).isoformat(),
-        git_commit=safe_git_commit(),
+        git_commit=cfg.provenance.source_revision,
         dependency_lock_hash=resolve_dependency_lock_hash(lock_candidates),
         config_hash=payload_hash,
         seed=cfg.provider.seed,

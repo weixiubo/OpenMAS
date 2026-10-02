@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from openagora.utils.contracts import check_public_contract
 

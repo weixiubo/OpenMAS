@@ -5,20 +5,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
-          python-version: '3.11'
-      - run: |
-          python -m pip install -r requirements-dev.lock
-          python -m pip install --no-deps -e code/core -e code/experiments
-      - run: ruff check src tests
-        working-directory: code/core
-      - run: mypy src
-        working-directory: code/core
-      - run: python -m pytest --cov=src/openagora --cov-fail-under=85
-        working-directory: code/core
-      - run: python -m pytest tests --cov=openagora_experiments --cov-fail-under=80
-        working-directory: code/experiments
-      - run: python examples/egor_smoke.py
-      - run: python reproduce/verify.py
-      - run: openagora doctor --config code/core/configs/default.yaml
+          version: '0.10.11'
+          enable-cache: true
+      - run: uv sync --locked
+      - run: uv run --no-sync ruff check code scripts examples
+      - run: uv run --no-sync ruff format --check code scripts examples
+      - run: uv run --no-sync mypy --config-file pyproject.toml
+      - run: uv run --no-sync python scripts/check_structure.py
+      - run: uv run --no-sync pytest --cov=openagora --cov-fail-under=85
+      - run: uv run --no-sync pytest --cov=openagora_experiments --cov-fail-under=80
+      - run: uv run --no-sync python scripts/check_historical.py
+      - run: uv run --no-sync openagora doctor
+      - run: uv run --no-sync openagora demo
+      - run: uv run --no-sync openagora reproduce
+      - run: uv build --all-packages
+      - run: uv run --no-sync python scripts/check_release.py

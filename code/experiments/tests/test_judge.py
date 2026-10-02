@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from openagora_experiments.evaluation.judge import HybridJudge
 from openagora_experiments.evaluation.protocol import RuleEvaluation

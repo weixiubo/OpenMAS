@@ -1,4 +1,4 @@
-﻿"""Artifact manifest/hash/export helpers."""
+"""Artifact manifest/hash/export helpers."""
 
 from __future__ import annotations
 
@@ -68,5 +68,3 @@ def export_run_bundle(
 def read_run_result(path: Path) -> RunResult:
     """Load RunResult JSON from file."""
     return RunResult.model_validate_json(path.read_text(encoding="utf-8"))
-
-

@@ -11,7 +11,6 @@ from openagora_experiments.egor.ocrbench_splits import (
     select_transfer_rows_by_type,
 )
 
-
 TYPES = ("APP agent en", "text recognition en")
 
 

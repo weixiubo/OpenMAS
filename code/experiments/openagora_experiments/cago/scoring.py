@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from collections.abc import Mapping, Sequence
 
-
 _ANSWER_PREFIX = re.compile(
     r"^\s*(?:final\s+answer|answer|prediction|result)\s*(?::|is\b)\s*",
     flags=re.IGNORECASE,
@@ -32,9 +31,7 @@ def score_prediction(
     references = _unique_non_empty([answer, *reference_answers])
     metric_name = metric.strip().lower()
     if metric_name == "anls":
-        return max(
-            (_anls(predicted, reference) for reference in references), default=0.0
-        )
+        return max((_anls(predicted, reference) for reference in references), default=0.0)
     if metric_name == "choice_accuracy":
         return _choice_accuracy(predicted, references=references, options=options)
     if metric_name == "relaxed_accuracy":
@@ -70,9 +67,7 @@ def _multi_reference_accuracy(predicted: str, references: Sequence[str]) -> floa
     return 0.0
 
 
-def _relaxed_accuracy(
-    predicted: str, reference: str, *, tolerance: float = 0.05
-) -> float:
+def _relaxed_accuracy(predicted: str, reference: str, *, tolerance: float = 0.05) -> float:
     """ChartQA-style relaxed accuracy with relative tolerance for numbers."""
 
     predicted_number = _to_float_or_embedded(_strip_wrapper(predicted))
@@ -80,9 +75,7 @@ def _relaxed_accuracy(
     if predicted_number is not None and reference_number is not None:
         if reference_number == 0.0:
             return float(predicted_number == reference_number)
-        relative_error = abs(predicted_number - reference_number) / abs(
-            reference_number
-        )
+        relative_error = abs(predicted_number - reference_number) / abs(reference_number)
         return float(relative_error <= tolerance)
     return float(_normalize(predicted) == _normalize(reference))
 
@@ -107,9 +100,7 @@ def _choice_keys(text: str, options: Sequence[Mapping[str, str]]) -> set[str]:
     normalized = _normalize(cleaned)
     keys: set[str] = set()
     option_by_id = {
-        str(option.get("id", "")).strip().upper(): _normalize(
-            str(option.get("text", ""))
-        )
+        str(option.get("id", "")).strip().upper(): _normalize(str(option.get("text", "")))
         for option in options
         if str(option.get("id", "")).strip()
     }
@@ -183,11 +174,7 @@ def _normalize_number(text: str) -> str:
         value = float(cleaned)
     except ValueError:
         return text
-    return (
-        str(int(value))
-        if value.is_integer()
-        else f"{value:.8f}".rstrip("0").rstrip(".")
-    )
+    return str(int(value)) if value.is_integer() else f"{value:.8f}".rstrip("0").rstrip(".")
 
 
 def _leading_number(text: str) -> str | None:

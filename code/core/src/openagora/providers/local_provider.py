@@ -183,13 +183,7 @@ class LocalModelProvider:
         seed: int,
     ) -> str:
         pipeline = self._ensure_transformers_pipeline()
-        prompt = (
-            "<|system|>\n"
-            f"{system_prompt}\n"
-            "<|user|>\n"
-            f"{user_prompt}\n"
-            "<|assistant|>\n"
-        )
+        prompt = f"<|system|>\n{system_prompt}\n<|user|>\n{user_prompt}\n<|assistant|>\n"
         try:
             try:
                 import torch  # type: ignore[import-not-found]
@@ -317,17 +311,7 @@ class LocalModelProvider:
                 local_files_only=local_only,
                 trust_remote_code=True,
             )
-            model_load_kwargs: dict[str, Any] = {
-                "local_files_only": local_only,
-                "trust_remote_code": True,
-                "torch_dtype": "auto",
-                "low_cpu_mem_usage": True,
-            }
-            if self._uses_multi_gpu():
-                model_load_kwargs["device_map"] = "auto"
-                max_memory = self._build_max_memory_map()
-                if max_memory:
-                    model_load_kwargs["max_memory"] = max_memory
+            model_load_kwargs = self._model_load_options(local_only)
             try:
                 model = AutoModelForCausalLM.from_pretrained(
                     model_id,
@@ -350,15 +334,7 @@ class LocalModelProvider:
                     model_id,
                     **model_load_kwargs,
                 )
-            force_cpu = self._gpu_devices.lower() in {"cpu", "none", "-1"}
-            device = -1
-            try:
-                import torch
-
-                if torch.cuda.is_available() and not force_cpu:
-                    device = 0
-            except Exception:
-                device = -1
+            device = self._pipeline_device()
             pipeline_kwargs: dict[str, Any] = {
                 "task": "text-generation",
                 "model": model,
@@ -390,6 +366,32 @@ class LocalModelProvider:
                 code="local_backend_init_failed",
                 retryable=False,
             ) from exc
+
+    def _pipeline_device(self) -> int:
+        force_cpu = self._gpu_devices.lower() in {"cpu", "none", "-1"}
+        device = -1
+        try:
+            import torch
+
+            if torch.cuda.is_available() and not force_cpu:
+                device = 0
+        except Exception:
+            device = -1
+        return device
+
+    def _model_load_options(self, local_only: bool) -> dict[str, Any]:
+        model_load_kwargs: dict[str, Any] = {
+            "local_files_only": local_only,
+            "trust_remote_code": True,
+            "torch_dtype": "auto",
+            "low_cpu_mem_usage": True,
+        }
+        if self._uses_multi_gpu():
+            model_load_kwargs["device_map"] = "auto"
+            max_memory = self._build_max_memory_map()
+            if max_memory:
+                model_load_kwargs["max_memory"] = max_memory
+        return model_load_kwargs
 
     def _resolve_model_identifier(self) -> str:
         if self._model_path:

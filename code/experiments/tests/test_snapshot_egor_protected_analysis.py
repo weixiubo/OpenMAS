@@ -5,6 +5,7 @@ from pathlib import Path
 from types import ModuleType
 
 import pytest
+from openmas_test_history import historical_root
 
 
 def test_snapshot_detects_content_metadata_and_file_set_changes(tmp_path: Path) -> None:
@@ -43,11 +44,7 @@ def test_snapshot_rejects_symlinked_protected_files(tmp_path: Path) -> None:
 
 
 def _load_module() -> ModuleType:
-    path = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "snapshot_egor_protected_analysis.py"
-    )
+    path = (historical_root() / "code/experiments") / "scripts" / "snapshot_egor_protected_analysis.py"
     spec = importlib.util.spec_from_file_location(path.stem, path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

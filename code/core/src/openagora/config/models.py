@@ -1,8 +1,7 @@
-﻿"""Pydantic config models for OpenAGORA runtime."""
+"""Pydantic config models for OpenAGORA runtime."""
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -108,6 +107,14 @@ class EvalSettings(BaseModel):
     stats_seed: int = 2026
 
 
+class ProvenanceSettings(BaseModel):
+    """Explicit source identity, independent of the caller's working directory."""
+
+    model_config = ConfigDict(extra="forbid")
+    source_revision: str = "unknown"
+    dependency_lock_path: str | None = None
+
+
 class RunConfig(BaseModel):
     """Top-level runtime config for engine and CLI."""
 
@@ -120,6 +127,7 @@ class RunConfig(BaseModel):
     templates: TemplateSettings = Field(default_factory=TemplateSettings)
     plugins: PluginSettings = Field(default_factory=PluginSettings)
     audit: AuditSettings = Field(default_factory=AuditSettings)
+    provenance: ProvenanceSettings = Field(default_factory=ProvenanceSettings)
     task: TaskSpec
     eval: EvalSettings = Field(default_factory=EvalSettings)
     config_path: str | None = None
@@ -128,31 +136,7 @@ class RunConfig(BaseModel):
     def check_threshold_order(self) -> "RunConfig":
         t = self.thresholds
         if t.cache_invalidate_threshold > t.cache_write_perf_threshold:
-            raise ValueError(
-                "cache_invalidate_threshold must be <= cache_write_perf_threshold"
-            )
+            raise ValueError("cache_invalidate_threshold must be <= cache_write_perf_threshold")
         if self.eval.borderline_low >= self.eval.borderline_high:
             raise ValueError("eval.borderline_low must be < eval.borderline_high")
         return self
-
-    def with_paths_resolved(self) -> "RunConfig":
-        """Return a copy with paths resolved against config file location."""
-        if self.config_path is None:
-            return self
-        base = Path(self.config_path).resolve().parent
-        clone = self.model_copy(deep=True)
-        clone.paths.db_path = str((base / clone.paths.db_path).resolve())
-        clone.paths.artifacts_dir = str((base / clone.paths.artifacts_dir).resolve())
-        clone.eval.dataset_path = str((base / clone.eval.dataset_path).resolve())
-        clone.eval.output_csv = str((base / clone.eval.output_csv).resolve())
-        clone.eval.output_summary_csv = str((base / clone.eval.output_summary_csv).resolve())
-        clone.eval.output_failure_csv = str((base / clone.eval.output_failure_csv).resolve())
-        clone.eval.output_pairwise_csv = str((base / clone.eval.output_pairwise_csv).resolve())
-        clone.eval.output_judge_audit_jsonl = str((base / clone.eval.output_judge_audit_jsonl).resolve())
-        clone.eval.output_manifest_json = str((base / clone.eval.output_manifest_json).resolve())
-        clone.eval.output_hashes_json = str((base / clone.eval.output_hashes_json).resolve())
-        clone.eval.gaia_manifest_path = str((base / clone.eval.gaia_manifest_path).resolve())
-        if clone.templates.registry_path:
-            clone.templates.registry_path = str((base / clone.templates.registry_path).resolve())
-        return clone
-

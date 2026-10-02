@@ -5,15 +5,12 @@ from pathlib import Path
 from typing import Any
 
 from openagora.mechanisms.evidence_gap_repair import EvidenceType
-from openagora_experiments.egor.protocol import (
-    PilotTask,
+from openagora_experiments.egor.parsing import parse_baseline_output, parse_scheduler_output, parse_specialist_output
+from openagora_experiments.egor.prompts import (
     build_baseline_prompt,
     build_scheduler_prompt,
     build_specialist_prompt,
     build_synthesis_prompt,
-    parse_baseline_output,
-    parse_scheduler_output,
-    parse_specialist_output,
 )
 from openagora_experiments.egor.runner import (
     load_latest_stage_records,
@@ -24,6 +21,7 @@ from openagora_experiments.egor.runner import (
     run_synthesis_stage,
 )
 from openagora_experiments.egor.runtime_types import ArtifactSpec
+from openagora_experiments.egor.task_model import PilotTask
 
 
 class FakeProvider:
@@ -88,9 +86,7 @@ def test_pilot_task_infers_real_image_mime_types(tmp_path: Path) -> None:
         ".webp": "image/webp",
     }
     for suffix, expected in expected_by_suffix.items():
-        task = PilotTask.from_json(
-            {**required, "image_path": str(tmp_path / f"fixture{suffix}")}
-        )
+        task = PilotTask.from_json({**required, "image_path": str(tmp_path / f"fixture{suffix}")})
         assert task.mime_type == expected
 
     disguised_webp = tmp_path / "fixture.img"
@@ -98,9 +94,7 @@ def test_pilot_task_infers_real_image_mime_types(tmp_path: Path) -> None:
     task = PilotTask.from_json({**required, "image_path": str(disguised_webp)})
     assert task.mime_type == "image/webp"
 
-    unknown = PilotTask.from_json(
-        {**required, "image_path": str(tmp_path / "missing.img")}
-    )
+    unknown = PilotTask.from_json({**required, "image_path": str(tmp_path / "missing.img")})
     assert unknown.mime_type == "application/octet-stream"
 
 
@@ -168,9 +162,9 @@ def test_scheduler_prompt_is_answer_blind_and_parser_is_catalog_bound() -> None:
         }
     ]
 
-    assert build_scheduler_prompt(
-        first, baseline=baseline, template_catalog=catalog
-    ) == build_scheduler_prompt(second, baseline=baseline, template_catalog=catalog)
+    assert build_scheduler_prompt(first, baseline=baseline, template_catalog=catalog) == build_scheduler_prompt(
+        second, baseline=baseline, template_catalog=catalog
+    )
     parsed, issues = parse_scheduler_output(
         json.dumps(
             {
@@ -393,9 +387,7 @@ def test_staged_runner_logs_usage_and_fuses_dependencies() -> None:
             )
         ]
     )
-    baseline_record = list(
-        run_baseline_stage(provider=baseline_provider, tasks=[task], seed=7)
-    )[0]
+    baseline_record = list(run_baseline_stage(provider=baseline_provider, tasks=[task], seed=7))[0]
     key = (task.source_id, task.task_id)
 
     assert baseline_record["status"] == "ok"

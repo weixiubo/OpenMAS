@@ -13,9 +13,7 @@ def summarize_rows(input_csv: str, output_csv: str) -> None:
     with Path(input_csv).open("r", encoding="utf-8") as fp:
         reader = csv.DictReader(fp)
         rows.extend(reader)
-    bucket: dict[str, dict[str, list[float]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
+    bucket: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     numeric_cols = ["quality_score", "token_consumption", "latency_seconds", "cost_usd", "perf_cost_ratio"]
     for row in rows:
         name = row["variant"]
@@ -26,7 +24,7 @@ def summarize_rows(input_csv: str, output_csv: str) -> None:
         out = {"variant": variant}
         for col in numeric_cols:
             values = stats[col]
-            out[f"{col}_mean"] = f"{sum(values)/len(values):.6f}"
+            out[f"{col}_mean"] = f"{sum(values) / len(values):.6f}"
         out_rows.append(out)
     out_path = Path(output_csv)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -34,4 +32,3 @@ def summarize_rows(input_csv: str, output_csv: str) -> None:
         writer = csv.DictWriter(fp, fieldnames=list(out_rows[0].keys()))
         writer.writeheader()
         writer.writerows(out_rows)
-

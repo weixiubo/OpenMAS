@@ -1,7 +1,6 @@
-from pathlib import Path
+from openmas_test_history import historical_root
 
-
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = historical_root()
 SCRIPT = ROOT / "code/experiments/scripts/analyze_egor_opened_verifier_diagnostic_v1.py"
 
 

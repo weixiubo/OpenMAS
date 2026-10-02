@@ -1,9 +1,8 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 
 import pytest
-
 from openagora_experiments.adapters.gaia_mini import load_gaia_mini_tasks
 
 
@@ -33,4 +32,3 @@ def test_gaia_manifest_dataset_hash_validation(tmp_path) -> None:
 
     with pytest.raises(ValueError):
         load_gaia_mini_tasks(str(dataset), manifest_path=str(manifest_path), limit=1)
-

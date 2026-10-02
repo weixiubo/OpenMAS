@@ -1,4 +1,4 @@
-﻿"""Audit integrity checks for run events."""
+"""Audit integrity checks for run events."""
 
 from __future__ import annotations
 

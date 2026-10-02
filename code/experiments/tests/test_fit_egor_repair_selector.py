@@ -6,6 +6,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
+
 
 def test_fit_selector_script_writes_source_cross_validated_audit(
     tmp_path: Path,
@@ -132,9 +134,7 @@ def test_fit_selector_script_writes_source_cross_validated_audit(
         encoding="utf-8",
     )
     output = tmp_path / "selector"
-    script = (
-        Path(__file__).resolve().parents[1] / "scripts" / "fit_egor_repair_selector.py"
-    )
+    script = (historical_root() / "code/experiments") / "scripts" / "fit_egor_repair_selector.py"
 
     subprocess.run(
         [
@@ -151,21 +151,15 @@ def test_fit_selector_script_writes_source_cross_validated_audit(
     summary = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     selector = json.loads((output / "selector.json").read_text(encoding="utf-8"))
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
-    standalone = json.loads(
-        (output / "selector_standalone_value.json").read_text(encoding="utf-8")
-    )
-    with (output / "cross_validated_rows.csv").open(
-        encoding="utf-8", newline=""
-    ) as handle:
+    standalone = json.loads((output / "selector_standalone_value.json").read_text(encoding="utf-8"))
+    with (output / "cross_validated_rows.csv").open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
 
     assert summary["source_cross_validated_selector"]["mean_quality_delta"] == 1.0
     assert summary["source_cross_validated_selector"]["strict_harm_rate"] == 0.0
     assert summary["cross_validation_protocol"] == "nested_loso"
     assert summary["standalone_cross_validation_protocol"] == "nested_loso"
-    assert (
-        summary["source_cross_validated_standalone_value"]["mean_quality_delta"] == 1.0
-    )
+    assert summary["source_cross_validated_standalone_value"]["mean_quality_delta"] == 1.0
     assert selector["config"]["l2"] == 1.0
     assert selector["target"] == "paired_advantage"
     assert selector["models"].keys() == {"exact", "visual"}

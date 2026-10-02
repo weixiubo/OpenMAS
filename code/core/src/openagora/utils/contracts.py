@@ -1,4 +1,4 @@
-﻿"""Public API contract checks."""
+"""Public API contract checks."""
 
 from __future__ import annotations
 

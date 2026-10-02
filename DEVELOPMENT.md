@@ -1,11 +1,11 @@
 # Development
 
-Install the locked development environment and both editable packages as
-documented in README.md. Keep generated files under `outputs/` and per-project
-environments under `.venv/`. Package APIs and scientific result schemas are
-compatibility boundaries. Add a regression case when changing policy logic.
+Use the repository-root Python 3.11 uv workspace: `uv sync --locked`.
+Each repository owns its `.venv`; no sibling repository or previous virtual
+environment is required. See [contributing](CONTRIBUTING.md) for validation,
+[resources](docs/RESOURCES.md) for local configuration, and
+[migration](docs/MIGRATION.md) for the old-to-new entry mapping.
 
-The runtime and experiment suite are separate packages; providers and
-environment-specific I/O do not belong in evidence contracts or policy math.
-Frozen research artifacts have their own source identity and must not be
-rewritten to claim results for refactored code.
+Optional groups: `inference` for local models and `services` for OpenAI clients.
+Default tests and demos are offline. Store full datasets, models and experiment
+outputs under your configurable research roots, outside this Git repository.

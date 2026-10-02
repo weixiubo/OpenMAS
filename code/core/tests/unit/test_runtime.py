@@ -64,7 +64,6 @@ def test_runtime_always_on_variant_consumes_reconfig_budget() -> None:
     out = executor.execute(task=cfg.task, signature=signature, architecture=strong_arch, cfg=cfg)
     assert out.reconfig_count == cfg.thresholds.max_reconfigs
     assert any(
-        event.event_type == "runtime_reconfig"
-        and str(event.payload.get("trigger")) == "always_on_rt"
+        event.event_type == "runtime_reconfig" and str(event.payload.get("trigger")) == "always_on_rt"
         for event in observer.events
     )

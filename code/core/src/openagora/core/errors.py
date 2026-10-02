@@ -1,4 +1,4 @@
-﻿"""Structured error taxonomy and normalization helpers."""
+"""Structured error taxonomy and normalization helpers."""
 
 from __future__ import annotations
 

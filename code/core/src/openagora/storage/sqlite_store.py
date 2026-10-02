@@ -1,4 +1,4 @@
-﻿"""SQLite-backed run/event/cache store."""
+"""SQLite-backed run/event/cache store."""
 
 from __future__ import annotations
 

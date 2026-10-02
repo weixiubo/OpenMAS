@@ -1,9 +1,8 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 
 import yaml
-
 from openagora_experiments.suites.qa_mini import run_qa_mini_ablation
 
 

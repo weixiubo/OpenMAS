@@ -5,7 +5,7 @@ from itertools import product
 from math import isclose
 
 from openagora_experiments.cago.linear import RidgeModel
-from openagora_experiments.egor.protocol import PilotTask, parse_baseline_output
+from openagora_experiments.egor.parsing import parse_baseline_output
 from openagora_experiments.egor.selection import (
     REPAIR_FEATURE_NAMES,
     CounterfactualRepairSelector,
@@ -15,6 +15,7 @@ from openagora_experiments.egor.selection import (
     select_config_by_source_cv,
     visible_repair_feature_vector,
 )
+from openagora_experiments.egor.task_model import PilotTask
 
 
 def _task(*, source_id: str = "source-a", gold: str = "hidden-a") -> PilotTask:
@@ -60,7 +61,7 @@ def _features(signal: float) -> tuple[float, ...]:
 
 def _examples() -> list[RepairTrainingExample]:
     examples = []
-    for source_index, source in enumerate(("s1", "s2", "s3")):
+    for _source_index, source in enumerate(("s1", "s2", "s3")):
         for offset, signal in enumerate((-1.0, -0.8, 0.8, 1.0)):
             examples.append(
                 RepairTrainingExample(
@@ -79,12 +80,8 @@ def _examples() -> list[RepairTrainingExample]:
 
 
 def test_visible_repair_features_exclude_gold_source_and_metadata() -> None:
-    first = visible_repair_feature_vector(
-        _task(source_id="private-source-a", gold="answer-a"), _baseline()
-    )
-    second = visible_repair_feature_vector(
-        _task(source_id="private-source-b", gold="answer-b"), _baseline()
-    )
+    first = visible_repair_feature_vector(_task(source_id="private-source-a", gold="answer-a"), _baseline())
+    second = visible_repair_feature_vector(_task(source_id="private-source-b", gold="answer-b"), _baseline())
 
     assert len(REPAIR_FEATURE_NAMES) == 40
     assert len(first) == len(REPAIR_FEATURE_NAMES)
@@ -177,8 +174,7 @@ def test_selector_implements_finite_catalog_stability_bound() -> None:
 
                     decision = selector.select(_features(0.0), gap_max=1.0)
                     true_utilities = {
-                        action: true_advantages[action] - cost_weight * true_costs[action]
-                        for action in true_costs
+                        action: true_advantages[action] - cost_weight * true_costs[action] for action in true_costs
                     }
                     true_utilities["baseline"] = 0.0
                     regret = max(true_utilities.values()) - true_utilities[decision.selected_id]
@@ -206,9 +202,7 @@ def test_selector_serialization_round_trip_preserves_decision() -> None:
     restored = CounterfactualRepairSelector.from_dict(selector.to_dict())
 
     assert restored.to_dict() == selector.to_dict()
-    assert restored.select(_features(-0.9), gap_max=1.0) == selector.select(
-        _features(-0.9), gap_max=1.0
-    )
+    assert restored.select(_features(-0.9), gap_max=1.0) == selector.select(_features(-0.9), gap_max=1.0)
 
 
 def test_standalone_quality_control_predicts_absolute_candidate_value() -> None:

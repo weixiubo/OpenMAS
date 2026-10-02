@@ -5,12 +5,9 @@ import json
 import sys
 from pathlib import Path
 
+from openmas_test_history import historical_root
 
-SCRIPT = (
-    Path(__file__).resolve().parents[1]
-    / "scripts"
-    / "build_egor_v9_confirmation_data.py"
-)
+SCRIPT = (historical_root() / "code/experiments") / "scripts" / "build_egor_v9_confirmation_data.py"
 SPEC = importlib.util.spec_from_file_location("build_egor_v9_data_test", SCRIPT)
 assert SPEC and SPEC.loader
 module = importlib.util.module_from_spec(SPEC)
@@ -68,9 +65,7 @@ def test_chartqa_selection_is_balanced_unique_and_answer_blind() -> None:
         per_type=2,
         salt="frozen",
     )
-    assert [row.row_index for row in selected] == [
-        row.row_index for row in selected_changed
-    ]
+    assert [row.row_index for row in selected] == [row.row_index for row in selected_changed]
     assert audit["selected_rows_by_type"] == {"human": 2, "augmented": 2}
     assert len({row.image_sha256 for row in selected}) == 4
 
@@ -110,9 +105,7 @@ def test_partition_is_stratified_and_disjoint() -> None:
     )
     assert len(format_rows) == len(confirmation_rows) == 2
     assert {row.question_type for row in format_rows} == set(module.CHARTQA_TYPES)
-    assert {row.task_id for row in format_rows}.isdisjoint(
-        {row.task_id for row in confirmation_rows}
-    )
+    assert {row.task_id for row in format_rows}.isdisjoint({row.task_id for row in confirmation_rows})
 
 
 def test_partition_accepts_frozen_unequal_stratum_quotas() -> None:
@@ -132,9 +125,7 @@ def test_partition_accepts_frozen_unequal_stratum_quotas() -> None:
 
     assert len(format_rows) == 3
     assert len(confirmation_rows) == 4
-    assert {row.task_id for row in format_rows}.isdisjoint(
-        {row.task_id for row in confirmation_rows}
-    )
+    assert {row.task_id for row in format_rows}.isdisjoint({row.task_id for row in confirmation_rows})
 
 
 def test_amended_ocrbench_quota_contract_is_exact() -> None:
@@ -150,8 +141,7 @@ def test_amended_ocrbench_quota_contract_is_exact() -> None:
     assert "math QA en" in module.OCRBENCH_V9_TYPES
     for task_type in module.OCRBENCH_V9_TYPES:
         assert module.OCRBENCH_V9_TOTAL_QUOTA[task_type] == (
-            module.OCRBENCH_V9_FORMAT_QUOTA[task_type]
-            + module.OCRBENCH_V9_CONFIRMATION_QUOTA[task_type]
+            module.OCRBENCH_V9_FORMAT_QUOTA[task_type] + module.OCRBENCH_V9_CONFIRMATION_QUOTA[task_type]
         )
 
 

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import importlib.util
-from pathlib import Path
 from types import ModuleType
 from typing import Any
 
 from openagora_experiments.egor.evaluation import PolicyRow
+from openmas_test_history import historical_root
 
 
 def test_matched_random_preserves_trigger_and_template_multiset() -> None:
@@ -20,11 +20,10 @@ def test_matched_random_preserves_trigger_and_template_multiset() -> None:
     controls = module.build_matched_control_plans(plans, seed=7)
 
     assert [row["selector_triggered"] for row in controls] == [True, True, False]
-    assert sorted(
-        row["matched_random_template_id"]
-        for row in controls
-        if row["selector_triggered"]
-    ) == ["exact", "visual"]
+    assert sorted(row["matched_random_template_id"] for row in controls if row["selector_triggered"]) == [
+        "exact",
+        "visual",
+    ]
     assert controls[2]["matched_random_template_id"] == "baseline"
 
 
@@ -43,9 +42,7 @@ def test_matched_analysis_applies_certificate_only_to_random_repair() -> None:
     }
     matrix: dict[tuple[str, str, str], dict[str, str]] = {}
     for task_id in ("t1", "t2"):
-        matrix[("fixture", task_id, "visual_repair")] = _matrix_row(
-            task_id, "visual_repair", candidate_quality=0.0
-        )
+        matrix[("fixture", task_id, "visual_repair")] = _matrix_row(task_id, "visual_repair", candidate_quality=0.0)
     matrix[("fixture", "t1", "exact_repair")] = _matrix_row(
         "t1", "exact_repair", candidate_quality=1.0, supported=False
     )
@@ -58,12 +55,8 @@ def test_matched_analysis_applies_certificate_only_to_random_repair() -> None:
     for row in rows:
         by_policy.setdefault(row.policy_id, []).append(row)
 
-    random_t1 = next(
-        row for row in by_policy["matched_random_repair"] if row.task_id == "t1"
-    )
-    resynthesis_t1 = next(
-        row for row in by_policy["selector_trigger_resynthesis"] if row.task_id == "t1"
-    )
+    random_t1 = next(row for row in by_policy["matched_random_repair"] if row.task_id == "t1")
+    resynthesis_t1 = next(row for row in by_policy["selector_trigger_resynthesis"] if row.task_id == "t1")
     assert random_t1.policy_quality == 0.0
     assert random_t1.provenance_rejected is True
     assert resynthesis_t1.policy_quality == 0.5
@@ -71,7 +64,7 @@ def test_matched_analysis_applies_certificate_only_to_random_repair() -> None:
 
 
 def _load_script(filename: str) -> ModuleType:
-    path = Path(__file__).resolve().parents[1] / "scripts" / filename
+    path = (historical_root() / "code/experiments") / "scripts" / filename
     spec = importlib.util.spec_from_file_location(path.stem, path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

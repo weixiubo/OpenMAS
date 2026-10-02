@@ -1,22 +1,24 @@
-﻿"""Typer CLI for OpenAGORA."""
+"""Typer CLI for OpenAGORA."""
 
 from __future__ import annotations
 
 import csv
 import json
-import os
 from enum import IntEnum
 from pathlib import Path
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 import typer
 
+from openagora.cli.preflight import environment_report, require_catalog_resources, require_run_resources
+from openagora.cli.project import register_project_commands
+from openagora.cli.workflows import experiment_payload, run_experiment
 from openagora.config.loader import dump_config, load_run_config
 from openagora.config.models import RunConfig
 from openagora.core.engine import OpenAGORAEngine
 from openagora.core.errors import ConfigurationError, normalize_error
-from openagora.core.interfaces import ModelProvider
 from openagora.plugins.registry import build_default_registry
+from openagora.resources import resolve_paths
 from openagora.storage.sqlite_store import SQLiteStore
 from openagora.templates.runtime import build_template_runtime
 from openagora.types import TaskSpec
@@ -35,6 +37,7 @@ template_app = typer.Typer(no_args_is_help=True, add_completion=False)
 manifest_app = typer.Typer(no_args_is_help=True, add_completion=False)
 app.add_typer(template_app, name="template")
 app.add_typer(manifest_app, name="manifest")
+register_project_commands(app)
 
 
 class ExitCode(IntEnum):
@@ -61,6 +64,9 @@ def _build_engine(cfg: RunConfig) -> OpenAGORAEngine:
 @app.command("run")
 def run_command(
     config: str = typer.Option(..., "--config", help="Path to YAML config"),
+    data_dir: Annotated[Path | None, typer.Option("--data-dir")] = None,
+    models_dir: Annotated[Path | None, typer.Option("--models-dir")] = None,
+    runs_dir: Annotated[Path | None, typer.Option("--runs-dir")] = None,
     provider_mode: Literal["mock", "live", "local"] | None = typer.Option(
         None,
         "--provider-mode",
@@ -69,10 +75,23 @@ def run_command(
 ) -> None:
     """Run one task defined in config."""
     try:
-        cfg = _load_with_override(config, provider_mode=provider_mode)
+        paths = resolve_paths({"data": data_dir, "models": models_dir, "runs": runs_dir})
+        payload = experiment_payload(config)
+        if payload is not None:
+            experiment_result = run_experiment(payload, config, paths, check_only=False)
+            typer.echo(json.dumps(experiment_result, ensure_ascii=False))
+            if experiment_result["successful"] != experiment_result["attempted"]:
+                raise typer.Exit(code=int(ExitCode.RUNTIME_ERROR))
+            return
+        cfg = load_run_config(config, resources=paths)
+        if provider_mode is not None:
+            cfg.provider.provider_mode = provider_mode
+        require_run_resources(cfg)
         engine = _build_engine(cfg)
         result = engine.run(cfg.task, cfg)
         typer.echo(json.dumps(result.model_dump(mode="json"), ensure_ascii=False))
+    except typer.Exit:
+        raise
     except Exception as exc:
         _exit_with_error(exc)
 
@@ -107,6 +126,7 @@ def eval_command(
         if suite not in {"qa_mini", "gaia_mini"}:
             raise ConfigurationError("Only --suite qa_mini|gaia_mini is implemented", code="invalid_suite")
         cfg = _load_with_override(config, provider_mode=provider_mode)
+        require_run_resources(cfg, evaluation=True)
         engine = _build_engine(cfg)
         dataset = _load_jsonl(cfg.eval.dataset_path)
         rows = _eval_rows(engine, cfg, dataset, suite=suite)
@@ -125,45 +145,33 @@ def eval_command(
 
 @app.command("doctor")
 def doctor_command(
-    config: str = typer.Option(..., "--config", help="Path to YAML config"),
+    config: str | None = typer.Option(None, "--config", help="Optional experiment YAML"),
     provider_mode: Literal["mock", "live", "local"] | None = typer.Option(None, "--provider-mode"),
+    data_dir: Annotated[Path | None, typer.Option("--data-dir")] = None,
+    models_dir: Annotated[Path | None, typer.Option("--models-dir")] = None,
+    runs_dir: Annotated[Path | None, typer.Option("--runs-dir")] = None,
+    require: Annotated[list[str] | None, typer.Option("--require", help="Require a catalog resource ID")] = None,
 ) -> None:
-    """Validate environment, plugins, templates and storage schema."""
+    """Read-only checks. Never create a database, load a model or contact a service."""
     try:
-        cfg = _load_with_override(config, provider_mode=provider_mode)
-        registry = build_default_registry()
-        registry.discover(cfg.plugins.discovery_modules)
-        provider: ModelProvider = registry.create_provider(cfg)
-        template_runtime = build_template_runtime(cfg)
-        personas = template_runtime.assign_personas(cfg=cfg, worker_count=cfg.runtime.worker_count)
-        store = SQLiteStore(cfg.paths.db_path)
-
-        checks: dict[str, Any] = {
-            "config_path": cfg.config_path,
-            "provider_mode": cfg.provider.provider_mode,
-            "provider_name": cfg.provider.name,
-            "provider_model": cfg.provider.model,
-            "provider_impl": provider.__class__.__name__,
-            "openai_api_key_present": bool(os.getenv("OPENAI_API_KEY")),
-            "task_adapter": cfg.plugins.task_adapter,
-            "tool_adapter": cfg.plugins.tool_adapter,
-            "plugin_modules": cfg.plugins.discovery_modules,
-            "template_id": template_runtime.template_id,
-            "template_version": template_runtime.version,
-            "persona_count": len(personas),
-            "db_path": cfg.paths.db_path,
-            "db_schema_version": store.schema_version(),
-            "event_schema_version": cfg.audit.event_schema_version,
-            "status": "ok",
-        }
-
-        if cfg.provider.provider_mode == "live" and cfg.provider.name.lower() == "openai" and not checks[
-            "openai_api_key_present"
-        ]:
-            checks["status"] = "degraded"
-            checks["warning"] = "OPENAI_API_KEY missing in live mode"
-
-        typer.echo(json.dumps(checks, ensure_ascii=False))
+        paths = resolve_paths({"data": data_dir, "models": models_dir, "runs": runs_dir})
+        payload = experiment_payload(config) if config else None
+        if payload is not None and config is not None:
+            report = environment_report(paths)
+            report.update(run_experiment(payload, config, paths, check_only=True))
+        else:
+            cfg = load_run_config(config, resources=paths) if config else None
+            if cfg is not None and provider_mode is not None:
+                cfg.provider.provider_mode = provider_mode
+            report = environment_report(paths, cfg)
+        require_catalog_resources(report, require or [])
+        if report["problems"]:
+            report["status"] = "missing_requirements"
+        typer.echo(json.dumps(report, ensure_ascii=False))
+        if report["problems"]:
+            raise typer.Exit(code=int(ExitCode.ENV_ERROR))
+    except typer.Exit:
+        raise
     except Exception as exc:
         _exit_with_error(exc)
 
@@ -261,9 +269,7 @@ def template_validate(config: str = typer.Option(..., "--config", help="Path to 
         cfg = load_run_config(config)
         runtime = build_template_runtime(cfg)
         personas = runtime.assign_personas(cfg=cfg, worker_count=cfg.runtime.worker_count)
-        typer.echo(
-            f"Template OK: id={runtime.template_id} version={runtime.version} personas={len(personas)}"
-        )
+        typer.echo(f"Template OK: id={runtime.template_id} version={runtime.version} personas={len(personas)}")
     except Exception as exc:
         _exit_with_error(exc)
 

@@ -6,7 +6,6 @@ from dataclasses import replace
 from pathlib import Path
 
 import pytest
-
 from openagora_experiments.cago.data import (
     CounterfactualMatrix,
     MatrixAudit,
@@ -147,12 +146,8 @@ def test_matrix_loader_rescores_every_organization_with_one_scorer(
     )
     first = tmp_path / "first.csv"
     second = tmp_path / "second.csv"
-    _write_rows(
-        first, [{"task_id": "t1", "predicted_answer": "0.24", "quality_score": "0.75"}]
-    )
-    _write_rows(
-        second, [{"task_id": "t1", "predicted_answer": "0.24", "quality_score": "0.0"}]
-    )
+    _write_rows(first, [{"task_id": "t1", "predicted_answer": "0.24", "quality_score": "0.75"}])
+    _write_rows(second, [{"task_id": "t1", "predicted_answer": "0.24", "quality_score": "0.0"}])
 
     matrix = load_counterfactual_matrix(
         task_paths={"source": tasks_path},
@@ -186,9 +181,7 @@ def test_matrix_loader_rejects_a_missing_counterfactual_cell(tmp_path: Path) -> 
         encoding="utf-8",
     )
     rows_path = tmp_path / "rows.csv"
-    _write_rows(
-        rows_path, [{"task_id": "t1", "predicted_answer": "a", "quality_score": "1"}]
-    )
+    _write_rows(rows_path, [{"task_id": "t1", "predicted_answer": "a", "quality_score": "1"}])
 
     with pytest.raises(MatrixValidationError, match="completeness audit"):
         load_counterfactual_matrix(
@@ -229,9 +222,7 @@ def test_cago_evaluation_produces_auditable_decisions() -> None:
         question = "What is shown?" + (" detailed evidence" * index)
         tasks[key] = _task(source="source", task_id=str(index), question=question)
         baseline_quality = 0.5
-        candidate_quality = min(
-            1.0, max(0.0, baseline_quality + (len(question) - 200) / 1000.0)
-        )
+        candidate_quality = min(1.0, max(0.0, baseline_quality + (len(question) - 200) / 1000.0))
         outcomes[(key, "baseline")] = _outcome(key, "baseline", baseline_quality)
         outcomes[(key, "candidate")] = _outcome(key, "candidate", candidate_quality)
     audit = MatrixAudit(
@@ -275,10 +266,7 @@ def test_cago_evaluation_produces_auditable_decisions() -> None:
         "cago",
         "oracle",
     }
-    assert all(
-        tuple(decision.predicted_advantages) == ("candidate",)
-        for decision in result.cago_decisions
-    )
+    assert all(tuple(decision.predicted_advantages) == ("candidate",) for decision in result.cago_decisions)
 
 
 def _task(*, source: str, task_id: str, question: str) -> TaskRecord:

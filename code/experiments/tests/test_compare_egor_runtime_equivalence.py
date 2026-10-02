@@ -2,11 +2,10 @@ from __future__ import annotations
 
 import copy
 import importlib.util
-from pathlib import Path
 from types import ModuleType
 
 import pytest
-
+from openmas_test_history import historical_root
 
 HASH = "a" * 64
 COMMIT = "b" * 40
@@ -198,11 +197,7 @@ def _manifest() -> dict[str, object]:
 
 
 def _load_module() -> ModuleType:
-    path = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "compare_egor_runtime_equivalence.py"
-    )
+    path = (historical_root() / "code/experiments") / "scripts" / "compare_egor_runtime_equivalence.py"
     spec = importlib.util.spec_from_file_location("runtime_equivalence", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

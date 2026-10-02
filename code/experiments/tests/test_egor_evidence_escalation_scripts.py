@@ -10,6 +10,7 @@ from types import ModuleType
 from typing import Any
 
 import pytest
+from openmas_test_history import historical_root
 
 
 def test_stage_validator_normalizes_benchmark_as_source_id(tmp_path: Path) -> None:
@@ -113,9 +114,7 @@ def test_materializer_projects_nested_decisions_without_outcomes(
     assert all("selected_id" not in row for row in rows)
     assert all("quality_delta" not in row for row in rows)
     assert all("strict_harm" not in row for row in rows)
-    manifest = json.loads(
-        output_path.with_suffix(".jsonl.manifest.json").read_text()
-    )
+    manifest = json.loads(output_path.with_suffix(".jsonl.manifest.json").read_text())
     assert manifest["outcome_fields_read"] is False
     assert "quality_delta" not in manifest["allowed_input_fields_read"]
     assert manifest["trigger_counts"] == {"abstain": 1, "trigger": 1}
@@ -167,13 +166,9 @@ def test_materializer_projects_frozen_selector_plans_and_task_ids(
 
     assert module.main() == 0
 
-    assert [
-        row["repairability_triggered"] for row in _read_jsonl(output_path)
-    ] == [False, True]
+    assert [row["repairability_triggered"] for row in _read_jsonl(output_path)] == [False, True]
     assert task_ids_path.read_text() == "t1\n"
-    manifest = json.loads(
-        output_path.with_suffix(".jsonl.manifest.json").read_text()
-    )
+    manifest = json.loads(output_path.with_suffix(".jsonl.manifest.json").read_text())
     assert manifest["input_kind"] == "frozen_selector_plans"
     assert "frozen development-trained selector" in manifest["policy"]
     assert manifest["outcome_fields_read"] is False
@@ -288,9 +283,7 @@ def test_planner_freezes_only_outcome_blind_stage_inputs(
 
     assert module.main() == 0
 
-    frozen = {
-        row["task_id"]: row for row in _read_jsonl(output_dir / "plans.jsonl")
-    }
+    frozen = {row["task_id"]: row for row in _read_jsonl(output_dir / "plans.jsonl")}
     assert frozen["t0"]["tier"] == "baseline"
     assert frozen["t1"]["tier"] == "core_pair"
     assert frozen["t2"]["tier"] == "full_team"
@@ -307,10 +300,7 @@ def test_planner_freezes_only_outcome_blind_stage_inputs(
     assert "full-team synthesis records" in manifest["forbidden_inputs"]
     assert (output_dir / "task_ids" / "core_pair.txt").read_text() == "t1\nt2\n"
     assert (output_dir / "task_ids" / "full_team.txt").read_text() == "t2\n"
-    core_control = {
-        row["task_id"]: row
-        for row in _read_jsonl(output_dir / "core_pair_control_plans.jsonl")
-    }
+    core_control = {row["task_id"]: row for row in _read_jsonl(output_dir / "core_pair_control_plans.jsonl")}
     assert core_control["t0"]["tier"] == "baseline"
     assert core_control["t1"]["tier"] == "core_pair"
     assert core_control["t2"]["tier"] == "core_pair"
@@ -389,7 +379,7 @@ def test_analyzer_charges_sequential_core_once_and_enforces_certificate() -> Non
 
 
 def _load_script(filename: str) -> ModuleType:
-    path = Path(__file__).resolve().parents[1] / "scripts" / filename
+    path = (historical_root() / "code/experiments") / "scripts" / filename
     spec = importlib.util.spec_from_file_location(path.stem, path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

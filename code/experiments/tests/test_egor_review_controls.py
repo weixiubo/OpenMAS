@@ -3,11 +3,11 @@ from __future__ import annotations
 import importlib.util
 import math
 import sys
-from pathlib import Path
 from types import ModuleType
 
+from openmas_test_history import historical_root
 
-SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
+SCRIPTS = (historical_root() / "code/experiments") / "scripts"
 
 
 def test_nested_report_keeps_posthoc_boundary_and_isolates_conditions() -> None:
@@ -59,9 +59,7 @@ def test_nested_report_keeps_posthoc_boundary_and_isolates_conditions() -> None:
         seed=7,
     )
 
-    assert report["claim_boundary"] == (
-        "posthoc_review_diagnostic_not_new_confirmation"
-    )
+    assert report["claim_boundary"] == ("posthoc_review_diagnostic_not_new_confirmation")
     assert report["policies"]["specialist_only"]["losses"] == 1
     assert report["policies"]["egor_v8"]["losses"] == 0
     assert report["decision_funnel"]["egor_v8_accept"] == 1

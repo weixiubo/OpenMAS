@@ -9,7 +9,7 @@ from openagora_experiments.egor.planning import (
     evaluate_planned_policy,
     fit_capability_cards,
 )
-from openagora_experiments.egor.protocol import PilotTask
+from openagora_experiments.egor.task_model import PilotTask
 
 
 def test_cross_type_capability_fit_uses_strict_provenance_closures() -> None:
@@ -35,9 +35,7 @@ def test_cross_type_capability_fit_uses_strict_provenance_closures() -> None:
     cards, estimates = fit_capability_cards(
         rows,
         action_candidates={"ocr": "exact_singleton"},
-        admissible_gap_types={
-            "ocr": [EvidenceType.EXACT_SPAN, EvidenceType.NUMERICAL_DERIVATION]
-        },
+        admissible_gap_types={"ocr": [EvidenceType.EXACT_SPAN, EvidenceType.NUMERICAL_DERIVATION]},
         minimum_eligible=1,
     )
 

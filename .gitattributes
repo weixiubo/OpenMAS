@@ -1,5 +1,4 @@
-* text=auto eol=lf
-reproduce/egor-v10/* -text
-code/experiments/data/*.jsonl -text
+# Preserve release manifest and evidence bytes across platforms.
+* -text
 *.png binary
 *.pdf binary

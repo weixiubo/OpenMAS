@@ -1,4 +1,4 @@
-﻿"""Rule-first evaluation protocol for GAIA mini outputs."""
+"""Rule-first evaluation protocol for GAIA mini outputs."""
 
 from __future__ import annotations
 
@@ -53,32 +53,9 @@ def evaluate_rule(
     overlap = _token_overlap(norm_pred, norm_exp)
     conflict = _is_conflict(norm_pred, norm_exp, numeric_match, alias_match)
 
-    if exact_match:
-        score = 1.0
-        error_type = "none"
-    elif normalized_match:
-        score = 0.9
-        error_type = "none"
-    elif numeric_match:
-        score = 0.85
-        error_type = "none"
-    elif alias_match:
-        score = 0.75
-        error_type = "alias_only"
-    elif overlap >= 0.6:
-        score = 0.6
-        error_type = "partial_match"
-    elif overlap >= 0.4:
-        score = 0.45
-        error_type = "weak_partial_match"
-    else:
-        score = 0.0
-        if _has_number(norm_exp) and _has_number(norm_pred):
-            error_type = "numeric_mismatch"
-        elif not norm_pred:
-            error_type = "empty_prediction"
-        else:
-            error_type = "no_match"
+    score, error_type = _rule_score(
+        exact_match, normalized_match, numeric_match, alias_match, overlap, norm_exp, norm_pred
+    )
 
     if conflict:
         score = min(score, 0.6)
@@ -176,3 +153,42 @@ def _is_conflict(predicted: str, expected: str, numeric_match: bool, alias_match
     if _has_number(predicted) and _has_number(expected) and not numeric_match and alias_match:
         return True
     return False
+
+
+def _rule_score(
+    exact_match: bool,
+    normalized_match: bool,
+    numeric_match: bool,
+    alias_match: bool,
+    overlap: float,
+    norm_exp: str,
+    norm_pred: str,
+) -> tuple[float, str]:
+    if exact_match:
+        score = 1.0
+        error_type = "none"
+    elif normalized_match:
+        score = 0.9
+        error_type = "none"
+    elif numeric_match:
+        score = 0.85
+        error_type = "none"
+    elif alias_match:
+        score = 0.75
+        error_type = "alias_only"
+    elif overlap >= 0.6:
+        score = 0.6
+        error_type = "partial_match"
+    elif overlap >= 0.4:
+        score = 0.45
+        error_type = "weak_partial_match"
+    else:
+        score = 0.0
+        if _has_number(norm_exp) and _has_number(norm_pred):
+            error_type = "numeric_mismatch"
+        elif not norm_pred:
+            error_type = "empty_prediction"
+        else:
+            error_type = "no_match"
+
+    return score, error_type

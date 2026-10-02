@@ -1,22 +1,17 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import csv
 import json
-import shutil
 from pathlib import Path
-from uuid import uuid4
 
 import yaml
-
 from openagora.config.loader import load_run_config
 from openagora_experiments.suites.gaia_mini import run_gaia_mini_ablation
 
 
-def test_gaia_pipeline_outputs_and_reproducibility() -> None:
-    base = Path(__file__).resolve().parents[1]
-    config_path = str(base / "configs" / "gaia_mini.yaml")
-    run_root = base / ".tmp_test_runs" / str(uuid4())
-    run_root.mkdir(parents=True, exist_ok=True)
+def test_gaia_pipeline_outputs_and_reproducibility(tmp_path) -> None:
+    config_path = str(Path(__file__).parent / "fixtures" / "gaia_mini.yaml")
+    run_root = tmp_path
 
     rows1 = run_root / "rows1.csv"
     summary1 = run_root / "summary1.csv"
@@ -75,7 +70,12 @@ def test_gaia_pipeline_outputs_and_reproducibility() -> None:
     assert pairwise1.exists() and pairwise1.read_text(encoding="utf-8").strip()
     assert failure1.exists()
 
-    for path in [cfg1.eval.output_manifest_json, cfg1.eval.output_hashes_json, cfg2.eval.output_manifest_json, cfg2.eval.output_hashes_json]:
+    for path in [
+        cfg1.eval.output_manifest_json,
+        cfg1.eval.output_hashes_json,
+        cfg2.eval.output_manifest_json,
+        cfg2.eval.output_hashes_json,
+    ]:
         assert Path(path).exists()
 
     manifest_payload = json.loads(Path(cfg1.eval.output_manifest_json).read_text(encoding="utf-8"))
@@ -86,8 +86,6 @@ def test_gaia_pipeline_outputs_and_reproducibility() -> None:
     assert first_rows == second_rows
     assert "OpenAGORA_AlwaysOnRT" in {row["variant"] for row in first_rows}
     assert "NoOT" in {row["variant"] for row in first_rows}
-
-    shutil.rmtree(run_root, ignore_errors=True)
 
 
 def _read_rows_without_run_id(path: Path) -> list[dict[str, str]]:

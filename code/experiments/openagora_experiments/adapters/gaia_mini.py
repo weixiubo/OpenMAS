@@ -1,4 +1,4 @@
-﻿"""GAIA mini adapter: task loading, manifest selection and deterministic parsing."""
+"""GAIA mini adapter: task loading, manifest selection and deterministic parsing."""
 
 from __future__ import annotations
 
@@ -118,9 +118,7 @@ def _validate_manifest_rows(
     if expected_hash:
         actual_hash = sha256_file(dataset_path)
         if actual_hash != expected_hash:
-            raise ValueError(
-                f"GAIA dataset hash mismatch: expected {expected_hash}, got {actual_hash}"
-            )
+            raise ValueError(f"GAIA dataset hash mismatch: expected {expected_hash}, got {actual_hash}")
 
 
 def normalize_text(text: str) -> str:

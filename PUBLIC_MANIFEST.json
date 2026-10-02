@@ -3,18 +3,18 @@
   "files": [
     {
       "path": ".gitattributes",
-      "sha256": "251be1d822fea619458678c3478b7c927f514e7996cd5b4dced7cc0141c5ff9b",
-      "bytes": 108
+      "sha256": "28cf32c5e8e1c2be6e8dd06f84e3517d261ef88d0528aceb486611e51d70abe9",
+      "bytes": 99
     },
     {
       "path": ".github/workflows/openagora-ci.yml",
-      "sha256": "189c6f52f05b0f19dcee2010e0bf9eedd120208e9c939ba86ded3cc67ef29218",
-      "bytes": 883
+      "sha256": "24133cf418c4e5e0123a2693aaa0265870b01ab56ac74d342e6a9638c6fe0a90",
+      "bytes": 998
     },
     {
       "path": ".github/workflows/openagora-release.yml",
-      "sha256": "4b40886df04ef10ceb3455d1a04e026f9f8b0ceb6b2e2f757c730dacd7b0f90c",
-      "bytes": 949
+      "sha256": "f0d4f030d67303942e3d7b5b11ada31c2381635a4b76ffaa52ed5b0c27a10eb8",
+      "bytes": 912
     },
     {
       "path": ".gitignore",
@@ -22,9 +22,19 @@
       "bytes": 244
     },
     {
+      "path": ".python-version",
+      "sha256": "49a506dd32096b010d75205acf3430c9ae6c40351888129499e5a5e487126c93",
+      "bytes": 5
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "5638a8e9f7e0ab94531cfefb42c0da71f364ed556ce49413eaba685f3839d397",
+      "bytes": 1632
+    },
+    {
       "path": "DEVELOPMENT.md",
-      "sha256": "4c09b904624aee2565088ba1ccd0bf53aa5eb321d911f924c8bace571c2f8a7c",
-      "bytes": 588
+      "sha256": "8a6adfdcd1776b3b289540623803ee2952f3c5da6d78ca03d56a8fa62710ba0a",
+      "bytes": 602
     },
     {
       "path": "LICENSE",
@@ -33,13 +43,13 @@
     },
     {
       "path": "OPEN_SOURCE_STATUS.md",
-      "sha256": "e71651efa544315aa32b364b3e18ec386429f17942cc07340aaf6c03e9d5a90f",
-      "bytes": 383
+      "sha256": "26fcfc1db8879ac8df4cecba77f666f730edb4895786c77bd70d8ab165d6f5e2",
+      "bytes": 407
     },
     {
       "path": "README.md",
-      "sha256": "fed008a461fdcdba581d318786203ee26ad6264755c4dcd30aef0d463378b2c8",
-      "bytes": 2136
+      "sha256": "bdc782971b30a83b1f03b7b1f189083be0b86b782244de46525290dac167adf4",
+      "bytes": 4353
     },
     {
       "path": "SOURCE_PROVENANCE.json",
@@ -62,39 +72,29 @@
       "bytes": 317
     },
     {
-      "path": "code/core/README.md",
-      "sha256": "6021523dfe631affbf8444ffd5a43af8ed5afb91f84ba4d5d25550ee8a111bd7",
-      "bytes": 1266
+      "path": "code/core/LICENSE",
+      "sha256": "aa5b334a1dab98a1b76be7587bba68cb7b980755bc796679ab60effe28e9aead",
+      "bytes": 10254
     },
     {
-      "path": "code/core/configs/default.yaml",
-      "sha256": "00abf0d800491430964507fc9532897fb11778e66ab29774996480b5e64ffa4d",
-      "bytes": 2149
+      "path": "code/core/README.md",
+      "sha256": "9e09981af0b6ccf2eaa4c5ee06696f055019c079e9419150f3e3615c8a4c44d5",
+      "bytes": 713
     },
     {
       "path": "code/core/pyproject.toml",
-      "sha256": "72505777f7cf55eaf17654dfc604f7ba3dbf7d19810572e5a552a0b0e82215cc",
-      "bytes": 1289
-    },
-    {
-      "path": "code/core/scripts/live_smoke_openai.py",
-      "sha256": "7393887ef47e4bcd50f6d0713850f89555740f764253b06a7cf7a8845e7a36c9",
-      "bytes": 3479
-    },
-    {
-      "path": "code/core/scripts/local_demo.py",
-      "sha256": "349ea80dc3fb2aeb529981171dc9878bfbd50abb34e704aeb474c2feeaa9d32d",
-      "bytes": 1170
+      "sha256": "d2220764be06690e1744fa23c49b3a69a265c536af6205df47368de4010f1b6f",
+      "bytes": 1358
     },
     {
       "path": "code/core/src/openagora/__init__.py",
-      "sha256": "f4a2a06ef317a9313d1895f3bb367c8fe25a327f2ff6e2d3b6746910c6cfb4e5",
-      "bytes": 330
+      "sha256": "008af0121072512260d88bfb86bb3cd34977eb864384d2ed5443fecba2586025",
+      "bytes": 329
     },
     {
       "path": "code/core/src/openagora/adapters/__init__.py",
-      "sha256": "b490cb02e00fb3a6d51f88a50831e93642600f4b1359f2d87dc1233e0efe2b3e",
-      "bytes": 161
+      "sha256": "42d466715adc4a9d0b02c2ee4198462662da76924db0380b9ce2f68abd7fa705",
+      "bytes": 160
     },
     {
       "path": "code/core/src/openagora/adapters/qa_tools.py",
@@ -103,43 +103,58 @@
     },
     {
       "path": "code/core/src/openagora/cli/__init__.py",
-      "sha256": "54872e89ab7f8fc5bb0fe3ee7bdfa2e21a416b1be58f0fa54c86f0ecc0ae31e8",
-      "bytes": 20
+      "sha256": "0badf25a27f3a40d0857b6160dab6901dae1a15f338eac402afd3131fd3d55d3",
+      "bytes": 19
     },
     {
       "path": "code/core/src/openagora/cli/app.py",
-      "sha256": "793a51597f8e05069c8ff2b0f17c413db6ed7c22ef4ab141e478ff822648d7cd",
-      "bytes": 15754
+      "sha256": "b6eefa7b74256103bb915e3eb81c02f88a099c1ab2c5b38925f23f1623cd1450",
+      "bytes": 16550
+    },
+    {
+      "path": "code/core/src/openagora/cli/preflight.py",
+      "sha256": "d1d43c74340a47b0bef8f59b926cdccf33afaf8815a59e26d3b72e8962716714",
+      "bytes": 3720
+    },
+    {
+      "path": "code/core/src/openagora/cli/project.py",
+      "sha256": "5b533d1e9f737ab0e16881b43fdc309ea71422c9e563f3bc67866e39d714fbc9",
+      "bytes": 2954
+    },
+    {
+      "path": "code/core/src/openagora/cli/workflows.py",
+      "sha256": "d1576a95363c4f71789294ef11918c37a15d651d8dfee86a4704925d49abf252",
+      "bytes": 1511
     },
     {
       "path": "code/core/src/openagora/config/__init__.py",
-      "sha256": "2f8bb18a2a758d818bf74311db0a19dff14362c9106e8eab09a3911892b67abe",
-      "bytes": 173
+      "sha256": "070af3bf74db04920b92d44254720d3ddbab5c0a9feaf7ff5d85f5f11a6f151d",
+      "bytes": 172
     },
     {
       "path": "code/core/src/openagora/config/loader.py",
-      "sha256": "4d919e8752fabb3d9d659839d968b7a4bd42016b4327dc40d8c740b86ed3f0dd",
-      "bytes": 902
+      "sha256": "6e83634b3591868027f8b444895777c3f7caf482dcfe8a70f060c5320cc6697d",
+      "bytes": 2490
     },
     {
       "path": "code/core/src/openagora/config/models.py",
-      "sha256": "38f2445d9365ed0a7b3d570934c0139f013a06a72fbbe32368b82ea77ca0e9ec",
-      "bytes": 7081
+      "sha256": "b53d2cfd69264e3e2a6071f8d5ce7513df0e5faa14812cdd5ff52b4b8b41b6f3",
+      "bytes": 5906
     },
     {
       "path": "code/core/src/openagora/core/__init__.py",
-      "sha256": "fae698dd322a15e1d7c11b1c5881dee161ae1b8bcd2b034c40e8edda1a6d3d9b",
-      "bytes": 110
+      "sha256": "1309636c1af0cff66bcd05e9531d6711f08e65a7ad6ca8fd000090feb0e3b498",
+      "bytes": 109
     },
     {
       "path": "code/core/src/openagora/core/engine.py",
-      "sha256": "29d2aec7c33933b08343e59c89c1517c7617bc8292c2290501758a648bcdf811",
-      "bytes": 11444
+      "sha256": "2bf78f0d24b26c72bb8af62a1abda171ba0287e37abe9c0f7f6df4890c5493d5",
+      "bytes": 6979
     },
     {
       "path": "code/core/src/openagora/core/errors.py",
-      "sha256": "ac973f60641649976b5accd06f99f1f47d98ae789d70d8fbec7bb9b36ff87864",
-      "bytes": 2582
+      "sha256": "6f26b0cb7d0195cd5d780f1e312acfc2b9c2d246cc36f30aafd242e5c33b762e",
+      "bytes": 2579
     },
     {
       "path": "code/core/src/openagora/core/interfaces.py",
@@ -152,19 +167,24 @@
       "bytes": 2896
     },
     {
+      "path": "code/core/src/openagora/core/recording.py",
+      "sha256": "f1b84643c62e55b1a275768d3dfd01828bb958daa0c7533d15ba470c26581665",
+      "bytes": 4539
+    },
+    {
       "path": "code/core/src/openagora/mechanisms/__init__.py",
       "sha256": "a4fdbc07e93eb52fea5fd8d8967cb6bb61938ae322d217eba079085937b06da2",
       "bytes": 1302
     },
     {
       "path": "code/core/src/openagora/mechanisms/caching.py",
-      "sha256": "541ea5aa8675dc4f25b5ae568114a63a5990242f3c3fbca3872f714ae1387a9c",
-      "bytes": 2859
+      "sha256": "71b23d0f521fc7c3110222fee586727e53d2357d6bac756d36b9c0c6be6f0e85",
+      "bytes": 2858
     },
     {
       "path": "code/core/src/openagora/mechanisms/conservative_adaptation.py",
-      "sha256": "d72c0a2092c4b7e18fe472c8f04fa8c80eab4714862484478fc9512d69a9e96d",
-      "bytes": 8864
+      "sha256": "8496d31620cff38046e169777e4b0c04ee37f2ba0f343824affdd0ac1f2af208",
+      "bytes": 8786
     },
     {
       "path": "code/core/src/openagora/mechanisms/evidence_gap_repair.py",
@@ -173,13 +193,13 @@
     },
     {
       "path": "code/core/src/openagora/mechanisms/evidence_types.py",
-      "sha256": "678e3d5163ae800c1ff9689c675026c3bdad80ce727343d821e49e18faefed61",
-      "bytes": 3705
+      "sha256": "397e72faa9a3c0204153c3da02dc22060186c9ae6aee296f1d980221b85ccfa2",
+      "bytes": 3713
     },
     {
       "path": "code/core/src/openagora/mechanisms/negotiation.py",
-      "sha256": "b080c863799bf5c6bb35c566b159e938aa5ba85f77b51463db5d386caf689afd",
-      "bytes": 15762
+      "sha256": "468a96726db4b20141e2d05b1e3c7c72190b8bcc095f65a0ec7caecbb1282eed",
+      "bytes": 15209
     },
     {
       "path": "code/core/src/openagora/mechanisms/ot_alignment.py",
@@ -193,13 +213,13 @@
     },
     {
       "path": "code/core/src/openagora/plugins/__init__.py",
-      "sha256": "97d1264612df93b4eddafe067608dafee63b02e487978bef7d51593db3d7fe3e",
-      "bytes": 167
+      "sha256": "83afcdcae3ea50a08d604dc5e54a715aecd81f8222cecb4c4f396afbbe63d061",
+      "bytes": 164
     },
     {
       "path": "code/core/src/openagora/plugins/registry.py",
-      "sha256": "4d5b18459dd923ee5bbb2eb461a5f77299ad593aec837df2711e29888db74439",
-      "bytes": 5039
+      "sha256": "a479250872fe851d6bae34ce44a9ac8bec39cfb7610799206c40f53f160fe803",
+      "bytes": 5036
     },
     {
       "path": "code/core/src/openagora/providers/__init__.py",
@@ -213,8 +233,8 @@
     },
     {
       "path": "code/core/src/openagora/providers/local_provider.py",
-      "sha256": "a0517e9645b5186b149427e815946692bbf125ee04e39d662e586153ddf3da22",
-      "bytes": 18441
+      "sha256": "6a53f275712128d0d2a899c1409d6805eb17d0dcdccde4eb3d0ebfb2f9cbce4d",
+      "bytes": 18561
     },
     {
       "path": "code/core/src/openagora/providers/mock.py",
@@ -223,18 +243,33 @@
     },
     {
       "path": "code/core/src/openagora/providers/openai_provider.py",
-      "sha256": "5f320f23f21532441db5531d39d87458b9f55ab1815def84959fc26b02e4b8e4",
-      "bytes": 6608
+      "sha256": "989f3990962db8074ee7bac033396154e28ebfdff76af2e344f2528106af1261",
+      "bytes": 6603
+    },
+    {
+      "path": "code/core/src/openagora/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "code/core/src/openagora/resource_catalog.json",
+      "sha256": "d70d1744e175c34552e060d8d6ec08ef6eb4b21a5639c10c15a4686921ea5c3e",
+      "bytes": 2142
+    },
+    {
+      "path": "code/core/src/openagora/resources.py",
+      "sha256": "1f58c79764c168b643c786a20580aa4e5afce97ece0488b6aab34fd16541e49b",
+      "bytes": 5678
     },
     {
       "path": "code/core/src/openagora/storage/__init__.py",
-      "sha256": "0fd62ae69b58c9cbda1789220139f26a12c4721adb31c8fa6ca771ed445dcb3c",
-      "bytes": 108
+      "sha256": "4f1ff5def5830489273d7726e37eaefe63686f00e9b40825e317c0341a98a284",
+      "bytes": 107
     },
     {
       "path": "code/core/src/openagora/storage/sqlite_store.py",
-      "sha256": "5b9c1cc58765e768da93209a2e8a3ef71036c32a6560d54418b82d7d5d5796c2",
-      "bytes": 13411
+      "sha256": "f00b4fec7ad009fe08014702580ce84ef63accd6eeb400bfc95f199aba4af4af",
+      "bytes": 13408
     },
     {
       "path": "code/core/src/openagora/templates/__init__.py",
@@ -268,68 +303,83 @@
     },
     {
       "path": "code/core/src/openagora/utils/__init__.py",
-      "sha256": "b1889dd76636ac4f0500078d8bfdc713987755e20dc8746e0be28baaa5fc59ad",
-      "bytes": 24
+      "sha256": "bd3ce9cc0870670869f7177348df7949699fd36aa0c3b02c73450b5c6e1a1289",
+      "bytes": 23
     },
     {
       "path": "code/core/src/openagora/utils/artifacts.py",
-      "sha256": "16f0c6c460f7e79fd428f8c5a46a79af64645995a1edc79b7839b87941372fc9",
-      "bytes": 2472
+      "sha256": "9a8307eed550c0ef25258f5591437a162b9643178f7940dfc30f0a7cd289f971",
+      "bytes": 2467
     },
     {
       "path": "code/core/src/openagora/utils/audit.py",
-      "sha256": "4473052b2b9cb61fb402ce804a30ffe7af16d5d8508b69b9ad5ec46a157467c3",
-      "bytes": 2772
+      "sha256": "ff8cbc54aef3a95880d525f946a3de9da459e1b54530ea3bad09b4c50ce145a8",
+      "bytes": 2769
     },
     {
       "path": "code/core/src/openagora/utils/contracts.py",
-      "sha256": "5f00813689c2192c4c3cafb7e076d9dfc225857ec6ce36aacfcc783f2fef1301",
-      "bytes": 1311
+      "sha256": "3dbff4b2fb58f457f020c0e89087f58a8274ccb3394d81eb4bfeae802464d447",
+      "bytes": 1308
     },
     {
       "path": "code/core/src/openagora/utils/hash_utils.py",
-      "sha256": "c65c27626567126ffddb1b826444c37eba7594395050213a3de1dc0b31603b57",
-      "bytes": 830
+      "sha256": "b110bc51a94474b6dc9506dae540adbaf1af496c37261a6350d57481243b14f0",
+      "bytes": 829
     },
     {
       "path": "code/core/src/openagora/utils/repro.py",
-      "sha256": "f12ad1393115baceaa9b683d9b44f338f1663887fb015730bbf447e20969fd0f",
-      "bytes": 2251
+      "sha256": "103efe46c30e2947f127753e6a57d89160dc63d33be00efa871e540d3bc348ae",
+      "bytes": 1889
     },
     {
       "path": "code/core/tests/conftest.py",
-      "sha256": "c9cbeee04c82a02ac81d7bbe703a8d4c65150119fe6703be29cba2fa0b136719",
-      "bytes": 226
+      "sha256": "eeef9abf0b27ea03bc87029812d85fdbe40014a432bd4ca63a6179014a102f4a",
+      "bytes": 225
     },
     {
       "path": "code/core/tests/e2e/test_cli.py",
-      "sha256": "c943fbc634f257bf35c8dce037bb5ae88662b098220fe5bc21039f5596d84b80",
-      "bytes": 4196
+      "sha256": "6d443c37d763ce13eefc25e9725815aab47546e7b83dfc7821d584fc6f6a2dd6",
+      "bytes": 4193
+    },
+    {
+      "path": "code/core/tests/e2e/test_portable_commands.py",
+      "sha256": "109d563ba38380d8306387d7416aaccd12412f49619acaf5355426c13ef70e27",
+      "bytes": 4409
+    },
+    {
+      "path": "code/core/tests/integration/fixtures/engine_behavior_812f3e2.json",
+      "sha256": "b377dba19e29556210746e4db4a8445f5776690c04f10ad60c1da8a056536f8e",
+      "bytes": 44205
+    },
+    {
+      "path": "code/core/tests/integration/test_behavior_reference.py",
+      "sha256": "e6a90528c3a94e1d34f09867ea3b0d270f2e6f86a5264d598fe92c3a0c7d1e46",
+      "bytes": 2836
     },
     {
       "path": "code/core/tests/integration/test_engine_full_cycle.py",
-      "sha256": "bfe4f34f5d7ec0ec5085d812af68a1b7ee11a0af0557e49b83d7c921650eb06b",
-      "bytes": 2346
+      "sha256": "c49e1f14c86c710df9f9538e2c23471586292d11e049ef1efa08a178d282e8e0",
+      "bytes": 2343
     },
     {
       "path": "code/core/tests/unit/test_cache.py",
-      "sha256": "cfe6f74e8baf321f3316d6317e6ed002457795579869833b30d08d5443c0e166",
-      "bytes": 1639
+      "sha256": "c451e578464516ccccd81ce74e48b0d414b6f22e94e9c66f958813c7ed5c0133",
+      "bytes": 1638
     },
     {
       "path": "code/core/tests/unit/test_config.py",
-      "sha256": "7275ee64faada02efe7aedbad7588def09543cc30105aad314d75e2114e5437d",
-      "bytes": 821
+      "sha256": "86996e32df6238ea9660d54baa99001da7e9d995c498fdd31b51f7256acb6c73",
+      "bytes": 818
     },
     {
       "path": "code/core/tests/unit/test_conservative_adaptation.py",
-      "sha256": "55264813ec352fa1496eea2de071c319d33e4b76a28978742ac2e6f4529d89a4",
-      "bytes": 4264
+      "sha256": "864193fc1d62389407a924d89b9ea0df40bff8f2ae2ec947b4a5e5a6489522be",
+      "bytes": 4250
     },
     {
       "path": "code/core/tests/unit/test_contracts.py",
-      "sha256": "73969ff87d141dd9456512c310cc7ca58d9f1e97e72c24d9ec449ec21dcff1dd",
-      "bytes": 213
+      "sha256": "9708ca7c960438a5a3e21f950eda5692e3617f031513333dbc5bc07405624627",
+      "bytes": 210
     },
     {
       "path": "code/core/tests/unit/test_evidence_gap_repair.py",
@@ -338,8 +388,8 @@
     },
     {
       "path": "code/core/tests/unit/test_local_provider.py",
-      "sha256": "f5c1970e3bf128a968b913695c674f2136bf96c73ebf094cf88dccf236b50d3f",
-      "bytes": 5553
+      "sha256": "159b13d8151539253acd50ee107eb07d86298c09503c9ae492827476b16c6d66",
+      "bytes": 5554
     },
     {
       "path": "code/core/tests/unit/test_negotiation.py",
@@ -353,13 +403,13 @@
     },
     {
       "path": "code/core/tests/unit/test_ot_alignment.py",
-      "sha256": "3731c121b2080e013bc4471f3d2f7043fa81512d78eb0b6197df248cf9b4caab",
-      "bytes": 573
+      "sha256": "2074780e480b25251c6889c7414fb620a71262ff8ee4203df6551c5eb84610a4",
+      "bytes": 572
     },
     {
       "path": "code/core/tests/unit/test_plugins.py",
-      "sha256": "b2e5aeb9709347a0711f533e1a88c767a20ea7d53ca9de4ca31e27057307f9a8",
-      "bytes": 1977
+      "sha256": "85c3b06dfc161ca8df3231084af783760c111014efe0990b98e343a48d4a2654",
+      "bytes": 1974
     },
     {
       "path": "code/core/tests/unit/test_provider.py",
@@ -367,14 +417,19 @@
       "bytes": 2253
     },
     {
+      "path": "code/core/tests/unit/test_resources.py",
+      "sha256": "20b04ceca2d1e4fd4f909b2f38414f957f9f5eca4f8f59ae467d9f26fd549db9",
+      "bytes": 2616
+    },
+    {
       "path": "code/core/tests/unit/test_runtime.py",
-      "sha256": "2aebd00785fd293dbd0edb34b5d46e906b3af13642911d25d38fc9ab5dda3043",
-      "bytes": 2509
+      "sha256": "9da7e93f2dae561adbbfe228481499907b6aacc333aa92a3f072b5957bf68839",
+      "bytes": 2501
     },
     {
       "path": "code/core/tests/unit/test_storage_migration.py",
-      "sha256": "90b1c5212b8f6004e05911c4d157f4a045b3849fb48648bd45c7bd11ae1a84cd",
-      "bytes": 2293
+      "sha256": "ebae685af6a5ac22e58aea2e81516a1afcf6882ea9f71aca9dc8b49d11dd460f",
+      "bytes": 2290
     },
     {
       "path": "code/core/tests/unit/test_templates.py",
@@ -392,114 +447,14 @@
       "bytes": 129
     },
     {
+      "path": "code/experiments/LICENSE",
+      "sha256": "aa5b334a1dab98a1b76be7587bba68cb7b980755bc796679ab60effe28e9aead",
+      "bytes": 10254
+    },
+    {
       "path": "code/experiments/README.md",
-      "sha256": "59ebddbacd672e9f60af6f67b8b664064fe99000b20d9d6fa3434f2d4a27335d",
-      "bytes": 758
-    },
-    {
-      "path": "code/experiments/configs/cago_diagnostic_330.yaml",
-      "sha256": "dfca4e8944777ab57507f9c08e25d309d49a803606c612cb013942e6f6007b37",
-      "bytes": 2523
-    },
-    {
-      "path": "code/experiments/configs/egor_chartqa_action_singletons_v1.json",
-      "sha256": "b389381afbef4c50f2bd7515b20cfbc7556637c182d8f60ee2e60306898b5bad",
-      "bytes": 505
-    },
-    {
-      "path": "code/experiments/configs/egor_chartqa_development_matrix_v1.json",
-      "sha256": "8756e38f2424856f73d46aa1af14087f83999bcbedb50c5130ea4163e4250eba",
-      "bytes": 2559
-    },
-    {
-      "path": "code/experiments/configs/egor_chartqa_pair_interactions_v1.json",
-      "sha256": "99cf8713b975e88ee5a7045135603cadeae2460d1bd55c6733ce24cd3e2d6b4f",
-      "bytes": 2088
-    },
-    {
-      "path": "code/experiments/configs/egor_development_matrix_v1.json",
-      "sha256": "8ea22900957d7f17ff01db03c88b1ae324c41b6b77a5c43091fc246d18bb290c",
-      "bytes": 3026
-    },
-    {
-      "path": "code/experiments/configs/egor_heldout_matrix_v1.json",
-      "sha256": "1eb1a208fc5bc1e90b0053ba84c0924104b938d08d3c15339995adea4e3674b5",
-      "bytes": 2966
-    },
-    {
-      "path": "code/experiments/configs/egor_infographic_action_singletons_v1.json",
-      "sha256": "abaa8ed6d92735033a94824f98be601145846a1540cc3ffa9e80f1f31c450641",
-      "bytes": 371
-    },
-    {
-      "path": "code/experiments/configs/egor_infographic_dynamic_execution_v1.json",
-      "sha256": "2bc6c7fbe3d797fa127061df7ae0865090a47bb501a7191f8d16465c79806043",
-      "bytes": 802
-    },
-    {
-      "path": "code/experiments/configs/egor_infographic_selector_extension_v1.json",
-      "sha256": "e2d6723969e4134bcd453f047c9de4bd0559f49d0ab355cc766c8449e432334d",
-      "bytes": 2890
-    },
-    {
-      "path": "code/experiments/configs/egor_mathvista_action_singletons_v1.json",
-      "sha256": "b389381afbef4c50f2bd7515b20cfbc7556637c182d8f60ee2e60306898b5bad",
-      "bytes": 505
-    },
-    {
-      "path": "code/experiments/configs/egor_mathvista_development_matrix_v1.json",
-      "sha256": "9428a2807832416841829010d0e240c279d123ad007331ff738c855e0237c1e9",
-      "bytes": 2689
-    },
-    {
-      "path": "code/experiments/configs/egor_mathvista_selector_extension_v1.json",
-      "sha256": "76b487dfcf3491a96c32d3a7c57c78c2672950d69265b486e9d6bc33ed079872",
-      "bytes": 3097
-    },
-    {
-      "path": "code/experiments/configs/egor_pending_claim_preflight_v1.json",
-      "sha256": "f7181819e94713ad66f9b97e9b403152bd0e53ea56420fe226e52caa4da80f4f",
-      "bytes": 2096
-    },
-    {
-      "path": "code/experiments/configs/egor_repair_execution_v1.json",
-      "sha256": "0aa628bff4d54863e5f238ba1a857426554d4a0c52a5e96c3095252d5e4555e0",
-      "bytes": 1567
-    },
-    {
-      "path": "code/experiments/configs/egor_selector_hard_gate_v1.json",
-      "sha256": "901e1d4cbb8b7104bc32979ca28347fcb9cd98d627bf77dabaddb5bf01b801f5",
-      "bytes": 377
-    },
-    {
-      "path": "code/experiments/configs/egor_selector_three_source_nested_v2.json",
-      "sha256": "c49e2f1662fbf92cfadadf6fbae59e897c8218750852fecbe4dfa09dc9035a93",
-      "bytes": 2589
-    },
-    {
-      "path": "code/experiments/configs/egor_selector_three_source_v1.json",
-      "sha256": "4af1fcfaf460eda12ac86cadc95138b7f5cab94706365f66432ab5180f5e9594",
-      "bytes": 2589
-    },
-    {
-      "path": "code/experiments/configs/egor_selector_two_source_feasibility_v1.json",
-      "sha256": "f2780d7b4c216e2e8dddeb96681250b944d670a76fa5f042bfad57b6aca3277f",
-      "bytes": 1815
-    },
-    {
-      "path": "code/experiments/configs/gaia_mini.yaml",
-      "sha256": "172a15310ed0cbee2e986488e8eb930b3ec04e9cf6f7171f8cfcb216df18cac4",
-      "bytes": 1854
-    },
-    {
-      "path": "code/experiments/configs/qa_mini.yaml",
-      "sha256": "22093ba624803c238213197e3e1d9d98f89655d7b12fe2ed25edb5f7ae62ec37",
-      "bytes": 1867
-    },
-    {
-      "path": "code/experiments/configs/qwen35_smoke_mathvista_task_ids_v1.txt",
-      "sha256": "a6e2b7a040683432de03a18fd8a1939a2fdf82585b364bfc874bdd4095c4cae1",
-      "bytes": 4
+      "sha256": "0a9fb623c7f4b7efd197dee30f12a6c5f7df7b113dcf62e7d1befb29c412d807",
+      "bytes": 135
     },
     {
       "path": "code/experiments/data/gaia40_manifest.json",
@@ -518,28 +473,28 @@
     },
     {
       "path": "code/experiments/openagora_experiments/__init__.py",
-      "sha256": "b42f2099187886def637d6aa840022266e05cb6c987a9394e708e23cd505eb46",
-      "bytes": 4
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
     },
     {
       "path": "code/experiments/openagora_experiments/adapters/__init__.py",
-      "sha256": "a48b41cf58ac136873cccd0e5d356e5bc63f4568fb3ea49f95260b4711eeb4b5",
-      "bytes": 222
+      "sha256": "ce8be9d48f8baef405bcdc48baf6aaccfd4bd708d5797f6de963444b7b17798c",
+      "bytes": 219
     },
     {
       "path": "code/experiments/openagora_experiments/adapters/gaia_mini.py",
-      "sha256": "13d001b431b2c4db456da07f687eaa9932099fb0254a0583274c89d1447c0a3a",
-      "bytes": 4910
+      "sha256": "d3dccccec3f23c998663f3e31076f16832b6a2c449d47a4e71d3796f021a45fd",
+      "bytes": 4877
     },
     {
       "path": "code/experiments/openagora_experiments/analysis/__init__.py",
-      "sha256": "b42f2099187886def637d6aa840022266e05cb6c987a9394e708e23cd505eb46",
-      "bytes": 4
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
     },
     {
       "path": "code/experiments/openagora_experiments/analysis/aggregate.py",
-      "sha256": "3bb5fae80535ff28a974c79342248aa27f9b77021093fcc90f650400d89e165a",
-      "bytes": 1346
+      "sha256": "704def6ec48927f6b9ed518dd230e04a033ec08e3a8df7c12ffd520da334eccc",
+      "bytes": 1333
     },
     {
       "path": "code/experiments/openagora_experiments/cago/__init__.py",
@@ -548,28 +503,28 @@
     },
     {
       "path": "code/experiments/openagora_experiments/cago/data.py",
-      "sha256": "cb996455047ec27cea82b8cf04a2f075207e055a2cf854bb807b7c6e18061e0a",
-      "bytes": 10889
+      "sha256": "0b631cecbdd86e4c391d4f66bcd5cc08b1a7147a4d7f6b836a9903bc32b609cf",
+      "bytes": 11267
     },
     {
       "path": "code/experiments/openagora_experiments/cago/evaluation.py",
-      "sha256": "4f1f71b5f223b752230b07de446db7bca0891b9f9eb2c511f26c0ea8524055e8",
-      "bytes": 16213
+      "sha256": "fcc86cb2bc85e42dd62f265b67e0c1d9e8448cd62b4e529ab3e30cb9901f4c63",
+      "bytes": 17607
     },
     {
       "path": "code/experiments/openagora_experiments/cago/features.py",
-      "sha256": "f723c28f3a5f5693faf90e142c9aa9b5fc4f9e84d11a4d52ee840e82fbd1914b",
-      "bytes": 2519
+      "sha256": "f43cfdd198919007739d38b360bc2ece1c20903a8fcb513788962b103cb76e3f",
+      "bytes": 2518
     },
     {
       "path": "code/experiments/openagora_experiments/cago/linear.py",
-      "sha256": "4bae1cab5158491b2aec3d61bc90d6a10d4e1ac7a91021a14b583c7d9e5dd468",
-      "bytes": 4786
+      "sha256": "c811911140874620b09df4d2907f82b0b203dfb8df6804355ef4b255b548439e",
+      "bytes": 5157
     },
     {
       "path": "code/experiments/openagora_experiments/cago/scoring.py",
-      "sha256": "50d5599beeb63945052db79c507d33a829e73f2bababb887f39076fc70338419",
-      "bytes": 8258
+      "sha256": "5aaf2ec201e1af5e50f17ba9bbb71052aa6a7cce9dbd4a73eb3098fbefcd0d88",
+      "bytes": 8153
     },
     {
       "path": "code/experiments/openagora_experiments/cago/splits.py",
@@ -578,8 +533,8 @@
     },
     {
       "path": "code/experiments/openagora_experiments/egor/__init__.py",
-      "sha256": "77d4b8aad350d7d138dfd7d4b7008f3df2b633556fecd4cf52a9c3a173fd3c15",
-      "bytes": 514
+      "sha256": "cee1694081f9a0fc92eda73bcd7ec8680ae8fcea4e1ed40c33dfd18f29666363",
+      "bytes": 575
     },
     {
       "path": "code/experiments/openagora_experiments/egor/analysis_recovery.py",
@@ -588,43 +543,58 @@
     },
     {
       "path": "code/experiments/openagora_experiments/egor/audit_packet.py",
-      "sha256": "28787cf2d47393961f7c89fe15718357456c455e3732d7b602520ec47af5a806",
-      "bytes": 11246
+      "sha256": "c59d12d551edc890f7cdbc1915a7c3351d90458369b1f286f5c49da1f3efb0c8",
+      "bytes": 10962
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/catalog.py",
+      "sha256": "6c46328329c038872a97fc51ee61fa6f7d98f84e12d8ca9cf81c95d410b7960e",
+      "bytes": 1397
     },
     {
       "path": "code/experiments/openagora_experiments/egor/chartqa_splits.py",
-      "sha256": "ddb2f2c6e28bc06ad0834b5c10aed9bc28b284394adbccef77c5efe43f88a114",
-      "bytes": 7603
+      "sha256": "2047f4752eb7b948f3f7de8f8efd97f37833f6454a104cadadc0c571d5d903b5",
+      "bytes": 7415
     },
     {
       "path": "code/experiments/openagora_experiments/egor/escalation.py",
-      "sha256": "9f85fec7226e670eaeceb213d7026904b79a98a8bf38f9c05b597ad5aabb304a",
-      "bytes": 3762
+      "sha256": "cc4fc9e78d2c7bdf62b09095a2650bb8df2ce7a5bca640ebf273060dcdfe57ae",
+      "bytes": 3733
     },
     {
       "path": "code/experiments/openagora_experiments/egor/evaluation.py",
-      "sha256": "99ce202b3197464737561e14d72e2f0107af25402375cd736f5266823bca4f4a",
-      "bytes": 19217
+      "sha256": "18f69221bce311469e5904f6e2588d628354d06b311233c16edffb8a2599a9c2",
+      "bytes": 18712
     },
     {
       "path": "code/experiments/openagora_experiments/egor/evidence.py",
-      "sha256": "2933b1dfafd0a6aa9a0b17dc3ae4dd688182586b5e6525a39a5415a7e81bbeab",
-      "bytes": 3258
+      "sha256": "3269d3be9167f63bb865a992473536eab1fe557fc6662c064931fa49506a6aee",
+      "bytes": 3264
     },
     {
       "path": "code/experiments/openagora_experiments/egor/execution.py",
-      "sha256": "2bbcd746066b9b1ccd166e8d595bcd5ac28daf86023ffd9d27e2fdadad989255",
-      "bytes": 8618
+      "sha256": "81c6d7934ab9c30c089e891bc526c19ce150063e5b77afb671dec875f3ac6b40",
+      "bytes": 8366
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/job.py",
+      "sha256": "b8e88531c8f03d4f1fb5d6a022439c1ccc087d93732457ddf33f7c4ae4a5c404",
+      "bytes": 10526
     },
     {
       "path": "code/experiments/openagora_experiments/egor/local_provider.py",
-      "sha256": "c3a16738eb774d4f232357b0a5a5989b0ab9a011998d0cb8727cbd8c3fef8d8f",
-      "bytes": 25770
+      "sha256": "357e9704168b02442325a368d8a660b60ec8d9f37a7b09075c6ff2338dbba5f9",
+      "bytes": 18578
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/model_inputs.py",
+      "sha256": "46c38b20c3e0df372a78c2bcf77babe740e95fb1491f99bec36de74bb48ba4b5",
+      "bytes": 7427
     },
     {
       "path": "code/experiments/openagora_experiments/egor/ocrbench_splits.py",
-      "sha256": "acdba486ea77f2a62e1a8bc4ca26b7c043ad0b72f3e9323a0a09b7ef4c82a1d9",
-      "bytes": 11736
+      "sha256": "b38f83dcc4b93fbc28842568d1f80fdb463cef07568fa83ca17d2bebbb419b0b",
+      "bytes": 12488
     },
     {
       "path": "code/experiments/openagora_experiments/egor/ocrbench_v9_prior_filter.py",
@@ -632,19 +602,29 @@
       "bytes": 1346
     },
     {
-      "path": "code/experiments/openagora_experiments/egor/planning.py",
-      "sha256": "5988cfb7797cc6447029bb8c79eb724ca59547ad00a5174401e2f12437d5685e",
-      "bytes": 15767
+      "path": "code/experiments/openagora_experiments/egor/parsing.py",
+      "sha256": "5a500c75fc40b7914772930d63a8bbf88eae38a3646dcb15fc624a5b6b398d5b",
+      "bytes": 15909
     },
     {
-      "path": "code/experiments/openagora_experiments/egor/protocol.py",
-      "sha256": "0cce42067a1e8da556216a237b6d2b5dabe2294341313ffdb02a1d3d4b3a3a05",
-      "bytes": 29460
+      "path": "code/experiments/openagora_experiments/egor/planning.py",
+      "sha256": "a1fac29bac2b50acf5d2138d9e6e20aa564a6569ce2a6a1868ee4107a1b9be53",
+      "bytes": 16338
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/prompts.py",
+      "sha256": "dd65d77849c401f33fc12206f8e2fd53e38545530967787b3ac859247883d28d",
+      "bytes": 9886
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/provider_errors.py",
+      "sha256": "1b4237d75f3e3c86c40f327e4a404c53a5fc07e95c47a98f70f3203e9639f64e",
+      "bytes": 329
     },
     {
       "path": "code/experiments/openagora_experiments/egor/runner.py",
-      "sha256": "ad3916e7496e7dd5a2613a05fda8223b517b09f631474ff991fff698e13f062f",
-      "bytes": 18030
+      "sha256": "3a215f8f6833972d1999d221e13d11dda9c843e0007fc7bd677213be0ea60c05",
+      "bytes": 17766
     },
     {
       "path": "code/experiments/openagora_experiments/egor/runtime_types.py",
@@ -653,43 +633,88 @@
     },
     {
       "path": "code/experiments/openagora_experiments/egor/selection.py",
-      "sha256": "e30d54b9aff8ae70fbd7bb23fc2e709002168e904768e07166e0e0668077df28",
-      "bytes": 21263
+      "sha256": "3572bd4c79d5ee25e2056d60ee1751482b10ae5482ca89407860bb660335c5a1",
+      "bytes": 21053
     },
     {
       "path": "code/experiments/openagora_experiments/egor/statistics.py",
-      "sha256": "350b28c7ffabc03bf2737aacd4417271f8b9e9aa26e2ba918daafd88f946d0e1",
-      "bytes": 3402
+      "sha256": "2f4414c0f9066b267051e2220bbb42956b152b5279c0ef5ce0585fd2faaa5b86",
+      "bytes": 3318
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/task_model.py",
+      "sha256": "0e85a7364962bb218cae582cf520f438a5c427ad41f2f4c8e207d9d29faf1bc3",
+      "bytes": 3780
+    },
+    {
+      "path": "code/experiments/openagora_experiments/egor/values.py",
+      "sha256": "d4449e0ded75204366a4dccba7c953d81201f44cc5665adae7a54be58178352d",
+      "bytes": 164
     },
     {
       "path": "code/experiments/openagora_experiments/egor/verification.py",
-      "sha256": "1923032696a18fd7a458ebcbc1811641fd1c15254aadc611be889d30637aef8d",
-      "bytes": 6217
+      "sha256": "85ffce25fc9d7ad45016cae2fb2ac56c58b14778b2ba503946a10404f994f7f6",
+      "bytes": 6137
     },
     {
       "path": "code/experiments/openagora_experiments/egor/verification_v9.py",
-      "sha256": "6e23f41da498d1ab0f9b973b7148909397874d4ef8640730ed122d1358404fd4",
-      "bytes": 2940
+      "sha256": "31f2b42f91011bed5ad159d55e1fcbe89e22a7a53556ba85cd2ea754b1ba13df",
+      "bytes": 2910
     },
     {
       "path": "code/experiments/openagora_experiments/evaluation/__init__.py",
-      "sha256": "10a141c7305a78870962561e27f76f9609c609b31eacb3b1984c9f3ea6127751",
-      "bytes": 560
+      "sha256": "1128e8ef6958348078ae38ebfdfcd0eb61eb31dc9ffb403dacbc2353af04c3c5",
+      "bytes": 557
     },
     {
       "path": "code/experiments/openagora_experiments/evaluation/judge.py",
-      "sha256": "aeb5510062f6d692170e7db028aa4d6e5f7e00752f5d06f67f45b5359cacc360",
-      "bytes": 7345
+      "sha256": "6a8d4f1ec5221136a998ed41e471bda65af694a47a66d3d15e0ac343359f8ca7",
+      "bytes": 7363
     },
     {
       "path": "code/experiments/openagora_experiments/evaluation/protocol.py",
-      "sha256": "9e2ed1624400aed679fef07ed8c173af8285a9ac8ab32d461e4f7b3a22d2cf60",
-      "bytes": 5169
+      "sha256": "bd53c7f74434cb574e90637a7670b188e2be650ca66d159ef8500f66300137b4",
+      "bytes": 5536
     },
     {
       "path": "code/experiments/openagora_experiments/evaluation/stats.py",
-      "sha256": "e6e15f1899278fc1c2a5eda484f4796e676e2a350e78097d341d175cbfa39ff9",
-      "bytes": 6191
+      "sha256": "abaf93b8ae5f354d29846f4c52c7d7f5b1b7f42bd44430f58228b31a66065a45",
+      "bytes": 6697
+    },
+    {
+      "path": "code/experiments/openagora_experiments/evidence/egor-v10/confirmation_gate.json",
+      "sha256": "5587d1a7ee9b8745d81948f310a091f29d74aaf739c6e71783be9071f664b72c",
+      "bytes": 12145
+    },
+    {
+      "path": "code/experiments/openagora_experiments/evidence/egor-v10/confirmation_gate.sha256",
+      "sha256": "2943d1635de540f73a4c62e55c01491894c32f1689edfbc97095ae339f7aa24d",
+      "bytes": 89
+    },
+    {
+      "path": "code/experiments/openagora_experiments/evidence/egor-v10/manifest_provenance.json",
+      "sha256": "9921870b358db4fb16c5b6a0b3048b8baac74deeeb09375e140c669861fab824",
+      "bytes": 220
+    },
+    {
+      "path": "code/experiments/openagora_experiments/evidence/egor-v10/task_rows.csv",
+      "sha256": "1930ee0f980e558e281390ff2050b554b2ccd9e8e34fa667e7cc9979d27f8fdb",
+      "bytes": 129722
+    },
+    {
+      "path": "code/experiments/openagora_experiments/evidence/egor-v10/task_rows.sha256",
+      "sha256": "f216676e937cf0546091e72990c79f8c0f2fd7644b91f87fc77187b06828da54",
+      "bytes": 80
+    },
+    {
+      "path": "code/experiments/openagora_experiments/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "code/experiments/openagora_experiments/reproduction.py",
+      "sha256": "acd999a61dd14655b70ccd3580e10106911c2802db975a918088016824032572",
+      "bytes": 2720
     },
     {
       "path": "code/experiments/openagora_experiments/suites/__init__.py",
@@ -698,493 +723,103 @@
     },
     {
       "path": "code/experiments/openagora_experiments/suites/gaia_mini.py",
-      "sha256": "0b32517963e334a717ed283cd4abfc789a98be4f5b73f58049e881c0aaeb62f4",
-      "bytes": 10799
+      "sha256": "5151bd458dc88eff1d3ffffd06a7a92d7abb55c632c16ff2e9d41608223b4885",
+      "bytes": 11239
     },
     {
       "path": "code/experiments/openagora_experiments/suites/qa_mini.py",
-      "sha256": "cd3ce30b5f190200ecd14b57291b3fa5bd303921872b6a4804f6beea5bc27a38",
-      "bytes": 7755
+      "sha256": "acc098f8c58cb4f880c3a4bec0951796d7c48f680d2680e37a445c00e55a64f8",
+      "bytes": 7752
     },
     {
       "path": "code/experiments/pyproject.toml",
-      "sha256": "1b50a39a5987d44543fe420b6cad766d482d24a2a928233979b74e1b115d872f",
-      "bytes": 502
+      "sha256": "55c92ad4e09a28f0528203173e5c01e354028563633ff519e1bccb4a4803e347",
+      "bytes": 668
     },
     {
-      "path": "code/experiments/scripts/analyze_egor_answer_only_v8.py",
-      "sha256": "18b5985cbf3050206aad6e0321cdf168d1d97f9e6ac666b0d119f519653ac5c5",
-      "bytes": 6402
+      "path": "code/experiments/tests/conftest.py",
+      "sha256": "24359e5cc2d60baece84eceb4f85a6bf41d48dabdc3a1d4ee924ad752cff7816",
+      "bytes": 1515
     },
     {
-      "path": "code/experiments/scripts/analyze_egor_certificate_ablation.py",
-      "sha256": "0c25b7ea6315fcaea59ba0e7a37589497025f91f3e1cba0f0e3390bf673ac400",
-      "bytes": 20458
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_coverage_ablation.py",
-      "sha256": "8569fe8d147389b73cbdda835f2f71a58020a5964d459c907badf84701f58c8a",
-      "bytes": 27443
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_evidence_alignment_audit.py",
-      "sha256": "3bbaaae7e2faf73ee72e9a745901c3ae0b259f5806c252e2c09b9e32ed7065ed",
-      "bytes": 27036
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_evidence_escalation.py",
-      "sha256": "36412e9b752f3f05612d8463b2d260f5a76b9d136e03a55d89e4e30a1633d1e0",
-      "bytes": 12834
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_matched_controls.py",
-      "sha256": "bf9a5d242f319a269c45c7d9a2138a19e224e62e166d4d49347e0f1271d4e6a8",
-      "bytes": 8287
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_matrix.py",
-      "sha256": "4734f22d926f3749290bb6952dd6a355f336570ca0ef603d991e715265df51bd",
-      "bytes": 15446
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_opened_verifier_diagnostic_v1.py",
-      "sha256": "6e1ee73bb695f4cc6d6eddd1c2075c6bbcc593ef38579effcb599f0afe3dc2f7",
-      "bytes": 14939
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_planned_policy.py",
-      "sha256": "13f09ab8b8d52266845654c2399460d9c1e630bc5df29eac54eecf188330d4fe",
-      "bytes": 7484
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_prospective_certificate_control.py",
-      "sha256": "a27bd5c097871a4cc9f4edc60221e56178f14e071c0cd1c7447e1b7b1a443ce6",
-      "bytes": 17132
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_qwen35_direct_control.py",
-      "sha256": "e450773a395c3c1f6cb0b5bf1097c1144339bc5bb39afce7076d7337c7dfc7ad",
-      "bytes": 8902
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_qwen35_selective_control.py",
-      "sha256": "a3bd1e4e557ce05641a5171589eaffa3c86c515a46cc1393e2b51b0d43141a98",
-      "bytes": 8623
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_selector_ablations.py",
-      "sha256": "2e777995f3cb4ba86f78f1f463b7a0638ba95864644b89e82fbf4fa68ef34955",
-      "bytes": 18957
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_selector_statistics.py",
-      "sha256": "ddc9efbc20f5d7e02a4d104bb9aede087bd7b9a781d15e71f6ab9bac8291c3fc",
-      "bytes": 7949
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_statistics.py",
-      "sha256": "659d8ebfaea68fee8fc625713022f999b6677ef978906fa1a92688808ae735c0",
-      "bytes": 4350
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v10_confirmation.py",
-      "sha256": "3bfd723bfb5aa407c28bc6156ee26dfcd16296655ee2267d0a55fdcb3caa09c6",
-      "bytes": 21068
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v10_support_development.py",
-      "sha256": "89aaa0448a81de781230ec025658146356cdaea040ed6b7028593583673b817d",
-      "bytes": 8278
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v6_opened_gate.py",
-      "sha256": "179ba4dce343bcda004d50dccb060639029486990f9ab38683738a9fdb37e497",
-      "bytes": 11657
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v7_confirmation.py",
-      "sha256": "eab2bbae22948129b02d63ef4e3c17b1d451c60670f885e8de95c9ba19a4faca",
-      "bytes": 23455
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v7_opened_gate.py",
-      "sha256": "288421dfa5d7ffbc2883420825a3787e8668b203e61a29f7e84bfaac5b9deaf1",
-      "bytes": 1038
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v8_confirmation.py",
-      "sha256": "e43c6637ce26bddc212ee4bae2ab084af9fbd90513d139dd4de2b1ab6204ae24",
-      "bytes": 6525
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v8_review_controls.py",
-      "sha256": "17d9f431afeb809ea00a48bdd4b4f14a2effe34150f8d8de67c63738ad847ce5",
-      "bytes": 15888
-    },
-    {
-      "path": "code/experiments/scripts/analyze_egor_v9_confirmation.py",
-      "sha256": "d3eccc7be2c2ad2af437596bbb3e6e0e6c96776ed48f75a3fa5a1d99e0ed6b80",
-      "bytes": 22370
-    },
-    {
-      "path": "code/experiments/scripts/assert_evidence_outputs.py",
-      "sha256": "9e3c8861b60e2ae86607f2fffcfa4f87fcfea9b194a03a0d589b63566c225418",
-      "bytes": 3331
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_selected_execution.py",
-      "sha256": "5084ea100068f22aac7a4099370df94888816a74f7e7eeea5821cd9e8c096fa7",
-      "bytes": 12411
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_stage_completeness.py",
-      "sha256": "f5f16ffb862f686d6924092dd4ef8308980369e033b7fe1d38d608457941a995",
-      "bytes": 11548
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v10_capacity.py",
-      "sha256": "52675dea1cce57fa7379d935f2040b283a00e17ce1b3c7238ad8094f924d60d9",
-      "bytes": 2856
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v10_capacity_v2.py",
-      "sha256": "ea270fb777fc81b8fba6a5aedaae9f2d196cfe31801ecfe81c5c0ea1b9217189",
-      "bytes": 4852
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v10_confirmation_source.py",
-      "sha256": "7d73603e06c07101622374ea72e1682e3696e7d7a06fb4f10e1298028f5a3b10",
-      "bytes": 8509
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v10_fresh_split.py",
-      "sha256": "f6ffe530635353b188d99f8c724e56487f5f1889cf6a546f66bf8fac6a335158",
-      "bytes": 9317
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v7_confirmation_source.py",
-      "sha256": "b585f928258cda5384d21fa8d547e9365bce4274b15397dfe142fba037f49785",
-      "bytes": 15951
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v8_confirmation_prior_use.py",
-      "sha256": "f67944dffa6e19d218551a893834cd234ca0215896d27b0f3c88e91edb05d563",
-      "bytes": 14345
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v9_confirmation_source.py",
-      "sha256": "597ffcc06b71f8c6c12707c87fee7ce794634af86c11bc42160c586f7cea33f9",
-      "bytes": 7130
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v9_fresh_split.py",
-      "sha256": "203c6603d5161158b8ca776110ded0ef3b0314ce7f0f22f26e66a62fe03ea664",
-      "bytes": 9816
-    },
-    {
-      "path": "code/experiments/scripts/audit_egor_v9_ocrbench_capacity.py",
-      "sha256": "a2c025ff354a2fd94da9178b1d468d78ebea3be9b9636d847016b34e5c4b3c53",
-      "bytes": 5747
-    },
-    {
-      "path": "code/experiments/scripts/bootstrap_local_tiny_model.py",
-      "sha256": "05888940694a0f3588e34a384d003766f71f2c8de92ae7352f9d11497a4e951f",
-      "bytes": 4242
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_chartqa_splits.py",
-      "sha256": "64a99a9b1adb8aca6edc70f23f3a3e944bc668fad48b5fb6456a2ffa3e2d5d16",
-      "bytes": 4277
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_evidence_alignment_audit.py",
-      "sha256": "8146b36565bbdc5324236fbd260cb405be1a4d446718f34b6f1782c07e4e0c52",
-      "bytes": 19206
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_evidence_escalation_matrix_config.py",
-      "sha256": "c444828edb496912ebaa780728d3b9f0e82c214c18d2e3d61e9f35a85be6966e",
-      "bytes": 3225
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_infographic_splits.py",
-      "sha256": "f773303a1f0f01fd3bf3ee399e7af357f314fe8f27c32d8945336a7c12405c5b",
-      "bytes": 11668
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_matched_control_plans.py",
-      "sha256": "be673ae32121c3d4caf6a62129666b3f4fe683cda1f0236e97b110ea9fadd7e0",
-      "bytes": 4900
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_method_v3_transfer_gate.py",
-      "sha256": "96cb2d5838605567b67eedb0e7453814c50be2caed1aa18ce6b6419685b30e26",
-      "bytes": 24789
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_ocrbench_transfer.py",
-      "sha256": "e75ced3a3d79b0ad72e6b1e94db1e975283f3686c39ca2cefe3e147d1639b08c",
-      "bytes": 9408
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_prospective_configs.py",
-      "sha256": "9e04a3ef8eb843174ffc7fc8a4050d43482aa18c62514fa42d11a4776ab730f1",
-      "bytes": 6504
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_prospective_gate_report.py",
-      "sha256": "00b5173273ab85103a47741443890131cc6a513b3e15ca31bc6535535e6d8a2a",
-      "bytes": 22251
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_stronger_backbone_report.py",
-      "sha256": "8fe0ab11a2e31461abae28f092ed91a76b4b4a26f3d3d613ed63f4994fa63fe8",
-      "bytes": 14462
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v10_confirmation_data.py",
-      "sha256": "23b2d0192034d1c1b8c27dfae44a07fc8e0ff209add47d4b3e0797bf04a7b293",
-      "bytes": 2977
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v10_format_gate.py",
-      "sha256": "b07e5dbd563dabf2374a61619b94c36786fdad59581d27a68946055a113258a4",
-      "bytes": 4947
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v7_format_gate.py",
-      "sha256": "79e77ca8a51b2fa3e398f1abe9c65738f20e6286ded69aa001696efa1ca5da2f",
-      "bytes": 3885
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v8_confirmation_split.py",
-      "sha256": "f0dad7d8cfb09f5b084816d5d22c6453982563e50b941e47c2596becd6e610a8",
-      "bytes": 14016
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v8_format_gate.py",
-      "sha256": "ae5c9730c5c9ab345ddc9b3b0c252a01fdad527a59aca8ab158a91a949aff88e",
-      "bytes": 4439
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v9_confirmation_data.py",
-      "sha256": "3cc40b9e41bcc123512d701789732cea06b6bd7dd25c2fbe13e65ede68a9b5e1",
-      "bytes": 30918
-    },
-    {
-      "path": "code/experiments/scripts/build_egor_v9_format_gate.py",
-      "sha256": "cd52b5b3e870975edc967fa276cc0f05d756d4c8ce5710356f4f6c4e3febcfbb",
-      "bytes": 4337
-    },
-    {
-      "path": "code/experiments/scripts/check_egor_selector_gate.py",
-      "sha256": "a9ff2dbd6b4c637d65ab5d5b00812931a605f219705beea4ec11464ebdc19a48",
-      "bytes": 5268
-    },
-    {
-      "path": "code/experiments/scripts/check_egor_sharded_resource_gate.py",
-      "sha256": "d1978f4d85565fb12ca954b85b666a766fdaeef1b1d6758d5657abc1b4028eaf",
-      "bytes": 12584
-    },
-    {
-      "path": "code/experiments/scripts/combine_egor_policy_rows.py",
-      "sha256": "46c8f6cf1f24ae7f2c6218621011a5750e06619d713dc633e0aabcd537588a7b",
-      "bytes": 3494
-    },
-    {
-      "path": "code/experiments/scripts/compare_egor_runtime_equivalence.py",
-      "sha256": "8f3060ca9f0d766c16c4574ad37344442fbb87c3ea46200e181d12f92c4eddf1",
-      "bytes": 16605
-    },
-    {
-      "path": "code/experiments/scripts/finalize_egor_chartqa_analysis_amendment.py",
-      "sha256": "6399260baa060e2313678655f531e9ee89c568557b0fe321f0938a2d73dd4e66",
-      "bytes": 11623
-    },
-    {
-      "path": "code/experiments/scripts/finalize_egor_chartqa_analysis_recovery.py",
-      "sha256": "f1926f870b8480948f97158fcd0179652d07b8d64d9d8e57593db52c867fe2ef",
-      "bytes": 14795
-    },
-    {
-      "path": "code/experiments/scripts/finalize_egor_prospective_release.py",
-      "sha256": "e506e2f91a5a595263d487d5e6353c70012c45e05d28ef765682746c9dcd1175",
-      "bytes": 7433
-    },
-    {
-      "path": "code/experiments/scripts/finalize_egor_sharded_dev_review.py",
-      "sha256": "f1dfe21898ce30620653be237d2c02ae28e8f08c3a44a8eda4c7c67160ab6303",
-      "bytes": 21723
-    },
-    {
-      "path": "code/experiments/scripts/fit_egor_capability_cards.py",
-      "sha256": "c158daa7a96cdcfa5a6eb70268dbc4b907a2496a27757d18e361b6429990c3e8",
-      "bytes": 3933
-    },
-    {
-      "path": "code/experiments/scripts/fit_egor_repair_selector.py",
-      "sha256": "f168d6be51be695dd1a10aaebc8d980a6d27426c35104e42ba02a07e654caa78",
-      "bytes": 25890
-    },
-    {
-      "path": "code/experiments/scripts/materialize_egor_images.py",
-      "sha256": "afeac273db48d461ff2b651653da2a87470eda544022d5553ef0e82a8a14dc3f",
-      "bytes": 6012
-    },
-    {
-      "path": "code/experiments/scripts/materialize_egor_repairability_gate.py",
-      "sha256": "1b6033f4c0c8bb483cb1f75d3937a33bf23eab3723c41cfa52abe8015ef859aa",
-      "bytes": 9183
-    },
-    {
-      "path": "code/experiments/scripts/materialize_egor_resolver_change_gate.py",
-      "sha256": "5f1f05f4e03b08408c2c662727944d0eaeacbd3e730b9b56f584d6ab908bff39",
-      "bytes": 7003
-    },
-    {
-      "path": "code/experiments/scripts/package_egor_blinded_rater_packet.py",
-      "sha256": "a9d6d4d75f389bff40fbd1b994cdf254dc58617782efa60b2f0a86e6e99bcf51",
-      "bytes": 19926
-    },
-    {
-      "path": "code/experiments/scripts/plan_egor_evidence_escalation.py",
-      "sha256": "01c44fe9c09fbd3c5129137dd2dd7e4783462bcd6660f1a83d6a33daf7b75b54",
-      "bytes": 9152
-    },
-    {
-      "path": "code/experiments/scripts/plan_egor_repairs.py",
-      "sha256": "4430843d9204e590cfa2adbf457548b21698dd1979b0e7793bd191ae0a8c3ea8",
-      "bytes": 5609
-    },
-    {
-      "path": "code/experiments/scripts/plan_egor_selector_policy.py",
-      "sha256": "1eced4c47eceb0379452087ee997447176ded2a91f639e615c03960aee34c5e3",
-      "bytes": 7225
-    },
-    {
-      "path": "code/experiments/scripts/plan_egor_v7_verified_overwrite.py",
-      "sha256": "a18fd55f2a68cb8013b419f1d2c3d4015e7687efec5bc12774dc6339c0f69ad1",
-      "bytes": 9098
-    },
-    {
-      "path": "code/experiments/scripts/publish_egor_chartqa_analysis_recovery.py",
-      "sha256": "d56555ba2ec08427c97f294bf79b3ba1b62ec8c56df33cf5945a4eec5f93c0d1",
-      "bytes": 8116
-    },
-    {
-      "path": "code/experiments/scripts/run_ablation.py",
-      "sha256": "c05bd094e93931585326d3ffce3edc8a4176637eb85120ce1c3b7c937ea98ef3",
-      "bytes": 2008
-    },
-    {
-      "path": "code/experiments/scripts/run_cago_diagnostic.py",
-      "sha256": "92dfa0482af349d045e437e3d3eb2b29dc06f3183e2d72bdcd821262e9d2d9e8",
-      "bytes": 8905
-    },
-    {
-      "path": "code/experiments/scripts/run_egor_pending_claim_preflight.py",
-      "sha256": "bbf36700ba0631e5bd2065b71e4d461d47fb15c7401a593a7c6b5b26452d2c84",
-      "bytes": 9059
-    },
-    {
-      "path": "code/experiments/scripts/run_egor_stage.py",
-      "sha256": "eaf4dc275cb1ba9fbf39eeb8e5dcb0725fe48997324c5ba235df82576a96775f",
-      "bytes": 14721
-    },
-    {
-      "path": "code/experiments/scripts/run_gaia_mini.py",
-      "sha256": "57b544e57e89268a72006a80878263854f1c46b5f7571a8698794605a7240c59",
-      "bytes": 2575
-    },
-    {
-      "path": "code/experiments/scripts/run_mechanism_accept_push.py",
-      "sha256": "4f79d9ccd7b19fa5aef02e9eb702d2913813ab845d31c47829f49fa265fd5ea6",
-      "bytes": 9150
-    },
-    {
-      "path": "code/experiments/scripts/snapshot_egor_protected_analysis.py",
-      "sha256": "1982282f773d1bfc4a853f6d412b922ae0bc1cde4296a547e655cd1ee59986c0",
-      "bytes": 1597
-    },
-    {
-      "path": "code/experiments/scripts/validate_egor_downstream_release.py",
-      "sha256": "c470ef466022ea6937eab836eab78fc23038e47bd86d86a1433e605647e4547d",
-      "bytes": 6703
-    },
-    {
-      "path": "code/experiments/scripts/validate_egor_stage_output.py",
-      "sha256": "9209e0a7d2b3234161a896e633d5348f57d2a058cef4c864a269418dd772fa38",
-      "bytes": 4000
+      "path": "code/experiments/tests/fixtures/gaia_mini.yaml",
+      "sha256": "4f6c2d1a617dd42122d01ea7c7cf03a2296d74779ec1dc484053353d5b342555",
+      "bytes": 1852
     },
     {
       "path": "code/experiments/tests/test_aggregate.py",
-      "sha256": "43a5fe9be7a74150d9bf58d3dae7a9c1258e009a7f3e2f93a90dd1a401b358b1",
-      "bytes": 1198
+      "sha256": "fa2537fd8a8b9e2aa3e9e94e307e02db9fd6e34d1dfe54d6b3f7486768551aaa",
+      "bytes": 1195
     },
     {
       "path": "code/experiments/tests/test_analyze_egor_answer_only_v8.py",
-      "sha256": "6c1108d57d73cc52543de4c4e3f230a55ab76c79e480834c8e3a6e455f5bad73",
-      "bytes": 2517
+      "sha256": "8f62a3a9c162f325b072e030422a3ba55a6395360c099653fc2e9bcfe0c79b70",
+      "bytes": 2524
     },
     {
       "path": "code/experiments/tests/test_analyze_egor_matrix.py",
-      "sha256": "9aeaeeb614669b6db64df162a7e3db82e0199adfbad35852fc82c5f297074041",
-      "bytes": 8507
+      "sha256": "94f868441c926c5a9810471f425fe04fb8302b6fd7b65b36ac2bcb292b5bb6c0",
+      "bytes": 8495
     },
     {
       "path": "code/experiments/tests/test_analyze_egor_opened_verifier_diagnostic_contract.py",
-      "sha256": "527b44bba5500eb6b778761be223c2d870c6caf663b126df63d38fdd56f8674c",
-      "bytes": 792
+      "sha256": "284776b1a7ce0418492c6bf6a7acf72b77d0192e74a5fc8d0327e3ffd1a9f5a6",
+      "bytes": 797
     },
     {
       "path": "code/experiments/tests/test_analyze_egor_selector_statistics.py",
-      "sha256": "dee96c7af564677756c6d54c5947b778b5d0e0ca31c0316718641d0acec5dff2",
-      "bytes": 2419
+      "sha256": "a3e9f6111aa009950514b52cda22595050b398db88fc0b0ecd22809d2c4011b7",
+      "bytes": 2426
     },
     {
       "path": "code/experiments/tests/test_audit_egor_stage_completeness.py",
-      "sha256": "89f4422c75cff994c2cd141f25d6eb0d0b8e1d7ce83a6a5decd2020ca3f3533f",
-      "bytes": 5155
+      "sha256": "88f6e6bedb1074eb34167bfd398bfc43dbe4438717601c33328660553e8607d2",
+      "bytes": 5108
     },
     {
       "path": "code/experiments/tests/test_build_egor_prospective_configs.py",
-      "sha256": "d8f025052778479912eb308535af8fc1e6e341e66be07c7d7b56d29794acd234",
-      "bytes": 4026
+      "sha256": "6b2707e998387049a0291b18348711483637b2fd8fecd204830e7e8df38d0c2e",
+      "bytes": 4010
     },
     {
       "path": "code/experiments/tests/test_cago_pipeline.py",
-      "sha256": "fcbbd2f810a05980bf58e1a4bad4dd1430e6c42b2afbeab46a908f066d66d93e",
-      "bytes": 9338
+      "sha256": "2308d3393360fde2d5a34729da10945e519e27bef8581937065d799953b5c1fe",
+      "bytes": 9251
     },
     {
       "path": "code/experiments/tests/test_check_egor_selector_gate.py",
-      "sha256": "125d1e3e6586b4bdb41fc1c760b3fddde958556db8f93e680a9f4372ed3c90a9",
-      "bytes": 2907
+      "sha256": "03956b878e41adefda42893831188a26fdce61e3d4292359e1a5c940c1ac30ad",
+      "bytes": 2946
     },
     {
       "path": "code/experiments/tests/test_check_egor_sharded_resource_gate.py",
-      "sha256": "6235050413725ed0282815d9ca6582ab1e951ddcc02406d44bb0690e909cced0",
-      "bytes": 6380
+      "sha256": "346cd619d611d8fb5b85f7c1ffad3ac191a7fbfbc3d07d6fab02e38a5e88624f",
+      "bytes": 6308
     },
     {
       "path": "code/experiments/tests/test_compare_egor_runtime_equivalence.py",
-      "sha256": "842415369325f3b8b38b6c20a5ba00b8cfa1e40682be201b86708e33b722fe84",
-      "bytes": 6441
+      "sha256": "774c3e827917282f344c47d984c516c6aa0a231c9d54ccd9faf37f0e53391fb5",
+      "bytes": 6437
+    },
+    {
+      "path": "code/experiments/tests/test_configured_stage.py",
+      "sha256": "2a19a284472afd3b5a2d0b811fa38c193fd1e08609f74808a375ff6734d1906e",
+      "bytes": 4407
     },
     {
       "path": "code/experiments/tests/test_egor_answer_only_verifier_v8.py",
-      "sha256": "c7537610dd25da257aa25ddf31af57480c540b077067f778ceefb81f6ad21409",
-      "bytes": 4770
+      "sha256": "62317dfd05f22b331cfc30ac1ff681104220bcbfa45285c2bf572812afabe360",
+      "bytes": 4763
     },
     {
       "path": "code/experiments/tests/test_egor_chartqa_splits.py",
-      "sha256": "85540437c586c224c40230c9e1297fa37a871221c22b44ca3d6daa5ecab6bee9",
-      "bytes": 2529
+      "sha256": "cdbbbd6989e12f2c78454a1e131ce43033d2b0b5e508300af026371ad9f97176",
+      "bytes": 2501
     },
     {
       "path": "code/experiments/tests/test_egor_compact_verifier.py",
-      "sha256": "1a46896bacd4c285987e2c07206d87cb331a728178b8cd33a4125728deee4f1f",
-      "bytes": 4333
+      "sha256": "6ea37237639a267c3e44b91d4b32cbff9e034c565e898ccce0e00256a6d7f0e5",
+      "bytes": 4410
     },
     {
       "path": "code/experiments/tests/test_egor_escalation.py",
@@ -1193,108 +828,108 @@
     },
     {
       "path": "code/experiments/tests/test_egor_evaluation.py",
-      "sha256": "8594a094d66b57795bf96412147fa7bdc6cdb9cb8688d3341b341af22d9c111a",
-      "bytes": 10370
+      "sha256": "7e68f26d0c77ca227c081dff9720369a9f53faeb61c24d00096a442017a652f9",
+      "bytes": 10297
     },
     {
       "path": "code/experiments/tests/test_egor_evidence_escalation_scripts.py",
-      "sha256": "82dd267af7e3af387d131173c652b36e4c652bd1bfcb6df658cd3321699d121f",
-      "bytes": 15992
+      "sha256": "0134a17cf1341effd19bf6f0a74e453e563c354d62d9b070f674499f5e38d236",
+      "bytes": 15968
     },
     {
       "path": "code/experiments/tests/test_egor_execution.py",
-      "sha256": "42eb7748822bc215343687dbcc41a69eb337a5a32da027a6f51085c3e360fff7",
-      "bytes": 7651
+      "sha256": "c74dc20418161c0b221d467a96109196e506c3e602e392fa57486ca23f8eb5b6",
+      "bytes": 7605
     },
     {
       "path": "code/experiments/tests/test_egor_infographic_splits.py",
-      "sha256": "d64812154a4481dc9321751bb79c65db63560563c97007077530069d02cc0653",
-      "bytes": 3705
+      "sha256": "e865c584ce8929a9ba19f4c0235051cacbf13864ea9ba7945452ba060c19b7a6",
+      "bytes": 3746
     },
     {
       "path": "code/experiments/tests/test_egor_local_provider.py",
-      "sha256": "e26f09d5f6029e722759e96e576c3528a07de91f6c184fdd13f14ee9a5aa7075",
-      "bytes": 11753
+      "sha256": "a7745927c7134e8dc046fcb3fba2b36c4d15fce0574873c6efded5e6b332dc63",
+      "bytes": 11817
     },
     {
       "path": "code/experiments/tests/test_egor_matched_controls.py",
-      "sha256": "6a36d990ba08a58263d7a4905214b443151fef3c6f56337bb13197d237b246a6",
-      "bytes": 3650
+      "sha256": "40c0254c1fb0dc3279b31b45068be16c0d83cc3382694abb0286de2c2c514644",
+      "bytes": 3622
     },
     {
       "path": "code/experiments/tests/test_egor_ocrbench_splits.py",
-      "sha256": "bfe23015d505153efd567e703b1479bab4ca72d4c406e3b2a72f30221e615b2b",
-      "bytes": 4778
+      "sha256": "1fb1f43bbaff89feac4cb935dc2e7b638aeae2636ea372cd4dc3cf8b5c99c1eb",
+      "bytes": 4777
     },
     {
       "path": "code/experiments/tests/test_egor_planning.py",
-      "sha256": "3a67c846b68891a33c5cf39845bdd4a03f0178af70bc48ee84ae472e38c2b73c",
-      "bytes": 6131
+      "sha256": "42037e2c2d89f2fd1e9391b72f12dd4469589e522a17ac9227bda0307d13df61",
+      "bytes": 6111
     },
     {
       "path": "code/experiments/tests/test_egor_protocol.py",
-      "sha256": "ee765fb3c8f1ee5441fecea340e4297937d288e27d80bb9a1e9e7f959d660cf3",
-      "bytes": 20070
+      "sha256": "3ac119b0e12e25b3329ca798fefe87fa95e8860caef1359c42eecd3c4f6c89ab",
+      "bytes": 20098
     },
     {
       "path": "code/experiments/tests/test_egor_qwen35_non_thinking.py",
-      "sha256": "0bc9b486309b587e0d61db5dcd6132f2e53e2101876cd6dc223fa8a709af49b3",
-      "bytes": 1438
+      "sha256": "6fa94e4cf096005437f582874b02ca481873c2f60cbc73cb00f952f41736229b",
+      "bytes": 1414
     },
     {
       "path": "code/experiments/tests/test_egor_review_controls.py",
-      "sha256": "184e329b15f6485593ae346198b92efaa24974989f2bf6ba4d2d97c60f0d4060",
-      "bytes": 3644
+      "sha256": "8ad87a8713569bce7c78035cab8c9737b5ed082e7b629442ad5811ea02d8daa1",
+      "bytes": 3659
     },
     {
       "path": "code/experiments/tests/test_egor_selection.py",
-      "sha256": "ec62eb6ff44b0a3c2101c051db66256eb76ac89e6513bf0f936e1b590080b66b",
-      "bytes": 13638
+      "sha256": "4186102305285c001787f939a92df625f15119187d085e8ed3102d4a8e346516",
+      "bytes": 13621
     },
     {
       "path": "code/experiments/tests/test_egor_statistics.py",
-      "sha256": "4c61b3629bfc8d356781cf3ab721fa35f9ddc56bd329deb442ff67191a38ae67",
-      "bytes": 1013
+      "sha256": "00a0510441e5bcee13dd30aed99a8b7fc0aa4d588e368a2e928a55005feb4c16",
+      "bytes": 1012
     },
     {
       "path": "code/experiments/tests/test_egor_v7_confirmation_analysis.py",
-      "sha256": "8794ef3eab1085e12fb90c50ac73c0795fdea327d5929cb90b822d4e39ade717",
-      "bytes": 3975
+      "sha256": "51ebafa7dc2fcbb46d5d02ac241e670287f3d7becba3831c42fab0273896543a",
+      "bytes": 3986
     },
     {
       "path": "code/experiments/tests/test_egor_v7_format_gate.py",
-      "sha256": "833d7922449b68be4a51b6b3334b98ab1ed84dbf18bbaa6477166f57efda1d5b",
-      "bytes": 746
+      "sha256": "737936c93747c8e4526b0acd278c9f3467fe4c19797c99c1bfd60ff053d15449",
+      "bytes": 759
     },
     {
       "path": "code/experiments/tests/test_egor_v7_verified_overwrite_planner.py",
-      "sha256": "c3456f3e8ce7babaea8b1c180c7bb5ee33b2d290e52d47f7e6711dd8d29ca162",
-      "bytes": 2689
+      "sha256": "168faf7333853732d51f7b01646c067cfe12cfce981a33c7fe990b4beb747d52",
+      "bytes": 2702
     },
     {
       "path": "code/experiments/tests/test_egor_v8_confirmation_analysis.py",
-      "sha256": "c97ce92f9d93b7ed564b2d161fd2ebd2728df254d053e0996d7ad8e8f9d642bc",
-      "bytes": 4459
+      "sha256": "7ed9ea0e2085ccd1d2aeb8791cdb129757aabe2a5db52906422e66254a67f892",
+      "bytes": 4490
     },
     {
       "path": "code/experiments/tests/test_egor_v8_format_gate.py",
-      "sha256": "0e94f8453d58c433ba269a0ce4c057eb39e6e062872c8e805c91e7bba4ce007a",
-      "bytes": 1015
+      "sha256": "c05148f18358d6f90de7bf996af5bc4791c896ab673bfb4c24329937aaa0e5bb",
+      "bytes": 1047
     },
     {
       "path": "code/experiments/tests/test_egor_v9_confirmation_analysis.py",
-      "sha256": "18a5955535d5464c1107e4122d9187666a578e4b261b354424060ce52d50b8be",
-      "bytes": 3549
+      "sha256": "6424c043169e063dd81c92d218a9001eee70847f00a409c9cc2c9d293c3f18e5",
+      "bytes": 3602
     },
     {
       "path": "code/experiments/tests/test_egor_v9_confirmation_data.py",
-      "sha256": "eb22522b373c73c0f9208e3091043801d63fe654f0d1e69df1ee88db7f27d8fc",
-      "bytes": 5826
+      "sha256": "4f4685e6fb52a57bb0593a9003d3dd17d829420a74860c47cc642957ebcb4dc1",
+      "bytes": 5810
     },
     {
       "path": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py",
-      "sha256": "52925477e4044e070b6cd799ad09fc4d3ff56cc6fa2de387b6ed3ef0b3a435b8",
-      "bytes": 2942
+      "sha256": "b539105808378116779fd6d826f66c755ffce5e84bca74d10465772112019f6c",
+      "bytes": 2906
     },
     {
       "path": "code/experiments/tests/test_egor_verification.py",
@@ -1303,78 +938,108 @@
     },
     {
       "path": "code/experiments/tests/test_egor_verifier_transport_v6.py",
-      "sha256": "0ec29bc9309f8283b3987bd9f02956086e240a583344da76d0fe323771e84424",
-      "bytes": 4350
+      "sha256": "3f849a6f3173f960c241cd0bcde5104e8e61fc750c524a60ff1a43738583dca1",
+      "bytes": 4385
     },
     {
       "path": "code/experiments/tests/test_egor_verifier_transport_v7.py",
-      "sha256": "f6edcf4baf72433509fdf8d028a0dd3a4e61be42b412eee41dc97e4189baabee",
-      "bytes": 2368
+      "sha256": "fa479d68b75aa36daa65a83c49bd69cd6238aa45106dd4259866a5dd76009f6f",
+      "bytes": 2564
     },
     {
       "path": "code/experiments/tests/test_fit_egor_repair_selector.py",
-      "sha256": "93609694f5cdb0043fd72db2564f42df07d2e23f3376cd44c1ea034ecc653afa",
-      "bytes": 6377
+      "sha256": "08dfbd8ba04ae0eee83b437095b59d8e61196ed43b16f7b59450e580c256a909",
+      "bytes": 6372
     },
     {
       "path": "code/experiments/tests/test_gaia_loader.py",
-      "sha256": "097479acd407c885be5c8148326a042c0a6a96be1bb2c1f39023185275a3b034",
-      "bytes": 1156
+      "sha256": "2c266d8e6ae54c915942141873736523edc543b1d9ebe5b9fa2dcc3d4adc36e7",
+      "bytes": 1153
     },
     {
       "path": "code/experiments/tests/test_gaia_manifest.py",
-      "sha256": "d60df1b42b60cbcc9c7c93a5d180f48dc83a28d2afb966faa0fe5f3a8d16674e",
-      "bytes": 934
+      "sha256": "2b10293a72001c078e351a4f239af7f7f1172693f5301ecbc5de5410a0e86441",
+      "bytes": 929
     },
     {
       "path": "code/experiments/tests/test_gaia_pipeline.py",
-      "sha256": "5c90e8c93bd9e52fb6839c94511d93a8e786fb519746f52fb640a6f7af28d800",
-      "bytes": 3542
+      "sha256": "634009844564f1b729e00798d6100efac51e663855467aa6955441ab3a9d0698",
+      "bytes": 3392
     },
     {
       "path": "code/experiments/tests/test_judge.py",
-      "sha256": "4b7edcbe078bece31aa4785c2d6ed5c572f873067a5f284fcbe8176c1d97f3e5",
-      "bytes": 1914
+      "sha256": "6609b3c63f664cf400717966df703ba1a2ac8fb24cbb165728ac3ddb54f904af",
+      "bytes": 1911
     },
     {
       "path": "code/experiments/tests/test_materialize_egor_images.py",
-      "sha256": "23d415f4390aeec268bfe1d0f89530254ecfa6dbc9aad4d67cbd1d49b703a648",
-      "bytes": 2383
+      "sha256": "064d31302d8cd51bb287cd24e8523ef2500ac8c95f8ae2f41d040dcd99b47f89",
+      "bytes": 2341
     },
     {
       "path": "code/experiments/tests/test_protocol.py",
-      "sha256": "41ad19dd9662a60f607045581cbbb7deea6d5441b82b3acfad0c346b4a469b4b",
-      "bytes": 974
+      "sha256": "8e0680f0a59ed3f33a5f73de64fbf01949b75f8d44b88318610d85d7a6aa0509",
+      "bytes": 971
     },
     {
       "path": "code/experiments/tests/test_qa_pipeline.py",
-      "sha256": "54ddc18eabfad6931a2be33305388cfaf260b80ef133a945c7e12d0f3a7dd05c",
-      "bytes": 2228
+      "sha256": "a31a3e07117ddf535041a51e1f17e0bfadbc61f7c2730e50e48278d611082923",
+      "bytes": 2224
     },
     {
       "path": "code/experiments/tests/test_run_egor_stage.py",
-      "sha256": "a6b8e8b31b98b843a6f77119fc55d4b4657051cf2d6ab4f4e52d572196b1e858",
-      "bytes": 3440
+      "sha256": "d070dadfc032a678db399bcbfab0bf0385e85df77c49d7761291ff7e55a82c6c",
+      "bytes": 3457
     },
     {
       "path": "code/experiments/tests/test_snapshot_egor_protected_analysis.py",
-      "sha256": "114da1cc0a8076531f1a9ec069ad4e49a4cb1cebcb67a735bfefc7c4813d8ca1",
-      "bytes": 1809
+      "sha256": "9b72eba7b1d05e71badfa9e5af6f72c61cb4cc85e5eed85e099daf133d086f6e",
+      "bytes": 1831
     },
     {
       "path": "code/experiments/tests/test_stats.py",
-      "sha256": "3142e89fbefd471b0fdfeef8524a961e947ff2833eb145f7221a2fa20a50658b",
-      "bytes": 961
+      "sha256": "5e4c2f850e1a89c125a4389ff07c7665a08e6e4b463501c6d7511b96ff116271",
+      "bytes": 958
+    },
+    {
+      "path": "configs/egor-stage.yaml",
+      "sha256": "58eb77dd8229b3fed1204d3e9a93446e02eb109769448ff009b0f8c42b6b6222",
+      "bytes": 386
+    },
+    {
+      "path": "configs/runtime.yaml",
+      "sha256": "369a96eb9b9a4f8e1fcc5099f71a14ed75e59874623a14b5a062367e33069f98",
+      "bytes": 331
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "72089c503fb193ee6d840fe7cd2b96d7a69d5fe6a3a48a93bd53e9415e6fb73a",
-      "bytes": 1063
+      "sha256": "14ba89488dff3602aafe4666a72bf47b012b4369836bee1658ac7b3e46047233",
+      "bytes": 1977
     },
     {
       "path": "docs/MIGRATION.md",
-      "sha256": "dc1ea5da02af7174973969d2c7d6d355d1a82de79a96e1376f4004b3567c8fde",
-      "bytes": 1483
+      "sha256": "aa40005a8829d5a636dcd4abfcfc8cbda792f262d1fe84712eca5712a80e19a5",
+      "bytes": 2353
+    },
+    {
+      "path": "docs/RELEASE_NOTES.md",
+      "sha256": "ca4e8ddc7793c87e88628f7f776dd9c4f7e73391336541fac18429d870ee1b2e",
+      "bytes": 792
+    },
+    {
+      "path": "docs/RESOURCES.md",
+      "sha256": "23cfc8cae2a9bae11ed4515cbfed00cfb8480fe6a2edc54b64c695dc1199464b",
+      "bytes": 1799
+    },
+    {
+      "path": "docs/TEST_MIGRATION.json",
+      "sha256": "9f5e9f0e4d9b7b1277d471508af5592acc54220679817a60825eb5229b47fb42",
+      "bytes": 70180
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "sha256": "8d53fe61a483cf5a09eb3e67dec99d816a48f8457ab2c92576d8a9215616bb72",
+      "bytes": 2624
     },
     {
       "path": "docs/model_sources.json",
@@ -1383,13 +1048,18 @@
     },
     {
       "path": "examples/egor_smoke.py",
-      "sha256": "99a008808c18d248c0dd91fa52ef0dc41aecf627bf675c6dcb3e0bd60a5b3cc8",
-      "bytes": 1107
+      "sha256": "922a5ca61253dfd11ed7290b0cfbdc4d775d1f03c8a5cf89f21e9c506b0fbb42",
+      "bytes": 1237
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "9f52d37055e680238e0ee62ca9a8248046097f9e907b505de731cb3e676bbcd1",
+      "bytes": 1292
     },
     {
       "path": "reproduce/README.md",
-      "sha256": "5a30e0863b330375e9ea5d419823039dc51b2db88817560ec3e77eac4bd5f967",
-      "bytes": 998
+      "sha256": "512d6b67fecf152b4608e233acb289d6339fdcccb135d8ac11078dce0637dc23",
+      "bytes": 1630
     },
     {
       "path": "reproduce/egor-v10/confirmation_gate.json",
@@ -1417,29 +1087,45 @@
       "bytes": 80
     },
     {
-      "path": "reproduce/verify.py",
-      "sha256": "aefaa77cf017ea14c035a41c9979cf7511e18e7506e6bf807afc3e9a02e2d6ac",
-      "bytes": 2657
+      "path": "reproduce/frozen/SOURCE.json",
+      "sha256": "7daa5c346a96625e64f34f5dc3feb6bf260dc0fedbdc424e994f6e7f091a174d",
+      "bytes": 40563
     },
     {
-      "path": "requirements-dev.lock",
-      "sha256": "e14740cfb071f3e02ceb1895b59880bb68bf3ea06b2fc592b21343740eaabf22",
-      "bytes": 678
+      "path": "reproduce/frozen/openmas-812f3e2.tar.gz",
+      "sha256": "d5dfe6975d643aeeea06867a95135b2a91588766d423e2c2cd7218d5ad267726",
+      "bytes": 424705
+    },
+    {
+      "path": "reproduce/verify.py",
+      "sha256": "413b9baa566bb500199e44dbc2cb064868723facd6ec2a070277def6f57fd05e",
+      "bytes": 2709
+    },
+    {
+      "path": "scripts/check_historical.py",
+      "sha256": "a85b56ec0bc172df2558eec678a1dbc9ff6c2ffef253f81e33a59488fd6eeae4",
+      "bytes": 2473
+    },
+    {
+      "path": "scripts/check_release.py",
+      "sha256": "6fe90b60c47015cb0cdd4f3fda44bcb791e60df68a2206537701305538960d77",
+      "bytes": 4126
+    },
+    {
+      "path": "scripts/check_structure.py",
+      "sha256": "af61b8f640f73ba0782011b7cc74a25f70732052aba109393e777e979df426c1",
+      "bytes": 1991
     },
     {
       "path": "scripts/export_public.py",
-      "sha256": "f761a38b0fdc300a707dd38a65911bad6c71c36f0c9f676ed81517383e9310b7",
-      "bytes": 1382
+      "sha256": "58c25c61d75c896921b7b20d100a326f21104b9cb898ff8758fe8e54a0c2e0aa",
+      "bytes": 1385
     },
     {
-      "path": "scripts/export_public_repo.py",
-      "sha256": "1785445f8048856ec8e93cf9d24ee5eb319a2d07ce09196657f079e66fadaa66",
-      "bytes": 5779
-    },
-    {
-      "path": "运行.py",
-      "sha256": "8f8d7fc5b9c309d2c781066bf7cd27449e17583e19e66bef56fe7204f0e0fe9b",
-      "bytes": 514
+      "path": "uv.lock",
+      "sha256": "f982dbdbb5e3656af38604dc1fcf7d0a8e61ab432b5d787606a3922e7f7ad423",
+      "bytes": 158126
     }
-  ]
+  ],
+  "public_edition": "2026-10-17"
 }

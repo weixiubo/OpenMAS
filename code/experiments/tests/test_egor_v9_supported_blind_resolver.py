@@ -89,8 +89,4 @@ def test_v9_two_specialist_control_is_stricter_and_has_no_outcome_inputs() -> No
     )
     assert not decision.accept_overwrite
     forbidden = {"source_id", "reference", "score", "realized_outcome"}
-    assert forbidden.isdisjoint(
-        inspect.signature(
-            decide_supported_blind_resolver_overwrite
-        ).parameters
-    )
+    assert forbidden.isdisjoint(inspect.signature(decide_supported_blind_resolver_overwrite).parameters)

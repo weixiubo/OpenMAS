@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from openagora_experiments.egor.statistics import paired_bootstrap_contrast
 
 

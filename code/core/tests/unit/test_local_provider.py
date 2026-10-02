@@ -161,4 +161,5 @@ def test_local_provider_transformers_oom_error_code_unchanged(monkeypatch) -> No
 def isolated_transformers_pipeline_cache(monkeypatch):
     """A cached fake pipeline must not bypass another test's model loader."""
     import openagora.providers.local_provider as local_provider
+
     monkeypatch.setattr(local_provider, "_TRANSFORMERS_PIPELINE_CACHE", {})

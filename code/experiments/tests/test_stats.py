@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from openagora_experiments.evaluation.stats import build_pairwise_stats
 

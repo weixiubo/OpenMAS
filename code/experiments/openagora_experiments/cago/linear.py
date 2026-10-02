@@ -34,25 +34,8 @@ class RidgeModel:
         if width == 0 or any(len(row) != width for row in features):
             raise MatrixValidationError("feature rows must have one fixed positive width")
 
-        means = tuple(sum(float(row[column]) for row in features) / len(features) for column in range(width))
-        scales: list[float] = []
-        for column, mean in enumerate(means):
-            variance = sum((float(row[column]) - mean) ** 2 for row in features) / len(features)
-            scales.append(sqrt(variance) if variance > 1e-12 else 1.0)
-        design = [
-            [1.0, *((float(value) - means[index]) / scales[index] for index, value in enumerate(row))]
-            for row in features
-        ]
-        dimension = width + 1
-        gram = [[0.0 for _ in range(dimension)] for _ in range(dimension)]
-        rhs = [0.0 for _ in range(dimension)]
-        for row, target in zip(design, targets, strict=True):
-            for left in range(dimension):
-                rhs[left] += row[left] * float(target)
-                for right in range(dimension):
-                    gram[left][right] += row[left] * row[right]
-        for index in range(1, dimension):
-            gram[index][index] += l2
+        means, scales, design = _standardized_design(features, width)
+        gram, rhs = _normal_equations(design, targets, width, l2)
         weights = _solve_linear_system(gram, rhs)
         return cls(
             feature_means=means,
@@ -93,10 +76,7 @@ class AdvantagePredictor:
         return tuple(sorted(self.models))
 
     def predict(self, features: Sequence[float]) -> dict[str, float]:
-        return {
-            candidate_id: self.models[candidate_id].predict(features)
-            for candidate_id in self.candidate_ids
-        }
+        return {candidate_id: self.models[candidate_id].predict(features) for candidate_id in self.candidate_ids}
 
 
 def _solve_linear_system(matrix: list[list[float]], vector: list[float]) -> list[float]:
@@ -120,3 +100,33 @@ def _solve_linear_system(matrix: list[list[float]], vector: list[float]) -> list
                 for value, pivot_value in zip(augmented[row], augmented[pivot_column], strict=True)
             ]
     return [augmented[row][-1] for row in range(size)]
+
+
+def _standardized_design(
+    features: Sequence[Sequence[float]], width: int
+) -> tuple[tuple[float, ...], list[float], list[list[float]]]:
+    means = tuple(sum(float(row[column]) for row in features) / len(features) for column in range(width))
+    scales: list[float] = []
+    for column, mean in enumerate(means):
+        variance = sum((float(row[column]) - mean) ** 2 for row in features) / len(features)
+        scales.append(sqrt(variance) if variance > 1e-12 else 1.0)
+    design = [
+        [1.0, *((float(value) - means[index]) / scales[index] for index, value in enumerate(row))] for row in features
+    ]
+    return means, scales, design
+
+
+def _normal_equations(
+    design: Sequence[Sequence[float]], targets: Sequence[float], width: int, l2: float
+) -> tuple[list[list[float]], list[float]]:
+    dimension = width + 1
+    gram = [[0.0 for _ in range(dimension)] for _ in range(dimension)]
+    rhs = [0.0 for _ in range(dimension)]
+    for row, target in zip(design, targets, strict=True):
+        for left in range(dimension):
+            rhs[left] += row[left] * float(target)
+            for right in range(dimension):
+                gram[left][right] += row[left] * row[right]
+    for index in range(1, dimension):
+        gram[index][index] += l2
+    return gram, rhs

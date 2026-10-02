@@ -3,12 +3,10 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from openagora_experiments.egor.protocol import (
-    PilotTask,
-    parse_verifier_output_v6,
-)
+from openagora_experiments.egor.parsing import parse_verifier_output_v6
 from openagora_experiments.egor.runner import run_verifier_v6_stage
 from openagora_experiments.egor.runtime_types import ArtifactSpec
+from openagora_experiments.egor.task_model import PilotTask
 
 
 def valid_payload() -> dict[str, Any]:

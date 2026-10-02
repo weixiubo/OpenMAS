@@ -35,12 +35,8 @@ def test_chartqa_selection_is_answer_blind_and_image_disjoint(tmp_path: Path) ->
     )
 
     assert [item.task_id for item in first_dev] == [item.task_id for item in second_dev]
-    assert [item.task_id for item in first_test] == [
-        item.task_id for item in second_test
-    ]
-    assert {item.image_name for item in first_dev}.isdisjoint(
-        item.image_name for item in first_test
-    )
+    assert [item.task_id for item in first_test] == [item.task_id for item in second_test]
+    assert {item.image_name for item in first_dev}.isdisjoint(item.image_name for item in first_test)
     assert audit["image_overlap_between_splits"] == 0
 
     normalized = materialize_chartqa_rows(first_dev, images_root=tmp_path / "images")

@@ -33,15 +33,11 @@ def build_trace_candidate(
     """Build one non-rater-facing end-to-end execution trace."""
 
     specialist_rows = []
-    for action_id, record, parsed in zip(
-        selected, specialist_records, specialists, strict=True
-    ):
+    for action_id, record, parsed in zip(selected, specialist_records, specialists, strict=True):
         specialist_rows.append(
             {
                 "action_id": action_id,
-                "answer": str(
-                    parsed.get("answer", parsed.get("candidate_answer", ""))
-                ).strip(),
+                "answer": str(parsed.get("answer", parsed.get("candidate_answer", ""))).strip(),
                 "evidence": _object_list(parsed.get("evidence", [])),
                 "usage": _usage(record),
             }
@@ -91,19 +87,11 @@ def build_trace_candidate(
             "actual_changed": bool(structural.actual_changed),
             "reported_changed": bool(structural.reported_changed),
             "change_flag_agrees": bool(structural.change_flag_agrees),
-            "used_valid_specialist_ids": list(
-                structural.used_valid_specialist_ids
-            ),
+            "used_valid_specialist_ids": list(structural.used_valid_specialist_ids),
             "unknown_used_ids": list(structural.unknown_used_ids),
-            "evidence_supported_change": bool(
-                structural.evidence_supported_change
-            ),
-            "decision": "fallback_to_baseline"
-            if provenance_rejected
-            else "accept_candidate",
-            "final_answer": baseline_answer
-            if provenance_rejected
-            else candidate_answer,
+            "evidence_supported_change": bool(structural.evidence_supported_change),
+            "decision": "fallback_to_baseline" if provenance_rejected else "accept_candidate",
+            "final_answer": baseline_answer if provenance_rejected else candidate_answer,
         },
         "automatic_outcome": {
             "baseline_quality": _optional_number(policy.get("baseline_quality")),
@@ -210,9 +198,7 @@ def render_trace_markdown(packet: Mapping[str, Any]) -> str:
                 _markdown_block(
                     {
                         "resources": raw_trace.get("total_resources", {}),
-                        "automatic_outcome": raw_trace.get(
-                            "automatic_outcome", {}
-                        ),
+                        "automatic_outcome": raw_trace.get("automatic_outcome", {}),
                     }
                 ),
                 "",
@@ -234,18 +220,10 @@ def copy_audit_images(
         raise ValueError(f"missing source images for audit items: {missing}")
     images_dir = output_dir / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
-    expected_names = {
-        Path(image_relative_path(blind_id, image_sources[blind_id])).name
-        for blind_id in blind_ids
-    }
-    extras = sorted(
-        path.name for path in images_dir.iterdir() if path.name not in expected_names
-    )
+    expected_names = {Path(image_relative_path(blind_id, image_sources[blind_id])).name for blind_id in blind_ids}
+    extras = sorted(path.name for path in images_dir.iterdir() if path.name not in expected_names)
     if extras:
-        raise ValueError(
-            "audit image directory contains stale unexpected entries: "
-            + ", ".join(extras)
-        )
+        raise ValueError("audit image directory contains stale unexpected entries: " + ", ".join(extras))
     outputs: list[Path] = []
     for blind_id in sorted(blind_ids):
         source = image_sources[blind_id]

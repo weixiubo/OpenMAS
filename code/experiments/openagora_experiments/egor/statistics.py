@@ -38,9 +38,7 @@ def paired_bootstrap_contrast(
     """
 
     if len(left) != len(right) or not left:
-        raise ValueError(
-            "left and right must contain the same positive number of tasks"
-        )
+        raise ValueError("left and right must contain the same positive number of tasks")
     if bootstrap_samples <= 0:
         raise ValueError("bootstrap_samples must be positive")
     deltas = [float(a) - float(b) for a, b in zip(left, right, strict=True)]
@@ -80,15 +78,9 @@ def _exact_sign_p_values(*, wins: int, losses: int) -> tuple[float, float]:
     if non_ties == 0:
         return 1.0, 1.0
     denominator = 2**non_ties
-    one_sided = (
-        sum(math.comb(non_ties, successes) for successes in range(wins, non_ties + 1))
-        / denominator
-    )
+    one_sided = sum(math.comb(non_ties, successes) for successes in range(wins, non_ties + 1)) / denominator
     smaller_side = min(wins, losses)
-    lower_tail = (
-        sum(math.comb(non_ties, successes) for successes in range(smaller_side + 1))
-        / denominator
-    )
+    lower_tail = sum(math.comb(non_ties, successes) for successes in range(smaller_side + 1)) / denominator
     return one_sided, min(1.0, 2.0 * lower_tail)
 
 
@@ -103,6 +95,4 @@ def _quantile(sorted_values: Sequence[float], probability: float) -> float:
     if lower == upper:
         return float(sorted_values[lower])
     fraction = position - lower
-    return float(
-        sorted_values[lower] * (1.0 - fraction) + sorted_values[upper] * fraction
-    )
+    return float(sorted_values[lower] * (1.0 - fraction) + sorted_values[upper] * fraction)
