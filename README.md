@@ -52,16 +52,16 @@ OpenAI service integration is installed separately with `--group services`.
 ~/research/data/OpenMAS/      external datasets and task manifests
 ~/research/models/           explicitly restored model revisions
 ~/research/runs/OpenMAS/      databases, records and experiment outputs
-~/research/archives/          original sources and recovery material
+~/research/data/<project>/evidence/          original sources and recovery material
 ```
 
 Resource roots resolve in this order: command options (`--data-dir`,
 `--models-dir`, `--runs-dir`), `OPENMAS_DATA_DIR` / `OPENMAS_MODELS_DIR` /
-`OPENMAS_RUNS_DIR` / `OPENMAS_ARCHIVES_DIR`, then
+`OPENMAS_RUNS_DIR` / `OPENMAS_EVIDENCE_DIR`, then
 `~/.config/research/OpenMAS.json`, then the layout above. `XDG_CONFIG_HOME` and
 `OPENMAS_LOCAL_CONFIG` can relocate the local configuration. A local JSON
 example is in [resources](docs/RESOURCES.md). Public experiment paths support
-`{data}`, `{models}`, `{runs}` and `{archives}`; other relative paths resolve
+`{data}`, `{models}`, `{runs}` and `{evidence}`; other relative paths resolve
 against the configuration file, independent of the working directory.
 
 No package import creates directories. `doctor` is read-only and never creates
@@ -75,7 +75,7 @@ offline demo. See the [resource catalog](code/core/src/openagora/resource_catalo
   boundary, EGOR evidence parsing, planning, two-support decisions and configured
   stage execution; CAGO and QA/GAIA analysis remain library APIs.
 - Frozen: previous experiment orchestration/configuration and sealed evidence.
-  The source snapshot and original checksums are under `reproduce/frozen`.
+  The required workflow regression inputs and file hashes are under `tests/reference`.
   Historical workflow tests run against current library functions through a
   test-only import adapter and separately against their untouched source.
 - Not established by this cleanup: fresh GPU experiments, full dataset recovery,
@@ -85,3 +85,5 @@ Run `uv run --no-sync pytest` for all migrated scenarios and new contracts.
 See [architecture](docs/ARCHITECTURE.md), [contributing](CONTRIBUTING.md),
 [migration](docs/MIGRATION.md), [validation](docs/VALIDATION.md),
 [reproduction](reproduce/README.md) and [third-party notices](THIRD_PARTY.md).
+
+Material ownership and deletion rules: [docs/MATERIALS.md](docs/MATERIALS.md).

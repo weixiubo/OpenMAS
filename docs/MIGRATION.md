@@ -1,6 +1,4 @@
-# Migration from the pre-refactor public tree
-
-Baseline: `812f3e25997b35e41d4f38453fb49b50f0b8a40b`.
+# Migration
 
 | Previous entry or location | Current entry |
 | --- | --- |
@@ -10,25 +8,22 @@ Baseline: `812f3e25997b35e41d4f38453fb49b50f0b8a40b`.
 | `doctor --config ...` creating a SQLite database | Read-only `doctor`; configuration is optional |
 | `code/core/configs/default.yaml` | `configs/runtime.yaml` for the maintained mock entry |
 | `code/experiments/scripts/run_egor_stage.py` | `openagora run --config configs/egor-stage.yaml` |
-| Version-labelled experiment scripts/configurations | Immutable `reproduce/frozen/openmas-812f3e2.tar.gz`; see its SOURCE.json index |
+| Version-labelled experiment scripts/configurations | Supported stages use run configs; unused wrappers removed |
 | `egor.protocol.PilotTask` | `egor.task_model.PilotTask` |
 | `egor.protocol.build_*` / `parse_*` | `egor.prompts.build_*` / `egor.parsing.parse_*` |
 | Private tensor/image helpers in `egor.local_provider` | `egor.model_inputs` |
 | `.openagora` or experiment results in source directories | Configurable `~/research/runs/OpenMAS` defaults |
 
-Existing standalone runtime YAML files still resolve explicit relative paths
-against their own directory. Prefer resource placeholders in new public configs.
-Use a new run directory for the new stage runner; old stage manifests intentionally
-cannot authorize appending new-source results to old evidence.
+Versioned experiment wrappers without a supported current entry are removed.
+The supported EGOR stages use explicit run configurations. Workflow regression
+tests use only their required original inputs under `tests/reference`, against
+the maintained experiment library; the independent workflow check also tests
+the reference producer. The CLI, workspace lock and public exporter are the
+single maintained installation and execution path.
 
-Every original test case remains represented. Workflow test files retain their
-assertions and resolve old scripts through a verified temporary extraction;
-the compatibility import is test-only and absent from wheels. The 69 workflow
-scenarios also run with the untouched source via `scripts/check_historical.py`.
-The GAIA pipeline fixture retains its algorithm settings while resolving output
-paths in a temporary directory. Fixed-seed engine references retain their
-original bytes; comparisons omit wall-clock timestamps and random UUIDs.
+Existing standalone YAML files resolve explicit relative paths against their own
+directory. New stage runs use a new run identity; they cannot append new-source
+results to old evidence. The original 800-row evidence and confirmation gate
+remain unchanged and are checked by `openagora reproduce`.
 
-The old `运行.py`, core demo/smoke scripts, duplicate public-tree exporter and
-root pip lock are also frozen in that snapshot. Use `openagora`, the root uv.lock
-and `scripts/export_public.py`; there is one maintained install/export path.
+See [MATERIALS.md](MATERIALS.md) for material ownership and deletion rules.

@@ -43,3 +43,7 @@ the maintained tests, historical tests and demo. Setup downloaded a few missing
 small development wheels; subsequent sync and all test execution were offline.
 
 No model or remote experiment service was called and no repository or research material was published.
+
+The material-cleanup checks and current retained source list are documented in
+MATERIALS.md and tests/reference/MANIFEST.json. Whole-source bundles are no longer
+part of the current distribution. Scientific evidence identities are unchanged.

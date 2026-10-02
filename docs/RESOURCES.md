@@ -28,7 +28,7 @@ Neither tests nor demos restore these automatically. GPU/Transformers inference
 is optional and has not been validated by the offline suite.
 
 The former research archive was relocated at directory level to
-`~/research/archives`; the old `~/project/_research_archive` path is a compatibility
+`~/research/data/<project>/evidence`; the old `~/project/_research_archive` path is a compatibility
 symlink. The private relocation index and original Git bundles live under
-`~/research/archives/refactor-20261002-baseline`. That index is outside the public
+`~/research/data/<project>/evidence/refactor-20261002-baseline`. That index is outside the public
 repository and records actual machine paths; historical manifests were not edited.
