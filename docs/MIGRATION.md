@@ -27,3 +27,7 @@ results to old evidence. The original 800-row evidence and confirmation gate
 remain unchanged and are checked by `openagora reproduce`.
 
 See [MATERIALS.md](MATERIALS.md) for material ownership and deletion rules.
+
+The root `uv.lock` and contributor commands own both packages. The obsolete
+core-only lock and old pre-commit configuration are removed; run validation from
+the workspace root to use the maintained versions and rules.

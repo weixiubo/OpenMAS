@@ -8,13 +8,13 @@
     },
     {
       "path": ".github/workflows/openagora-ci.yml",
-      "sha256": "24133cf418c4e5e0123a2693aaa0265870b01ab56ac74d342e6a9638c6fe0a90",
-      "bytes": 998
+      "sha256": "cbbc8a9321fd7d73165a9d2e62fd51ed514d5958c3fe06094c6d14bcee6e4fc1",
+      "bytes": 1058
     },
     {
       "path": ".github/workflows/openagora-release.yml",
-      "sha256": "f0d4f030d67303942e3d7b5b11ada31c2381635a4b76ffaa52ed5b0c27a10eb8",
-      "bytes": 912
+      "sha256": "5c33342f72936f174d963a671f7949b9fdb4ec9cf6e1b99625a60eac6a8cb3a1",
+      "bytes": 969
     },
     {
       "path": ".gitignore",
@@ -28,8 +28,8 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "5638a8e9f7e0ab94531cfefb42c0da71f364ed556ce49413eaba685f3839d397",
-      "bytes": 1632
+      "sha256": "e088060902282b9ac7414cb1fef345a10e87fc1a228bd0ad8a280ae6030ec0ba",
+      "bytes": 2118
     },
     {
       "path": "DEVELOPMENT.md",
@@ -67,14 +67,14 @@
       "bytes": 79
     },
     {
-      "path": "code/core/.pre-commit-config.yaml",
-      "sha256": "97143fa3f3799bf6dee69e5afb78d4b957cc13511a79f1fdf0430556466eae1a",
-      "bytes": 317
-    },
-    {
       "path": "code/core/LICENSE",
       "sha256": "aa5b334a1dab98a1b76be7587bba68cb7b980755bc796679ab60effe28e9aead",
       "bytes": 10254
+    },
+    {
+      "path": "code/core/MANIFEST.in",
+      "sha256": "d9bb4b4fb3dd170f9e2ed682cbfb052e1343fcdf5593cae1459245dd4a6f2a7f",
+      "bytes": 75
     },
     {
       "path": "code/core/README.md",
@@ -437,11 +437,6 @@
       "bytes": 1079
     },
     {
-      "path": "code/core/uv.lock",
-      "sha256": "39c2d735ea928b7c1d0d906d5d7619cc113f23265527385429efb5a4b1486d8b",
-      "bytes": 180815
-    },
-    {
       "path": "code/experiments/.gitignore",
       "sha256": "f2ad9909ddb0fb34b88b159a0b73ad406fcc8848d0d8523ec6f92dfa4062fe03",
       "bytes": 129
@@ -450,6 +445,11 @@
       "path": "code/experiments/LICENSE",
       "sha256": "aa5b334a1dab98a1b76be7587bba68cb7b980755bc796679ab60effe28e9aead",
       "bytes": 10254
+    },
+    {
+      "path": "code/experiments/MANIFEST.in",
+      "sha256": "d280d5cbbc45ddd1028dc0a5cae086bbd8ada146fdbe5ccd906a278b51b7ed1f",
+      "bytes": 86
     },
     {
       "path": "code/experiments/README.md",
@@ -1013,8 +1013,8 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "14ba89488dff3602aafe4666a72bf47b012b4369836bee1658ac7b3e46047233",
-      "bytes": 1977
+      "sha256": "58c0ac77d89d4ce462fc02c7bdd515e6e4623c8dd599afa026a22bf042f182fd",
+      "bytes": 2226
     },
     {
       "path": "docs/MATERIALS.md",
@@ -1023,18 +1023,18 @@
     },
     {
       "path": "docs/MIGRATION.md",
-      "sha256": "519f0c06684f7d74e84b208a1cea902020b29520817396c402d9b1574e762914",
-      "bytes": 1970
+      "sha256": "e066e31468ccf02865bfe3de0d26d71cf9b244161fab14d97f833ef0dc38f9b1",
+      "bytes": 2189
     },
     {
       "path": "docs/RELEASE_NOTES.md",
-      "sha256": "ca4e8ddc7793c87e88628f7f776dd9c4f7e73391336541fac18429d870ee1b2e",
-      "bytes": 792
+      "sha256": "61c916e65f76954c6622d687da4c7e9810585d29a0a6970d16d351fb464e652b",
+      "bytes": 801
     },
     {
       "path": "docs/RESOURCES.md",
-      "sha256": "e4fc0614fea8e3e09767d179c29be419974be37005d1c98fce8329010d47c16c",
-      "bytes": 1829
+      "sha256": "83984aff6ad727969c771eab7646da5bfcad4c790df5960e95f76624e90cbeb5",
+      "bytes": 1855
     },
     {
       "path": "docs/TEST_MIGRATION.json",
@@ -1043,8 +1043,8 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "8da6f131bd7edfb9dfbfaa9c2fce5eed5897aca6a21844cefea3e0bfb1ccfd9f",
-      "bytes": 2867
+      "sha256": "4c7c48cd76029fe295886b340ed1df22e28cc262ab0863ac7fc96fe5e257940b",
+      "bytes": 3858
     },
     {
       "path": "docs/model_sources.json",
@@ -1105,6 +1105,11 @@
       "path": "scripts/check_release.py",
       "sha256": "6fe90b60c47015cb0cdd4f3fda44bcb791e60df68a2206537701305538960d77",
       "bytes": 4126
+    },
+    {
+      "path": "scripts/check_sdist.py",
+      "sha256": "352b59b3ffce12d96541751d9f13b089e1834a2ebb1ddd31dccf1468b08f94fb",
+      "bytes": 3833
     },
     {
       "path": "scripts/check_structure.py",

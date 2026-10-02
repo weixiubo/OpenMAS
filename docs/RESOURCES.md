@@ -27,8 +27,9 @@ Full image datasets require their publishers' access and redistribution terms.
 Neither tests nor demos restore these automatically. GPU/Transformers inference
 is optional and has not been validated by the offline suite.
 
-The former research archive was relocated at directory level to
-`~/research/data/<project>/evidence`; the old `~/project/_research_archive` path is a compatibility
-symlink. The private relocation index and original Git bundles live under
-`~/research/data/<project>/evidence/refactor-20261002-baseline`. That index is outside the public
-repository and records actual machine paths; historical manifests were not edited.
+Reviewed evidence needed by a project belongs under its data directory's
+`evidence/` subdirectory. Unclassified private research originals remain listed
+in the owner's `~/research/RECOVERY_INDEX.json`; that index and its action journal
+record their actual locations. Duplicate Git bundles were removed after their
+commits were checked against normal repository history. No public command relies
+on the private index or a legacy directory alias.

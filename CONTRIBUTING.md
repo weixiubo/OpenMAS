@@ -30,3 +30,12 @@ new experiment and claim; editing old hashes is not a migration strategy.
 Before release, regenerate `PUBLIC_MANIFEST.json` only after reviewing new public
 files, then test `scripts/export_public.py`. Building artifacts does not publish
 them. The root `LICENSE` and both distribution licenses must agree.
+
+## Source distribution validation
+
+The two library sdists must include their complete package tests and fixtures.
+The root workspace metadata and shared reference drivers come from the public
+source export. After `uv build --all-packages`, run
+`uv run --no-sync python scripts/check_sdist.py`. It reconstructs that workspace
+using the sdists, creates a fresh environment from the root lock, runs the full
+suite, rebuilds both wheels, and checks installed commands outside the sources.

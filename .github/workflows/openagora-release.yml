@@ -21,6 +21,7 @@ jobs:
           uv sync --locked
           uv build --all-packages
           uv run --no-sync python scripts/check_release.py
+          uv run --no-sync python scripts/check_sdist.py
       - name: Package public source snapshot
         run: |
           python scripts/export_public.py --target dist/public-source

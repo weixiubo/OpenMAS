@@ -27,6 +27,9 @@ CLI modules adapt files/options into domain objects. The runtime never imports
 the CLI. Optional experiment imports occur only when selected by a command.
 
 New stage manifests bind source hashes, experiment parameters and input hashes.
-They use a new identity, separate from sealed historical experiments. Old
-tools/configurations are byte-preserved in the public historical archive;
-none is silently relabelled as a run of the refactored implementation.
+They use a new identity, separate from sealed historical experiments. Required
+reference implementations and workflow inputs are byte-preserved under
+`tests/reference/source/`, with explicit identities in `tests/reference/MANIFEST.json`.
+The reviewed scientific evidence is bundled with the experiment package; unused
+historical tools are removed from the working tree. Existing repository history
+records prior versions without making them supported run entrypoints.

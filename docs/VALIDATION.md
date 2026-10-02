@@ -6,7 +6,7 @@ that its original assertion expressions are retained. Parameterized cases remain
 
 ## Run successfully
 
-- 229 maintained-suite tests, including all 213 original scenarios and 15 new
+- 229 maintained-suite tests, including all 213 original scenarios and 16 new
   resource/CLI/behavior/recovery tests.
 - 69 historical workflow scenarios against the immutable original source;
   these are additional verification, not added to the migrated-case count.
@@ -47,3 +47,19 @@ No model or remote experiment service was called and no repository or research m
 The material-cleanup checks and current retained source list are documented in
 MATERIALS.md and tests/reference/MANIFEST.json. Whole-source bundles are no longer
 part of the current distribution. Scientific evidence identities are unchanged.
+
+## Final distribution audit — 2026-10-03
+
+The current suite passed 229 collected cases. The two library sdists were tested in a reconstructed root workspace, with the shared reference drivers from the public source export.
+All required test fixtures and helper files were present. The rebuilt wheel
+payload matched the wheel built from the maintained checkout. Installed commands
+ran outside the source directory with their declared resource and optional
+dependency checks. Lint, formatting, types, structural limits and lock consistency
+passed. CI now includes `check_sdist.py` after the ordinary build.
+
+This verifies the maintained offline software and distribution boundaries.
+The resource-dependent experiments listed above remain unverified; the test
+result does not imply a new GPU experiment or a changed scientific conclusion.
+
+The current CI coverage gates were rerun: core 88.24% (minimum 85%) and
+experiments 83.44% (minimum 80%). The 69 original workflow checks also passed.
