@@ -1,0 +1,77 @@
+﻿provider:
+  name: mock
+  model: mock-leader-v1
+  provider_mode: mock
+  temperature: 0.0
+  seed: 42
+  timeout_s: 30
+  max_retries: 2
+  retry_backoff_base: 0.5
+  max_concurrency: 4
+  enable_idempotency_key: true
+
+paths:
+  db_path: ../../core/.openagora/openagora.db
+  artifacts_dir: ../../core/.openagora/artifacts
+
+thresholds:
+  max_negotiation_rounds: 5
+  max_reconfig_rounds: 3
+  max_reconfigs: 2
+  cooldown_steps: 3
+  cache_hit_threshold: 0.8
+  cache_write_perf_threshold: 0.7
+  cache_write_align_threshold: 0.5
+  cache_invalidate_threshold: 0.5
+  feedback_stable_threshold: 0.9
+  type_weight: 0.6
+
+toggles:
+  enable_negotiation: true
+  enable_runtime_reconfig: true
+  enable_cache: true
+
+runtime:
+  max_steps: 4
+  worker_count: 4
+  data_version: gaia40-v1
+
+templates:
+  registry_path: ../../core/src/openagora/templates/default_templates.yaml
+  template_id: default
+  version: v1
+  persona_strategy: seeded_random
+  fixed_personas: []
+  persona_pool: [planner, analyst, critic, integrator, researcher, verifier]
+
+plugins:
+  task_adapter: qa_tools
+  tool_adapter: local_tools
+  discovery_modules: []
+
+audit:
+  event_schema_version: v2
+  max_prompt_chars: 240
+
+task:
+  task_id: placeholder
+  prompt: placeholder
+  metadata: {}
+
+eval:
+  dataset_path: ../data/gaia_mini.jsonl
+  output_csv: ../results/gaia_rows.csv
+  output_summary_csv: ../results/gaia_summary.csv
+  output_failure_csv: ../results/gaia_failure_cases.csv
+  output_pairwise_csv: ../results/gaia_pairwise_stats.csv
+  output_judge_audit_jsonl: ../results/gaia_judge_audit.jsonl
+  output_manifest_json: ../results/gaia_manifest.json
+  output_hashes_json: ../results/gaia_hashes.json
+  gaia_manifest_path: ../data/gaia40_manifest.json
+  sample_limit: 40
+  judge_mode: rule
+  judge_model: gpt-4o-mini
+  borderline_low: 0.4
+  borderline_high: 0.8
+  stats_bootstrap_n: 10000
+  stats_seed: 2026

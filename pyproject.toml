@@ -1,0 +1,47 @@
+[project]
+name = "openmas-workspace"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = ["openagora", "openagora-experiments"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["code/core", "code/experiments"]
+
+[tool.uv.sources]
+openagora = { workspace = true }
+openagora-experiments = { workspace = true }
+
+[dependency-groups]
+dev = [
+  "pytest==8.4.2", "pytest-cov==6.3.0", "mypy==1.20.2",
+  "ruff==0.16.10", "pillow==12.3.0", "build>=1.2,<2",
+]
+inference = ["transformers>=4.57,<6", "torch>=2.6,<3", "accelerate>=1.6,<2", "pillow>=10,<13", "qwen-vl-utils>=0.0.11,<1"]
+services = ["openai>=1.51,<2"]
+
+[tool.pytest.ini_options]
+norecursedirs = ["reference", ".*", "build", "dist", "*.egg"]
+testpaths = ["code/core/tests", "code/experiments/tests"]
+addopts = "-q --import-mode=importlib"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["tests/reference", "reproduce/egor-v10"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["code/core/src/openagora", "code/experiments/openagora_experiments/egor/job.py", "code/experiments/openagora_experiments/egor/catalog.py"]
+mypy_path = ["code/core/src", "code/experiments"]
+follow_imports = "silent"
+
+[[tool.mypy.overrides]]
+module = ["yaml", "openai", "openagora_experiments.*"]
+ignore_missing_imports = true

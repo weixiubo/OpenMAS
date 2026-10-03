@@ -1,0 +1,1606 @@
+[
+  {
+    "result": {
+      "task_id": "reference-5",
+      "final_architecture": {
+        "roles": [
+          {
+            "worker_id": 1,
+            "role_name": "worker_1",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 2,
+            "role_name": "worker_2",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 3,
+            "role_name": "worker_3",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 4,
+            "role_name": "worker_4",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          }
+        ],
+        "communication_topology": {
+          "type": "dense",
+          "edges": [],
+          "broadcast_channels": [
+            "leader"
+          ]
+        },
+        "coordination": {
+          "mechanism": "mutual_adjustment",
+          "execution_order": "parallel",
+          "sync_points": []
+        }
+      },
+      "result": {
+        "answer": "5 Use tools to answer: what is 2 + 3?",
+        "quality_score": 0.9199999999999999,
+        "reference_answer": "5",
+        "is_correct": true
+      },
+      "ot_alignment": {
+        "predicted_config": "Adh",
+        "actual_config": "Adh",
+        "score": 1.0
+      },
+      "metrics": {
+        "quality_score": 0.9199999999999999,
+        "token_consumption": 1760.0,
+        "latency_seconds": 14.9,
+        "cost_usd": 0.0264,
+        "perf_cost_ratio": 34.848484848484844,
+        "reconfig_count": 0.0,
+        "negotiation_rounds": 1.0
+      },
+      "cache_used": false,
+      "negotiation_rounds": 1,
+      "reconfig_count": 0,
+      "override_used": false,
+      "deadlock_breaker": false
+    },
+    "events": [
+      {
+        "event_type": "run_started",
+        "payload": {
+          "task_id": "reference-5",
+          "provider": "mock-leader-v1",
+          "provider_mode": "mock",
+          "template_id": "default",
+          "template_version": "v1"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.624211+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "leader_proposal",
+          "variables": [
+            "architecture_json",
+            "feedback_json",
+            "persona",
+            "round_idx",
+            "signature_json",
+            "task_id",
+            "task_prompt"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.627372+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_proposal",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-proposal-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 92,
+          "user_prompt_chars": 1012
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.630015+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "worker_feedback",
+          "variables": [
+            "architecture_json",
+            "persona",
+            "signature_json",
+            "task_id",
+            "task_prompt",
+            "worker_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.632431+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-1-1",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 80,
+          "user_prompt_chars": 1033
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.634933+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "worker_feedback",
+          "variables": [
+            "architecture_json",
+            "persona",
+            "signature_json",
+            "task_id",
+            "task_prompt",
+            "worker_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.637906+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-1-2",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 80,
+          "user_prompt_chars": 1033
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.640928+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "worker_feedback",
+          "variables": [
+            "architecture_json",
+            "persona",
+            "signature_json",
+            "task_id",
+            "task_prompt",
+            "worker_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.643574+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-1-3",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 79,
+          "user_prompt_chars": 1033
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.646297+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "worker_feedback",
+          "variables": [
+            "architecture_json",
+            "persona",
+            "signature_json",
+            "task_id",
+            "task_prompt",
+            "worker_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.649141+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-1-4",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 83,
+          "user_prompt_chars": 1033
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.651762+00:00"
+      },
+      {
+        "event_type": "negotiation_round",
+        "payload": {
+          "round": 1,
+          "feedback": [
+            {
+              "worker_id": 1,
+              "overall_assessment": "conditional_agree",
+              "role_fit": "acceptable",
+              "concerns": [],
+              "confidence": "medium",
+              "suggestion": "mock:0bb99168b88ea5a5"
+            },
+            {
+              "worker_id": 2,
+              "overall_assessment": "agree",
+              "role_fit": "acceptable",
+              "concerns": [],
+              "confidence": "medium",
+              "suggestion": "mock:6f645fe375b0454f"
+            },
+            {
+              "worker_id": 3,
+              "overall_assessment": "conditional_agree",
+              "role_fit": "acceptable",
+              "concerns": [],
+              "confidence": "medium",
+              "suggestion": "mock:c17233be5f0e10b3"
+            },
+            {
+              "worker_id": 4,
+              "overall_assessment": "agree",
+              "role_fit": "acceptable",
+              "concerns": [],
+              "confidence": "medium",
+              "suggestion": "mock:6b0946c72d933bf5"
+            }
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.654645+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.657586+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 198
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.660095+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 0,
+          "summary": "mock:27496bcce641814f"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.662708+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 0,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.665304+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.668306+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-1",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 335
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.671196+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 1,
+          "summary": "mock:a64ee81856ee39e4"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.674064+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 1,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.677287+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.679949+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-2",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.682582+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 2,
+          "summary": "mock:28cfb8e75aed1b4e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.685354+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 2,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.687864+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.690570+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-3",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.693090+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 3,
+          "summary": "mock:920de3662655790e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.695543+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 3,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.698570+00:00"
+      },
+      {
+        "event_type": "cache_write",
+        "payload": {
+          "task_type": "multi_step_qa",
+          "version_id": 0,
+          "performance": 0.9199999999999999,
+          "ot_alignment": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.704637+00:00"
+      },
+      {
+        "event_type": "run_completed",
+        "payload": {
+          "quality_score": 0.9199999999999999,
+          "ot": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.709634+00:00"
+      },
+      {
+        "event_type": "audit_integrity",
+        "payload": {
+          "event_count": 30,
+          "redacted_hits": 0,
+          "prompt_truncations": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.712337+00:00"
+      }
+    ]
+  },
+  {
+    "result": {
+      "task_id": "reference-5",
+      "final_architecture": {
+        "roles": [
+          {
+            "worker_id": 1,
+            "role_name": "worker_1",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 2,
+            "role_name": "worker_2",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 3,
+            "role_name": "worker_3",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 4,
+            "role_name": "worker_4",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          }
+        ],
+        "communication_topology": {
+          "type": "dense",
+          "edges": [],
+          "broadcast_channels": [
+            "leader"
+          ]
+        },
+        "coordination": {
+          "mechanism": "mutual_adjustment",
+          "execution_order": "parallel",
+          "sync_points": []
+        }
+      },
+      "result": {
+        "answer": "5 Use tools to answer: what is 2 + 3?",
+        "quality_score": 0.9199999999999999,
+        "reference_answer": "5",
+        "is_correct": true
+      },
+      "ot_alignment": {
+        "predicted_config": "Adh",
+        "actual_config": "Adh",
+        "score": 1.0
+      },
+      "metrics": {
+        "quality_score": 0.9199999999999999,
+        "token_consumption": 1360.0,
+        "latency_seconds": 13.6,
+        "cost_usd": 0.0204,
+        "perf_cost_ratio": 45.09803921568627,
+        "reconfig_count": 0.0,
+        "negotiation_rounds": 0.0
+      },
+      "cache_used": true,
+      "negotiation_rounds": 0,
+      "reconfig_count": 0,
+      "override_used": false,
+      "deadlock_breaker": false
+    },
+    "events": [
+      {
+        "event_type": "run_started",
+        "payload": {
+          "task_id": "reference-5",
+          "provider": "mock-leader-v1",
+          "provider_mode": "mock",
+          "template_id": "default",
+          "template_version": "v1"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.727346+00:00"
+      },
+      {
+        "event_type": "cache_hit",
+        "payload": {
+          "task_id": "reference-5",
+          "task_type": "multi_step_qa",
+          "version_id": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.730348+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.733556+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 198
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.736205+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 0,
+          "summary": "mock:27496bcce641814f"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.738950+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 0,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.741386+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.743975+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-1",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 335
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.746585+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 1,
+          "summary": "mock:a64ee81856ee39e4"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.749507+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 1,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.752127+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.755424+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-2",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.758186+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 2,
+          "summary": "mock:28cfb8e75aed1b4e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.760865+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 2,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.763815+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.766341+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-3",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.769057+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 3,
+          "summary": "mock:920de3662655790e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.771676+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 3,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.774195+00:00"
+      },
+      {
+        "event_type": "cache_write",
+        "payload": {
+          "task_type": "multi_step_qa",
+          "version_id": 1,
+          "performance": 0.9199999999999999,
+          "ot_alignment": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.779954+00:00"
+      },
+      {
+        "event_type": "run_completed",
+        "payload": {
+          "quality_score": 0.9199999999999999,
+          "ot": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.785276+00:00"
+      },
+      {
+        "event_type": "audit_integrity",
+        "payload": {
+          "event_count": 20,
+          "redacted_hits": 0,
+          "prompt_truncations": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.788063+00:00"
+      }
+    ]
+  },
+  {
+    "result": {
+      "task_id": "reference-5",
+      "final_architecture": {
+        "roles": [
+          {
+            "worker_id": 1,
+            "role_name": "worker_1",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 2,
+            "role_name": "worker_2",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 3,
+            "role_name": "worker_3",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 4,
+            "role_name": "worker_4",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          }
+        ],
+        "communication_topology": {
+          "type": "dense",
+          "edges": [],
+          "broadcast_channels": [
+            "leader"
+          ]
+        },
+        "coordination": {
+          "mechanism": "mutual_adjustment",
+          "execution_order": "parallel",
+          "sync_points": []
+        }
+      },
+      "result": {
+        "answer": "5 Use tools to answer: what is 2 + 3?",
+        "quality_score": 0.9199999999999999,
+        "reference_answer": "5",
+        "is_correct": true
+      },
+      "ot_alignment": {
+        "predicted_config": "Adh",
+        "actual_config": "Adh",
+        "score": 1.0
+      },
+      "metrics": {
+        "quality_score": 0.9199999999999999,
+        "token_consumption": 1430.0,
+        "latency_seconds": 13.6,
+        "cost_usd": 0.021449999999999997,
+        "perf_cost_ratio": 42.89044289044289,
+        "reconfig_count": 0.0,
+        "negotiation_rounds": 0.0
+      },
+      "cache_used": false,
+      "negotiation_rounds": 0,
+      "reconfig_count": 0,
+      "override_used": false,
+      "deadlock_breaker": false
+    },
+    "events": [
+      {
+        "event_type": "run_started",
+        "payload": {
+          "task_id": "reference-5",
+          "provider": "mock-leader-v1",
+          "provider_mode": "mock",
+          "template_id": "default",
+          "template_version": "v1"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.820286+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "leader_proposal",
+          "variables": [
+            "architecture_json",
+            "feedback_json",
+            "persona",
+            "round_idx",
+            "signature_json",
+            "task_id",
+            "task_prompt"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.823319+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "negotiation_proposal",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-proposal-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 92,
+          "user_prompt_chars": 1012
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.826565+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.829161+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 198
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.831764+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 0,
+          "summary": "mock:27496bcce641814f"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.834456+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 0,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.836946+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.839745+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-1",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 335
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.842252+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 1,
+          "summary": "mock:a64ee81856ee39e4"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.844772+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 1,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.847402+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.849933+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-2",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.853366+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 2,
+          "summary": "mock:28cfb8e75aed1b4e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.856276+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 2,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.858817+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.861318+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-3",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.863850+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 3,
+          "summary": "mock:920de3662655790e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.866687+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 3,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.870917+00:00"
+      },
+      {
+        "event_type": "cache_write",
+        "payload": {
+          "task_type": "multi_step_qa",
+          "version_id": 0,
+          "performance": 0.9199999999999999,
+          "ot_alignment": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.876020+00:00"
+      },
+      {
+        "event_type": "run_completed",
+        "payload": {
+          "quality_score": 0.9199999999999999,
+          "ot": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.881294+00:00"
+      },
+      {
+        "event_type": "audit_integrity",
+        "payload": {
+          "event_count": 21,
+          "redacted_hits": 0,
+          "prompt_truncations": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.884545+00:00"
+      }
+    ]
+  },
+  {
+    "result": {
+      "task_id": "reference-5",
+      "final_architecture": {
+        "roles": [
+          {
+            "worker_id": 1,
+            "role_name": "worker_1",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 2,
+            "role_name": "worker_2",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 3,
+            "role_name": "worker_3",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          },
+          {
+            "worker_id": 4,
+            "role_name": "worker_4",
+            "role_description": "generalist executor",
+            "capabilities_required": [
+              "reasoning",
+              "tools"
+            ]
+          }
+        ],
+        "communication_topology": {
+          "type": "dense",
+          "edges": [],
+          "broadcast_channels": [
+            "leader"
+          ]
+        },
+        "coordination": {
+          "mechanism": "mutual_adjustment",
+          "execution_order": "parallel",
+          "sync_points": []
+        }
+      },
+      "result": {
+        "answer": "5 Use tools to answer: what is 2 + 3?",
+        "quality_score": 0.9199999999999999,
+        "reference_answer": "5",
+        "is_correct": true
+      },
+      "ot_alignment": {
+        "predicted_config": "Adh",
+        "actual_config": "Adh",
+        "score": 1.0
+      },
+      "metrics": {
+        "quality_score": 0.9199999999999999,
+        "token_consumption": 1210.0,
+        "latency_seconds": 13.6,
+        "cost_usd": 0.01815,
+        "perf_cost_ratio": 50.68870523415978,
+        "reconfig_count": 0.0,
+        "negotiation_rounds": 0.0
+      },
+      "cache_used": true,
+      "negotiation_rounds": 0,
+      "reconfig_count": 0,
+      "override_used": false,
+      "deadlock_breaker": false
+    },
+    "events": [
+      {
+        "event_type": "run_started",
+        "payload": {
+          "task_id": "reference-5",
+          "provider": "mock-leader-v1",
+          "provider_mode": "mock",
+          "template_id": "default",
+          "template_version": "v1"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.903225+00:00"
+      },
+      {
+        "event_type": "cache_hit",
+        "payload": {
+          "task_id": "reference-5",
+          "task_type": "multi_step_qa",
+          "version_id": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.906318+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.909128+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-0",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 198
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.912043+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 0,
+          "summary": "mock:27496bcce641814f"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.914644+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 0,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.917125+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.919836+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-1",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 335
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.922594+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 1,
+          "summary": "mock:a64ee81856ee39e4"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.925788+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 1,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.928403+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.931457+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-2",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.934137+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 2,
+          "summary": "mock:28cfb8e75aed1b4e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.936764+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 2,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.939278+00:00"
+      },
+      {
+        "event_type": "template_rendered",
+        "payload": {
+          "template_id": "default",
+          "template_version": "v1",
+          "template_key": "feedback_summary",
+          "variables": [
+            "feedback_json",
+            "persona",
+            "task_id"
+          ]
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.942918+00:00"
+      },
+      {
+        "event_type": "provider_call_audit",
+        "payload": {
+          "stage": "runtime_feedback",
+          "provider": "mock",
+          "model_name": "mock-leader-v1",
+          "request_id": "reference-5-feedback-summary-3",
+          "attempts": 1,
+          "retry_count": 0,
+          "status": "ok",
+          "system_prompt_chars": 76,
+          "user_prompt_chars": 308
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.945717+00:00"
+      },
+      {
+        "event_type": "feedback_summary",
+        "payload": {
+          "step_index": 3,
+          "summary": "mock:920de3662655790e"
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.948615+00:00"
+      },
+      {
+        "event_type": "runtime_step",
+        "payload": {
+          "step_index": 3,
+          "status": "on_track",
+          "diagnosis": {
+            "ot_alignment": 1.0
+          }
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.951411+00:00"
+      },
+      {
+        "event_type": "cache_write",
+        "payload": {
+          "task_type": "multi_step_qa",
+          "version_id": 1,
+          "performance": 0.9199999999999999,
+          "ot_alignment": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.956550+00:00"
+      },
+      {
+        "event_type": "run_completed",
+        "payload": {
+          "quality_score": 0.9199999999999999,
+          "ot": 1.0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.962140+00:00"
+      },
+      {
+        "event_type": "audit_integrity",
+        "payload": {
+          "event_count": 20,
+          "redacted_hits": 0,
+          "prompt_truncations": 0
+        },
+        "schema_version": "v2",
+        "ts": "2026-10-02T07:52:15.964835+00:00"
+      }
+    ]
+  }
+]

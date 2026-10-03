@@ -1,0 +1,36 @@
+﻿name: openagora-release
+
+on:
+  push:
+    tags:
+      - "openmas-v*"
+      - "openagora-v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.10.11"
+      - name: Build source artifacts
+        run: |
+          uv sync --locked
+          uv build --all-packages
+          uv run --no-sync python scripts/check_release.py
+          uv run --no-sync python scripts/check_sdist.py
+      - name: Package public source snapshot
+        run: |
+          python scripts/export_public.py --target dist/public-source
+          tar -czf openmas-public-source.tar.gz -C dist/public-source .
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+            openmas-public-source.tar.gz

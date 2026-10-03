@@ -1,0 +1,12 @@
+# Real model execution is explicit. Run doctor first; no resource is auto-downloaded.
+workflow: egor-stage
+stage: baseline
+tasks: "{data}/experiment/tasks.jsonl"
+model_path: "{models}/Qwen3-VL-8B-Instruct"
+model_name: Qwen/Qwen3-VL-8B-Instruct
+model_revision: 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b
+run_id: example-egor
+gpu_devices: "0"
+max_gpu_mem_gb: 20
+seed: 20260711
+resume: true

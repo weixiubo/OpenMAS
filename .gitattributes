@@ -1,0 +1,7 @@
+# Preserve release manifest and evidence bytes across platforms.
+* -text
+*.png binary
+*.pdf binary
+
+# Test reference identities include original whitespace and line endings.
+tests/reference/source/** -text -whitespace

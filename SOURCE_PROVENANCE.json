@@ -1,0 +1,8 @@
+{
+  "project": "OpenMAS / OpenAGORA / EGOR",
+  "baseline_commit": "bf37b49846393e97cc019b3dcbbe3511509e377c",
+  "baseline_description": "Existing working tree; EGOR-v10 sealed negative confirmation is the current scientific line.",
+  "cleanup_date": "2026-10-02",
+  "refactor_preserves_algorithm": true,
+  "historical_evidence_is_not_new_execution": true
+}

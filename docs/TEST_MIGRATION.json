@@ -1,0 +1,1223 @@
+{
+  "baseline_revision": "812f3e25997b35e41d4f38453fb49b50f0b8a40b",
+  "tests": [
+    {
+      "baseline": "code/core/tests/e2e/test_cli.py::test_cli_run_replay_eval_template_doctor_manifest_export",
+      "current": "code/core/tests/e2e/test_cli.py::test_cli_run_replay_eval_template_doctor_manifest_export",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/integration/test_engine_full_cycle.py::test_full_cycle_cache_reuse_manifest_events_and_hashes",
+      "current": "code/core/tests/integration/test_engine_full_cycle.py::test_full_cycle_cache_reuse_manifest_events_and_hashes",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_cache.py::test_invalidation_and_rollback",
+      "current": "code/core/tests/unit/test_cache.py::test_invalidation_and_rollback",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_config.py::test_invalid_threshold_order",
+      "current": "code/core/tests/unit/test_config.py::test_invalid_threshold_order",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_config.py::test_invalid_eval_borderline_order",
+      "current": "code/core/tests/unit/test_config.py::test_invalid_eval_borderline_order",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_fit_uses_worst_candidate_residual_per_task",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_fit_uses_worst_candidate_residual_per_task",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_fit_returns_infinite_correction_when_coverage_exceeds_sample_resolution",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_fit_returns_infinite_correction_when_coverage_exceeds_sample_resolution",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_keeps_baseline_without_positive_lower_bound",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_keeps_baseline_without_positive_lower_bound",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_chooses_largest_positive_lower_bound",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_chooses_largest_positive_lower_bound",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_uses_edit_distance_then_cost_for_equal_bounds",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_selector_uses_edit_distance_then_cost_for_equal_bounds",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_conservative_adaptation.py::test_calibration_rejects_mismatched_candidate_sets",
+      "current": "code/core/tests/unit/test_conservative_adaptation.py::test_calibration_rejects_mismatched_candidate_sets",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_contracts.py::test_public_contract_stable",
+      "current": "code/core/tests/unit/test_contracts.py::test_public_contract_stable",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_no_repair_when_existing_evidence_closes_every_gap",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_no_repair_when_existing_evidence_closes_every_gap",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_selects_capability_matching_largest_gap",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_selects_capability_matching_largest_gap",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_coverage_has_diminishing_returns_for_redundant_capabilities",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_coverage_has_diminishing_returns_for_redundant_capabilities",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_minimum_gain_and_worker_budget_bound_repair",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_minimum_gain_and_worker_budget_bound_repair",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_ties_prefer_lower_cost_then_action_id",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_ties_prefer_lower_cost_then_action_id",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_accepts_a_frozen_residual_gap_vector",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_accepts_a_frozen_residual_gap_vector",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_rejects_invalid_external_gap_values",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_planner_rejects_invalid_external_gap_values",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_evidence_requires_support_and_provenance",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_evidence_requires_support_and_provenance",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_evidence_gap_repair.py::test_validation_scores_must_reference_known_objects",
+      "current": "code/core/tests/unit/test_evidence_gap_repair.py::test_validation_scores_must_reference_known_objects",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_local_provider.py::test_local_provider_vllm_success",
+      "current": "code/core/tests/unit/test_local_provider.py::test_local_provider_vllm_success",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_local_provider.py::test_local_provider_vllm_http_error",
+      "current": "code/core/tests/unit/test_local_provider.py::test_local_provider_vllm_http_error",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_local_provider.py::test_local_provider_transformers_model_load_uses_torch_dtype_and_low_cpu_mem",
+      "current": "code/core/tests/unit/test_local_provider.py::test_local_provider_transformers_model_load_uses_torch_dtype_and_low_cpu_mem",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_local_provider.py::test_local_provider_transformers_oom_error_code_unchanged",
+      "current": "code/core/tests/unit/test_local_provider.py::test_local_provider_transformers_oom_error_code_unchanged",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_negotiation.py::test_consensus_and_override_logic",
+      "current": "code/core/tests/unit/test_negotiation.py::test_consensus_and_override_logic",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_negotiation.py::test_deadlock_breaker",
+      "current": "code/core/tests/unit/test_negotiation.py::test_deadlock_breaker",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_observers.py::test_redacting_observer_masks_sensitive_and_truncates",
+      "current": "code/core/tests/unit/test_observers.py::test_redacting_observer_masks_sensitive_and_truncates",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_ot_alignment.py::test_ot_alignment_score_range",
+      "current": "code/core/tests/unit/test_ot_alignment.py::test_ot_alignment_score_range",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_plugins.py::test_default_registry_builds_builtin_components",
+      "current": "code/core/tests/unit/test_plugins.py::test_default_registry_builds_builtin_components",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_plugins.py::test_registry_discovery_invalid_module",
+      "current": "code/core/tests/unit/test_plugins.py::test_registry_discovery_invalid_module",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_plugins.py::test_registry_creates_local_provider_when_mode_local",
+      "current": "code/core/tests/unit/test_plugins.py::test_registry_creates_local_provider_when_mode_local",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_provider.py::test_openai_provider_retries_and_audits",
+      "current": "code/core/tests/unit/test_provider.py::test_openai_provider_retries_and_audits",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_provider.py::test_openai_provider_non_retryable_error",
+      "current": "code/core/tests/unit/test_provider.py::test_openai_provider_non_retryable_error",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_runtime.py::test_runtime_reconfig_respects_limits",
+      "current": "code/core/tests/unit/test_runtime.py::test_runtime_reconfig_respects_limits",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_runtime.py::test_runtime_always_on_variant_consumes_reconfig_budget",
+      "current": "code/core/tests/unit/test_runtime.py::test_runtime_always_on_variant_consumes_reconfig_budget",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_storage_migration.py::test_sqlite_store_migrates_from_v1_schema",
+      "current": "code/core/tests/unit/test_storage_migration.py::test_sqlite_store_migrates_from_v1_schema",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_templates.py::test_template_render_missing_variable_fails",
+      "current": "code/core/tests/unit/test_templates.py::test_template_render_missing_variable_fails",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/core/tests/unit/test_templates.py::test_seeded_persona_assignment_reproducible",
+      "current": "code/core/tests/unit/test_templates.py::test_seeded_persona_assignment_reproducible",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_aggregate.py::test_summarize_rows",
+      "current": "code/experiments/tests/test_aggregate.py::test_summarize_rows",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_answer_only_v8.py::test_v8_gate_passes_only_with_sourcewise_completion_and_opened_signal",
+      "current": "code/experiments/tests/test_analyze_egor_answer_only_v8.py::test_v8_gate_passes_only_with_sourcewise_completion_and_opened_signal",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_answer_only_v8.py::test_v8_gate_fails_closed_on_one_source_completion_failure",
+      "current": "code/experiments/tests/test_analyze_egor_answer_only_v8.py::test_v8_gate_fails_closed_on_one_source_completion_failure",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_matrix.py::test_analysis_script_writes_scored_matrix_and_capability_cards",
+      "current": "code/experiments/tests/test_analyze_egor_matrix.py::test_analysis_script_writes_scored_matrix_and_capability_cards",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_matrix.py::test_frozen_run_all_sentinel_is_narrowly_translated",
+      "current": "code/experiments/tests/test_analyze_egor_matrix.py::test_frozen_run_all_sentinel_is_narrowly_translated",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_opened_verifier_diagnostic_contract.py::test_opened_verifier_analysis_freezes_primary_and_controls",
+      "current": "code/experiments/tests/test_analyze_egor_opened_verifier_diagnostic_contract.py::test_opened_verifier_analysis_freezes_primary_and_controls",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_analyze_egor_selector_statistics.py::test_selector_statistics_binds_inputs_and_computes_paired_contrasts",
+      "current": "code/experiments/tests/test_analyze_egor_selector_statistics.py::test_selector_statistics_binds_inputs_and_computes_paired_contrasts",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_partial_append_only_stage_is_outcome_blind_and_incomplete",
+      "current": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_partial_append_only_stage_is_outcome_blind_and_incomplete",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_completed_stage_requires_original_order_seed_and_compatible_manifest",
+      "current": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_completed_stage_requires_original_order_seed_and_compatible_manifest",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_task_id_subset_uses_original_task_file_seed_index",
+      "current": "code/experiments/tests/test_audit_egor_stage_completeness.py::test_task_id_subset_uses_original_task_file_seed_index",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_build_egor_prospective_configs.py::test_configs_share_paths_and_freeze_visual_as_best_fixed",
+      "current": "code/experiments/tests/test_build_egor_prospective_configs.py::test_configs_share_paths_and_freeze_visual_as_best_fixed",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_build_egor_prospective_configs.py::test_policy_combiner_rejects_task_mismatch_and_writes_manifest",
+      "current": "code/experiments/tests/test_build_egor_prospective_configs.py::test_policy_combiner_rejects_task_mismatch_and_writes_manifest",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_anls_uses_best_official_reference",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_anls_uses_best_official_reference",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_choice_scorer_does_not_treat_an_article_as_option_a",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_choice_scorer_does_not_treat_an_article_as_option_a",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_chartqa_relaxed_accuracy_uses_five_percent_numeric_tolerance",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_chartqa_relaxed_accuracy_uses_five_percent_numeric_tolerance",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_ocrbench_v2_vqa_matches_short_containment_and_long_anls",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_ocrbench_v2_vqa_matches_short_containment_and_long_anls",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_visible_features_are_answer_blind",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_visible_features_are_answer_blind",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_matrix_loader_rescores_every_organization_with_one_scorer",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_matrix_loader_rescores_every_organization_with_one_scorer",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_matrix_loader_rejects_a_missing_counterfactual_cell",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_matrix_loader_rejects_a_missing_counterfactual_cell",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_source_stratified_split_is_deterministic_and_disjoint",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_source_stratified_split_is_deterministic_and_disjoint",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_dependency_free_ridge_fits_a_simple_relation",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_dependency_free_ridge_fits_a_simple_relation",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_cago_pipeline.py::test_cago_evaluation_produces_auditable_decisions",
+      "current": "code/experiments/tests/test_cago_pipeline.py::test_cago_evaluation_produces_auditable_decisions",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_selector_gate.py::test_selector_gate_writes_pass_and_fail_reports",
+      "current": "code/experiments/tests/test_check_egor_selector_gate.py::test_selector_gate_writes_pass_and_fail_reports",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_two_safe_readings_are_required_and_recorded",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_two_safe_readings_are_required_and_recorded",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_unknown_compute_pid_fails_closed_without_waiting",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_unknown_compute_pid_fails_closed_without_waiting",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_memory_and_utilization_thresholds_fail_closed",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_memory_and_utilization_thresholds_fail_closed",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_nvidia_csv_parser_maps_processes_by_uuid",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_nvidia_csv_parser_maps_processes_by_uuid",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_nvidia_csv_parser_rejects_ambiguous_rows",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_nvidia_csv_parser_rejects_ambiguous_rows",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_injected_malformed_snapshot_fails_closed",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_injected_malformed_snapshot_fails_closed",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_allowed_pid_parser_rejects_ambiguous_values",
+      "current": "code/experiments/tests/test_check_egor_sharded_resource_gate.py::test_allowed_pid_parser_rejects_ambiguous_values",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_allows_only_declared_placement_fields",
+      "current": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_allows_only_declared_placement_fields",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_fails_closed_on_semantic_or_token_drift",
+      "current": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_fails_closed_on_semantic_or_token_drift",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_rejects_duplicate_task_keys",
+      "current": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_rejects_duplicate_task_keys",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_enforces_candidate_runtime_contract",
+      "current": "code/experiments/tests/test_compare_egor_runtime_equivalence.py::test_runtime_equivalence_enforces_candidate_runtime_contract",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_parser_accepts_one_line_and_explicit_abstention",
+      "current": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_parser_accepts_one_line_and_explicit_abstention",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_parser_safely_abstains_on_nonconforming_transport",
+      "current": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_parser_safely_abstains_on_nonconforming_transport",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_runner_binds_blind_prompt_parser_and_token_contract",
+      "current": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_runner_binds_blind_prompt_parser_and_token_contract",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_authorization_separates_verifier_answer_from_specialist_evidence",
+      "current": "code/experiments/tests/test_egor_answer_only_verifier_v8.py::test_v8_authorization_separates_verifier_answer_from_specialist_evidence",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_chartqa_splits.py::test_chartqa_selection_is_answer_blind_and_image_disjoint",
+      "current": "code/experiments/tests/test_egor_chartqa_splits.py::test_chartqa_selection_is_answer_blind_and_image_disjoint",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_chartqa_splits.py::test_chartqa_exclusions_read_source_image_or_materialized_path",
+      "current": "code/experiments/tests/test_egor_chartqa_splits.py::test_chartqa_exclusions_read_source_image_or_materialized_path",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_prompt_and_stage_are_answer_blind",
+      "current": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_prompt_and_stage_are_answer_blind",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_parser_rejects_truncated_outer_json",
+      "current": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_parser_rejects_truncated_outer_json",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_keeps_only_one_valid_card",
+      "current": "code/experiments/tests/test_egor_compact_verifier.py::test_compact_verifier_keeps_only_one_valid_card",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_gate_abstention_does_not_consume_core_records",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_gate_abstention_does_not_consume_core_records",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_certified_core_change_stops_at_pair",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_certified_core_change_stops_at_pair",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_remaining_gap_escalates_even_when_core_change_is_certified",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_remaining_gap_escalates_even_when_core_change_is_certified",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_uncertified_changed_answer_escalates",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_uncertified_changed_answer_escalates",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_unchanged_boolean_contradiction_escalates",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_unchanged_boolean_contradiction_escalates",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_nonboolean_disagreement_does_not_force_escalation",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_nonboolean_disagreement_does_not_force_escalation",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_escalation.py::test_canonical_boolean_requires_an_explicit_leading_answer",
+      "current": "code/experiments/tests/test_egor_escalation.py::test_canonical_boolean_requires_an_explicit_leading_answer",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_residual_gaps_use_validated_card_confidence_and_baseline_confidence",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_residual_gaps_use_validated_card_confidence_and_baseline_confidence",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_residual_gaps_accumulate_same_type_demands_and_honor_open_gap",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_residual_gaps_accumulate_same_type_demands_and_honor_open_gap",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_synthesis_audit_rejects_unknown_citations",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_synthesis_audit_rejects_unknown_citations",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_synthesis_audit_canonicalizes_only_change_status",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_synthesis_audit_canonicalizes_only_change_status",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_candidate_matrix_scores_all_rows_and_estimates_capability",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_candidate_matrix_scores_all_rows_and_estimates_capability",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_explicit_all_policy_triggers_an_empty_gap_row_without_relaxing_thresholds",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_explicit_all_policy_triggers_an_empty_gap_row_without_relaxing_thresholds",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_strict_provenance_gate_reverts_an_unsupported_changed_answer",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_strict_provenance_gate_reverts_an_unsupported_changed_answer",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evaluation.py::test_failed_synthesis_is_scored_as_an_all_row_failure",
+      "current": "code/experiments/tests/test_egor_evaluation.py::test_failed_synthesis_is_scored_as_an_all_row_failure",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_stage_validator_normalizes_benchmark_as_source_id",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_stage_validator_normalizes_benchmark_as_source_id",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_stage_validator_rejects_missing_source_identity",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_stage_validator_rejects_missing_source_identity",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_materializer_projects_nested_decisions_without_outcomes",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_materializer_projects_nested_decisions_without_outcomes",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_materializer_projects_frozen_selector_plans_and_task_ids",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_materializer_projects_frozen_selector_plans_and_task_ids",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_sparse_matrix_config_has_staged_candidates_and_controls",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_sparse_matrix_config_has_staged_candidates_and_controls",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_planner_freezes_only_outcome_blind_stage_inputs",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_planner_freezes_only_outcome_blind_stage_inputs",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_analyzer_charges_sequential_core_once_and_enforces_certificate",
+      "current": "code/experiments/tests/test_egor_evidence_escalation_scripts.py::test_analyzer_charges_sequential_core_once_and_enforces_certificate",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_execution.py::test_plans_are_source_blind_and_emit_only_selected_stages",
+      "current": "code/experiments/tests/test_egor_execution.py::test_plans_are_source_blind_and_emit_only_selected_stages",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_execution.py::test_policy_planner_script_writes_auditable_task_lists",
+      "current": "code/experiments/tests/test_egor_execution.py::test_policy_planner_script_writes_auditable_task_lists",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_execution.py::test_scheduler_records_convert_to_the_same_execution_contract",
+      "current": "code/experiments/tests/test_egor_execution.py::test_scheduler_records_convert_to_the_same_execution_contract",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_infographic_splits.py::test_builder_is_deterministic_excludes_old_images_and_separates_splits",
+      "current": "code/experiments/tests/test_egor_infographic_splits.py::test_builder_is_deterministic_excludes_old_images_and_separates_splits",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_internvl_uses_native_multimodal_chat_template",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_internvl_uses_native_multimodal_chat_template",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_qwen_uses_native_multimodal_chat_template",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_qwen_uses_native_multimodal_chat_template",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_frozen_request_token_budgets",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_frozen_request_token_budgets",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_internvl_requires_an_image_artifact",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_internvl_requires_an_image_artifact",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_egor_provider_fails_fast_instead_of_cpu_fallback_on_placement_oom",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_egor_provider_fails_fast_instead_of_cpu_fallback_on_placement_oom",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_egor_multi_gpu_loader_enforces_explicit_per_device_memory_caps",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_egor_multi_gpu_loader_enforces_explicit_per_device_memory_caps",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_egor_single_gpu_cpu_offload_uses_a_bounded_device_map",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_egor_single_gpu_cpu_offload_uses_a_bounded_device_map",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_egor_cpu_offload_rejects_an_ambiguous_placement",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_egor_cpu_offload_rejects_an_ambiguous_placement",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_provider_failure_is_recorded_in_audit",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_provider_failure_is_recorded_in_audit",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_local_provider.py::test_qwen35_uses_native_multimodal_path_and_requires_image",
+      "current": "code/experiments/tests/test_egor_local_provider.py::test_qwen35_uses_native_multimodal_path_and_requires_image",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_matched_controls.py::test_matched_random_preserves_trigger_and_template_multiset",
+      "current": "code/experiments/tests/test_egor_matched_controls.py::test_matched_random_preserves_trigger_and_template_multiset",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_matched_controls.py::test_matched_analysis_applies_certificate_only_to_random_repair",
+      "current": "code/experiments/tests/test_egor_matched_controls.py::test_matched_analysis_applies_certificate_only_to_random_repair",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_ocrbench_splits.py::test_transfer_selection_is_answer_blind_balanced_and_image_unique",
+      "current": "code/experiments/tests/test_egor_ocrbench_splits.py::test_transfer_selection_is_answer_blind_balanced_and_image_unique",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_ocrbench_splits.py::test_transfer_selection_supports_frozen_unequal_quotas",
+      "current": "code/experiments/tests/test_egor_ocrbench_splits.py::test_transfer_selection_supports_frozen_unequal_quotas",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_ocrbench_splits.py::test_exclusions_read_raw_json_and_normalized_jsonl",
+      "current": "code/experiments/tests/test_egor_ocrbench_splits.py::test_exclusions_read_raw_json_and_normalized_jsonl",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_ocrbench_splits.py::test_normalized_transfer_row_uses_official_metric",
+      "current": "code/experiments/tests/test_egor_ocrbench_splits.py::test_normalized_transfer_row_uses_official_metric",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_ocrbench_splits.py::test_math_qa_uses_the_official_vqa_metric_group",
+      "current": "code/experiments/tests/test_egor_ocrbench_splits.py::test_math_qa_uses_the_official_vqa_metric_group",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_planning.py::test_cross_type_capability_fit_uses_strict_provenance_closures",
+      "current": "code/experiments/tests/test_egor_planning.py::test_cross_type_capability_fit_uses_strict_provenance_closures",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_planning.py::test_dynamic_plans_use_only_baseline_gaps_and_frozen_cards",
+      "current": "code/experiments/tests/test_egor_planning.py::test_dynamic_plans_use_only_baseline_gaps_and_frozen_cards",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_planning.py::test_planned_policy_scores_only_selected_stages_with_strict_gate",
+      "current": "code/experiments/tests/test_egor_planning.py::test_planned_policy_scores_only_selected_stages_with_strict_gate",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_pilot_task_infers_real_image_mime_types",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_pilot_task_infers_real_image_mime_types",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_all_generation_prompts_are_answer_blind",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_all_generation_prompts_are_answer_blind",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_scheduler_prompt_is_answer_blind_and_parser_is_catalog_bound",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_scheduler_prompt_is_answer_blind_and_parser_is_catalog_bound",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_scheduler_stage_is_a_paid_outcome_blind_router_call",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_scheduler_stage_is_a_paid_outcome_blind_router_call",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_baseline_parser_discards_unknown_demands_and_unprovenanced_cards",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_baseline_parser_discards_unknown_demands_and_unprovenanced_cards",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_specialist_parser_enforces_assigned_type",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_specialist_parser_enforces_assigned_type",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_specialist_evidence_ids_are_namespaced_by_producer",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_specialist_evidence_ids_are_namespaced_by_producer",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_specialist_parser_owns_namespace_not_model_output",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_specialist_parser_owns_namespace_not_model_output",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_specialist_abstention_keeps_the_assigned_gap_open",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_specialist_abstention_keeps_the_assigned_gap_open",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_staged_runner_logs_usage_and_fuses_dependencies",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_staged_runner_logs_usage_and_fuses_dependencies",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_missing_dependency_is_recorded_without_invoking_provider",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_missing_dependency_is_recorded_without_invoking_provider",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_baseline_only_resynthesis_needs_no_specialist_dependency",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_baseline_only_resynthesis_needs_no_specialist_dependency",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_empty_provider_completion_is_a_resumable_error",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_empty_provider_completion_is_a_resumable_error",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_resume_subset_keeps_seed_from_original_task_order",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_resume_subset_keeps_seed_from_original_task_order",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_stage_loader_keeps_only_successful_records",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_stage_loader_keeps_only_successful_records",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_protocol.py::test_latest_stage_loader_preserves_final_failed_attempt",
+      "current": "code/experiments/tests/test_egor_protocol.py::test_latest_stage_loader_preserves_final_failed_attempt",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_qwen35_non_thinking.py::test_qwen35_structured_generation_disables_thinking",
+      "current": "code/experiments/tests/test_egor_qwen35_non_thinking.py::test_qwen35_structured_generation_disables_thinking",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_review_controls.py::test_nested_report_keeps_posthoc_boundary_and_isolates_conditions",
+      "current": "code/experiments/tests/test_egor_review_controls.py::test_nested_report_keeps_posthoc_boundary_and_isolates_conditions",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_review_controls.py::test_zero_event_interval_does_not_turn_no_observation_into_safety",
+      "current": "code/experiments/tests/test_egor_review_controls.py::test_zero_event_interval_does_not_turn_no_observation_into_safety",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_review_controls.py::test_direct_control_summary_reports_both_required_contrasts",
+      "current": "code/experiments/tests/test_egor_review_controls.py::test_direct_control_summary_reports_both_required_contrasts",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_visible_repair_features_exclude_gold_source_and_metadata",
+      "current": "code/experiments/tests/test_egor_selection.py::test_visible_repair_features_exclude_gold_source_and_metadata",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_feature_counts_receive_only_parser_validated_evidence",
+      "current": "code/experiments/tests/test_egor_selection.py::test_feature_counts_receive_only_parser_validated_evidence",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_selector_implements_finite_catalog_stability_bound",
+      "current": "code/experiments/tests/test_egor_selection.py::test_selector_implements_finite_catalog_stability_bound",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_selector_routes_complementary_repairs_and_abstains_without_gap",
+      "current": "code/experiments/tests/test_egor_selection.py::test_selector_routes_complementary_repairs_and_abstains_without_gap",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_selector_serialization_round_trip_preserves_decision",
+      "current": "code/experiments/tests/test_egor_selection.py::test_selector_serialization_round_trip_preserves_decision",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_standalone_quality_control_predicts_absolute_candidate_value",
+      "current": "code/experiments/tests/test_egor_selection.py::test_standalone_quality_control_predicts_absolute_candidate_value",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_same_design_ridge_subtraction_recovers_direct_paired_head",
+      "current": "code/experiments/tests/test_egor_selection.py::test_same_design_ridge_subtraction_recovers_direct_paired_head",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_selector_breaks_equal_advantage_ties_by_minimal_call_cost",
+      "current": "code/experiments/tests/test_egor_selection.py::test_selector_breaks_equal_advantage_ties_by_minimal_call_cost",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_forced_repair_ablation_bypasses_gap_and_abstention_only",
+      "current": "code/experiments/tests/test_egor_selection.py::test_forced_repair_ablation_bypasses_gap_and_abstention_only",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_selection.py::test_source_grouped_grid_selection_is_positive_and_safe",
+      "current": "code/experiments/tests/test_egor_selection.py::test_source_grouped_grid_selection_is_positive_and_safe",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_statistics.py::test_paired_bootstrap_reports_exact_sign_test_and_deterministic_interval",
+      "current": "code/experiments/tests/test_egor_statistics.py::test_paired_bootstrap_reports_exact_sign_test_and_deterministic_interval",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_statistics.py::test_paired_bootstrap_rejects_misaligned_inputs",
+      "current": "code/experiments/tests/test_egor_statistics.py::test_paired_bootstrap_rejects_misaligned_inputs",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v7_confirmation_analysis.py::test_confirmation_analysis_accepts_only_independently_verified_change",
+      "current": "code/experiments/tests/test_egor_v7_confirmation_analysis.py::test_confirmation_analysis_accepts_only_independently_verified_change",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v7_confirmation_analysis.py::test_exact_sign_test_handles_ties_and_one_sided_counts",
+      "current": "code/experiments/tests/test_egor_v7_confirmation_analysis.py::test_exact_sign_test_handles_ties_and_one_sided_counts",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v7_format_gate.py::test_format_gate_contract_has_no_scoring_path",
+      "current": "code/experiments/tests/test_egor_v7_format_gate.py::test_format_gate_contract_has_no_scoring_path",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v7_verified_overwrite_planner.py::test_planner_calls_verifier_only_for_a_real_core_overwrite",
+      "current": "code/experiments/tests/test_egor_v7_verified_overwrite_planner.py::test_planner_calls_verifier_only_for_a_real_core_overwrite",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v7_verified_overwrite_planner.py::test_planner_has_no_reference_or_outcome_argument",
+      "current": "code/experiments/tests/test_egor_v7_verified_overwrite_planner.py::test_planner_has_no_reference_or_outcome_argument",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v8_confirmation_analysis.py::test_v8_confirmation_uses_answer_only_verifier_and_specialist_evidence",
+      "current": "code/experiments/tests/test_egor_v8_confirmation_analysis.py::test_v8_confirmation_uses_answer_only_verifier_and_specialist_evidence",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v8_format_gate.py::test_v8_format_gate_is_outcome_blind_and_rejects_missing_sources",
+      "current": "code/experiments/tests/test_egor_v8_format_gate.py::test_v8_format_gate_is_outcome_blind_and_rejects_missing_sources",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_analysis.py::test_v9_keeps_supported_win_and_blocks_unsupported_direct_harm",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_analysis.py::test_v9_keeps_supported_win_and_blocks_unsupported_direct_harm",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_chartqa_selection_is_balanced_unique_and_answer_blind",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_chartqa_selection_is_balanced_unique_and_answer_blind",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_chartqa_selection_accepts_frozen_unequal_quotas",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_chartqa_selection_accepts_frozen_unequal_quotas",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_partition_is_stratified_and_disjoint",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_partition_is_stratified_and_disjoint",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_partition_accepts_frozen_unequal_stratum_quotas",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_partition_accepts_frozen_unequal_stratum_quotas",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_amended_ocrbench_quota_contract_is_exact",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_amended_ocrbench_quota_contract_is_exact",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_exclusion_loader_reads_only_visible_identity_fields",
+      "current": "code/experiments/tests/test_egor_v9_confirmation_data.py::test_exclusion_loader_reads_only_visible_identity_fields",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_accepts_blind_answer_with_one_evidence_bearing_specialist",
+      "current": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_accepts_blind_answer_with_one_evidence_bearing_specialist",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_falls_back_for_no_support_same_answer_or_transport_failure",
+      "current": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_falls_back_for_no_support_same_answer_or_transport_failure",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_two_specialist_control_is_stricter_and_has_no_outcome_inputs",
+      "current": "code/experiments/tests/test_egor_v9_supported_blind_resolver.py::test_v9_two_specialist_control_is_stricter_and_has_no_outcome_inputs",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_requires_verifier_and_heterogeneous_support",
+      "current": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_requires_verifier_and_heterogeneous_support",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_rejects_missing_or_disagreeing_verifier",
+      "current": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_rejects_missing_or_disagreeing_verifier",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_rejects_uncorroborated_or_unchanged_answer",
+      "current": "code/experiments/tests/test_egor_verification.py::test_verified_overwrite_rejects_uncorroborated_or_unchanged_answer",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verification.py::test_answer_agreement_handles_json_wrappers_and_output_prefixes",
+      "current": "code/experiments/tests/test_egor_verification.py::test_answer_agreement_handles_json_wrappers_and_output_prefixes",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verification.py::test_verification_interface_has_no_outcome_or_source_inputs",
+      "current": "code/experiments/tests/test_egor_verification.py::test_verification_interface_has_no_outcome_or_source_inputs",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_accepts_exact_fenced_and_one_missing_outer_brace",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_accepts_exact_fenced_and_one_missing_outer_brace",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_rejects_nonlocal_truncation_nested_recovery_and_extra_keys",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_rejects_nonlocal_truncation_nested_recovery_and_extra_keys",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_counts_explicit_or_sanitized_abstention_as_operational",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_counts_explicit_or_sanitized_abstention_as_operational",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_runner_is_answer_blind_and_records_parser_contract",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v6.py::test_v6_runner_is_answer_blind_and_records_parser_contract",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v7.py::test_v7_accepts_only_one_proven_trailing_backtick",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v7.py::test_v7_accepts_only_one_proven_trailing_backtick",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_egor_verifier_transport_v7.py::test_v7_runner_binds_stage_and_parser_contract",
+      "current": "code/experiments/tests/test_egor_verifier_transport_v7.py::test_v7_runner_binds_stage_and_parser_contract",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_fit_egor_repair_selector.py::test_fit_selector_script_writes_source_cross_validated_audit",
+      "current": "code/experiments/tests/test_fit_egor_repair_selector.py::test_fit_selector_script_writes_source_cross_validated_audit",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_gaia_loader.py::test_gaia_manifest_and_loader_success",
+      "current": "code/experiments/tests/test_gaia_loader.py::test_gaia_manifest_and_loader_success",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_gaia_manifest.py::test_gaia_manifest_dataset_hash_validation",
+      "current": "code/experiments/tests/test_gaia_manifest.py::test_gaia_manifest_dataset_hash_validation",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_gaia_pipeline.py::test_gaia_pipeline_outputs_and_reproducibility",
+      "current": "code/experiments/tests/test_gaia_pipeline.py::test_gaia_pipeline_outputs_and_reproducibility",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_judge.py::test_hybrid_judge_uses_llm_when_triggered",
+      "current": "code/experiments/tests/test_judge.py::test_hybrid_judge_uses_llm_when_triggered",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_judge.py::test_hybrid_judge_fallback_on_invalid_json",
+      "current": "code/experiments/tests/test_judge.py::test_hybrid_judge_fallback_on_invalid_json",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_materialize_egor_images.py::test_materializer_caps_pixels_without_using_answer_fields",
+      "current": "code/experiments/tests/test_materialize_egor_images.py::test_materializer_caps_pixels_without_using_answer_fields",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_protocol.py::test_rule_exact_numeric_alias_paths",
+      "current": "code/experiments/tests/test_protocol.py::test_rule_exact_numeric_alias_paths",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_qa_pipeline.py::test_qa_mini_ablation_outputs",
+      "current": "code/experiments/tests/test_qa_pipeline.py::test_qa_mini_ablation_outputs",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    },
+    {
+      "baseline": "code/experiments/tests/test_run_egor_stage.py::test_manifest_uses_explicit_source_commit_outside_git",
+      "current": "code/experiments/tests/test_run_egor_stage.py::test_manifest_uses_explicit_source_commit_outside_git",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_run_egor_stage.py::test_scheduler_catalog_is_derived_from_frozen_action_spec",
+      "current": "code/experiments/tests/test_run_egor_stage.py::test_scheduler_catalog_is_derived_from_frozen_action_spec",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_run_egor_stage.py::test_task_id_filter_preserves_original_seed_indices",
+      "current": "code/experiments/tests/test_run_egor_stage.py::test_task_id_filter_preserves_original_seed_indices",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_snapshot_egor_protected_analysis.py::test_snapshot_detects_content_metadata_and_file_set_changes",
+      "current": "code/experiments/tests/test_snapshot_egor_protected_analysis.py::test_snapshot_detects_content_metadata_and_file_set_changes",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_snapshot_egor_protected_analysis.py::test_snapshot_rejects_symlinked_protected_files",
+      "current": "code/experiments/tests/test_snapshot_egor_protected_analysis.py::test_snapshot_rejects_symlinked_protected_files",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": true
+    },
+    {
+      "baseline": "code/experiments/tests/test_stats.py::test_pairwise_stats_stable_seed",
+      "current": "code/experiments/tests/test_stats.py::test_pairwise_stats_stable_seed",
+      "assertions_preserved": true,
+      "historical_workflow_adapter": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "repo": "Qwen/Qwen3-VL-8B-Instruct",
+  "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+  "source": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct/tree/0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+  "all_tracked_content_matches_public_revision": true,
+  "files": [
+    {
+      "file": ".gitattributes",
+      "bytes": 1554,
+      "sha256": "88023d0a029a0c409b30c03b689c68605b559f5cefe06376e4a26b38ed795269"
+    },
+    {
+      "file": "README.md",
+      "bytes": 7324,
+      "sha256": "0a755b27d24994f27abf2086c8e0a191f1d5a3b809be135c92dc01d0601f770d"
+    },
+    {
+      "file": "chat_template.json",
+      "bytes": 5501,
+      "sha256": "564c70b200fe315685170dc08199d7cc922f3134ca96d3c4b24de351594c5b7b"
+    },
+    {
+      "file": "config.json",
+      "bytes": 1536,
+      "sha256": "0d40927d1989d5d624591e4fb7786df2ccae440e41a2c488dd949226e45f9fed"
+    },
+    {
+      "file": "generation_config.json",
+      "bytes": 282,
+      "sha256": "c811cf68c7599dc0d964c755f13b990db3fad6f2f5424f21f0cb91b4b113cfb1"
+    },
+    {
+      "file": "merges.txt",
+      "bytes": 1823226,
+      "sha256": "0de0bc38a29ea38eef099b677fa1ff52edd181e573529af26c4cd2136e233777"
+    },
+    {
+      "file": "model-00001-of-00004.safetensors",
+      "bytes": 4902275944,
+      "sha256": "d5d0aef0eb170fc7453a296c43c0849a56f510555d3588e4fd662bb35490aefa"
+    },
+    {
+      "file": "model-00002-of-00004.safetensors",
+      "bytes": 4915962496,
+      "sha256": "8be88fb5501e4d5719a6d4cc212e6a13480330e74f3e8c77daa1a68f199106b5"
+    },
+    {
+      "file": "model-00003-of-00004.safetensors",
+      "bytes": 4999831048,
+      "sha256": "83de00eafe6e0d57ccd009dbcf71c9974d74df2f016c27afb7e95aafd16b2192"
+    },
+    {
+      "file": "model-00004-of-00004.safetensors",
+      "bytes": 2716270024,
+      "sha256": "0a88b98e9f96270973f567e6a2c103ede6ccdf915ca3075e21c755604d0377a5"
+    },
+    {
+      "file": "model.safetensors.index.json",
+      "bytes": 68516,
+      "sha256": "3a360720bac87b7cebaa1f915999436a5e356d02785a54af16751305de0feb00"
+    },
+    {
+      "file": "preprocessor_config.json",
+      "bytes": 410,
+      "sha256": "2767d5efeb29362bc8e25e8e6baa9bc862da73fdcb5eee4db4e7f23f6625b6f7"
+    },
+    {
+      "file": "tokenizer.json",
+      "bytes": 7335720,
+      "sha256": "1d02dc379ab62dff8a6d266caa3882d279cf60460a2ce669beab33132ad6b628"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "bytes": 11106,
+      "sha256": "8ccf9ad86ad541e246d4d2bc59af729f21deaa4c05809d4f284934b5178c6c29"
+    },
+    {
+      "file": "video_preprocessor_config.json",
+      "bytes": 405,
+      "sha256": "2b17b535a4bc0119c27d385f8265a23d93d274a02e1b0fb6055d7676ac15d9b1"
+    },
+    {
+      "file": "vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  ],
+  "time": "2026-09-29T13:36:57+0800",
+  "reason": "Unreferenced public-model staging copy; current Ollama uses a separate model store"
+}

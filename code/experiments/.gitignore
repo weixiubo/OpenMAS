@@ -1,0 +1,8 @@
+﻿__pycache__/
+results/
+.pytest_cache/
+.tmp_test_runs/
+.tmp_pytest*/
+.coverage
+core/.openagora/
+openagora_experiments.egg-info/

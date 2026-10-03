@@ -1,0 +1,13 @@
+# A mock task; all outputs go to the configured research run root.
+provider:
+  provider_mode: mock
+  seed: 42
+task:
+  task_id: example-qa
+  prompt: "Use tools to answer: what is 2 + 3?"
+  metadata:
+    reference_answer: "5"
+    primary_type: multi_step_qa
+    uncertainty: high
+    complexity: high
+    interdependence: reciprocal

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "project": "OpenMAS",
+  "resources": [
+    {
+      "id": "qwen3-vl-8b",
+      "purpose": "Optional local multimodal EGOR experiments",
+      "root": "models",
+      "path": "Qwen3-VL-8B-Instruct",
+      "kind": "directory",
+      "version": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "source": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+      "license": "Apache-2.0",
+      "sha256": null,
+      "checksums": "docs/model_sources.json (individual files; no aggregate directory hash)",
+      "required_for": [
+        "local multimodal experiments"
+      ],
+      "how_to_get": "Obtain the specified revision in the model root, verify files against docs/model_sources.json, and set provider.local_model_path."
+    },
+    {
+      "id": "gaia",
+      "purpose": "Optional GAIA task execution",
+      "root": "data",
+      "path": "gaia",
+      "kind": "directory",
+      "version": "GAIA 2023",
+      "source": "https://huggingface.co/datasets/gaia-benchmark/GAIA",
+      "license": "Upstream dataset access terms; review before redistribution",
+      "sha256": null,
+      "checksum_status": "Selected dataset revision and file hashes are recorded per experiment.",
+      "required_for": [
+        "GAIA experiments"
+      ],
+      "how_to_get": "Obtain access from the dataset publisher, place the selected revision in this directory, and set eval.dataset_path. Record revision and file hashes in the experiment manifest."
+    },
+    {
+      "id": "ocrbench",
+      "purpose": "Optional image-backed EGOR transfer experiments",
+      "root": "data",
+      "path": "ocrbench",
+      "kind": "directory",
+      "version": "OCRBench; see experiment manifest for selected rows",
+      "source": "https://huggingface.co/datasets/echo840/OCRBench",
+      "license": "Upstream dataset/image terms; review before redistribution",
+      "sha256": null,
+      "checksum_status": "Original images external to the public repository",
+      "required_for": [
+        "image-backed EGOR experiments"
+      ],
+      "how_to_get": "Supply the task images and experiment manifest, preserving the source IDs and hashes of the selected study. Packaged outcome verification uses the recorded task rows."
+    }
+  ]
+}
