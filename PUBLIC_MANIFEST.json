@@ -28,13 +28,13 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "e088060902282b9ac7414cb1fef345a10e87fc1a228bd0ad8a280ae6030ec0ba",
-      "bytes": 2118
+      "sha256": "02284243a53ae7b5531c5ffdb9f19bb69017ecb3de427fac294b9c0fc13d8901",
+      "bytes": 1859
     },
     {
       "path": "DEVELOPMENT.md",
-      "sha256": "8a6adfdcd1776b3b289540623803ee2952f3c5da6d78ca03d56a8fa62710ba0a",
-      "bytes": 602
+      "sha256": "2b0c3e65e01d3c2b590bf790de59f250507ee9afcc584ce72ff98033fc895e25",
+      "bytes": 575
     },
     {
       "path": "LICENSE",
@@ -43,13 +43,13 @@
     },
     {
       "path": "OPEN_SOURCE_STATUS.md",
-      "sha256": "26fcfc1db8879ac8df4cecba77f666f730edb4895786c77bd70d8ab165d6f5e2",
-      "bytes": 407
+      "sha256": "7e580853f519b68488f1cf343223162cfa6c3918ba20462c3aa39f7733cecc5f",
+      "bytes": 480
     },
     {
       "path": "README.md",
-      "sha256": "bf73d26b1f24b983718f10c07c745ea4a244f6e1be2a227dd42852cdf489b519",
-      "bytes": 4460
+      "sha256": "871354ffaedbff1e8bf1d757239d04bb4e1e9a17a8eefa9dd817745a1ef6e16e",
+      "bytes": 3266
     },
     {
       "path": "SOURCE_PROVENANCE.json",
@@ -58,8 +58,8 @@
     },
     {
       "path": "THIRD_PARTY.md",
-      "sha256": "41afc146d8a5ce5036a92bfece63b12d88ad99d51039e3e35330beb5094d079e",
-      "bytes": 1459
+      "sha256": "6a6857a1c21ccfcbb8a45477f8cdd3414483187def92d99a027c6aa707bdfa84",
+      "bytes": 1195
     },
     {
       "path": "code/core/.gitignore",
@@ -78,8 +78,8 @@
     },
     {
       "path": "code/core/README.md",
-      "sha256": "9e09981af0b6ccf2eaa4c5ee06696f055019c079e9419150f3e3615c8a4c44d5",
-      "bytes": 713
+      "sha256": "8b030e83401d0c1877c4fff97b79c949fb459a76db824f26f2858b73207ec284",
+      "bytes": 643
     },
     {
       "path": "code/core/pyproject.toml",
@@ -253,8 +253,8 @@
     },
     {
       "path": "code/core/src/openagora/resource_catalog.json",
-      "sha256": "d70d1744e175c34552e060d8d6ec08ef6eb4b21a5639c10c15a4686921ea5c3e",
-      "bytes": 2142
+      "sha256": "02101673bf3d2781f340f74538e29b44151d83a12a447e666c35d874698ce2c5",
+      "bytes": 2237
     },
     {
       "path": "code/core/src/openagora/resources.py",
@@ -453,8 +453,8 @@
     },
     {
       "path": "code/experiments/README.md",
-      "sha256": "0a9fb623c7f4b7efd197dee30f12a6c5f7df7b113dcf62e7d1befb29c412d807",
-      "bytes": 135
+      "sha256": "c5d39ccd14a0363c12f75f8c497b24583f4599a0e007852ce75cace1d2565d29",
+      "bytes": 421
     },
     {
       "path": "code/experiments/data/gaia40_manifest.json",
@@ -1013,28 +1013,28 @@
     },
     {
       "path": "docs/ARCHITECTURE.md",
-      "sha256": "58c0ac77d89d4ce462fc02c7bdd515e6e4623c8dd599afa026a22bf042f182fd",
-      "bytes": 2226
+      "sha256": "d984b442da37f159a6fde6bd1300306d86a297bc58deb64bf76a2bb6b04d46db",
+      "bytes": 1779
     },
     {
       "path": "docs/MATERIALS.md",
-      "sha256": "023bb5237a1d966d908881e2ebb7c9a4ecc91024c536bf90501f877b5e90b347",
-      "bytes": 1359
+      "sha256": "81917b63984e439b2a2c08b06733889674be4884252dace3be23e954d0266d85",
+      "bytes": 1264
     },
     {
       "path": "docs/MIGRATION.md",
-      "sha256": "e066e31468ccf02865bfe3de0d26d71cf9b244161fab14d97f833ef0dc38f9b1",
-      "bytes": 2189
+      "sha256": "a467343607292470a419c3d04bc6eb1d5c30206f03ca9dc5279c710befac7e2e",
+      "bytes": 1460
     },
     {
       "path": "docs/RELEASE_NOTES.md",
-      "sha256": "61c916e65f76954c6622d687da4c7e9810585d29a0a6970d16d351fb464e652b",
-      "bytes": 801
+      "sha256": "07c691b068f9e59961eb4399cee455e37620aa9cd309d34f45373bcf0fc8f51c",
+      "bytes": 615
     },
     {
       "path": "docs/RESOURCES.md",
-      "sha256": "83984aff6ad727969c771eab7646da5bfcad4c790df5960e95f76624e90cbeb5",
-      "bytes": 1855
+      "sha256": "97952a68b13336fa3c979cb605638233629fe1f48ec55effa9a26c622fbbae0f",
+      "bytes": 1934
     },
     {
       "path": "docs/TEST_MIGRATION.json",
@@ -1043,8 +1043,8 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "4c7c48cd76029fe295886b340ed1df22e28cc262ab0863ac7fc96fe5e257940b",
-      "bytes": 3858
+      "sha256": "3f44e4f059f7ad46c2f7dc26fcd1dc7364f570ae23fa038da1fd15aef484f396",
+      "bytes": 1723
     },
     {
       "path": "docs/model_sources.json",
@@ -1063,8 +1063,8 @@
     },
     {
       "path": "reproduce/README.md",
-      "sha256": "512d6b67fecf152b4608e233acb289d6339fdcccb135d8ac11078dce0637dc23",
-      "bytes": 1630
+      "sha256": "766e16707d563df9291db4ff03cb09aed8e3f809961397e44b337bfdbf6fcbda",
+      "bytes": 1278
     },
     {
       "path": "reproduce/egor-v10/confirmation_gate.json",
@@ -1128,8 +1128,8 @@
     },
     {
       "path": "tests/reference/README.md",
-      "sha256": "7506c5e8ce25350210cc293888b672b18a72b75a28c853d4c8ce04c52ab96f21",
-      "bytes": 660
+      "sha256": "1863fc8d8ac898ec301240694a7c9f51a025c97eda61a9ff6a3026da9ea04b56",
+      "bytes": 536
     },
     {
       "path": "tests/reference/source/LICENSE",
@@ -1847,6 +1847,6 @@
       "bytes": 158126
     }
   ],
-  "material_policy": "Required tested references and scientific evidence are explicit. Unused whole-source bundles and obsolete environments are removed.",
+  "material_policy": "Source exports include project code, documentation, tests, regression references and scientific verification resources.",
   "public_edition": "2026-10-17"
 }

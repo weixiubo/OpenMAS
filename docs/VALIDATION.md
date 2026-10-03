@@ -1,65 +1,32 @@
-# Validation report — 2026-10-02
+# Validation
 
-Baseline: `812f3e25997b35e41d4f38453fb49b50f0b8a40b` (213 collected tests).
-The AST audit in `TEST_MIGRATION.json` maps every original named test and verifies
-that its original assertion expressions are retained. Parameterized cases remain.
+The offline suite covers runtime behavior, experiment analysis, configuration,
+resources and persistence. Run the commands in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
-## Run successfully
+| Check | Coverage |
+| --- | --- |
+| Main suite | 229 cases, including 213 original scenarios |
+| Reference workflows | 69 additional cases against original producer modules |
+| Runtime comparisons | Cold/warm cache with negotiation enabled/disabled; results, metrics, decisions and event order |
+| Stage lifecycle | Interruption, resume, task-index seeds, changed inputs, invalid scheduler references and resource checks |
+| Static checks | Ruff, boundary type checking, 600-line modules, 120-line functions and McCabe complexity 15 |
+| Coverage gates | Core at least 85%; experiments at least 80% |
 
-- 229 maintained-suite tests, including all 213 original scenarios and 16 new
-  resource/CLI/behavior/recovery tests.
-- 69 historical workflow scenarios against the immutable original source;
-  these are additional verification, not added to the migrated-case count.
-- Exact semantic comparison of four pre-refactor engine executions: cold/warm
-  cache with negotiation enabled/disabled. Task results, metrics, cache decisions
-  and ordered event payloads match, excluding wall-clock timestamps and UUIDs.
-- Ruff checks and formatting; strict types on the core and stage/config boundary.
-- All maintained package and utility modules satisfy 600 lines, functions satisfy
-  120 lines and complexity 15, with no blanket exceptions.
-- Core coverage 86.91% (required 85%); experiments coverage 83.30% (required 80%)
-  before the final added CLI preflight case. Both original thresholds passed.
-- Two wheels and two sdists include the Apache-2.0 license and required resources.
-  Wheels installed into a fresh environment run doctor, a real mock task with
-  cache reuse, and 800-row evidence verification from an unrelated directory.
-- New stage contracts cover interruption/resume, original-index seeds, changed
-  inputs/configuration, missing images/checksums and invalid scheduler references.
+The recorded 2026-10-03 coverage run reached 88.24% for the core and 83.44%
+for experiments. Runtime comparisons normalize wall-clock timestamps and
+generated UUIDs. `TEST_MIGRATION.json` records scenario and assertion mappings.
 
-## Frozen results
+## Distribution verification
 
-The EGOR-v10 evidence bytes and all existing sidecar hashes are unchanged.
-All 800 rows reproduce 5 wins, 1 loss, 794 ties, a 0.005 quality delta and 7
-accepted overwrites. The primary scientific gate remains false. The bootstrap
-interval is recorded, hash-verified evidence rather than a recomputed interval.
+Release checks inspect licenses and resources in both wheels and source
+distributions. Installed commands execute outside the source tree. The sdist
+check reconstructs the root workspace, creates a fresh locked environment,
+runs the complete suite and compares rebuilt wheel contents. Source exports
+are checked against `PUBLIC_MANIFEST.json`.
 
-## Resource-dependent validation outstanding
+## Scientific evidence
 
-Fresh model inference, GPU device behavior and the complete image datasets have
-not been restored or rerun. Optional dependency groups are resolved in uv.lock;
-their existence is not a numerical-equivalence claim. Use the resource catalog
-and doctor before restoring a pinned model and starting an explicit new run.
-
-A second source directory rebuilt its own environment from uv.lock and passed
-the maintained tests, historical tests and demo. Setup downloaded a few missing
-small development wheels; subsequent sync and all test execution were offline.
-
-No model or remote experiment service was called and no repository or research material was published.
-
-The material-cleanup checks and current retained source list are documented in
-MATERIALS.md and tests/reference/MANIFEST.json. Whole-source bundles are no longer
-part of the current distribution. Scientific evidence identities are unchanged.
-
-## Final distribution audit — 2026-10-03
-
-The current suite passed 229 collected cases. The two library sdists were tested in a reconstructed root workspace, with the shared reference drivers from the public source export.
-All required test fixtures and helper files were present. The rebuilt wheel
-payload matched the wheel built from the maintained checkout. Installed commands
-ran outside the source directory with their declared resource and optional
-dependency checks. Lint, formatting, types, structural limits and lock consistency
-passed. CI now includes `check_sdist.py` after the ordinary build.
-
-This verifies the maintained offline software and distribution boundaries.
-The resource-dependent experiments listed above remain unverified; the test
-result does not imply a new GPU experiment or a changed scientific conclusion.
-
-The current CI coverage gates were rerun: core 88.24% (minimum 85%) and
-experiments 83.44% (minimum 80%). The 69 original workflow checks also passed.
+`openagora reproduce` checks the EGOR-v10 file identities and the paired
+outcomes of all 800 task rows. The [reproduction guide](../reproduce/README.md)
+reports the registered confirmation criteria and resulting counts. Model
+experiments use the explicit model and dataset setup in [RESOURCES.md](RESOURCES.md).

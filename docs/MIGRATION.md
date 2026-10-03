@@ -2,32 +2,23 @@
 
 | Previous entry or location | Current entry |
 | --- | --- |
-| pip installation of two editable packages plus requirements-dev.lock | `uv sync --locked` from the root workspace |
-| `python examples/egor_smoke.py` | Kept as the two-support rule example; `openagora demo` exercises runtime and cache |
-| `python reproduce/verify.py` | `openagora reproduce`, also available in installed wheels |
-| `doctor --config ...` creating a SQLite database | Read-only `doctor`; configuration is optional |
-| `code/core/configs/default.yaml` | `configs/runtime.yaml` for the maintained mock entry |
+| Two editable installs and `requirements-dev.lock` | `uv sync --locked` from the root workspace |
+| `python examples/egor_smoke.py` | Same two-support example; `openagora demo` covers runtime and caching |
+| `python reproduce/verify.py` | `openagora reproduce`, including installed distributions |
+| `doctor --config ...` with database creation | Read-only `doctor`, with optional configuration |
+| `code/core/configs/default.yaml` | `configs/runtime.yaml` |
 | `code/experiments/scripts/run_egor_stage.py` | `openagora run --config configs/egor-stage.yaml` |
-| Version-labelled experiment scripts/configurations | Supported stages use run configs; unused wrappers removed |
+| Version-specific experiment wrappers | Explicit stage configurations |
 | `egor.protocol.PilotTask` | `egor.task_model.PilotTask` |
 | `egor.protocol.build_*` / `parse_*` | `egor.prompts.build_*` / `egor.parsing.parse_*` |
-| Private tensor/image helpers in `egor.local_provider` | `egor.model_inputs` |
-| `.openagora` or experiment results in source directories | Configurable `~/research/runs/OpenMAS` defaults |
+| Tensor/image helpers in `egor.local_provider` | `egor.model_inputs` |
+| Source-local `.openagora` and experiment outputs | Configurable run root, defaulting to `~/research/runs/OpenMAS` |
 
-Versioned experiment wrappers without a supported current entry are removed.
-The supported EGOR stages use explicit run configurations. Workflow regression
-tests use only their required original inputs under `tests/reference`, against
-the maintained experiment library; the independent workflow check also tests
-the reference producer. The CLI, workspace lock and public exporter are the
-single maintained installation and execution path.
+Run development commands at the workspace root to use the shared lock and
+checks. Relative paths in standalone YAML configurations resolve from the
+configuration directory. Assign a new run identity when source, inputs or
+configuration change.
 
-Existing standalone YAML files resolve explicit relative paths against their own
-directory. New stage runs use a new run identity; they cannot append new-source
-results to old evidence. The original 800-row evidence and confirmation gate
-remain unchanged and are checked by `openagora reproduce`.
-
-See [MATERIALS.md](MATERIALS.md) for material ownership and deletion rules.
-
-The root `uv.lock` and contributor commands own both packages. The obsolete
-core-only lock and old pre-commit configuration are removed; run validation from
-the workspace root to use the maintained versions and rules.
+`TEST_MIGRATION.json` maps regression scenarios. The 800-row EGOR-v10
+evidence retains its original identities and is verified independently by
+`openagora reproduce`.

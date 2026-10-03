@@ -1,9 +1,9 @@
 # Contributing
 
-Use the root workspace on Python 3.11: `uv sync --locked`. Both packages are
-editable members of one environment. Run these checks from the repository root:
+Use the root Python 3.11 workspace. Both packages are editable members of the
+environment created by `uv sync --locked`. Run checks from the repository root:
 
-```bash
+```sh
 uv run --no-sync ruff check code scripts examples
 uv run --no-sync ruff format --check code scripts examples
 uv run --no-sync mypy --config-file pyproject.toml
@@ -12,30 +12,26 @@ uv run --no-sync pytest
 uv run --no-sync python scripts/check_historical.py
 uv build --all-packages
 uv run --no-sync python scripts/check_release.py
+uv run --no-sync python scripts/check_sdist.py
 ```
 
-The maintained library and entry-point limits are 120 lines per function,
-600 lines per module and cyclomatic complexity 15. There are currently no named
-exceptions. Tests may have longer scenario setup. Frozen source is checked by
-SHA-256 and is never reformatted. Add focused failure/recovery tests when changing
-stage boundaries, resources, persistence or source bindings.
+Keep runtime mechanisms independent of configuration and provider setup.
+Changes to stage boundaries, resources, persistence or source bindings should
+include focused regression and failure-recovery tests. Generation prompts
+remain answer-blind; resumed stages preserve original task indices.
 
-Do not put datasets, weights, real credentials or complete runs in this tree.
-Use `doctor` and the resource catalog to describe missing prerequisites. Default
-tests must stay offline. Keep generation prompts answer-blind, preserve original
-task indices when resuming, and use a new run when input/config/source identity
-changes. Changes to an algorithm or preregistered criterion require an explicitly
-new experiment and claim; editing old hashes is not a migration strategy.
+Maintained modules have a 600-line limit, functions a 120-line limit and
+McCabe complexity a limit of 15. Regression source retains its original bytes
+and is verified by SHA-256. Algorithm or protocol changes receive a distinct
+experiment identity and retain the original evidence for comparison.
 
-Before release, regenerate `PUBLIC_MANIFEST.json` only after reviewing new public
-files, then test `scripts/export_public.py`. Building artifacts does not publish
-them. The root `LICENSE` and both distribution licenses must agree.
+Keep datasets, model weights, credentials and complete run outputs in the
+configured resource locations. Default tests use offline inputs.
 
-## Source distribution validation
-
-The two library sdists must include their complete package tests and fixtures.
-The root workspace metadata and shared reference drivers come from the public
-source export. After `uv build --all-packages`, run
-`uv run --no-sync python scripts/check_sdist.py`. It reconstructs that workspace
-using the sdists, creates a fresh environment from the root lock, runs the full
-suite, rebuilds both wheels, and checks installed commands outside the sources.
+Before a source export, review the file set and update `PUBLIC_MANIFEST.json`.
+`scripts/export_public.py` verifies each file's identity. The release checks
+inspect both distributions and execute installed commands outside the source
+tree. The sdist check reconstructs the workspace from both source distributions
+and the root metadata, runs the complete suite in a fresh locked environment,
+and compares rebuilt wheel contents. Dependency packages must be cached for
+this offline check. The root and both package licenses must agree.

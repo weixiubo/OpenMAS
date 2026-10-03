@@ -1,35 +1,36 @@
 # Architecture
 
-`openagora` owns domain models, negotiation, runtime execution, cache policy,
-storage and providers. `OpenAGORAEngine` coordinates the algorithm;
-`core.recording.RunRecording` owns manifest creation, ordered audit events,
-result persistence, completion and failure. Configuration loading and resource
-preflight live at the application boundary. Core mechanisms receive validated
-objects; they do not inspect sibling repositories or choose a model service.
+`openagora` owns domain models, negotiation, execution, caching, storage and
+providers. `OpenAGORAEngine` coordinates the runtime;
+`core.recording.RunRecording` manages manifests, ordered audit events,
+persisted results, completion and failure. Application boundaries resolve
+configuration and resources before passing validated objects to the core.
 
 `openagora_experiments` owns experiment-specific evidence, planners, source
-selection, numerical summaries and EGOR stages. EGOR task schemas are in
-`task_model`, answer-blind prompt rendering in `prompts`, strict output parsing
-in `parsing`, tensor/image preparation in `model_inputs`, and provider lifecycle
-in `local_provider`. `egor.job.StageConfig` is the configured run boundary;
-`egor.catalog` validates scheduler templates before inference.
+selection, numerical summaries and EGOR stages:
 
-CAGO separates task-source loading, outcome validation, ridge standardization,
-normal-equation construction, policy decisions and reporting. EGOR source
-cross-validation separates held-source fitting, operating-point summaries and
-grid selection. Deterministic split selection separates eligibility, ranking
-and interleaved image-unique allocation. The original arithmetic and ordering
-are retained and exercised by the migrated tests.
+| Module | Responsibility |
+| --- | --- |
+| `egor.task_model` | Task schemas |
+| `egor.prompts` | Answer-blind prompt construction |
+| `egor.parsing` | Structured output parsing |
+| `egor.model_inputs` | Tensor and image preparation |
+| `egor.local_provider` | Provider lifecycle |
+| `egor.job.StageConfig` | Configured stage execution |
+| `egor.catalog` | Scheduler-template validation |
 
-The public CLI offers `doctor`, `demo`, `run --config` and `reproduce`, plus the
-runtime's `replay`, `eval`, `manifest verify`, `export` and `template validate`.
-CLI modules adapt files/options into domain objects. The runtime never imports
-the CLI. Optional experiment imports occur only when selected by a command.
+CAGO separates task loading, outcome validation, ridge standardization,
+normal-equation construction, policy decisions and reporting. EGOR
+cross-validation separates held-source fitting, operating-point summaries
+and grid selection. Deterministic split selection applies eligibility,
+ranking and interleaved image-unique allocation in a defined order.
 
-New stage manifests bind source hashes, experiment parameters and input hashes.
-They use a new identity, separate from sealed historical experiments. Required
-reference implementations and workflow inputs are byte-preserved under
-`tests/reference/source/`, with explicit identities in `tests/reference/MANIFEST.json`.
-The reviewed scientific evidence is bundled with the experiment package; unused
-historical tools are removed from the working tree. Existing repository history
-records prior versions without making them supported run entrypoints.
+The CLI exposes `doctor`, `demo`, `run --config` and `reproduce`, together
+with `replay`, `eval`, `manifest verify`, `export` and `template validate`.
+CLI modules adapt files and options into domain objects. Optional experiment
+imports occur when a command selects them.
+
+Stage manifests bind source, parameter and input identities. Regression
+comparisons use original producer modules listed in
+`tests/reference/MANIFEST.json`. Scientific evidence is packaged separately
+from executable runtime logic and verified by the reproduction command.

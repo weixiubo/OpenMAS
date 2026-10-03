@@ -1,89 +1,81 @@
 # OpenMAS
 
-OpenMAS contains **OpenAGORA**, a multi-agent runtime, and **EGOR**, evidence
-repair and candidate-blind overwrite experiments. The two Python packages are
-`openagora` and `openagora-experiments`, managed in one uv workspace.
+OpenMAS provides **OpenAGORA**, a multi-agent runtime, and **EGOR**, an
+experimental framework for evidence repair and candidate-blind overwrite
+decisions. The `openagora` and `openagora-experiments` packages share one
+Python 3.11 workspace.
 
-## Install and check
+## Installation
 
-Use Linux/WSL and Python 3.11. From this repository:
+From the repository root on Linux or WSL:
 
-```bash
+```sh
 uv sync --locked
 uv run --no-sync openagora doctor
 uv run --no-sync openagora demo
 uv run --no-sync openagora reproduce
 ```
 
-The default environment, tests and demos use no model API and download no model
-weights or datasets. `demo` executes a constructed mock task and checks cache
-reuse. Its metrics are synthetic, not an empirical model benchmark. Add
-`--output /path/to/empty-demo-run` to retain its artifacts.
+`demo` runs a deterministic mock task and verifies cache reuse. Use
+`--output /path/to/demo-run` to retain its records. The default environment
+supports development, offline examples and evidence verification.
 
-`reproduce` verifies the packaged EGOR-v10 file hashes and recomputes outcomes
-from all 800 task rows. The primary confirmation **failed** its preregistered
-confidence-interval and overwrite-breadth gates. This negative result is
-preserved. The reported bootstrap interval is hash-bound recorded evidence;
-the arithmetic verifier does not regenerate it or rerun model inference.
+## Experiment execution
 
-## Run an explicit experiment
-
-```bash
+```sh
 uv run --no-sync openagora run --config configs/runtime.yaml
-uv run --no-sync openagora doctor --config configs/egor-stage.yaml
-# After restoring the required pinned model and task images:
 uv sync --locked --group inference
+uv run --no-sync openagora doctor --config configs/egor-stage.yaml
 uv run --no-sync openagora run --config configs/egor-stage.yaml
 ```
 
-`configs/runtime.yaml` runs the core with a mock provider. `egor-stage.yaml`
-shows an explicit real-model baseline stage. Supported stages are `baseline`,
-`verifier` (answer-only transport), `scheduler`, `specialist` and `synthesis`.
-Set a fresh `run_id` for a new experiment. A resumed stage preserves the original
-task-index seed schedule and refuses changed inputs, configuration or source.
-Optional inference dependencies are locked but GPU/model execution is a
-separate validation task; installing them does not establish a research result.
-OpenAI service integration is installed separately with `--group services`.
+`configs/runtime.yaml` selects the mock provider. `configs/egor-stage.yaml`
+specifies a local-model baseline stage and requires the configured model
+checkpoint and task images. EGOR supports `baseline`, `verifier`, `scheduler`,
+`specialist` and `synthesis` stages. The verifier stage uses answer-only
+transport. OpenAI client integration is available through `--group services`.
 
-## Resource locations
+Give each experiment a distinct `run_id`. Stage recovery preserves the
+original task-index seed schedule and checks source, input and configuration
+identities before continuing.
+
+## Configuration and resources
+
+Source and the project environment reside in the checkout. Default resource
+locations are:
 
 ```text
-~/project/OpenMAS/            source and .venv
-~/research/data/OpenMAS/      external datasets and task manifests
-~/research/models/           explicitly restored model revisions
-~/research/runs/OpenMAS/      databases, records and experiment outputs
-~/research/data/<project>/evidence/          original sources and recovery material
+~/research/data/OpenMAS/           datasets and task manifests
+~/research/data/OpenMAS/evidence/  external evidence
+~/research/models/                 model checkpoints
+~/research/runs/OpenMAS/            databases and experiment records
 ```
 
-Resource roots resolve in this order: command options (`--data-dir`,
-`--models-dir`, `--runs-dir`), `OPENMAS_DATA_DIR` / `OPENMAS_MODELS_DIR` /
-`OPENMAS_RUNS_DIR` / `OPENMAS_EVIDENCE_DIR`, then
-`~/.config/research/OpenMAS.json`, then the layout above. `XDG_CONFIG_HOME` and
-`OPENMAS_LOCAL_CONFIG` can relocate the local configuration. A local JSON
-example is in [resources](docs/RESOURCES.md). Public experiment paths support
-`{data}`, `{models}`, `{runs}` and `{evidence}`; other relative paths resolve
-against the configuration file, independent of the working directory.
+Resource roots resolve from command-line options, `OPENMAS_*_DIR` environment
+variables, `~/.config/research/OpenMAS.json`, then defaults. Experiment paths
+support `{data}`, `{models}`, `{runs}` and `{evidence}`; relative paths resolve
+from the configuration file. See [resources](docs/RESOURCES.md) for overrides.
 
-No package import creates directories. `doctor` is read-only and never creates
-a database, loads a model or contacts a service. Use `doctor --require <id>` to
-require a catalog resource. Missing optional resources do not prevent the
-offline demo. See the [resource catalog](code/core/src/openagora/resource_catalog.json).
+`doctor` inspects configuration and resource availability. Use
+`doctor --require <id>` for a required catalog item or `doctor --config FILE`
+for an experiment's preflight checks.
 
-## Research and maintenance scope
+## Research workflows
 
-- Maintained: runtime negotiation/execution/caching, explicit local-provider
-  boundary, EGOR evidence parsing, planning, two-support decisions and configured
-  stage execution; CAGO and QA/GAIA analysis remain library APIs.
-- Frozen: previous experiment orchestration/configuration and sealed evidence.
-  The required workflow regression inputs and file hashes are under `tests/reference`.
-  Historical workflow tests run against current library functions through a
-  test-only import adapter and separately against their untouched source.
-- Not established by this cleanup: fresh GPU experiments, full dataset recovery,
-  model numerical equivalence across dependency versions, or new scientific claims.
+The runtime provides negotiation, execution, caching, recording and replay.
+The experiment package provides EGOR evidence parsing, planning, two-support
+decisions and stage execution, together with CAGO and QA/GAIA analysis APIs.
 
-Run `uv run --no-sync pytest` for all migrated scenarios and new contracts.
-See [architecture](docs/ARCHITECTURE.md), [contributing](CONTRIBUTING.md),
-[migration](docs/MIGRATION.md), [validation](docs/VALIDATION.md),
-[reproduction](reproduce/README.md) and [third-party notices](THIRD_PARTY.md).
+`reproduce` verifies the packaged EGOR-v10 evidence and recomputes paired
+outcomes from 800 task rows. The [reproduction guide](reproduce/README.md)
+describes the recorded results, preregistered decision criteria and verifier
+outputs. New experiments record their own source and input identities.
 
-Material ownership and deletion rules: [docs/MATERIALS.md](docs/MATERIALS.md).
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) and [repository layout](docs/MATERIALS.md)
+- [Development](DEVELOPMENT.md) and [contributing](CONTRIBUTING.md)
+- [Migration](docs/MIGRATION.md) and [release notes](docs/RELEASE_NOTES.md)
+- [Validation](docs/VALIDATION.md) and [third-party notices](THIRD_PARTY.md)
+
+Project code is licensed under Apache-2.0.

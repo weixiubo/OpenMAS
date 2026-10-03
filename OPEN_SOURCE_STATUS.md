@@ -1,7 +1,9 @@
-# Open-source preparation status
+# Distribution overview
 
-The local refactor is validated; nothing has been published automatically.
-See [validation](docs/VALIDATION.md) for executed checks and missing external
-resources, and [release notes](docs/RELEASE_NOTES.md) for scope. The primary
-EGOR-v10 scientific gate remains false. Public source exports are controlled by
-PUBLIC_MANIFEST.json and verified by scripts/export_public.py.
+OpenMAS distributes the OpenAGORA runtime, the experiment package, examples,
+tests and EGOR-v10 evidence verification. The packages share a root uv lock.
+
+`PUBLIC_MANIFEST.json` defines the source export; `scripts/export_public.py`
+verifies its contents. See [release notes](docs/RELEASE_NOTES.md) for the
+release scope, [validation](docs/VALIDATION.md) for the verification procedure,
+and [third-party notices](THIRD_PARTY.md) for component attribution.

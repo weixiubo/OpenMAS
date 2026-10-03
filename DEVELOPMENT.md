@@ -1,11 +1,17 @@
 # Development
 
-Use the repository-root Python 3.11 uv workspace: `uv sync --locked`.
-Each repository owns its `.venv`; no sibling repository or previous virtual
-environment is required. See [contributing](CONTRIBUTING.md) for validation,
-[resources](docs/RESOURCES.md) for local configuration, and
-[migration](docs/MIGRATION.md) for the old-to-new entry mapping.
+OpenMAS uses Python 3.11 and a root uv workspace containing `openagora` and
+`openagora-experiments`:
 
-Optional groups: `inference` for local models and `services` for OpenAI clients.
-Default tests and demos are offline. Store full datasets, models and experiment
-outputs under your configurable research roots, outside this Git repository.
+```sh
+uv sync --locked
+uv run --no-sync pytest
+```
+
+The `inference` dependency group supplies local-model libraries; `services`
+supplies OpenAI clients. Install the groups required by the selected provider.
+Default tests and examples operate offline.
+
+See [contributing](CONTRIBUTING.md) for engineering and distribution checks,
+[resources](docs/RESOURCES.md) for data and model configuration, and
+[migration](docs/MIGRATION.md) for API and command changes.

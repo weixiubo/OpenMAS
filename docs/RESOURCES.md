@@ -1,35 +1,41 @@
 # Resources and local configuration
 
-The installable catalog is `code/core/src/openagora/resource_catalog.json`.
-Each record describes purpose, source, revision, license status, expected location,
-available checksums and recovery instructions. Missing model/dataset resources
-are optional for offline development. `present_unverified` means existence was
-checked, not content identity. Unknown checksums are explicitly recorded as null;
-do not substitute a guessed value.
+The installed [resource catalog](../code/core/src/openagora/resource_catalog.json)
+records purposes, sources, revisions, licenses, locations, known checksums and
+acquisition instructions. Offline examples and verification use packaged inputs.
 
-Example private file `~/.config/research/OpenMAS.json`:
+Resource roots resolve from command-line options, environment variables,
+local JSON, then defaults. The variables are `OPENMAS_DATA_DIR`,
+`OPENMAS_MODELS_DIR`, `OPENMAS_RUNS_DIR` and `OPENMAS_EVIDENCE_DIR`.
+Local configuration uses `$XDG_CONFIG_HOME/research/OpenMAS.json`, normally
+`~/.config/research/OpenMAS.json`; `OPENMAS_LOCAL_CONFIG` selects another file.
 
 ```json
 {
-  "paths": {"data": "~/research/data/OpenMAS", "models": "~/research/models", "runs": "~/research/runs/OpenMAS"},
+  "paths": {
+    "data": "~/research/data/OpenMAS",
+    "models": "~/research/models",
+    "runs": "~/research/runs/OpenMAS",
+    "evidence": "~/research/data/OpenMAS/evidence"
+  },
   "resources": {"qwen3-vl-8b": "~/research/models/Qwen3-VL-8B-Instruct"}
 }
 ```
 
-An individual catalog path can also be overridden with
-`OPENMAS_RESOURCE_QWEN3_VL_8B`. This changes diagnostics; set the experiment's
-`model_path` explicitly (usually `{models}/Qwen3-VL-8B-Instruct`) for execution.
-Resource-root CLI options override environment and local JSON values. Public
-experiment configuration is the final authority for the files an experiment uses.
+`OPENMAS_RESOURCE_QWEN3_VL_8B` overrides that catalog item's diagnostic path.
+Experiment execution uses the explicit `model_path` in its configuration,
+such as `{models}/Qwen3-VL-8B-Instruct`. Public paths support `{data}`,
+`{models}`, `{runs}` and `{evidence}`; other relative paths resolve from the
+configuration file.
 
-The original Qwen3-VL file checksums are recorded in `docs/model_sources.json`.
-Full image datasets require their publishers' access and redistribution terms.
-Neither tests nor demos restore these automatically. GPU/Transformers inference
-is optional and has not been validated by the offline suite.
+Local inference requires the `inference` dependency group, a selected model
+checkpoint and task images. [model_sources.json](model_sources.json) contains
+recorded Qwen3-VL file identities. Obtain image datasets and model files under
+their upstream terms, then run `openagora doctor --config FILE` before the
+configured stage. OpenAI clients use the separate `services` group.
 
-Reviewed evidence needed by a project belongs under its data directory's
-`evidence/` subdirectory. Unclassified private research originals remain listed
-in the owner's `~/research/RECOVERY_INDEX.json`; that index and its action journal
-record their actual locations. Duplicate Git bundles were removed after their
-commits were checked against normal repository history. No public command relies
-on the private index or a legacy directory alias.
+`doctor` reports `present_unverified` for a resource whose presence is known
+but whose content has no matching catalog checksum. A null checksum denotes
+unspecified identity. Experiment manifests bind the actual selected inputs.
+Diagnostics inspect files and configuration without loading models or starting
+services.
