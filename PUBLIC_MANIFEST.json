@@ -48,8 +48,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "871354ffaedbff1e8bf1d757239d04bb4e1e9a17a8eefa9dd817745a1ef6e16e",
-      "bytes": 3266
+      "sha256": "d311e75e665470541e87913dc45bebfaa09d38f0b2e7a6c940939320d4505c2c",
+      "bytes": 3615
     },
     {
       "path": "SOURCE_PROVENANCE.json",
@@ -1033,8 +1033,8 @@
     },
     {
       "path": "docs/RESOURCES.md",
-      "sha256": "97952a68b13336fa3c979cb605638233629fe1f48ec55effa9a26c622fbbae0f",
-      "bytes": 1934
+      "sha256": "3d054b95214e469c2517ecc7a4680422e9652e260759f47c682b3451db3738f5",
+      "bytes": 2209
     },
     {
       "path": "docs/TEST_MIGRATION.json",
@@ -1057,9 +1057,29 @@
       "bytes": 1237
     },
     {
+      "path": "handoff/catalog.json",
+      "sha256": "3b1f820d7501a22cb42694666f110ab29c6f523dc1a6e41c908a0a099a0d1897",
+      "bytes": 772
+    },
+    {
+      "path": "handoff/history-index.json",
+      "sha256": "ef7e9954121376966f6e13590841964608ccffd11fa2a2cbf92038e40fae843f",
+      "bytes": 5770
+    },
+    {
+      "path": "handoff/local-state/previous-release-ready.json",
+      "sha256": "b9a71ab401388781f148542a5840d8569d0a45b59f18d1e97e844a22eda52163",
+      "bytes": 385
+    },
+    {
+      "path": "handoff/material-disposition.json",
+      "sha256": "7e132c0fd0602c22f3602051fb7cf0ab250724c6cdc72792235faf5f9834fdf1",
+      "bytes": 447
+    },
+    {
       "path": "pyproject.toml",
-      "sha256": "98cc20b620fcb37b321f3200546b35fd356512df26623217a1283e157a758660",
-      "bytes": 1373
+      "sha256": "952ab9b4ef5f3e926d6f0da37c1c80d49384cce922bca0e64b08c18095b2a3f4",
+      "bytes": 1406
     },
     {
       "path": "reproduce/README.md",
@@ -1108,8 +1128,8 @@
     },
     {
       "path": "scripts/check_sdist.py",
-      "sha256": "352b59b3ffce12d96541751d9f13b089e1834a2ebb1ddd31dccf1468b08f94fb",
-      "bytes": 3833
+      "sha256": "6a1fbefc3054c4080b75891104b023d0322117ace308841935f92edd09670fa7",
+      "bytes": 3926
     },
     {
       "path": "scripts/check_structure.py",
@@ -1120,6 +1140,11 @@
       "path": "scripts/export_public.py",
       "sha256": "58c25c61d75c896921b7b20d100a326f21104b9cb898ff8758fe8e54a0c2e0aa",
       "bytes": 1385
+    },
+    {
+      "path": "scripts/handoff.py",
+      "sha256": "b133bb301134eb259aa2c35231a2a889145eb809e145725e913dff63156d1aaa",
+      "bytes": 15127
     },
     {
       "path": "tests/reference/MANIFEST.json",
@@ -1840,6 +1865,11 @@
       "path": "tests/reference_support.py",
       "sha256": "961e0fb5495445d3be95e7924d4fa9860d81e3d8b2abbac4c8e47b0152d3653d",
       "bytes": 1173
+    },
+    {
+      "path": "tests/test_handoff_restore.py",
+      "sha256": "a1df9c41ecdcd0246779069bcf56149d8a70a51d0af9ac4959a1b8e80e6a7d28",
+      "bytes": 7614
     },
     {
       "path": "uv.lock",

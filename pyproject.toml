@@ -24,7 +24,7 @@ services = ["openai>=1.51,<2"]
 
 [tool.pytest.ini_options]
 norecursedirs = ["reference", ".*", "build", "dist", "*.egg"]
-testpaths = ["code/core/tests", "code/experiments/tests"]
+testpaths = ["code/core/tests", "code/experiments/tests", "tests/test_handoff_restore.py"]
 addopts = "-q --import-mode=importlib"
 
 [tool.ruff]

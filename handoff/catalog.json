@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "project": "OpenMAS",
+  "repository": "weixiubo/OpenMAS",
+  "release": "handoff-2026-10-15",
+  "public": true,
+  "manifest": {
+    "name": "materials.json.gz",
+    "size": 2482750,
+    "sha256": "8a0a95c31a92ecc2ef74b8912b15b9875f4eb6d4a14e0daa081228dde62c7ac3"
+  },
+  "parts": [
+    {
+      "name": "materials.tar.gz.part001",
+      "size": 210067326,
+      "sha256": "6b6d8140ebf354ef48d986db2b122e793bea96582fe5a7d58499150b52032939"
+    }
+  ],
+  "archive_sha256": "6b6d8140ebf354ef48d986db2b122e793bea96582fe5a7d58499150b52032939",
+  "totals": {
+    "entries": 27782,
+    "files": 21687,
+    "logical_file_bytes": 810640207,
+    "unique_objects": 20147,
+    "unique_bytes": 801271702,
+    "excluded_paths": 6119,
+    "excluded_bytes": 289449003
+  }
+}

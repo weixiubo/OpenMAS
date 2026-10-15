@@ -1,5 +1,12 @@
 # OpenMAS
 
+## Project handoff
+
+Start with the [handoff guide](docs/HANDOFF.md) to recover the research records,
+paper sources, datasets and historical development versions. The
+[material release](https://github.com/weixiubo/OpenMAS/releases/tag/handoff-2026-10-15) is public;
+the restoration script downloads and verifies its contents without a GitHub login.
+
 OpenMAS provides **OpenAGORA**, a multi-agent runtime, and **EGOR**, an
 experimental framework for evidence repair and candidate-blind overwrite
 decisions. The `openagora` and `openagora-experiments` packages share one

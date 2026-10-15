@@ -1,0 +1,117 @@
+{
+  "reason": "User explicitly requested deletion of downloaded third-party full texts on 2026-10-15.",
+  "stores": [
+    {
+      "original_git_dir": "/home/weixiubo/research/archives/2026-10-02-open-source/OpenMAS（EGOR）/original/当前/.git",
+      "restored_git_dir": "snapshot/historical-git/git-01/repository.git",
+      "removed_blobs": [
+        "32a9e0a3ced4efd77b0d920ad96b4a75b71ac544",
+        "555a9cb6d3c66c4e1464676b25bc7de4cc05a976",
+        "6d325709ad69903ae8c0109eb129f4357c1307d2",
+        "7f00822e89d0090c7f6f03e2c9839075de4c016d",
+        "7ff8f2e65d0be46a934ec9e0b815d4f2c2fea425",
+        "8fa8800b3e1a7d7b48e8dfe928e9baa8f3611ebb",
+        "9243650899704cc3addc6ca9915103abe55568db",
+        "c8605d59f209ba78b14501208ae1e3fb1c500455",
+        "dd2a540b2ee608e715cb71b33da4d4e85332a9b9",
+        "de3292b004df9a6d558d439143cacc5ad3f58468",
+        "eb404d2efff5d1f5c50240922d7d171e5c05457f",
+        "fe344f190af6beb579cd7953f90f5dddb19f3210"
+      ],
+      "named_fulltexts": [
+        {
+          "object": "6d325709ad69903ae8c0109eb129f4357c1307d2",
+          "path": "resource/aaai_method_neighbors/cage_cal_2605.30653.pdf",
+          "sha256": "171bba3dbd2cc39cafc8efd1f33d20df2ceef3fc08e09124359a729484583743",
+          "size": 1031300
+        },
+        {
+          "object": "555a9cb6d3c66c4e1464676b25bc7de4cc05a976",
+          "path": "resource/baseline_and_related_work_partly/ADAS_Hu_2024.pdf",
+          "sha256": "32eb1c1a6888e35fae0f618e33c58698b54d9c49bc063fef91ee591719fca376",
+          "size": 801981
+        },
+        {
+          "object": "32a9e0a3ced4efd77b0d920ad96b4a75b71ac544",
+          "path": "resource/baseline_and_related_work_partly/AFlow_Zhang_2024.pdf",
+          "sha256": "9be15f695f11dd5bc634c1c026bd2270eff3d3c4a53c4d9b51c012b7bd03d521",
+          "size": 1342681
+        },
+        {
+          "object": "9243650899704cc3addc6ca9915103abe55568db",
+          "path": "resource/baseline_and_related_work_partly/AgentVerse_Chen_2023.pdf",
+          "sha256": "813320d58bd598428de4f2bba0c742f2ce305cdcda78537e6376e20543444397",
+          "size": 4652125
+        },
+        {
+          "object": "fe344f190af6beb579cd7953f90f5dddb19f3210",
+          "path": "resource/baseline_and_related_work_partly/AutoAgents_Chen_2024.pdf",
+          "sha256": "eb28d6d380b88dbdaabaaea10c9e55dac04706f903ccac22830f462f043385f6",
+          "size": 20659580
+        },
+        {
+          "object": "eb404d2efff5d1f5c50240922d7d171e5c05457f",
+          "path": "resource/baseline_and_related_work_partly/DyLAN_Liu_2023.pdf",
+          "sha256": "8c3eaa06b04db28bf3bea7064d03d357adf3414f6a3862a9cee03f39af2a9d06",
+          "size": 837579
+        },
+        {
+          "object": "7ff8f2e65d0be46a934ec9e0b815d4f2c2fea425",
+          "path": "resource/baseline_and_related_work_partly/Horling & Lesser — A Survey of Multi-Agent Organizational Paradigms.pdf",
+          "sha256": "333bc67fa42771331a5b2ffee5d6f59a9cd75003dccdfd02dc1b6bd61561183f",
+          "size": 294973
+        },
+        {
+          "object": "c8605d59f209ba78b14501208ae1e3fb1c500455",
+          "path": "resource/theoretical_foundation_partly/Carley — Computational Organization Theory.pdf",
+          "sha256": "075595b03025fb8ee29da3b23d20ad916160dd029b91fbcfe2e556eda5034c4d",
+          "size": 42491
+        },
+        {
+          "object": "8fa8800b3e1a7d7b48e8dfe928e9baa8f3611ebb",
+          "path": "resource/theoretical_foundation_partly/Galbraith — The Future of Organization Design.pdf",
+          "sha256": "4719e3217839a7fe11b716a9ad8d28e61cd465626006054987cb88b540461998",
+          "size": 235704
+        },
+        {
+          "object": "dd2a540b2ee608e715cb71b33da4d4e85332a9b9",
+          "path": "resource/theoretical_foundation_partly/Lunenburg — Organizational Structure Mintzberg's Framework .pdf",
+          "sha256": "92a1c54a2b719759eccb909f2c33d67c96f03381971d6beb8771a5e2d1d13361",
+          "size": 321762
+        },
+        {
+          "object": "de3292b004df9a6d558d439143cacc5ad3f58468",
+          "path": "resource/theoretical_foundation_partly/Mintzberg — A Typology of Organizational Structure.pdf",
+          "sha256": "56fa88424de5a635600f6b0c69e4af8e821976b431a415c683d0f01adf96fc86",
+          "size": 26652898
+        },
+        {
+          "object": "7f00822e89d0090c7f6f03e2c9839075de4c016d",
+          "path": "resource/theoretical_foundation_partly/Mintzberg — Structure in 5's.pdf",
+          "sha256": "e121cb3a5fa4acbc12b54fe6540f9f0957009aa00fcadda9bc711734ddedae93",
+          "size": 1580233
+        }
+      ],
+      "preserved_blob_count": 4534,
+      "original_commit_count": 290,
+      "mapped_commit_count": 290,
+      "unreferenced_blobs_preserved": 0,
+      "fsck_passed": true,
+      "commit_map_sha256": "87d91462cdf51b636ba7607f4f419f07d2534cd4b15f4423352b45c2b7643452"
+    }
+  ],
+  "deleted_fulltext_hashes": [
+    "075595b03025fb8ee29da3b23d20ad916160dd029b91fbcfe2e556eda5034c4d",
+    "171bba3dbd2cc39cafc8efd1f33d20df2ceef3fc08e09124359a729484583743",
+    "32eb1c1a6888e35fae0f618e33c58698b54d9c49bc063fef91ee591719fca376",
+    "333bc67fa42771331a5b2ffee5d6f59a9cd75003dccdfd02dc1b6bd61561183f",
+    "4719e3217839a7fe11b716a9ad8d28e61cd465626006054987cb88b540461998",
+    "56fa88424de5a635600f6b0c69e4af8e821976b431a415c683d0f01adf96fc86",
+    "813320d58bd598428de4f2bba0c742f2ce305cdcda78537e6376e20543444397",
+    "8c3eaa06b04db28bf3bea7064d03d357adf3414f6a3862a9cee03f39af2a9d06",
+    "92a1c54a2b719759eccb909f2c33d67c96f03381971d6beb8771a5e2d1d13361",
+    "9be15f695f11dd5bc634c1c026bd2270eff3d3c4a53c4d9b51c012b7bd03d521",
+    "e121cb3a5fa4acbc12b54fe6540f9f0957009aa00fcadda9bc711734ddedae93",
+    "eb28d6d380b88dbdaabaaea10c9e55dac04706f903ccac22830f462f043385f6"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "validations": {
+    "public_tests": 213,
+    "core_coverage_percent": 86.68,
+    "experiment_coverage_percent": 82.57,
+    "ruff": "pass",
+    "mypy": "pass",
+    "offline_evidence_rows": 800,
+    "formal_gate": false,
+    "baseline_original_failures": 4
+  },
+  "public_files": 288,
+  "public_manifest_sha256": "09b66ec6249879b21b5b3fad7491e668dbb5c8df1aa4ba3e60f2664ec7d7a0e7"
+}

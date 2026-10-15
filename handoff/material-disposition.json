@@ -1,0 +1,17 @@
+{
+  "project": "OpenMAS",
+  "transformations": [],
+  "discarded_bad_download_hashes": [],
+  "external_assets": [],
+  "optional_models": [],
+  "totals": {
+    "entries": 27782,
+    "files": 21687,
+    "logical_file_bytes": 810640207,
+    "unique_objects": 20147,
+    "unique_bytes": 801271702,
+    "excluded_paths": 6119,
+    "excluded_bytes": 289449003
+  },
+  "manifest_sha256": "8db3a12d3a567aa9724c2b952e0b79cdb2418c5b4ce79e1bce67d10e5b5de06c"
+}

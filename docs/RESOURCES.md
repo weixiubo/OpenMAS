@@ -39,3 +39,10 @@ but whose content has no matching catalog checksum. A null checksum denotes
 unspecified identity. Experiment manifests bind the actual selected inputs.
 Diagnostics inspect files and configuration without loading models or starting
 services.
+
+## Preserved handoff resources
+
+The [handoff guide](HANDOFF.md) provides restored local research inputs,
+resource bindings, exact download identities and historical limitations.
+Use those bindings for retained inputs and the setup below for new external
+models or services.

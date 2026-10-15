@@ -63,7 +63,13 @@ def main():
             unpack_member(sources[0], prefix, relative, workspace)
         # Workspace metadata and cross-package reference drivers are released in
         # the public source export, separately from the two library sdists.
-        for relative in ("pyproject.toml", "uv.lock", ".python-version", "scripts/check_historical.py"):
+        for relative in (
+            "pyproject.toml",
+            "uv.lock",
+            ".python-version",
+            "scripts/check_historical.py",
+            "scripts/handoff.py",
+        ):
             target = workspace / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, target)
