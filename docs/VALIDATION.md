@@ -5,7 +5,7 @@ resources and persistence. Run the commands in [CONTRIBUTING.md](../CONTRIBUTING
 
 | Check | Coverage |
 | --- | --- |
-| Main suite | 229 cases, including 213 original scenarios |
+| Main suite | 235 cases, including 213 original scenarios |
 | Reference workflows | 69 additional cases against original producer modules |
 | Runtime comparisons | Cold/warm cache with negotiation enabled/disabled; results, metrics, decisions and event order |
 | Stage lifecycle | Interruption, resume, task-index seeds, changed inputs, invalid scheduler references and resource checks |
@@ -30,3 +30,11 @@ are checked against `PUBLIC_MANIFEST.json`.
 outcomes of all 800 task rows. The [reproduction guide](../reproduce/README.md)
 reports the registered confirmation criteria and resulting counts. Model
 experiments use the explicit model and dataset setup in [RESOURCES.md](RESOURCES.md).
+
+## Public handoff acceptance
+
+Six additional handoff tests cover Unicode paths, missing and corrupt parts,
+repeat execution, modified-file protection, upstream assets and optional
+models. The current counts above include these cases. Full restoration,
+research-material checks and inherited limitations are recorded in the
+[handoff release](https://github.com/weixiubo/OpenMAS/releases/tag/handoff-2026-10-15).
