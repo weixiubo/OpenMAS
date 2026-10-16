@@ -119,7 +119,7 @@ class OTAlignmentScorer:
 class FixedPrototypeScorer(OTAlignmentScorer):
     """Internal ablation scorer with a fixed prototype prior.
 
-    This is used only for paper-side ablations such as "NoOT", where we want to
+    This is used only for paper-side ablations such as "NoOT", where the component is intended to
     remove task-theory guidance without changing the public runtime contract.
     """
 
