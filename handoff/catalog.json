@@ -2,26 +2,26 @@
   "schema": 2,
   "project": "OpenMAS",
   "repository": "weixiubo/OpenMAS",
-  "release": "research-artifacts-2026-10-16",
+  "release": "research-artifacts-2026-10-17",
   "public": true,
   "manifest": {
     "name": "materials.json.gz",
-    "size": 1996120,
-    "sha256": "3d5b251e2d998889f3d5f18aafc1f301c4c42b9604c0dbfbd2519252bd53b425"
+    "size": 1872996,
+    "sha256": "04d553cb551d49ebe8781cbf05c55936b1eec244e66752116eba74b2f96d7e9f"
   },
   "parts": [
     {
       "name": "materials.tar.gz.part001",
-      "size": 205723659,
-      "sha256": "a1558a9a1a3c87020ea164d4e97ec83ab55d3e68a4e92bac9cc7efbaf00a1989"
+      "size": 82025847,
+      "sha256": "f42682d218badecca1a6a106353de72618ea6151ca0c25aaa935be7af5f9e5d2"
     }
   ],
-  "archive_sha256": "a1558a9a1a3c87020ea164d4e97ec83ab55d3e68a4e92bac9cc7efbaf00a1989",
+  "archive_sha256": "f42682d218badecca1a6a106353de72618ea6151ca0c25aaa935be7af5f9e5d2",
   "totals": {
-    "entries": 25067,
-    "files": 19580,
-    "logical_file_bytes": 797806573,
-    "unique_objects": 19274,
-    "unique_bytes": 796049460
+    "entries": 23262,
+    "files": 18419,
+    "logical_file_bytes": 417849566,
+    "unique_objects": 18212,
+    "unique_bytes": 416110461
   }
 }

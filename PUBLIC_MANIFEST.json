@@ -48,7 +48,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "96f47434f038499ae363e975434fd7ab9bacac628e31ece7c2643ddbbf9d4f32",
+      "sha256": "2a62ea879c0790f0fcb4cc1c9e445ccceea3aed9c21a5555e95d8493f04f9834",
       "bytes": 3601
     },
     {
@@ -1018,8 +1018,8 @@
     },
     {
       "path": "docs/ARTIFACTS.md",
-      "sha256": "976583103b6beab2ca9339f6ab9b675a3c6700292292268fb85c2d575fe531c6",
-      "bytes": 3727
+      "sha256": "5d6875c8103f7cb9e885ee108e7c6a2e444acedbc1732fa593bdd769b0ce4e6b",
+      "bytes": 2825
     },
     {
       "path": "docs/MATERIALS.md",
@@ -1048,7 +1048,7 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "7743a5d927d67af8f98fd699998f78e4359a57ba561cc14c6959908bfba31527",
+      "sha256": "8123a1ef08054905301a9e86854d90b8d0979eb048a3249658848272312a488c",
       "bytes": 2221
     },
     {
@@ -1063,18 +1063,18 @@
     },
     {
       "path": "handoff/catalog.json",
-      "sha256": "8f98d8b3e5c9a7b5ffb69b14d244d216fbe99a0ba0ad56c4a4dc477747ed1a5e",
-      "bytes": 723
+      "sha256": "c41a644736554f04682033e5d912eb19b35bb72ea613d2eb377413afb323948f",
+      "bytes": 722
     },
     {
       "path": "handoff/history-index.json",
-      "sha256": "2608cf91f449f7225f3f10189f3e36e07707c955e084760a401c80b744902770",
-      "bytes": 8040
+      "sha256": "f94f64b10a2823f3f48a74625b4a0feb432b5b052956b35a744a31d35994c49d",
+      "bytes": 8053
     },
     {
       "path": "handoff/material-disposition.json",
-      "sha256": "cb6c0068129a5992cb60c270de2078197cc190b12ab05b3a2f4738f102e8b70d",
-      "bytes": 341
+      "sha256": "276a239351be0a6b30eed29d4278580618db666b3c7bd28d2b0cb185da5a95cd",
+      "bytes": 522
     },
     {
       "path": "pyproject.toml",
@@ -1083,8 +1083,8 @@
     },
     {
       "path": "reproduce/README.md",
-      "sha256": "766e16707d563df9291db4ff03cb09aed8e3f809961397e44b337bfdbf6fcbda",
-      "bytes": 1278
+      "sha256": "f32ab3931ab14818111f7e1ab9f36bc77686fa0b88a84867e5edf5de3ddae040",
+      "bytes": 1437
     },
     {
       "path": "reproduce/egor-v10/confirmation_gate.json",

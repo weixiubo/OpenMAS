@@ -28,3 +28,6 @@ runtime records the source and inputs used by that experiment.
 Workflow regression comparisons run through
 `uv run --no-sync python scripts/check_historical.py`. Their original producer
 modules and hashes are listed in `tests/reference/MANIFEST.json`.
+
+The current public edition omits recorded model-message bodies. Its integrity
+indexes bind the published records; recorded statistical outcomes are retained.
