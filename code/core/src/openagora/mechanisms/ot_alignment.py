@@ -119,8 +119,8 @@ class OTAlignmentScorer:
 class FixedPrototypeScorer(OTAlignmentScorer):
     """Internal ablation scorer with a fixed prototype prior.
 
-    This is used only for paper-side ablations such as "NoOT", where we want to
-    remove task-theory guidance without changing the public runtime contract.
+    Paper ablations such as "NoOT" use this scorer to remove task-theory
+    guidance while preserving the public runtime contract.
     """
 
     def __init__(self, fixed_config: str = "SS") -> None:

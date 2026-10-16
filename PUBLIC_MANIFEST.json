@@ -203,8 +203,8 @@
     },
     {
       "path": "code/core/src/openagora/mechanisms/ot_alignment.py",
-      "sha256": "f5c8bc0a1ed677b63f02b1bf48036688e388447c28e7eb257e00e77e978fbe53",
-      "bytes": 5717
+      "sha256": "a42dc45945f0ec75836870d24e08a21ce4627e84f68a4c6d9a1f0006b9416bd9",
+      "bytes": 5691
     },
     {
       "path": "code/core/src/openagora/mechanisms/runtime.py",
