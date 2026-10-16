@@ -42,46 +42,42 @@ def inspect_distributions() -> list[Path]:
     return wheels
 
 
+def command(args, *, cwd, env=None) -> str:
+    completed = subprocess.run(list(map(str, args)), cwd=cwd, env=env, capture_output=True, text=True)
+    if completed.returncode:
+        raise RuntimeError(completed.stdout + completed.stderr)
+    return completed.stdout
+
+
 def check_install(wheels: list[Path], temporary: Path) -> dict:
     uv = shutil.which("uv") or str(Path.home() / ".local/bin/uv")
     environment = temporary / "environment"
-    subprocess.run([uv, "venv", "--python", sys.executable, str(environment)], check=True, capture_output=True)
-    requirements = subprocess.check_output(
-        [uv, "export", "--locked", "--no-dev", "--no-emit-workspace", "--no-hashes"], cwd=ROOT
+    install_env = {
+        key: value
+        for key, value in os.environ.items()
+        if key not in {"PYTHONPATH", "VIRTUAL_ENV", "UV_PROJECT", "UV_PROJECT_ENVIRONMENT"}
+    }
+    install_env["UV_PROJECT_ENVIRONMENT"] = str(environment)
+    # Seed runtime dependencies directly from the lock, with no index lookup.
+    command(
+        [uv, "sync", "--locked", "--offline", "--no-dev", "--no-install-workspace", "--python", sys.executable],
+        cwd=ROOT,
+        env=install_env,
     )
-    constraints = temporary / "constraints.txt"
-    constraints.write_bytes(requirements)
     python = environment / "bin/python"
-    subprocess.run(
-        [
-            uv,
-            "pip",
-            "install",
-            "--offline",
-            "--python",
-            str(python),
-            "--constraint",
-            str(constraints),
-            *map(str, wheels),
-        ],
-        check=True,
-        capture_output=True,
+    command(
+        [uv, "pip", "install", "--offline", "--no-deps", "--python", python, *wheels],
+        cwd=temporary,
     )
+    command([uv, "pip", "check", "--python", python], cwd=temporary)
     directory = temporary / "unrelated-working-directory"
     directory.mkdir()
     env = {key: value for key, value in os.environ.items() if key != "PYTHONPATH" and not key.startswith("OPENMAS_")}
     env.update(HOME=str(temporary / "home"), XDG_CONFIG_HOME=str(temporary / "home/.config"))
     result = {}
-    for command in ("doctor", "demo", "reproduce"):
-        completed = subprocess.run(
-            [str(environment / "bin/openagora"), command],
-            cwd=directory,
-            env=env,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        result[command] = json.loads(completed.stdout)
+    for name in ("doctor", "demo", "reproduce"):
+        output = command([environment / "bin/openagora", name], cwd=directory, env=env)
+        result[name] = json.loads(output)
     assert result["doctor"]["status"] == "ok"
     assert result["demo"]["result"]["is_correct"] and result["demo"]["second_run_cache_hit"]
     assert result["reproduce"]["tasks"] == 800 and result["reproduce"]["evidence_verified"]
