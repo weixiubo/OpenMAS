@@ -18,7 +18,8 @@ def _semantic(value):
         return {
             k: _semantic(v)
             for k, v in value.items()
-            if k not in {
+            if k
+            not in {
                 "created_at",
                 "events_path",
                 "manifest_path",
