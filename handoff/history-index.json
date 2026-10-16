@@ -1,117 +1,89 @@
 {
-  "reason": "Separately collected third-party full-text documents were excluded from the public archive on 2026-10-15.",
-  "stores": [
+  "schema": 2,
+  "project": "OpenMAS",
+  "repositories": [
     {
-      "original_git_dir": "/home/weixiubo/research/archives/2026-10-02-open-source/OpenMAS（EGOR）/original/当前/.git",
-      "restored_git_dir": "snapshot/historical-git/git-01/repository.git",
-      "removed_blobs": [
-        "32a9e0a3ced4efd77b0d920ad96b4a75b71ac544",
-        "555a9cb6d3c66c4e1464676b25bc7de4cc05a976",
-        "6d325709ad69903ae8c0109eb129f4357c1307d2",
-        "7f00822e89d0090c7f6f03e2c9839075de4c016d",
-        "7ff8f2e65d0be46a934ec9e0b815d4f2c2fea425",
-        "8fa8800b3e1a7d7b48e8dfe928e9baa8f3611ebb",
-        "9243650899704cc3addc6ca9915103abe55568db",
-        "c8605d59f209ba78b14501208ae1e3fb1c500455",
-        "dd2a540b2ee608e715cb71b33da4d4e85332a9b9",
-        "de3292b004df9a6d558d439143cacc5ad3f58468",
-        "eb404d2efff5d1f5c50240922d7d171e5c05457f",
-        "fe344f190af6beb579cd7953f90f5dddb19f3210"
-      ],
-      "named_fulltexts": [
-        {
-          "object": "6d325709ad69903ae8c0109eb129f4357c1307d2",
-          "path": "resource/aaai_method_neighbors/cage_cal_2605.30653.pdf",
-          "sha256": "171bba3dbd2cc39cafc8efd1f33d20df2ceef3fc08e09124359a729484583743",
-          "size": 1031300
-        },
-        {
-          "object": "555a9cb6d3c66c4e1464676b25bc7de4cc05a976",
-          "path": "resource/baseline_and_related_work_partly/ADAS_Hu_2024.pdf",
-          "sha256": "32eb1c1a6888e35fae0f618e33c58698b54d9c49bc063fef91ee591719fca376",
-          "size": 801981
-        },
-        {
-          "object": "32a9e0a3ced4efd77b0d920ad96b4a75b71ac544",
-          "path": "resource/baseline_and_related_work_partly/AFlow_Zhang_2024.pdf",
-          "sha256": "9be15f695f11dd5bc634c1c026bd2270eff3d3c4a53c4d9b51c012b7bd03d521",
-          "size": 1342681
-        },
-        {
-          "object": "9243650899704cc3addc6ca9915103abe55568db",
-          "path": "resource/baseline_and_related_work_partly/AgentVerse_Chen_2023.pdf",
-          "sha256": "813320d58bd598428de4f2bba0c742f2ce305cdcda78537e6376e20543444397",
-          "size": 4652125
-        },
-        {
-          "object": "fe344f190af6beb579cd7953f90f5dddb19f3210",
-          "path": "resource/baseline_and_related_work_partly/AutoAgents_Chen_2024.pdf",
-          "sha256": "eb28d6d380b88dbdaabaaea10c9e55dac04706f903ccac22830f462f043385f6",
-          "size": 20659580
-        },
-        {
-          "object": "eb404d2efff5d1f5c50240922d7d171e5c05457f",
-          "path": "resource/baseline_and_related_work_partly/DyLAN_Liu_2023.pdf",
-          "sha256": "8c3eaa06b04db28bf3bea7064d03d357adf3414f6a3862a9cee03f39af2a9d06",
-          "size": 837579
-        },
-        {
-          "object": "7ff8f2e65d0be46a934ec9e0b815d4f2c2fea425",
-          "path": "resource/baseline_and_related_work_partly/Horling & Lesser — A Survey of Multi-Agent Organizational Paradigms.pdf",
-          "sha256": "333bc67fa42771331a5b2ffee5d6f59a9cd75003dccdfd02dc1b6bd61561183f",
-          "size": 294973
-        },
-        {
-          "object": "c8605d59f209ba78b14501208ae1e3fb1c500455",
-          "path": "resource/theoretical_foundation_partly/Carley — Computational Organization Theory.pdf",
-          "sha256": "075595b03025fb8ee29da3b23d20ad916160dd029b91fbcfe2e556eda5034c4d",
-          "size": 42491
-        },
-        {
-          "object": "8fa8800b3e1a7d7b48e8dfe928e9baa8f3611ebb",
-          "path": "resource/theoretical_foundation_partly/Galbraith — The Future of Organization Design.pdf",
-          "sha256": "4719e3217839a7fe11b716a9ad8d28e61cd465626006054987cb88b540461998",
-          "size": 235704
-        },
-        {
-          "object": "dd2a540b2ee608e715cb71b33da4d4e85332a9b9",
-          "path": "resource/theoretical_foundation_partly/Lunenburg — Organizational Structure Mintzberg's Framework .pdf",
-          "sha256": "92a1c54a2b719759eccb909f2c33d67c96f03381971d6beb8771a5e2d1d13361",
-          "size": 321762
-        },
-        {
-          "object": "de3292b004df9a6d558d439143cacc5ad3f58468",
-          "path": "resource/theoretical_foundation_partly/Mintzberg — A Typology of Organizational Structure.pdf",
-          "sha256": "56fa88424de5a635600f6b0c69e4af8e821976b431a415c683d0f01adf96fc86",
-          "size": 26652898
-        },
-        {
-          "object": "7f00822e89d0090c7f6f03e2c9839075de4c016d",
-          "path": "resource/theoretical_foundation_partly/Mintzberg — Structure in 5's.pdf",
-          "sha256": "e121cb3a5fa4acbc12b54fe6540f9f0957009aa00fcadda9bc711734ddedae93",
-          "size": 1580233
-        }
-      ],
-      "preserved_blob_count": 4534,
-      "original_commit_count": 290,
-      "mapped_commit_count": 290,
-      "unreferenced_blobs_preserved": 0,
-      "fsck_passed": true,
-      "commit_map_sha256": "87d91462cdf51b636ba7607f4f419f07d2534cd4b15f4423352b45c2b7643452"
+      "id": "research",
+      "bundle": "snapshot/source-history/research/source.bundle",
+      "repository": "snapshot/source-history/research/repository.git",
+      "head": "refs/heads/research/egor-aaai27-review-revision",
+      "refs": {
+        "refs/heads/research/egor-aaai27-review-revision": "073274de3e9f4798791a010e979828a374381c28",
+        "refs/heads/保留改动/egor_aaai27_submission.zip-4ef0b809": "64368a6e0e9d3a78bb93202259d0f83dab58d47e",
+        "refs/heads/保留改动/final_clone_b1a87724-17d7c602": "be4c3650c6f18eb3543110befd1b79139380335f",
+        "refs/heads/保留改动/final_codex_v8_confirmation_work_20260718-e151dc2c": "1cb5c26991ee8a051328a988608c4ab8b624c5d7",
+        "refs/heads/保留改动/supplementary-research-70288fd8": "83e9dd5507ef22c35eca684ef796a01eabde1d9a",
+        "refs/heads/来源版本/archive/legacy-openmas-wip-20260717": "4acab78f487c82a6b7ab64051da2ff96713925f9",
+        "refs/heads/来源版本/codex/paper-first-read-pass": "905874822ff55d4afa16783e6e435430bced798e",
+        "refs/heads/来源版本/feat/strong-accept-experiments": "3fd477773a27671c99fc2d31a76e3e2255169b73",
+        "refs/heads/来源版本/recovery/egor-analysis-only": "cb91a290c927fb3abc2cee8a6a178b0b91d38fdb",
+        "refs/heads/来源版本/recovery/ocrbench-validator-20260717": "238394d5bcab2484a5aee347eb6372a57cf68d9d",
+        "refs/heads/来源版本/research/aaai-method": "75d56de59547e78f15b12b247079bdcc300cf1f8",
+        "refs/heads/来源版本/research/egor-aaai27-final": "342c5f8446bf5200249ae4d3979f859749ca9d1e",
+        "refs/heads/来源版本/research/egor-aaai27-review-revision": "073274de3e9f4798791a010e979828a374381c28",
+        "refs/heads/来源版本/research/egor-method-v3": "e45bee1ce4da787a6738232b6119156a8d30fd88",
+        "refs/tags/handoff-retained-391065a29138de7ec4b1": "f220e609424ec74267e08adc38f0662a48ea469d",
+        "refs/tags/handoff-retained-56c26ce4fa3a52392472": "35cc82215424ce255db3076f3c531be53ce817aa",
+        "refs/tags/handoff-retained-6203d7f3501a56267c75": "55766d07c1e02c0f73c432797b488599dcef93fc",
+        "refs/tags/handoff-retained-8e4c79c5f7c3b74dabf1": "9a37be94f767b614ec1bd755c13cd567169aaaa1",
+        "refs/tags/handoff-retained-ceea931cc848d0f56a54": "d8c7ca19201baa46955a01998ef0a17cbd5b5520",
+        "refs/tags/openmas-active-egor-v3-20260717": "462d6d6bc612c6553afb6e31c10d84a0ad80d0e7",
+        "refs/tags/paper-freeze-2026-03-17": "3a05ebeeddc77f57ff5e0ccb485bb0cdbb12173b",
+        "refs/tags/paper-freeze-2026-03-19-f0": "85f70ab7746257c86e81c4db2ab0239427510c7d",
+        "refs/tags/paper-freeze-2026-03-19-f3": "02a33d54bfe0c08e848156da1536aa1dfb4faad5",
+        "refs/tags/paper-polish-2026-03-19": "280546596b97b639c8cb9afbff9bb93668ede28b",
+        "refs/tags/workspace-cleanup-2026-03-19-final": "053cf2c32670ab0f5e7b1af8d1b808abe163dc38",
+        "refs/保留备份提交/0472423fbeaba9558dd55e9f9e9cc14501056969": "905874822ff55d4afa16783e6e435430bced798e",
+        "refs/保留备份提交/08d9e488b2a5ddaef0db515d0e2b10bb1dca414b": "3d3b9f5b837440f06920977c1e902f111e874d71",
+        "refs/保留备份提交/1b0ea791983a9867ea3a6f07963f628a900a0bc2": "42e667537e9fe0b013930bb3fc92ee59a3e78fe0",
+        "refs/保留备份提交/204f6685bce6ef1b7136f60015becf6b7e9add92": "6462e1ddd91b8d590bd5252abd2fe8d6c19a058b",
+        "refs/保留备份提交/23accff817c9c9c358cb4ecbc63947f045bc2275": "3bb71be682c6eb7d9305b9f31dda5b20cbc3b9c8",
+        "refs/保留备份提交/30377457684d07a1846cc74f37619dc856687e9d": "047b8b1be5518839399972986b4475e0153387cc",
+        "refs/保留备份提交/30eaa72247f4bcae19fdf70e687cf1b0f19ff8c2": "0c3bc6e450e43e5d20ba4bdd504c68382854d37f",
+        "refs/保留备份提交/37addf185cf4de793eb13fbae89ac2b77129054f": "3fd477773a27671c99fc2d31a76e3e2255169b73",
+        "refs/保留备份提交/389cdfaeb7ac4474da36f9b0b0972a7688b400a4": "f70303827a38fbedc7e1e6942b00558f74efcfc6",
+        "refs/保留备份提交/3c5a51f326d638dc57a8d40853805e9a1dffe4ed": "7e73ba111fbfc5e90876e263ad4fa9d920cda088",
+        "refs/保留备份提交/461d975b9132137b205d59bd2eccaa279269d435": "fa00be709c44325cb336740f8514c72233a0cf16",
+        "refs/保留备份提交/4c8dc692e3bb8e044ab4b3e0eefe4705d2203d10": "a1880ae65c6e76d839a9e9b29c2d3655b31b2966",
+        "refs/保留备份提交/4ddfa1c2d0a878eefc3ca9ed44219afc7e0c89a8": "e5fea062440ed6e39820f45705279be293e4e71e",
+        "refs/保留备份提交/546b2eb401fc8c7bc7bc6a688280e369ff3c5052": "ebd116c6719b3b9ebdf2a2f1f83085e7ad305ef0",
+        "refs/保留备份提交/65d7160cf22405390360732e253357a72de4c28f": "cb91a290c927fb3abc2cee8a6a178b0b91d38fdb",
+        "refs/保留备份提交/6b3b1a2a5707541538744ee3fbb02221c103a7ba": "2ba454b1e6c1a25a053098510c6c9f0948ecd2b2",
+        "refs/保留备份提交/6ca32a3e72e10dc054b5e9ce70aecd13dd9e72aa": "f156052e595f2a6b3c132c4ea2f3272fbc4ac348",
+        "refs/保留备份提交/7a2d6d891b9598b58f6f80f94376ca5d1580eb7c": "3e9c9577d07a6921ecca90578af6b6f871cfbd6a",
+        "refs/保留备份提交/81e3714397e603751f9ad1991d0accbbac657824": "1dca8f11cf2917ca10c5ef2b29617c8ae3b40391",
+        "refs/保留备份提交/87ab84817499811118f97901ca2a740b2458f093": "75d56de59547e78f15b12b247079bdcc300cf1f8",
+        "refs/保留备份提交/87ac710670d792112e212e0c0309ee1c3d0932aa": "13eeca90177d7a4d209071f2a25b6192686243aa",
+        "refs/保留备份提交/89754a872b1bd4ecbf4de7e8e107608cfa648386": "72c1222f9394715c25aa69f35e20de2bd85b5346",
+        "refs/保留备份提交/9ae4c3cb5b4ae148d51a7450e38a67d638d46102": "8bf4fb79ef1b2aa5e118b80328790beb6d57535d",
+        "refs/保留备份提交/b1a877249cf6b98e29a0eb48f99d4254a8483d93": "3f7f10b34da1db016c6021506aafe3938109b739",
+        "refs/保留备份提交/bf37b49846393e97cc019b3dcbbe3511509e377c": "073274de3e9f4798791a010e979828a374381c28",
+        "refs/保留备份提交/c60480fe16e4f7beb6063066e145e82c5e289a4d": "348cd9bc3932a12ffb3b9e4d7c85e821a88c8b7a",
+        "refs/保留备份提交/c65020a9daceccb488859c22f43b59f8f2089f3d": "f68d6eb434b0f0da6fcb363c5d1ed8d9367df4dd",
+        "refs/保留备份提交/ccbcb2270c6c2ab532b414b08423115f719e1fb4": "aa469ed2bd9c4406e766f8e39119356ad9904d5b",
+        "refs/保留备份提交/d06cedcffddb27ec33739586ac171aaa86de1553": "4acab78f487c82a6b7ab64051da2ff96713925f9",
+        "refs/保留备份提交/d271a839146789598a25ed5b96a0a1a3753e36d6": "342c5f8446bf5200249ae4d3979f859749ca9d1e",
+        "refs/保留备份提交/dc9b248114815ee44d3ef8da0ad7d7e7b316262c": "8753b3cfeea465bfcb486126060f768a6d76f8e2",
+        "refs/保留备份提交/e5663cb9728a287b51218dc680635c4d6878a530": "3ae38dee4773e0473d0cc0d68c1b382ea858b0bb",
+        "refs/保留备份提交/e90584908319ca36cdca39532daa3906e1cb6c40": "3a05ebeeddc77f57ff5e0ccb485bb0cdbb12173b",
+        "refs/保留备份提交/f06fb0185a177e2a5350047a8ff642fd71a01ce7": "238394d5bcab2484a5aee347eb6372a57cf68d9d",
+        "refs/保留备份提交/f931133e7ef734343db7c3eddb7d6dd83632dfc2": "3d6a8cafba848b5f5f1c518d94d2f4f60655b452",
+        "refs/保留备份提交/fb2a53fbe0052e4a04f2f890b927cda2ea2d30d3": "e45bee1ce4da787a6738232b6119156a8d30fd88",
+        "refs/保留备份提交/fd95fa69b2e5721c209bdbed5f132f9a0603e6f9": "522967cf1bfe94b712d600796e55d3f3c541aafb"
+      },
+      "revision_map": "snapshot/source-history/research/commit-map.txt"
+    },
+    {
+      "id": "implementation",
+      "bundle": "snapshot/source-history/implementation/source.bundle",
+      "repository": "snapshot/source-history/implementation/repository.git",
+      "head": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "0886daf76a05021a3bd9ff77120e9664c178d8ca",
+        "refs/heads/refactor/public-research-release": "448e5fb708287103d5115d904a91861c7c101ab8",
+        "refs/remotes/origin/main": "0886daf76a05021a3bd9ff77120e9664c178d8ca"
+      },
+      "revision_map": "snapshot/source-history/implementation/commit-map.txt"
     }
-  ],
-  "deleted_fulltext_hashes": [
-    "075595b03025fb8ee29da3b23d20ad916160dd029b91fbcfe2e556eda5034c4d",
-    "171bba3dbd2cc39cafc8efd1f33d20df2ceef3fc08e09124359a729484583743",
-    "32eb1c1a6888e35fae0f618e33c58698b54d9c49bc063fef91ee591719fca376",
-    "333bc67fa42771331a5b2ffee5d6f59a9cd75003dccdfd02dc1b6bd61561183f",
-    "4719e3217839a7fe11b716a9ad8d28e61cd465626006054987cb88b540461998",
-    "56fa88424de5a635600f6b0c69e4af8e821976b431a415c683d0f01adf96fc86",
-    "813320d58bd598428de4f2bba0c742f2ce305cdcda78537e6376e20543444397",
-    "8c3eaa06b04db28bf3bea7064d03d357adf3414f6a3862a9cee03f39af2a9d06",
-    "92a1c54a2b719759eccb909f2c33d67c96f03381971d6beb8771a5e2d1d13361",
-    "9be15f695f11dd5bc634c1c026bd2270eff3d3c4a53c4d9b51c012b7bd03d521",
-    "e121cb3a5fa4acbc12b54fe6540f9f0957009aa00fcadda9bc711734ddedae93",
-    "eb28d6d380b88dbdaabaaea10c9e55dac04706f903ccac22830f462f043385f6"
   ]
 }

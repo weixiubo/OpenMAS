@@ -5,7 +5,7 @@ resources and persistence. Run the commands in [CONTRIBUTING.md](../CONTRIBUTING
 
 | Check | Coverage |
 | --- | --- |
-| Main suite | 235 cases, including 213 original scenarios |
+| Main suite | 239 cases, including 213 original scenarios |
 | Reference workflows | 69 additional cases against original producer modules |
 | Runtime comparisons | Cold/warm cache with negotiation enabled/disabled; results, metrics, decisions and event order |
 | Stage lifecycle | Interruption, resume, task-index seeds, changed inputs, invalid scheduler references and resource checks |
@@ -33,8 +33,8 @@ experiments use the explicit model and dataset setup in [RESOURCES.md](RESOURCES
 
 ## Artifact restoration checks
 
-Six artifact restoration tests cover Unicode paths, missing and corrupt parts,
-repeat execution, modified-file protection, upstream assets and optional
-models. The suite counts above include these cases. The restoration and
-research-material checks performed on 2026-10-15 are recorded in the
-[research archive](https://github.com/weixiubo/OpenMAS/releases/tag/handoff-2026-10-15).
+Ten artifact restoration tests cover Unicode paths, missing and corrupt parts,
+repeat execution, modified-file protection, upstream assets, optional
+models and independent Git history with reference and link protection. The suite counts above include these cases. The restoration and
+research-material checks for the distributed archive edition are recorded in the
+[research archive](https://github.com/weixiubo/OpenMAS/releases/tag/research-artifacts-2026-10-16).
