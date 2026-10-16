@@ -40,9 +40,9 @@ unspecified identity. Experiment manifests bind the actual selected inputs.
 Diagnostics inspect files and configuration without loading models or starting
 services.
 
-## Preserved handoff resources
+## Archived research resources
 
-The [handoff guide](HANDOFF.md) provides restored local research inputs,
-resource bindings, exact download identities and historical limitations.
-Use those bindings for retained inputs and the setup below for new external
-models or services.
+The [artifact guide](ARTIFACTS.md) provides recorded research inputs,
+resource configuration, file checksums and archive limitations. Use the
+archive configuration for these inputs and the environment specifications
+above for additional models or services.

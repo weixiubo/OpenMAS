@@ -48,8 +48,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "d311e75e665470541e87913dc45bebfaa09d38f0b2e7a6c940939320d4505c2c",
-      "bytes": 3615
+      "sha256": "e6ac14931da7ddb8a4a3c781b2ca9d2edea4b3dbd1e4c4c39f30943afa671a7b",
+      "bytes": 3590
     },
     {
       "path": "SOURCE_PROVENANCE.json",
@@ -1017,6 +1017,11 @@
       "bytes": 1779
     },
     {
+      "path": "docs/ARTIFACTS.md",
+      "sha256": "95e1bbf890e9d69be5940a9c79a1d0bea851c395b9b432b14ca23ffa0413c32a",
+      "bytes": 3716
+    },
+    {
       "path": "docs/MATERIALS.md",
       "sha256": "81917b63984e439b2a2c08b06733889674be4884252dace3be23e954d0266d85",
       "bytes": 1264
@@ -1033,8 +1038,8 @@
     },
     {
       "path": "docs/RESOURCES.md",
-      "sha256": "3d054b95214e469c2517ecc7a4680422e9652e260759f47c682b3451db3738f5",
-      "bytes": 2209
+      "sha256": "5106bbbc5eacaae03e8296152877ecb3b17fcc2866cc50c1276c723ed18b51fd",
+      "bytes": 2224
     },
     {
       "path": "docs/TEST_MIGRATION.json",
@@ -1043,8 +1048,8 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "8d99f48030c470260164e8428056c93a58f702a9b5c3e262b205938e3063019f",
-      "bytes": 2135
+      "sha256": "00be552ba1d3f48cb2a70b20462841e67ab3f13dc29ecc11cce213eeaf10d549",
+      "bytes": 2138
     },
     {
       "path": "docs/model_sources.json",
@@ -1063,13 +1068,8 @@
     },
     {
       "path": "handoff/history-index.json",
-      "sha256": "ef7e9954121376966f6e13590841964608ccffd11fa2a2cbf92038e40fae843f",
-      "bytes": 5770
-    },
-    {
-      "path": "handoff/local-state/previous-release-ready.json",
-      "sha256": "b9a71ab401388781f148542a5840d8569d0a45b59f18d1e97e844a22eda52163",
-      "bytes": 385
+      "sha256": "0263038645b7b3f76239e8d579bf4a374f28b6aec8098291ec040ae727a3e450",
+      "bytes": 5789
     },
     {
       "path": "handoff/material-disposition.json",
@@ -1143,8 +1143,8 @@
     },
     {
       "path": "scripts/handoff.py",
-      "sha256": "b133bb301134eb259aa2c35231a2a889145eb809e145725e913dff63156d1aaa",
-      "bytes": 15127
+      "sha256": "24c965a619dcd161e94ef63b2922ebb5cddee8f76391a3209c130184cc37df82",
+      "bytes": 15143
     },
     {
       "path": "tests/reference/MANIFEST.json",
@@ -1868,8 +1868,8 @@
     },
     {
       "path": "tests/test_handoff_restore.py",
-      "sha256": "a1df9c41ecdcd0246779069bcf56149d8a70a51d0af9ac4959a1b8e80e6a7d28",
-      "bytes": 7614
+      "sha256": "c02aa994345e2e4122f72bdfd825a7c0b95d54b73e59dee3c581ab17a74e17ad",
+      "bytes": 7615
     },
     {
       "path": "uv.lock",

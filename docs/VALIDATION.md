@@ -31,10 +31,10 @@ outcomes of all 800 task rows. The [reproduction guide](../reproduce/README.md)
 reports the registered confirmation criteria and resulting counts. Model
 experiments use the explicit model and dataset setup in [RESOURCES.md](RESOURCES.md).
 
-## Public handoff acceptance
+## Artifact restoration checks
 
-Six additional handoff tests cover Unicode paths, missing and corrupt parts,
+Six artifact restoration tests cover Unicode paths, missing and corrupt parts,
 repeat execution, modified-file protection, upstream assets and optional
-models. The current counts above include these cases. Full restoration,
-research-material checks and inherited limitations are recorded in the
-[handoff release](https://github.com/weixiubo/OpenMAS/releases/tag/handoff-2026-10-15).
+models. The suite counts above include these cases. The restoration and
+research-material checks performed on 2026-10-15 are recorded in the
+[research archive](https://github.com/weixiubo/OpenMAS/releases/tag/handoff-2026-10-15).
