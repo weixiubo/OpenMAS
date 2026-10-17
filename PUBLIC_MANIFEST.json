@@ -48,8 +48,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "2a62ea879c0790f0fcb4cc1c9e445ccceea3aed9c21a5555e95d8493f04f9834",
-      "bytes": 3601
+      "sha256": "1b44cd22db7946d8155caf4d75931494503ada7d29f56c4cd6f9e7a456010267",
+      "bytes": 3604
     },
     {
       "path": "SOURCE_PROVENANCE.json",
@@ -1018,8 +1018,8 @@
     },
     {
       "path": "docs/ARTIFACTS.md",
-      "sha256": "5d6875c8103f7cb9e885ee108e7c6a2e444acedbc1732fa593bdd769b0ce4e6b",
-      "bytes": 2825
+      "sha256": "c31867d43144a5b8606ae72fc574e62bae036a0a739bba8294451f20f74fc5ed",
+      "bytes": 2828
     },
     {
       "path": "docs/MATERIALS.md",
@@ -1048,8 +1048,8 @@
     },
     {
       "path": "docs/VALIDATION.md",
-      "sha256": "8123a1ef08054905301a9e86854d90b8d0979eb048a3249658848272312a488c",
-      "bytes": 2221
+      "sha256": "c1bb7389a395be8f49f48aeba19d538290e632d8d48a137574d46bc80abd29ed",
+      "bytes": 2224
     },
     {
       "path": "docs/model_sources.json",
@@ -1063,18 +1063,18 @@
     },
     {
       "path": "handoff/catalog.json",
-      "sha256": "c41a644736554f04682033e5d912eb19b35bb72ea613d2eb377413afb323948f",
-      "bytes": 722
+      "sha256": "b81d7395e01ec951ff0d090c4faa366f7c0dcc38345b74e906935d70c2b34fe1",
+      "bytes": 725
     },
     {
       "path": "handoff/history-index.json",
-      "sha256": "f94f64b10a2823f3f48a74625b4a0feb432b5b052956b35a744a31d35994c49d",
+      "sha256": "fdbd9d69ca2b43d481e99ce8c0f13443372776ea0908c6b78957b573eca37fc2",
       "bytes": 8053
     },
     {
       "path": "handoff/material-disposition.json",
-      "sha256": "276a239351be0a6b30eed29d4278580618db666b3c7bd28d2b0cb185da5a95cd",
-      "bytes": 522
+      "sha256": "909b3737a2a6f5315ad71d2992dd49a920f292cf8ddd9ca79339522a7b4a77fa",
+      "bytes": 525
     },
     {
       "path": "pyproject.toml",
